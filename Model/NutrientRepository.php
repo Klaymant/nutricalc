@@ -13,8 +13,4 @@ class NutrientRepository {
 		$dbc = new DbConnection();
 		$this->pdo = $dbc->getPdo();
 	}
-
-		public function calculateBmr() {
-
-	}
 }

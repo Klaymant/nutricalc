@@ -6,6 +6,7 @@ use Model\Nutrient;
 
 class User {
 	private $sex;
+	private $age;
 	private $height;
 	private $weight;
 	private $activity;
@@ -13,10 +14,11 @@ class User {
 	private $bmr;
 	private $nutrient;
 
-	function __construct($id, $sex, $height, $weight, $activity, $goal, $bmr, $nutrient)
+	function __construct($id, $age, $sex, $height, $weight, $activity, $goal, $bmr, $nutrient)
 	{
 		$this->id = $id;
 		$this->sex = $sex;
+		$this->age = $age;
 		$this->height = $height;
 		$this->weight = $weight;
 		$this->activity = $activity;
@@ -28,6 +30,10 @@ class User {
 	// Getters
 	public function getId() {
 		return $this->id;
+	}
+
+	public function getAge() {
+		return $this->age;
 	}
 
 	public function getSex() {
@@ -59,6 +65,9 @@ class User {
 	}
 
 	// Setters
+	public function setAge($agee) {
+		$this->age = $age;
+
 	public function setSex($sex) {
 		$this->sex = $sex;
 
