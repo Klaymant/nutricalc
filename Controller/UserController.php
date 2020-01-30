@@ -10,12 +10,49 @@ class UserController {
     public function getUserById($id) {
     	$this->userRepo = new UserRepository();
     	$user = $this->userRepo->getUserById($id);
+ 		$bmr = $this->calculateBmr($user);
+ 		$user->setBmr($bmr);
+ 		$kcalNeeds = $this->kcalNeeds($user);
+ 		$user->setKcalNeeds($kcalNeeds);
+    	require_once ("View/userByIdView.php");
+    }
+
+    public function createUser($sex, $age, $height, $weight, $activityId, $goalId)
+    {
+    	$userRepo = new UserRepository;
+    	$this->userRepo->createUser($sex, $age, $height, $weight, $activityId, $goalId);
     }
 
     private function calculateBmr($user) {
-    	$bmr = $user->getSex() == 'H' ?
-    	($user->getWeight()*13.707) + ($user->getHeight()*492.2) - ($user->getAge()*6.673) + 77.607 :
-    	($user->getWeight()*9.74) + ($user->getHeight()*172.9) - ($user->getAge()*4.737) + 667.05;
-    	return $bmr;
+    	$menFormula = ($user->getWeight()*13.707) + ($user->getHeight()/100*492.2) - ($user->getAge()*6.673) + 77.607;
+    	$womenFormula = ($user->getWeight()*9.74) + ($user->getHeight()*172.9) - ($user->getAge()*4.737) + 667.05;
+    	
+    	return $user->getSex() == 'H' ? $menFormula : $womenFormula;
+    }
+
+    private function activityQuotient($activity) {
+    	switch ($activity) {
+    		case "Any":
+    			return 1;
+    		case "Low":
+    			return 1.2;
+    		case "Moderate":
+    			return 1.37;
+    		case "High":
+    			return 1.5;
+    		case "Very high":
+    			return 1.8;
+    	}
+    }
+
+    private function kcalNeeds($user) {
+    	switch ($user->getGoal()) {
+    		case "Fat loss":
+    			return ($user->getBmr()*$this->activityQuotient($user->getActivity())*0.8);
+    		case "Maintain":
+    			return ($user->getBmr()*$this->activityQuotient($user->getActivity())*1);
+    		case "Mass gain":
+    			return ($user->getBmr()*$this->activityQuotient($user->getActivity())*1.2);
+    	}
     }
 }

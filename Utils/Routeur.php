@@ -9,17 +9,8 @@ class Routeur {
 	}
 
 	public function route () {
-		if (isset($this->get['add'])) {
-			return ['createGif'];
-		}			
-		else if (isset($this->get['random'])) {
-			return ['getRandomGif'];
-		}
-		else if (isset($this->get['all'])) {
-			return ['getAllGifs'];
-		}
-		else if (isset($this->get['id'])) {
-			return ['getById', $this->get['id']];
+		if (isset($this->get['id'])) {
+			return ['getUserById', $this->get['id']];
 		}
 		else {
 			return ['404'];

@@ -1,0 +1,109 @@
+body {
+	background-color: rgb(18, 18, 18);
+	font-family: 'Calibri';
+	font-size: 40px;
+	color: white;
+}
+
+header {
+	background-color: rgb(0, 255, 153);
+	padding-left: 15px;
+}
+
+/* ----------
+TITLE
+---------- */
+#website_title a:visited, #website_title a:link {
+	color: rgb(18, 18, 18);
+	text-decoration: none;
+}
+
+#website_title {
+	font-size: 70px;
+	font-family: 'Calibri';
+	color: rgb(18, 18, 18);
+	margin-bottom: 5px;
+}
+
+/* ----------
+SUBTITLE
+---------- */
+#subtitle {
+	font-size: 30px;
+	color: white;
+	margin-top: 5px;
+}
+
+/* ----------
+MENU
+---------- */
+#menu {
+	background: rgb(109, 100, 255);
+	margin: 0;
+	padding: 0;
+}
+
+#menu a:link, #menu a:visited {
+	text-decoration: none;
+	color: white;
+	font-size: 30px;
+	margin: 0;
+	padding: 0;
+}
+
+#menu a:hover {
+	background: rgb(0, 255, 153);
+	color: black;
+}
+
+#menu li {
+	font-family: 'Calibri';
+	color: white;
+	display: inline;
+	list-style: none;
+}
+
+/* ----------
+GIF PROPERTIES
+---------- */
+.gif table {
+    width: 1000px; /* On a indiqué une largeur (obligatoire) */
+    margin: auto; /* On peut donc demander à ce que le bloc soit centré avec auto */
+}
+
+.gif a:visited, .gif a:link {
+	text-decoration: none;
+	color: white;
+}
+
+.gif td {
+	text-align: center;
+	font-size: 20px;
+}
+
+.gif img:hover {
+	opacity: 1;
+	border-color: white;
+}
+
+.gif img {
+	opacity: 0.7;
+	width: 400px;
+	height: 300px;
+	border: solid 8px;
+	border-left-color: rgb(253, 102, 102);
+	border-right-color: rgb(109, 100, 255);
+	border-top-color: rgb(0, 255, 153);
+	border-bottom-color: rgb(255, 243, 92);
+}
+
+/* ----------
+FOOTER
+---------- */
+footer {
+	font-family: 'Arial';
+	font-size: 20px;
+	text-align: center;
+	background-color: black;
+	opacity: 0.75;
+}

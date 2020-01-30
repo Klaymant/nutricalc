@@ -15,10 +15,23 @@ class UserRepository {
 	}
 
 	public function getUserById($id) {
-		$query = $this->pdo->prepare('SELECT * FROM user WHERE id={$id}');
-		$query->execute;
-		$query->fetchAll(\PDO::FETCH_ASSOC);
+		$query = 'SELECT * FROM user AS u
+		LEFT JOIN activity AS a
+		ON u.id_activity = a.id
+		LEFT JOIN goal AS g
+		ON u.id_goal = g.id
+		WHERE u.id=' . $id;
+		$executed = $this->pdo->prepare($query);
+		$executed->execute();
+		$user = $executed->fetch(\PDO::FETCH_ASSOC);
 
-		return new User($id, $query['height'], $query['weight'], $query['activity'], $query['goal'], $query['bmr'], $query['nutrient']);
+		return new User($id, $user['sex'], $user['age'], $user['height'], $user['weight'], $user['activity_name'], $user['goal_name']);
+	}
+
+	public function createUser($sex, $age, $height, $weight, $activity, $goal) {
+		$query = 'INSERT INTO user (height, weight, activity, goal, age)
+			VALUES ("{$height}", "{$weight}", "{$activity}", "{$goal}", "{$age}")';
+		$createUser = $this->pdo->prepare();
+		return $createUser->execute;
 	}
 }
