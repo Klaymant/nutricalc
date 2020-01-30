@@ -7,6 +7,11 @@ use Model\UserRepository;
 class UserController {
     private $userRepo;
 
+    // Displays the homepage
+    public function homepage() {
+        require_once ("View/homepageView.php");
+    }
+
     public function getUserById($id) {
     	$this->userRepo = new UserRepository();
     	$user = $this->userRepo->getUserById($id);
@@ -45,6 +50,7 @@ class UserController {
     	}
     }
 
+    // Calculate the kcal needs depending on the activity quotient, BMR and the wanted goal
     private function kcalNeeds($user) {
     	switch ($user->getGoal()) {
     		case "Fat loss":

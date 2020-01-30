@@ -6,7 +6,7 @@ body {
 }
 
 header {
-	background-color: rgb(0, 255, 153);
+	background-color: white;
 	padding-left: 15px;
 }
 
@@ -22,7 +22,7 @@ TITLE
 	font-size: 70px;
 	font-family: 'Calibri';
 	color: rgb(18, 18, 18);
-	margin-bottom: 5px;
+	text-align: center;
 }
 
 /* ----------
