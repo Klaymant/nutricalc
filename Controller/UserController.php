@@ -12,6 +12,22 @@ class UserController {
         require_once ("View/homepageView.php");
     }
 
+    public function login() {
+        require_once ("View/loginView.php");
+    }
+
+    public function account() {
+        $this->userRepo = new UserRepository();
+        $user = $this->userRepo->getUserByMail($_POST['mail']);
+        if ($user['pwd'] == $_POST['pwd']) {
+            require_once ("View/accountView.php");
+        }
+        else {
+            $error = true;
+            require_once ("View/loginView.php");
+        }
+    }
+
     public function getUserById($id) {
     	$this->userRepo = new UserRepository();
     	$user = $this->userRepo->getUserById($id);
@@ -22,10 +38,10 @@ class UserController {
     	require_once ("View/userByIdView.php");
     }
 
-    public function createUser($sex, $age, $height, $weight, $activityId, $goalId)
+    public function createUser($mail, $pwd, $sex, $age, $height, $weight, $activityId, $goalId)
     {
     	$userRepo = new UserRepository;
-    	$this->userRepo->createUser($sex, $age, $height, $weight, $activityId, $goalId);
+    	$this->userRepo->createUser($mail, $pwd, $sex, $age, $height, $weight, $activityId, $goalId);
     }
 
     private function calculateBmr($user) {

@@ -12,6 +12,13 @@ class Routeur {
 		if (isset($this->get['id'])) {
 			return ['getUserById', $this->get['id']];
 		}
+		else if (isset($this->get['login'])) {
+			return ['login'];
+		}
+		else if (isset($this->get['account'])) {
+			return ['account'];
+		}
+		// If no parameter is set then go to the homepage
 		else {
 			return ['homepage'];
 		}

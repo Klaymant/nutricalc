@@ -14,6 +14,14 @@ class UserRepository {
 		$this->pdo = $dbc->getPdo();
 	}
 
+	public function getUserByMail($mail) {
+		$query = 'SELECT pwd FROM user WHERE mail="' . $mail . '"';
+		$executed = $this->pdo->prepare($query);
+		$executed->execute();
+		$user = $executed->fetch(\PDO::FETCH_ASSOC);
+		return $user;
+	}
+
 	public function getUserById($id) {
 		$query = 'SELECT * FROM user AS u
 		LEFT JOIN activity AS a
@@ -25,10 +33,10 @@ class UserRepository {
 		$executed->execute();
 		$user = $executed->fetch(\PDO::FETCH_ASSOC);
 
-		return new User($id, $user['sex'], $user['age'], $user['height'], $user['weight'], $user['activity_name'], $user['goal_name']);
+		return new User($id, $user['mail'], $user['pwd'], $user['sex'], $user['age'], $user['height'], $user['weight'], $user['activity_name'], $user['goal_name']);
 	}
 
-	public function createUser($sex, $age, $height, $weight, $activity, $goal) {
+	public function createUser($mail, $pwd, $sex, $age, $height, $weight, $activity, $goal) {
 		$query = 'INSERT INTO user (height, weight, activity, goal, age)
 			VALUES ("{$height}", "{$weight}", "{$activity}", "{$goal}", "{$age}")';
 		$createUser = $this->pdo->prepare();

@@ -4,7 +4,11 @@
 ?>
 
 <p>
-	Welcome!
+	Welcome to my nutrients calculator!
+</p>
+
+<p>
+	It is a tool that will help you to count the amount of calories you need depending on your physiological caracteristics, your lifestyle and your goal.
 </p>
 
 <?php

@@ -15,9 +15,11 @@ class User {
 	private $nutrient;
 	private $kcal_needs;
 
-	function __construct($id, $sex, $age, $height, $weight, $activity, $goal)
+	function __construct($id, $mail, $pwd, $sex, $age, $height, $weight, $activity, $goal)
 	{
 		$this->id = $id;
+		$this->mail = $mail;
+		$this->pwd = $pwd;
 		$this->sex = $sex;
 		$this->age = $age;
 		$this->height = $height;
@@ -30,6 +32,15 @@ class User {
 	public function getId() {
 		return $this->id;
 	}
+
+	public function getMail() {
+		return $this->mail;
+	}
+
+	public function getPwd() {
+		return $this->pwd;
+	}
+
 
 	public function getAge() {
 		return $this->age;
@@ -68,8 +79,16 @@ class User {
 	}
 
 	// Setters
-	public function setAge($agee) {
+	public function setAge($age) {
 		$this->age = $age;
+	}
+
+	public function setMail($mail) {
+		$this->mail = $mail;
+	}
+
+	public function setPwd($pwd) {
+		$this->pwd = $pwd;
 	}
 
 	public function setSex($sex) {
