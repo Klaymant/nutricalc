@@ -20,12 +20,18 @@ class UserController {
         $this->userRepo = new UserRepository();
         $user = $this->userRepo->getUserByMail($_POST['mail']);
         if ($user['pwd'] == $_POST['pwd']) {
+            $_SESSION['id'] = $user['id'];
             require_once ("View/accountView.php");
         }
         else {
             $error = true;
             require_once ("View/loginView.php");
         }
+    }
+
+    public function saveData() {
+        $this->userRepo = new UserRepository();
+        $user = $this->userRepo->saveData($_POST);
     }
 
     public function getUserById($id) {

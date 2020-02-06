@@ -4,6 +4,7 @@
 	use Controller\UserController;
 	use Utils\Routeur;
 
+	session_start();
 	$routeur = new Routeur($_GET);
 	$action = $routeur->route();
 	$function = $action[0];

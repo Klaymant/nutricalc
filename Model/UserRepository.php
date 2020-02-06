@@ -15,7 +15,7 @@ class UserRepository {
 	}
 
 	public function getUserByMail($mail) {
-		$query = 'SELECT pwd FROM user WHERE mail="' . $mail . '"';
+		$query = 'SELECT id, pwd FROM user WHERE mail="' . $mail . '"';
 		$executed = $this->pdo->prepare($query);
 		$executed->execute();
 		$user = $executed->fetch(\PDO::FETCH_ASSOC);
@@ -41,5 +41,18 @@ class UserRepository {
 			VALUES ("{$height}", "{$weight}", "{$activity}", "{$goal}", "{$age}")';
 		$createUser = $this->pdo->prepare();
 		return $createUser->execute;
+	}
+
+	public function saveData($data) {
+		$query = "UPDATE user
+			SET 
+			age=?,
+			height=?,
+			weight=?,
+			id_activity=?,
+			id_goal=?
+			WHERE id=?";
+		$executed = $this->pdo->prepare($query);
+    	return $executed->execute([$data['age'], $data['height'], $data['weight'], $data['activity'], $data['goal'], $_SESSION['id']]);
 	}
 }
