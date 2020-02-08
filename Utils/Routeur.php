@@ -21,6 +21,12 @@ class Routeur {
 		else if (isset($this->get['savedata'])) {
 			return ['saveData'];
 		}
+		else if (isset($this->get['newaccount'])) {
+			return ['newAccount'];
+		}
+		else if (isset($this->get['createaccount'])) {
+			return ['createAccount'];
+		}
 		// If no parameter is set then go to the homepage
 		else {
 			return ['homepage'];

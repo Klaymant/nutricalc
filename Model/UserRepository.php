@@ -55,4 +55,18 @@ class UserRepository {
 		$executed = $this->pdo->prepare($query);
     	return $executed->execute([$data['age'], $data['height'], $data['weight'], $data['activity'], $data['goal'], $_SESSION['id']]);
 	}
+
+	public function createAccount($data) {
+		$query = "INSERT INTO user (mail, pwd) VALUES (?, ?)";
+		$executed = $this->pdo->prepare($query);
+		return $executed->execute([$data['mail'], $data['pwd']]);
+	}
+
+	public function mailExists($mail) {
+		$query = "SELECT COUNT(*) as c FROM user WHERE mail=?";
+		$executed = $this->pdo->prepare($query);
+		$executed->execute([$mail]);
+		$mailExists = $executed->fetch(\PDO::FETCH_ASSOC);
+		return $mailExists['c'] == 1 ? true : false;
+	}
 }

@@ -51,7 +51,7 @@
 			</td>
 		</tr>
 	</table>
-	<input type="submit" value="Connection">
+	<input type="submit" value="Save my data">
 </form>
 
 <?php

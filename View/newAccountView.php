@@ -3,7 +3,7 @@
 	ob_start();
 ?>
 
-<form action="index.php?account" method="post">
+<form action="index.php?createaccount" method="post">
 	<table>
 		<tr>
 			<td>Mail :</td>
@@ -14,18 +14,14 @@
 			<td><input type="password" name="pwd"></td>
 		</tr>
 	</table>
-	<input type="submit" value="Connection">
+	<input type="submit" value="Here we go!">
 </form>
 
 <?php
 	if (isset($error)) {
-		echo 'Incorrect login. Try again!';
+		echo 'This mail is already used. Try another one!';
 	}
 ?>
-
-<p>
-	<a href="index.php?newaccount">No account yet ? Follow this link !</a>
-</p>
 
 <?php
 	// $content contains the html content from ob_start so far

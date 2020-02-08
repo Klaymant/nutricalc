@@ -32,6 +32,24 @@ class UserController {
     public function saveData() {
         $this->userRepo = new UserRepository();
         $user = $this->userRepo->saveData($_POST);
+        require_once("index.php");
+    }
+
+    public function newAccount()
+    {
+        require_once("View/newAccountView.php");
+    }
+
+    public function createAccount() {
+        $this->userRepo = new UserRepository();
+        if ($this->userRepo->mailExists($_POST['mail'])) {
+            $error = true;
+            require_once("View/newAccountView.php");
+        }
+        else {
+            $user = $this->userRepo->createAccount($_POST);
+            require_once("View/accountView.php");
+        }
     }
 
     public function getUserById($id) {
