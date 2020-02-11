@@ -12,6 +12,20 @@ class UserController {
         require_once ("View/homepageView.php");
     }
 
+    public function dashboard() {
+        $this->userRepo = new UserRepository();
+        $user = $this->userRepo->getUserById($_SESSION['id']);
+        $bmr = $this->calculateBmr($user);
+        $user->setBmr($bmr);
+        $kcalNeeds = $this->kcalNeeds($user);
+        $proteins = $user->getWeight() * 1.6;
+        $fat = $user->getWeight();
+        $carbs = ($kcalNeeds-($proteins*4)-($fat*9))/4;
+
+        $user->setNutrient($kcalNeeds, $proteins, $fat, $carbs);
+        require_once("View/dashBoardView.php");
+    }
+
     public function login() {
         require_once ("View/loginView.php");
     }
@@ -21,7 +35,7 @@ class UserController {
         $user = $this->userRepo->getUserByMail($_POST['mail']);
         if ($user['pwd'] == $_POST['pwd']) {
             $_SESSION['id'] = $user['id'];
-            require_once ("View/accountView.php");
+            header("Location: index.php?dashboard");
         }
         else {
             $error = true;
@@ -32,7 +46,7 @@ class UserController {
     public function saveData() {
         $this->userRepo = new UserRepository();
         $user = $this->userRepo->saveData($_POST);
-        require_once("index.php");
+        header("Location: index.php?dashboard");
     }
 
     public function newAccount()
@@ -50,16 +64,6 @@ class UserController {
             $user = $this->userRepo->createAccount($_POST);
             require_once("View/accountView.php");
         }
-    }
-
-    public function getUserById($id) {
-    	$this->userRepo = new UserRepository();
-    	$user = $this->userRepo->getUserById($id);
- 		$bmr = $this->calculateBmr($user);
- 		$user->setBmr($bmr);
- 		$kcalNeeds = $this->kcalNeeds($user);
- 		$user->setKcalNeeds($kcalNeeds);
-    	require_once ("View/userByIdView.php");
     }
 
     public function createUser($mail, $pwd, $sex, $age, $height, $weight, $activityId, $goalId)

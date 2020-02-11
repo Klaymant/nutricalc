@@ -1,54 +1,58 @@
 body {
 	background-color: rgb(18, 18, 18);
 	font-family: 'Calibri';
-	font-size: 18px;
+	font-size: 22px;
 	color: white;
 }
 
 header {
-	background-color: white;
-	padding-left: 15px;
 }
 
 /* ----------
 TITLE
 ---------- */
 #website_title a:visited, #website_title a:link {
-	color: rgb(18, 18, 18);
+	color: rgba(160, 65, 255);
 	text-decoration: none;
 }
 
+#website_title a:hover {
+	color: rgb(0, 255, 153);
+}
+
 #website_title {
-	font-size: 70px;
-	font-family: 'Calibri';
-	color: rgb(18, 18, 18);
+	font-size: 100px;
 	text-align: center;
+	margin: 0px;
+	padding: 0px;
 }
 
 /* ----------
 SUBTITLE
 ---------- */
 #subtitle {
+	text-align: center;
+	font-style: italic;
 	font-size: 30px;
 	color: white;
-	margin-top: 5px;
+	margin: 0px;
+	padding: 0px;
 }
 
 /* ----------
 MENU
 ---------- */
 #menu {
-	background: rgb(109, 100, 255);
-	margin: 0;
-	padding: 0;
+	text-align: center;
 }
 
 #menu a:link, #menu a:visited {
 	text-decoration: none;
 	color: white;
-	font-size: 30px;
-	margin: 0;
-	padding: 0;
+	font-weight: bold;
+	font-size: 40px;
+	padding: 10px;
+	border-bottom: solid 5px rgb(0, 255, 153);
 }
 
 #menu a:hover {
@@ -64,46 +68,39 @@ MENU
 }
 
 /* ----------
-GIF PROPERTIES
+DASHBOARD
 ---------- */
-.gif table {
-    width: 1000px; /* On a indiqué une largeur (obligatoire) */
-    margin: auto; /* On peut donc demander à ce que le bloc soit centré avec auto */
+#data {
+	clear: left;
 }
 
-.gif a:visited, .gif a:link {
-	text-decoration: none;
-	color: white;
+#data table thead {
+	font-size: 18px;
+	border-bottom: solid 1px rgb(160, 65, 255);
 }
 
-.gif td {
-	text-align: center;
-	font-size: 20px;
+#data table {
 }
 
-.gif img:hover {
-	opacity: 1;
-	border-color: white;
+#data table td {
 }
 
-.gif img {
-	opacity: 0.7;
-	width: 400px;
-	height: 300px;
-	border: solid 8px;
-	border-left-color: rgb(253, 102, 102);
-	border-right-color: rgb(109, 100, 255);
-	border-top-color: rgb(0, 255, 153);
-	border-bottom-color: rgb(255, 243, 92);
+.attribute {
+}
+
+#needs {
+}
+
+#needs table thead {
+	font-size: 18px;
+	border-bottom: solid 1px rgb(160, 65, 255);
 }
 
 /* ----------
 FOOTER
 ---------- */
 footer {
-	font-family: 'Arial';
-	font-size: 20px;
+	font-size: 18px;
 	text-align: center;
-	background-color: black;
-	opacity: 0.75;
+	background-color: rgb(0, 255, 153, 0.75);
 }

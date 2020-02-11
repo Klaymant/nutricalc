@@ -5,52 +5,47 @@ class Nutrient {
 	private $kcal;
 	private $protein;
 	private $fat;
-	private $carb;
+	private $carbs;
 
-	function __construct($id, $kcal, $protein, $fat, $carb)
+	function __construct($kcal, $proteins, $fat, $carbs)
 	{
-		$this->id = $id;
 		$this->kcal = $kcal;
-		$this->protein = $protein;
+		$this->proteins = $proteins;
 		$this->fat = $fat;
-		$this->carb = $carb;
+		$this->carbs = $carbs;
 	}
 
 	// Getters
-	public function getId() {
-		return $this->id;
-	}
-
-	public function getKcal() {
+	public function getKcalNeeds() {
 		return $this->kcal;
 	}
 
-	public function getProtein() {
-		return $this->protein;
+	public function getProteins() {
+		return $this->proteins;
 	}
 
 	public function getFat() {
 		return $this->fat;
 	}
 
-	public function getCarb() {
-		return $this->carb;
+	public function getCarbs() {
+		return $this->carbs;
 	}
 
 	// Setters
-	public function setKcal($kcal) {
+	public function setKcalNeeds($kcal) {
 		$this->kcal = $kcal;
 	}
 
-	public function setProtein($protein) {
-		$this->protein = $protein;
+	public function setProteins($proteins) {
+		$this->proteins = $proteins;
 	}
 
 	public function setFat($fat) {
 		$this->fat = $fat;
 	}
 
-	public function setCarb($carb) {
-		$this->carb = $carb;
+	public function setCarbs($carbs) {
+		$this->carbs = $carbs;
 	}
 }

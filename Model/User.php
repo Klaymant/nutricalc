@@ -13,7 +13,6 @@ class User {
 	private $goal;
 	private $bmr;
 	private $nutrient;
-	private $kcal_needs;
 
 	function __construct($id, $mail, $pwd, $sex, $age, $height, $weight, $activity, $goal)
 	{
@@ -26,6 +25,7 @@ class User {
 		$this->weight = $weight;
 		$this->activity = $activity;
 		$this->goal = $goal;
+		$this->nutrient = new Nutrient(NULL, NULL, NULL, NULL);
 	}
 
 	// Getters
@@ -111,8 +111,11 @@ class User {
 		$this->goal = $goal;
 	}
 
-	public function setNutrient($nutrient) {
-		$this->nutrient = $nutrient;
+	public function setNutrient($kcal, $proteins, $fat, $carbs) {
+		$this->nutrient->setKcalNeeds($kcal);
+		$this->nutrient->setProteins($proteins);
+		$this->nutrient->setFat($fat);
+		$this->nutrient->setCarbs($carbs);
 	}
 
 	public function setBmr($bmr) {
