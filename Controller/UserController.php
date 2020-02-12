@@ -12,6 +12,20 @@ class UserController {
         require_once ("View/homepageView.php");
     }
 
+    public function profile() {
+        $this->userRepo = new UserRepository();
+        $user = $this->userRepo->getUserById($_SESSION['id']);
+        $bmr = $this->calculateBmr($user);
+        $user->setBmr($bmr);
+        $kcalNeeds = $this->kcalNeeds($user);
+        $proteins = $user->getWeight() * 1.6;
+        $fat = $user->getWeight();
+        $carbs = ($kcalNeeds-($proteins*4)-($fat*9))/4;
+
+        $user->setNutrient($kcalNeeds, $proteins, $fat, $carbs);
+        require_once("View/profileView.php");
+    }
+
     public function dashboard() {
         $this->userRepo = new UserRepository();
         $user = $this->userRepo->getUserById($_SESSION['id']);
@@ -41,6 +55,10 @@ class UserController {
             $error = true;
             require_once ("View/loginView.php");
         }
+    }
+
+    public function changeData() {
+        require_once("View/accountView.php");
     }
 
     public function saveData() {

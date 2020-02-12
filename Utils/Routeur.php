@@ -21,6 +21,12 @@ class Routeur {
 		else if (isset($this->get['dashboard'])) {
 			return ['dashboard'];
 		}
+		else if (isset($this->get['profile'])) {
+			return ['profile'];
+		}
+		else if (isset($this->get['changedata'])) {
+			return ['changeData'];
+		}
 		else if (isset($this->get['savedata'])) {
 			return ['saveData'];
 		}
