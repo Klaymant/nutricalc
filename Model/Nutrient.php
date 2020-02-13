@@ -3,7 +3,7 @@ namespace Model;
 
 class Nutrient {
 	private $kcal;
-	private $protein;
+	private $proteins;
 	private $fat;
 	private $carbs;
 

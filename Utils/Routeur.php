@@ -12,6 +12,12 @@ class Routeur {
 		if (isset($this->get['id'])) {
 			return ['getUserById', $this->get['id']];
 		}
+		else if (isset($this->get['calculator'])) {
+			return ['calculator'];
+		}
+		else if (isset($this->get['usercalculator'])) {
+			return ['userCalculator'];
+		}
 		else if (isset($this->get['login'])) {
 			return ['login'];
 		}
