@@ -9,7 +9,6 @@ use Model\User;
 class UserController {
     private $userRepo;
 
-    // Displays the homepage
     public function homepage() {
         require_once ("View/homepageView.php");
     }
@@ -67,13 +66,21 @@ class UserController {
         $this->userRepo = new UserRepository();
         $user = $this->userRepo->getUserByMail($_POST['mail']);
         if ($user['pwd'] == $_POST['pwd']) {
+            session_start();
             $_SESSION['id'] = $user['id'];
+            $_SESSION['logged'] = true;
             header("Location: index.php?dashboard");
         }
         else {
             $error = true;
             require_once ("View/loginView.php");
         }
+    }
+
+    public function logout() {
+        $_SESSION['logged'] = false;
+        //session_write_close();
+        header ("Location: index.php");
     }
 
     public function changeData() {

@@ -24,6 +24,9 @@ class Routeur {
 		else if (isset($this->get['account'])) {
 			return ['account'];
 		}
+		else if (isset($this->get['logout'])) {
+			return ['logout'];
+		}
 		else if (isset($this->get['dashboard'])) {
 			return ['dashboard'];
 		}
