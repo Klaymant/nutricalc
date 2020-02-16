@@ -13,20 +13,23 @@
 			<td>Sex :</td>
 			<td>
 				<input type="radio" name="sex" value="F">Female
-				<input type="radio" name="sex" value="H">Male
+				<input type="radio" name="sex" value="H" checked="checked">Male
 			</td>
 		</tr>
 		<tr>
 			<td>Age :</td>
-			<td><input type="text" name="age"></td>
+			<td><input type="text" name="age" value=26></td>
+			<td>years old</td>
 		</tr>
 		<tr>
 			<td>Height :</td>
-			<td><input type="text" name="height"></td>
+			<td><input type="text" name="height" value=165></td>
+			<td>cm</td>
 		</tr>
 		<tr>
 			<td>Weight :</td>
-			<td><input type="text" name="weight"></td>
+			<td><input type="text" name="weight" value=62></td>
+			<td>kg</td>
 		</tr>
 		<tr>
 			<td>Activity level :</td>
@@ -67,7 +70,7 @@
 				<td>
 					<?php
 						if (isset($user)) {
-							echo $user->getNutrient()->getKcalNeeds() . 'kcal';
+							echo round($user->getNutrient()->getKcalNeeds(), 0) . 'kcal';
 						}
 					?>
 				</td>
@@ -77,7 +80,7 @@
 				<td>
 					<?php
 						if (isset($user)) {
-							echo round($user->getNutrient()->getProteins(), 0) . 'g';
+							echo round($user->getNutrient()->getProteinsNeeds(), 0) . 'g';
 						}
 					?>
 				</td>
@@ -87,7 +90,7 @@
 				<td>
 					<?php
 						if (isset($user)) {
-							echo round($user->getNutrient()->getFat(), 0) . 'g';
+							echo round($user->getNutrient()->getFatNeeds(), 0) . 'g';
 						}
 					?>
 				</td>
@@ -97,7 +100,7 @@
 				<td>
 					<?php
 						if (isset($user)) {
-							echo round($user->getNutrient()->getCarbs(), 0) . 'g';
+							echo round($user->getNutrient()->getCarbsNeeds(), 0) . 'g';
 						}
 					?>
 				</td>

@@ -2,50 +2,57 @@
 namespace Model;
 
 class Nutrient {
-	private $kcal;
-	private $proteins;
-	private $fat;
-	private $carbs;
+	private $kcalNeeds;
+	private $proteinsNeeds;
+	private $fatNeeds;
+	private $carbsNeeds;
 
-	function __construct($kcal, $proteins, $fat, $carbs)
+	function __construct($kcalNeeds, $proteinsNeeds, $fatNeeds, $carbsNeeds)
 	{
-		$this->kcal = $kcal;
-		$this->proteins = $proteins;
-		$this->fat = $fat;
-		$this->carbs = $carbs;
+		$this->kcalNeeds = $kcalNeeds;
+		$this->proteinsNeeds = $proteinsNeeds;
+		$this->$fatNeeds = $fatNeeds;
+		$this->carbsNeeds = $carbsNeeds;
 	}
 
 	// Getters
 	public function getKcalNeeds() {
-		return $this->kcal;
+		return $this->kcalNeeds;
 	}
 
-	public function getProteins() {
-		return $this->proteins;
+	public function getProteinsNeeds() {
+		return $this->proteinsNeeds;
 	}
 
-	public function getFat() {
-		return $this->fat;
+	public function getfatNeeds() {
+		return $this->fatNeeds;
 	}
 
-	public function getCarbs() {
-		return $this->carbs;
+	public function getCarbsNeeds() {
+		return $this->carbsNeeds;
 	}
 
 	// Setters
-	public function setKcalNeeds($kcal) {
-		$this->kcal = $kcal;
+	public function setKcalNeeds($kcalNeeds) {
+		$this->kcalNeeds = $kcalNeeds;
 	}
 
-	public function setProteins($proteins) {
-		$this->proteins = $proteins;
+	public function setProteinsNeeds($proteinsNeeds) {
+		$this->proteinsNeeds = $proteinsNeeds;
 	}
 
-	public function setFat($fat) {
-		$this->fat = $fat;
+	public function setfatNeeds($fatNeeds) {
+		$this->fatNeeds = $fatNeeds;
 	}
 
-	public function setCarbs($carbs) {
-		$this->carbs = $carbs;
+	public function setCarbsNeeds($carbsNeeds) {
+		$this->carbsNeeds = $carbsNeeds;
+	}
+
+	public function setNutrient($kcalNeeds, $proteinsNeeds, $fatNeeds, $carbsNeeds) {
+		$this->setKcalNeeds($kcalNeeds);
+		$this->setProteins($proteinsNeeds);
+		$this->setFatNeeds($fatNeeds);
+		$this->setCarbs($carbsNeeds);
 	}
 }

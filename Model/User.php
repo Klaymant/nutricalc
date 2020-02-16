@@ -111,13 +111,6 @@ class User {
 		$this->goal = $goal;
 	}
 
-	public function setNutrient($kcal, $proteins, $fat, $carbs) {
-		$this->nutrient->setKcalNeeds($kcal);
-		$this->nutrient->setProteins($proteins);
-		$this->nutrient->setFat($fat);
-		$this->nutrient->setCarbs($carbs);
-	}
-
 	public function setBmr($bmr) {
 		$this->bmr = $bmr;
 	}
@@ -125,4 +118,72 @@ class User {
 	public function setKcalNeeds($kcalNeeds) {
 		$this->kcalNeeds = $kcalNeeds;
 	}
+
+    public function calculateBmr() {
+    	$menFormula = ($this->weight*13.707) + ($this->height/100*492.2) - ($this->age*6.673) + 77.607;
+    	$womenFormula = ($this->weight*9.74) + ($this->height/100*172.9) - ($this->age*4.737) + 667.05;
+    	
+    	return $this->sex == 'H' ? $menFormula : $womenFormula;
+    }
+
+	// Calculate the kcal needs depending on the activity quotient, BMR and the wanted goal
+    public function kcalNeeds() {
+    	switch ($this->goal) {
+    		case "Fat loss":
+    			return ($this->bmr*$this->activityQuotient($this->activity)*0.8);
+    		case "Maintain":
+    			return ($this->bmr*$this->activityQuotient($this->activity*1));
+    		case "Mass gain":
+    			return ($this->bmr*$this->activityQuotient($this->activity*1.2));
+    	}
+    }
+
+    public function proteinsNeeds() {
+        switch ($this->goal) {
+            case "Fat loss":
+                return ($this->weight*1.4);
+            case "Maintain":
+                return ($this->weight*1.5);
+            case "Mass gain":
+                return ($this->weight*1.6);
+        }
+    }
+
+    public function fatNeeds() {
+        switch ($this->goal) {
+            case "Fat loss":
+                return ($this->weight*1.2);
+            case "Maintain":
+                return ($this->weight*1);
+            case "Mass gain":
+                return ($this->weight*0.8);
+        }
+    }
+
+    public function carbsNeeds() {
+        return ($this->nutrient->getKcalNeeds()-($this->nutrient->getProteinsNeeds()*4)-($this->nutrient->getFatNeeds()*9))/4;
+    }
+
+    private function activityQuotient() {
+    	switch ($this->activity) {
+    		case "Any":
+    			return 1;
+    		case "Low":
+    			return 1.2;
+    		case "Moderate":
+    			return 1.37;
+    		case "High":
+    			return 1.5;
+    		case "Very high":
+    			return 1.8;
+    	}
+    }
+
+    public function calcAllNeeds() {
+    	$this->bmr = $this->calculateBmr();
+        $this->nutrient->setKcalNeeds($this->kcalNeeds());
+        $this->nutrient->setProteinsNeeds($this->proteinsNeeds());
+        $this->nutrient->setFatNeeds($this->fatNeeds());
+        $this->nutrient->setCarbsNeeds($this->carbsNeeds());
+    }
 }

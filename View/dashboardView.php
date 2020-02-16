@@ -17,15 +17,15 @@
 			</tr>
 			<tr>
 				<td class="attribute">Proteins :</td>
-				<td><?= round($user->getNutrient()->getProteins(), 0) ?> g</td>
+				<td><?= round($user->getNutrient()->getProteinsNeeds(), 0) ?> g</td>
 			</tr>
 			<tr>
 				<td class="attribute">Fat :</td>
-				<td><?= round($user->getNutrient()->getFat(), 0) ?> g</td>
+				<td><?= round($user->getNutrient()->getFatNeeds(), 0) ?> g</td>
 			</tr>
 			<tr>
 				<td class="attribute">Carbs :</td>
-				<td><?= round($user->getNutrient()->getCarbs(), 0) ?> g</td>
+				<td><?= round($user->getNutrient()->getCarbsNeeds(), 0) ?> g</td>
 			</tr>
 		</tbody>
 	</table>

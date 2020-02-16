@@ -13,20 +13,23 @@
 			<td>Sex :</td>
 			<td>
 				<input type="radio" name="sex" value="F">Female
-				<input type="radio" name="sex" value="M">Male
+				<input type="radio" name="sex" value="M" checked="checked">Male
 			</td>
 		</tr>
 		<tr>
 			<td>Age :</td>
 			<td><input type="text" name="age"></td>
+			<td>years old</td>
 		</tr>
 		<tr>
 			<td>Height :</td>
 			<td><input type="text" name="height"></td>
+			<td>cm</td>
 		</tr>
 		<tr>
 			<td>Weight :</td>
 			<td><input type="text" name="weight"></td>
+			<td>kg</td>
 		</tr>
 		<tr>
 			<td>Activity level :</td>

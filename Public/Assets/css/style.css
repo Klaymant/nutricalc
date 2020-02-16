@@ -1,3 +1,9 @@
+/*
+COLOR CODES
+LEAF GREEN	: rgba(0, 255, 153)
+RAIN PURPLE	: rgba(160, 65, 255)
+*/
+
 body {
 	background-color: rgb(18, 18, 18);
 	font-family: 'Calibri';
@@ -12,12 +18,12 @@ header {
 TITLE
 ---------- */
 #website_title a:visited, #website_title a:link {
-	color: rgba(160, 65, 255);
+	color: rgba(0, 255, 153);
 	text-decoration: none;
 }
 
 #website_title a:hover {
-	color: rgb(0, 255, 153);
+	color: rgba(160, 65, 255);
 }
 
 #website_title {
