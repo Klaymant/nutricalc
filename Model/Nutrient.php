@@ -11,7 +11,7 @@ class Nutrient {
 	{
 		$this->kcalNeeds = $kcalNeeds;
 		$this->proteinsNeeds = $proteinsNeeds;
-		$this->$fatNeeds = $fatNeeds;
+		$this->fatNeeds = $fatNeeds;
 		$this->carbsNeeds = $carbsNeeds;
 	}
 

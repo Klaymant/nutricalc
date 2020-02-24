@@ -13,6 +13,7 @@ class User {
 	private $goal;
 	private $bmr;
 	private $nutrient;
+	private $trainings;
 
 	function __construct($id, $mail, $pwd, $sex, $age, $height, $weight, $activity, $goal)
 	{
