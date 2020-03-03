@@ -13,8 +13,7 @@ class UserApiController {
         $this->userRepo = new UserRepository();
         $user = $this->userRepo->getUserById($id);
 
-        var_dump(get_object_vars($user));
-        var_dump(array($user));
-        //echo json_encode(array($user));
+        $userVars = json_encode($user->jsonSerialize());
+        echo $userVars;
     }
 }

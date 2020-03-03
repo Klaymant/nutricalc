@@ -55,4 +55,10 @@ class Nutrient {
 		$this->setFatNeeds($fatNeeds);
 		$this->setCarbs($carbsNeeds);
 	}
+
+	public function jsonSerialize()
+    {
+        $vars = get_object_vars($this);
+        return $vars;
+    }
 }

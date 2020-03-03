@@ -187,4 +187,10 @@ class User {
         $this->nutrient->setFatNeeds($this->fatNeeds());
         $this->nutrient->setCarbsNeeds($this->carbsNeeds());
     }
+
+    public function jsonSerialize()
+    {
+        $vars = get_object_vars($this);
+        return $vars;
+    }
 }
