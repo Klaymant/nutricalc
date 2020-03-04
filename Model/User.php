@@ -188,9 +188,19 @@ class User {
         $this->nutrient->setCarbsNeeds($this->carbsNeeds());
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize($fields)
     {
-        $vars = get_object_vars($this);
+    	$vars = array();
+    	if ($fields == NULL) {
+        	$vars = get_object_vars($this);
+        }
+        else {
+        	foreach ($fields as $elem) {
+        		if (property_exists($this, $elem)) {
+        			array_push($vars, array($elem, $this->$elem));
+        		}
+        	}
+        }
         return $vars;
     }
 }

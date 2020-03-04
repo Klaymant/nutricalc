@@ -13,3 +13,5 @@
 	$param = isset($action[1]) ? $action[1] : "";
 	$userApiController = new UserApiController();
 	$userApiController->$function($param);
+	//$userController = new UserController();
+	//$userController->$function($param);

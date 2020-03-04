@@ -9,11 +9,21 @@ use Model\User;
 class UserApiController {
     private $userRepo;
 
-    function getUserById($id) {
+    public function getUserById($id) {
         $this->userRepo = new UserRepository();
         $user = $this->userRepo->getUserById($id);
 
-        $userVars = json_encode($user->jsonSerialize());
+        $userVars = $user->jsonSerialize([]);
+        $userVars = json_encode($userVars);
         echo $userVars;
+    }
+
+    public function calculateBmr() {
+        $user = new User(NULL, NULL, NULL, $_POST['sex'], $_POST['age'], $_POST['height'], $_POST['weight'], $_POST['activity'], $_POST['goal']);
+        $user->calcAllNeeds();
+
+        //$userVars = $user->jsonSerialize([]);
+        //$userVars = json_encode($userVars);
+        return $userVars;
     }
 }
