@@ -15,7 +15,7 @@ class User {
 	private $nutrient;
 	private $trainings;
 
-	function __construct($id, $mail, $pwd, $sex, $age, $height, $weight, $activity, $goal)
+	function __construct($id=NULL, $mail=NULL, $pwd=NULL, $sex, $age, $height, $weight, $activity, $goal)
 	{
 		$this->id = $id;
 		$this->mail = $mail;

@@ -8,10 +8,14 @@
 
 	session_start();
 	$routeur = new Routeur($_GET);
-	$action = $routeur->route();
-	$function = $action[0];
+	$action = $routeur->route(); // $action is an array containing a method and the parameters
+	$function = $action[0]; // Contains the method
 	$param = isset($action[1]) ? $action[1] : "";
-	$userApiController = new UserApiController();
-	$userApiController->$function($param);
-	//$userController = new UserController();
-	//$userController->$function($param);
+	if (isset($action[1]) == "api") {
+		$userApiController = new UserApiController();
+		$userApiController->$function($param);
+	}
+	else {
+		$userController = new UserController();
+		$userController->$function($param);
+	}

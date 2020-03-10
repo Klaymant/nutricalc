@@ -45,8 +45,11 @@ class Routeur {
 		else if (isset($this->get['createaccount'])) {
 			return ['createAccount'];
 		}
-		else if (isset($this->get['api'])) {
-			return ['getUserById'];
+		else if (isset($this->get['api']) & isset($this->get['id'])) {
+			return ['getUserById', $this->get['id']];
+		}
+		else if (isset($this->get['api']) & isset($this->get['bmr'])) {
+			return ['calculateBmr'];
 		}
 		// If no parameter is set then go to the homepage
 		else {
