@@ -7,15 +7,27 @@
 	use Controller\api\UserApiController;
 
 	session_start();
-	$routeur = new Routeur($_GET);
+
+	$uri = $_SERVER['REQUEST_URI'];
+	$uri = trim($uri, "/");
+	$path = explode("/", $uri);
+	$path = array_splice($path, 2);
+	$path = array_flip($path);
+
+	$routeur = new Routeur($path);
 	$action = $routeur->route(); // $action is an array containing a method and the parameters
-	$function = $action[0]; // Contains the method
+	$method = $action[0]; // Contains the method
 	$param = isset($action[1]) ? $action[1] : "";
-	if (isset($action[1]) == "api") {
+
+	//var_dump($path);
+	//exit;
+
+	// Goes through API Controller
+	if (array_key_exists("api", $path)) {
 		$userApiController = new UserApiController();
-		$userApiController->$function($param);
+		$userApiController->$method($param);
 	}
 	else {
 		$userController = new UserController();
-		$userController->$function($param);
+		$userController->$method($param);
 	}

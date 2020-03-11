@@ -19,7 +19,7 @@ class UserApiController {
     }
 
     public function calculateBmr() {
-        $user = new User($_POST['sex'], $_POST['age'], $_POST['height'], $_POST['weight'], $_POST['activity'], $_POST['goal']);
+        $user = new User(NULL, NULL, NULL, $_POST['sex'], $_POST['age'], $_POST['height'], $_POST['weight'], $_POST['activity'], $_POST['goal']);
         $user->calculateBmr();
 
         $userVars = $user->jsonSerialize(["bmr"]);
