@@ -11,10 +11,10 @@ class Routeur {
 	public function route(){
         switch ($this->path[0]){
             case 'app':
-                return $this->routeApp($this->path);
+                return $this->routeApp();
                 break;
             case 'api':
-                return $this->routeApi($this->path);;
+                return $this->routeApi();
                 break;
             default:
                 return $this->toggle404();
@@ -22,17 +22,19 @@ class Routeur {
         }
     }
 
-	private function routeApp($path) {
-	    if ($path[1] == "id"){
-            if(array_key_exists(2, $path)){
-                if (is_numeric($path[2]))
-                {
-                    return ['getUserById',$path[2]];
-                }
-            }
-        } else if($path[1] == "calculator") {
-	        return ['calculator'];
-        }
+	private function routeApp() {
+		if (array_key_exists(1, $this->path)) {
+			switch ($this->path[1]) {
+				case 'id':
+					if (array_key_exists(2, $this->path)) {
+						return ["getUserById", $this->path[2]];
+					}
+					break;
+				case 'calculator':
+					return ["calculator"];
+					break;
+			}
+		}
 		/*if (isset($this->$path['id'])) {
 			return ['$pathUserById', $this->$path['id']];
 		}
@@ -82,7 +84,18 @@ class Routeur {
 	}
 
 	private function routeApi(){
-
+		if (array_key_exists(1, $this->path)) {
+			switch ($this->path[1]) {
+				case 'id':
+					if (array_key_exists(2, $this->path)) {
+						return ["UserApiController", "getUserById", $this->path[2]];
+					}
+					break;
+				case 'bmr':
+					return ["bmr"];
+					break;
+			}
+		}
     }
 
     private function toggle404(){

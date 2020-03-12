@@ -13,17 +13,13 @@
 	$path = UriParser::parseUri();
 	$routeur = new Routeur($path);
 	$action = $routeur->route(); // $action is an array containing a method and the parameters
-	$method = $action[0]; // Contains the method
-	$param = isset($action[1]) ? $action[1] : "";
-	var_dump($path);
-	var_dump($action);exit;
+	$controllerName = $action[0]; // Contains the method
+	$method = $action[1];
+	$param = isset($action[2]) ? $action[2] : "";
+	//var_dump($path);
+	//var_dump($action);exit;
 
 	// Goes through API Controller
-	if (array_key_exists("api", $path)) {
-		$userApiController = new UserApiController();
-		$userApiController->$method($param);
-	}
-	else {
-		$userController = new UserController();
-		$userController->$method($param);
-	}
+	$controller = new $controllerName;
+	//$controller = new UserApiController;
+	$controller->$method($param);
