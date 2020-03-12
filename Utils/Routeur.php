@@ -2,6 +2,9 @@
 namespace Utils;
 
 class Routeur {
+    const USER_API_CONTROLLER = 'Controller\Api\UserApiController';
+    const USER_CONTROLLER = 'Controller\UserController';
+
 	private $path;
 
 	function __construct($path) {
@@ -35,6 +38,7 @@ class Routeur {
 					break;
 			}
 		}
+		// fixme : adapt and complete the rest of the function
 		/*if (isset($this->$path['id'])) {
 			return ['$pathUserById', $this->$path['id']];
 		}
@@ -88,11 +92,11 @@ class Routeur {
 			switch ($this->path[1]) {
 				case 'id':
 					if (array_key_exists(2, $this->path)) {
-						return ["UserApiController", "getUserById", $this->path[2]];
+						return [self::USER_API_CONTROLLER, "getUserById", $this->path[2]];
 					}
 					break;
 				case 'bmr':
-					return ["bmr"];
+					return ["bmr"]; //fixme
 					break;
 			}
 		}

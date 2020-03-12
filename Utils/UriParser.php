@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Utils;
-
 
 class UriParser
 {
@@ -10,6 +8,5 @@ class UriParser
         $uri = trim($_SERVER['REQUEST_URI'], "/");
         $path = explode("/", $uri);
         return array_splice($path, 2);
-
     }
 }
