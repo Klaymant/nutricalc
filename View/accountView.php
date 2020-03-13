@@ -7,7 +7,7 @@
 	It is now time to give your personal data so that you can estimate the calories you need to reach your goal!
 </p>
 
-<form action="index.php?savedata" method="post">
+<form action="savedata" method="post">
 	<table>
 		<tr>
 			<td>Sex :</td>

@@ -24,6 +24,7 @@ class UserApiController {
 
         $userVars = $user->jsonSerialize(["bmr"]);
         $userVars = json_encode($userVars);
+        echo $userVars;
         return $userVars;
     }
 }

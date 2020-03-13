@@ -26,78 +26,78 @@ class Routeur {
     }
 
 	private function routeApp() {
+		$error = false;
 		if (array_key_exists(1, $this->path)) {
 			switch ($this->path[1]) {
+				case 'homepage':
+					return [self::USER_CONTROLLER, "homepage"];
+					break;
 				case 'id':
 					if (array_key_exists(2, $this->path)) {
-						return ["getUserById", $this->path[2]];
+						return [self::USER_CONTROLLER, "getUserById", $this->path[2]];
+						break;
 					}
+					$error = true;
 					break;
 				case 'calculator':
-					return ["calculator"];
+					return [self::USER_CONTROLLER, "calculator"];
+					break;
+				case 'login':
+					return [self::USER_CONTROLLER, "login"];
+					break;
+				case 'logout':
+					return [self::USER_CONTROLLER, "logout"];
+					break;
+				case 'account':
+					return [self::USER_CONTROLLER, "account"];
+					break;
+				case 'newaccount':
+					return [self::USER_CONTROLLER, "newAccount"];
+					break;
+				case 'createaccount':
+					return [self::USER_CONTROLLER, "createAccount"];
+					break;
+				case 'dashboard':
+					return [self::USER_CONTROLLER, "dashboard"];
+					break;
+				case 'profile':
+					return [self::USER_CONTROLLER, "profile"];
+					break;
+				case 'usercalculator':
+					return [self::USER_CONTROLLER, "userCalculator"];
+					break;
+				case 'changedata':
+					return [self::USER_CONTROLLER, "changeData"];
+					break;
+				case 'savedata':
+					return [self::USER_CONTROLLER, "saveData"];
 					break;
 			}
+			if ($error) {
+				$this->toggle404();
+			}
 		}
-		// fixme : adapt and complete the rest of the function
-		/*if (isset($this->$path['id'])) {
-			return ['$pathUserById', $this->$path['id']];
-		}
-		else if (isset($this->$path['calculator'])) {
-			return ['calculator'];
-		}
-		else if (isset($this->$path['usercalculator'])) {
-			return ['userCalculator'];
-		}
-		else if (isset($this->$path['login'])) {
-			return ['login'];
-		}
-		else if (isset($this->$path['account'])) {
-			return ['account'];
-		}
-		else if (isset($this->$path['logout'])) {
-			return ['logout'];
-		}
-		else if (isset($this->$path['dashboard'])) {
-			return ['dashboard'];
-		}
-		else if (isset($this->$path['profile'])) {
-			return ['profile'];
-		}
-		else if (isset($this->$path['changedata'])) {
-			return ['changeData'];
-		}
-		else if (isset($this->$path['savedata'])) {
-			return ['saveData'];
-		}
-		else if (isset($this->$path['newaccount'])) {
-			return ['newAccount'];
-		}
-		else if (isset($this->$path['createaccount'])) {
-			return ['createAccount'];
-		}
-		else if (isset($this->$path['api']) & isset($this->$path['id'])) {
-			return ['$pathUserById', $this->$path['id']];
-		}
-		else if (isset($this->$path['api']) & isset($this->$path['bmr'])) {
-			return ['calculateBmr'];
-		}
-		// If no parameter is set then go to the homepage
-		else {
-			return ['homepage'];
-		}*/
 	}
 
 	private function routeApi(){
+		$error = false;
+		// If a method is defined in URI
 		if (array_key_exists(1, $this->path)) {
 			switch ($this->path[1]) {
 				case 'id':
+					// If a parameter is defined in URI
 					if (array_key_exists(2, $this->path)) {
 						return [self::USER_API_CONTROLLER, "getUserById", $this->path[2]];
+						break;
 					}
+					$error = true;
 					break;
 				case 'bmr':
-					return ["bmr"]; //fixme
+					return [self::USER_API_CONTROLLER, "calculateBmr"]; //fixme
 					break;
+			}
+			if ($error) {
+				$this->toggle404();
 			}
 		}
     }

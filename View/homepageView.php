@@ -18,12 +18,12 @@
 
 <p>
 	Ready to finally know what you need ?</br>
-	It's <a href="index.php?calculator">THIS WAY!</a>
+	It's <a href="calculator">THIS WAY!</a>
 </p>
 
 <p>
 	Want to create an account ?</br>
-	It's <a href="index.php?newaccount">THIS WAY!</a>
+	It's <a href="newaccount">THIS WAY!</a>
 </p>
 
 <?php

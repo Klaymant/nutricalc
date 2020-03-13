@@ -38,7 +38,7 @@
 		</tbody>
 	</table>
 
-	<a href="index.php?changedata">Change my data</a>
+	<a href="changedata">Change my data</a>
 </div>
 
 <?php
