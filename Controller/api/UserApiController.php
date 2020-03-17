@@ -16,10 +16,11 @@ class UserApiController {
         $userVars = $user->jsonSerialize([]);
         $userVars = json_encode($userVars);
         echo $userVars;
+        return $userVars;
     }
 
     public function calculateBmr() {
-        $user = new User(NULL, NULL, NULL, $_POST['sex'], $_POST['age'], $_POST['height'], $_POST['weight'], $_POST['activity'], $_POST['goal']);
+        $user = new User($_POST['sex'], $_POST['age'], $_POST['height'], $_POST['weight'], $_POST['activity'], $_POST['goal']);
         $user->calculateBmr();
 
         $userVars = $user->jsonSerialize(["bmr"]);

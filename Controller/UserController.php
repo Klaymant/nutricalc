@@ -18,7 +18,7 @@ class UserController {
     }
 
     public function userCalculator() {
-        $user = new User(NULL, NULL, NULL, $_POST['sex'], $_POST['age'], $_POST['height'], $_POST['weight'], $_POST['activity'], $_POST['goal']);
+        $user = new User($_POST['sex'], $_POST['age'], $_POST['height'], $_POST['weight'], $_POST['activity'], $_POST['goal']);
         $user->calcAllNeeds();
         require_once("View/calculatorView.php");
     }
@@ -48,7 +48,7 @@ class UserController {
             session_start();
             $_SESSION['id'] = $user['id'];
             $_SESSION['logged'] = true;
-            header("Location: index.php?dashboard");
+            header("Location: dashboard");
         }
         else {
             $error = true;
@@ -58,18 +58,19 @@ class UserController {
 
     public function logout() {
         $_SESSION['logged'] = false;
-        //session_write_close();
-        header ("Location: index.php");
+        session_write_close();
+        header ("Location: homepage");
     }
 
     public function changeData() {
+        //$user = $this->userRepo->getUserById($_SESSION['id']);
         require_once("View/accountView.php");
     }
 
     public function saveData() {
         $this->userRepo = new UserRepository();
         $user = $this->userRepo->saveData($_POST);
-        header("Location: index.php?dashboard");
+        header("Location: dashboard");
     }
 
     public function newAccount()

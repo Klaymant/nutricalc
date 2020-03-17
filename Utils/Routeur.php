@@ -9,8 +9,10 @@ class Routeur {
 
 	function __construct($path) {
 		$this->path = $path;
+		$this->error = false;
 	}
 
+	// Depending on the route of the URI, either a UserController or a UserApiController will be chosen in the index
 	public function route(){
         switch ($this->path[0]){
             case 'app':
@@ -25,8 +27,8 @@ class Routeur {
         }
     }
 
+    // When UserController is chosen
 	private function routeApp() {
-		$error = false;
 		if (array_key_exists(1, $this->path)) {
 			switch ($this->path[1]) {
 				case 'homepage':
@@ -37,8 +39,10 @@ class Routeur {
 						return [self::USER_CONTROLLER, "getUserById", $this->path[2]];
 						break;
 					}
-					$error = true;
-					break;
+					else {
+						return [self::USER_CONTROLLER, "404"];
+						break;
+					}
 				case 'calculator':
 					return [self::USER_CONTROLLER, "calculator"];
 					break;
@@ -72,16 +76,17 @@ class Routeur {
 				case 'savedata':
 					return [self::USER_CONTROLLER, "saveData"];
 					break;
+				default:
+					return [self::USER_CONTROLLER, "404"];
 			}
-			if ($error) {
-				$this->toggle404();
-			}
+		}
+		else {
+			return [self::USER_CONTROLLER, "404"];
 		}
 	}
 
+	// When UserApiController is chosen
 	private function routeApi(){
-		$error = false;
-		// If a method is defined in URI
 		if (array_key_exists(1, $this->path)) {
 			switch ($this->path[1]) {
 				case 'id':
@@ -90,14 +95,16 @@ class Routeur {
 						return [self::USER_API_CONTROLLER, "getUserById", $this->path[2]];
 						break;
 					}
-					$error = true;
+					else {
+						return [self::USER_API_CONTROLLER, "404"];
+						break;
+					}
 					break;
 				case 'bmr':
 					return [self::USER_API_CONTROLLER, "calculateBmr"]; //fixme
 					break;
-			}
-			if ($error) {
-				$this->toggle404();
+				default:
+					return [self::USER_CONTROLLER, "404"];
 			}
 		}
     }
