@@ -15,7 +15,7 @@ class User {
 	private $nutrient;
 	private $trainings;
 
-	function __construct($id, $mail, $pwd, $sex, $age, $height, $weight, $activity, $goal)
+	function __construct($sex, $age, $height, $weight, $activity, $goal, $id=NULL, $mail=NULL, $pwd=NULL)
 	{
 		$this->id = $id;
 		$this->mail = $mail;
@@ -127,15 +127,14 @@ class User {
     	return $this->sex == 'H' ? $menFormula : $womenFormula;
     }
 
-	// Calculate the kcal needs depending on the activity quotient, BMR and the wanted goal
     public function kcalNeeds() {
     	switch ($this->goal) {
     		case "Fat loss":
     			return ($this->bmr*$this->activityQuotient($this->activity)*0.8);
     		case "Maintain":
-    			return ($this->bmr*$this->activityQuotient($this->activity*1));
+    			return ($this->bmr*$this->activityQuotient($this->activity)*1);
     		case "Mass gain":
-    			return ($this->bmr*$this->activityQuotient($this->activity*1.2));
+    			return ($this->bmr*$this->activityQuotient($this->activity)*1.2);
     	}
     }
 
@@ -186,5 +185,21 @@ class User {
         $this->nutrient->setProteinsNeeds($this->proteinsNeeds());
         $this->nutrient->setFatNeeds($this->fatNeeds());
         $this->nutrient->setCarbsNeeds($this->carbsNeeds());
+    }
+
+    public function jsonSerialize($fields)
+    {
+    	$vars = array();
+    	if ($fields == NULL) {
+        	$vars = get_object_vars($this);
+        }
+        else {
+        	foreach ($fields as $elem) {
+        		if (property_exists($this, $elem)) {
+        			array_push($vars, array($elem, $this->$elem));
+        		}
+        	}
+        }
+        return $vars;
     }
 }

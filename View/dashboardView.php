@@ -12,20 +12,20 @@
 		</thead>
 		<tbody>
 			<tr>
-				<td class="attribute">Calories :</td>
-				<td><?= round($user->getNutrient()->getKcalNeeds(), 0) ?> kcal</td>
+				<td class="attribute">Calories </td>
+				<td>| <?= round($user->getNutrient()->getKcalNeeds(), 0) ?> kcal</td>
 			</tr>
 			<tr>
-				<td class="attribute">Proteins :</td>
-				<td><?= round($user->getNutrient()->getProteinsNeeds(), 0) ?> g</td>
+				<td class="attribute">Proteins </td>
+				<td>| <?= round($user->getNutrient()->getProteinsNeeds(), 0) ?> g</td>
 			</tr>
 			<tr>
-				<td class="attribute">Fat :</td>
-				<td><?= round($user->getNutrient()->getFatNeeds(), 0) ?> g</td>
+				<td class="attribute">Fat </td>
+				<td>| <?= round($user->getNutrient()->getFatNeeds(), 0) ?> g</td>
 			</tr>
 			<tr>
-				<td class="attribute">Carbs :</td>
-				<td><?= round($user->getNutrient()->getCarbsNeeds(), 0) ?> g</td>
+				<td class="attribute">Carbs </td>
+				<td>| <?= round($user->getNutrient()->getCarbsNeeds(), 0) ?> g</td>
 			</tr>
 		</tbody>
 	</table>

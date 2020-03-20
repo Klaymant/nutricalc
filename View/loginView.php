@@ -3,7 +3,7 @@
 	ob_start();
 ?>
 
-<form action="index.php?account" method="post">
+<form action="account" method="post">
 	<table>
 		<tr>
 			<td>Mail :</td>
@@ -24,7 +24,7 @@
 ?>
 
 <p>
-	<a href="index.php?newaccount">No account yet ? Follow this link !</a>
+	<a href="newaccount">No account yet ? Follow this link !</a>
 </p>
 
 <?php

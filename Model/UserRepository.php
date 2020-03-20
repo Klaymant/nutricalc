@@ -33,7 +33,7 @@ class UserRepository {
 		$executed->execute();
 		$user = $executed->fetch(\PDO::FETCH_ASSOC);
 
-		return new User($id, $user['mail'], $user['pwd'], $user['sex'], $user['age'], $user['height'], $user['weight'], $user['activity_name'], $user['goal_name']);
+		return new User($user['sex'], $user['age'], $user['height'], $user['weight'], $user['activity_name'], $user['goal_name'], $id, $user['mail'], $user['pwd']);
 	}
 
 	public function createUser($mail, $pwd, $sex, $age, $height, $weight, $activity, $goal) {

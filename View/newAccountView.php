@@ -3,7 +3,7 @@
 	ob_start();
 ?>
 
-<form action="index.php?createaccount" method="post">
+<form action="createaccount" method="post">
 	<table>
 		<tr>
 			<td>Mail :</td>
