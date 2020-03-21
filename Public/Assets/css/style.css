@@ -2,6 +2,7 @@
 COLOR CODES
 LEAF GREEN	: rgba(0, 255, 153)
 RAIN PURPLE	: rgba(160, 65, 255)
+RED LIGHT: rgba(255, 102, 102)
 */
 
 body {
@@ -23,7 +24,7 @@ TITLE
 }
 
 #website_title a:hover {
-	color: rgba(160, 65, 255);
+	color: rgba(255, 102, 102);
 }
 
 #website_title {
@@ -76,34 +77,45 @@ MENU
 /* ----------
 DASHBOARD
 ---------- */
-#data {
-	clear: left;
+.value {
+	color: rgba(0, 255, 153);
+	font-weight: bold;
 }
 
-#data table thead {
+.tile {
+	background: rgb(30, 30, 30);
+	border: solid 4px white;
+	margin: 20px;
+	width: 20%;
+	height: 250px;
+}
+
+.tile table {
+	width: 100%;
+	padding: 0px;
+}
+
+.tile table thead {
+	background: rgb(50, 50, 50);
 	font-size: 25px;
-	color: rgb(160, 65, 255);
+	color: white;
 }
 
-#data table {
+.tile table tbody {
+	padding-left: 10px;
 }
 
-#data table td {
-}
-
-.attribute {
+#data {
+	display: inline-block;
+	float: left;
 }
 
 #needs {
-}
-
-#needs table thead {
-	font-size: 25px;
-	color: rgb(160, 65, 255);
+	display: inline-block;
 }
 
 /* ----------
-FOOTER
+LINKS
 ---------- */
 a:link, a:visited {
 	text-decoration: underline;

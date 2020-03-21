@@ -23,13 +23,6 @@ class UserController {
         require_once("View/calculatorView.php");
     }
 
-    public function profile() {
-        $this->userRepo = new UserRepository();
-        $user = $this->userRepo->getUserById($_SESSION['id']);
-        $user->calcAllNeeds();
-        require_once("View/profileView.php");
-    }
-
     public function dashboard() {
         $this->userRepo = new UserRepository();
         $user = $this->userRepo->getUserById($_SESSION['id']);

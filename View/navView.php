@@ -7,7 +7,6 @@
 			}
 			if (isset($_SESSION['logged']) && $_SESSION['logged'] == true) {
 				echo '<li><a href="dashboard">Dashboard</a></li>';
-				echo '<li><a href="profile">My profile</a></li>';
 				echo '<li><a href="logout">Logout</a></li>';
 			}
 		?>

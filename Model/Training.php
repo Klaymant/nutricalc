@@ -2,9 +2,6 @@
 
 namespace Model;
 
-require_once("Model/Date.php");
-use Model\Date;
-
 class Training {
 	private $date;
 	private $shape;

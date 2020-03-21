@@ -64,9 +64,6 @@ class Routeur {
 				case 'dashboard':
 					return [self::USER_CONTROLLER, "dashboard"];
 					break;
-				case 'profile':
-					return [self::USER_CONTROLLER, "profile"];
-					break;
 				case 'usercalculator':
 					return [self::USER_CONTROLLER, "userCalculator"];
 					break;

@@ -3,7 +3,7 @@
 	ob_start();
 ?>
 
-<div id="data">
+<div class="tile" id="data">
 	<table>
 		<thead>
 			<tr>
