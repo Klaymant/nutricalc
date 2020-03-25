@@ -2,7 +2,9 @@
 namespace Model;
 
 require_once('Model/Nutrient.php');
+require_once('Model/Training.php');
 use Model\Nutrient;
+use Model\Training;
 
 class User {
 	private $sex;
@@ -27,6 +29,7 @@ class User {
 		$this->activity = $activity;
 		$this->goal = $goal;
 		$this->nutrient = new Nutrient(NULL, NULL, NULL, NULL);
+		$this->trainings = [];
 	}
 
 	// Getters
@@ -75,6 +78,10 @@ class User {
 		return $this->nutrient;
 	}
 
+	public function getTrainings() {
+		return $this->trainings;
+	}
+
 	public function getKcalNeeds() {
 		return $this->kcalNeeds;
 	}
@@ -114,6 +121,10 @@ class User {
 
 	public function setBmr($bmr) {
 		$this->bmr = $bmr;
+	}
+
+	public function setTrainings($trainings) {
+		$this->trainings = $trainings;
 	}
 
 	public function setKcalNeeds($kcalNeeds) {

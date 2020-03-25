@@ -69,6 +69,30 @@
 	</table>
 </div>
 
+<div class="tile" id="trainings">
+	<table>
+		<thead>
+			<tr>
+				<th colspan=2>My trainings</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>Date</td>
+				<td>Shape<td>
+			</tr>
+			<?php
+				foreach ($user->getTrainings() as $training) {
+					echo '<tr>
+					<td> <span class="value">' . $training->getDate() . '</span></td>
+					<td><span class="value">' . $training->getShape() . '</span>/10</td>
+					</tr>';
+				}
+			?>
+		</tbody>
+	</table>
+</div>
+
 <?php
 	// $content contains the html content from ob_start so far
 	$content = ob_get_clean();

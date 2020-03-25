@@ -27,6 +27,8 @@ class UserController {
         $this->userRepo = new UserRepository();
         $user = $this->userRepo->getUserById($_SESSION['id']);
         $user->calcAllNeeds();
+
+        $user->setTrainings($this->userRepo->getTrainingsById($_SESSION['id']));
         require_once("View/dashBoardView.php");
     }
 
