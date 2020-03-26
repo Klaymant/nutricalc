@@ -40,29 +40,28 @@ class UserRepository {
 		return new User($user['sex'], $user['age'], $user['height'], $user['weight'], $user['activity_name'], $user['goal_name'], $id, $user['mail'], $user['pwd']);
 	}
 
-	public function getTrainingsById($userId) {
-		// First of all we get the trainings ids of a user by his user id
+	public function getTrainingsIds($userId) {
 		$trainingsIdQuery = 'SELECT DISTINCT(training.id) AS id_trainings FROM `user`
-		LEFT JOIN user_training ON user_training.id_user = user.id
-        LEFT JOIN training ON training.id = user_training.id_training
-		LEFT JOIN exercise_practice ON user_training.id_training = exercise_practice.id_training
-		LEFT JOIN exercise_catalog ON exercise_practice.id_exercise_catalog = exercise_catalog.id
-		WHERE user_training.id_user=?
+        LEFT JOIN training ON training.id_user = user.id
+		WHERE training.id_user=?
 		ORDER BY training.id DESC';
 		$executed = $this->pdo->prepare($trainingsIdQuery);
 		$executed->execute([$userId]);
-		$trainingsIds = $executed->fetchAll(\PDO::FETCH_ASSOC);
+		return $executed->fetchAll(\PDO::FETCH_ASSOC);
+	}
+
+	public function getTrainingsById($userId) {
+		$trainingsIds = $this->getTrainingsIds($userId);
 
 		$myTrainings = [];
 
 		// For each training we get for a user all the exercises and put them into an array that is pushed itself in an another array containing all of the trainings
 		foreach ($trainingsIds as $tId) {
-			$query = 'SELECT training.id, training.date, training.shape, exercise_catalog.name AS name, exercise_practice.rest, exercise_practice.nb_sets, exercise_practice.nb_reps, exercise_practice.method FROM `user`
-			LEFT JOIN user_training ON user_training.id_user = user.id
-	        LEFT JOIN training ON training.id = user_training.id_training
-			LEFT JOIN exercise_practice ON user_training.id_training = exercise_practice.id_training
+			$query = 'SELECT training.date, training.shape, exercise_catalog.name, exercise_practice.rest, exercise_practice.nb_sets, exercise_practice.nb_reps, exercise_practice.method FROM `user`
+	        LEFT JOIN training ON training.id_user = user.id
+			LEFT JOIN exercise_practice ON training.id = exercise_practice.id_training
 			LEFT JOIN exercise_catalog ON exercise_practice.id_exercise_catalog = exercise_catalog.id
-			WHERE training.id=? AND user_training.id_user=?';
+			WHERE training.id=? AND training.id_user=?';
 			$executed = $this->pdo->prepare($query);
 			$executed->execute([$tId['id_trainings'], $userId]);
 			$trainings = $executed->fetchAll(\PDO::FETCH_ASSOC);
