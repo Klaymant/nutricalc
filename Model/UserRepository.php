@@ -18,15 +18,24 @@ class UserRepository {
 		$this->pdo = $dbc->getPdo();
 	}
 
-	public function makeSqlQuery($query, $params=NULL, $all=true, $fetchType=\PDO::FETCH_ASSOC) {
+	public function makeSqlQuery($query, $command='fetch', $params=NULL, $fetchType=\PDO::FETCH_ASSOC) {
 		$executed = $this->pdo->prepare($query);
 		$executed->execute($params);
-		return $all ? $executed->fetchAll($fetchType) : $executed->fetch($fetchType);
+		switch ($command) {
+			case 'fetch':
+				return $executed->fetch($fetchType);
+				break;
+			case 'fetchAll':
+				return $executed->fetchAll($fetchType);
+				break;
+			default:
+				break;
+		}
 	}
 
 	public function getUserByMail($mail) {
 		$query = 'SELECT id, pwd FROM user WHERE mail=?';
-		return $this->makeSqlQuery($query, [$mail], false);
+		return $this->makeSqlQuery($query, 'fetch', [$mail]);
 	}
 
 	public function getUserById($id) {
@@ -34,7 +43,7 @@ class UserRepository {
 		LEFT JOIN activity ON user.id_activity = activity.id
 		LEFT JOIN goal ON user.id_goal = goal.id
 		WHERE user.id=?';
-		$user = $this->makeSqlQuery($query, [$id], false);
+		$user = $this->makeSqlQuery($query, 'fetch', [$id]);
 
 		return new User($user['sex'], $user['age'], $user['height'], $user['weight'], $user['activity_name'], $user['goal_name'], $id, $user['mail'], $user['pwd']);
 	}
@@ -45,7 +54,7 @@ class UserRepository {
         LEFT JOIN training ON training.id_user = user.id
 		WHERE training.id_user=?
 		ORDER BY training.id DESC';
-		return $this->makeSqlQuery($trainingsIdQuery, [$userId]);
+		return $this->makeSqlQuery($trainingsIdQuery, 'fetchAll', [$userId]);
 	}
 
 	// Create a Training thanks to the training_id by a user id
@@ -55,8 +64,7 @@ class UserRepository {
 		LEFT JOIN exercise_practice ON training.id = exercise_practice.id_training
 		LEFT JOIN exercise_catalog ON exercise_practice.id_exercise_catalog = exercise_catalog.id
 		WHERE training.id=? AND training.id_user=?';
-		$training = $this->makeSqlQuery($query, [$trainingId['id_trainings'], $userId]);
-
+		$training = $this->makeSqlQuery($query, 'fetchAll', [$trainingId['id_trainings'], $userId]);
 		$exercises = [];
 		foreach ($training AS $exo) {
 			array_push($exercises, new Exercise($exo['name'], $exo['rest'], $exo['nb_sets'], $exo['nb_reps'], $exo['method']));
@@ -67,7 +75,6 @@ class UserRepository {
 	// Create a list of users' trainings by his id
 	public function getAllTrainingsById($userId) {
 		$trainingsIds = $this->getTrainingsIds($userId);
-
 		$myTrainings = [];
 		foreach ($trainingsIds as $trainingId) {
 			$training = $this->makeTrainingById($trainingId, $userId);
@@ -79,30 +86,24 @@ class UserRepository {
 	public function createUser($mail, $pwd, $sex, $age, $height, $weight, $activity, $goal) {
 		$query = 'INSERT INTO user (height, weight, activity, goal, age)
 		VALUES ("?", "?", "?", "?", "?")';
-		$createdUser = $this->pdo->prepare();
-		
-		return $createdUser->execute([$height, $weight, $activity, $goal, $age]);
+		return $this->makeSqlQuery($query, NULL, [$height, $weight, $activity, $goal, $age]);
 	}
 
 	public function saveData($data) {
 		$query = "UPDATE user
 			SET age=?, height=?, weight=?, id_activity=?, id_goal=?
 			WHERE id=?";
-		$executed = $this->pdo->prepare($query);
-    	return $executed->execute([$data['age'], $data['height'], $data['weight'], $data['activity'], $data['goal'], $_SESSION['id']]);
+    	return $this->makeSqlQuery($query, NULL, [$data['age'], $data['height'], $data['weight'], $data['activity'], $data['goal'], $_SESSION['id']]);
 	}
 
 	public function createAccount($data) {
 		$query = "INSERT INTO user (mail, pwd) VALUES (?, ?)";
-		$executed = $this->pdo->prepare($query);
-		return $executed->execute([$data['mail'], $data['pwd']]);
+		return $this->makeSqlQuery($query, NULL, [$data['mail'], $data['pwd']]);
 	}
 
 	public function mailExists($mail) {
 		$query = "SELECT COUNT(*) as c FROM user WHERE mail=?";
-		$executed = $this->pdo->prepare($query);
-		$executed->execute([$mail]);
-		$mailExists = $executed->fetch(\PDO::FETCH_ASSOC);
+		$mailExists = $this->makeSqlQuery($query, 'fetch', [$mail]);
 		return $mailExists['c'] == 1 ? true : false;
 	}
 }
