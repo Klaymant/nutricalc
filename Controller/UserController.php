@@ -11,6 +11,10 @@ class UserController {
 
     public function homepage() {
         require_once ("View/homepageView.php");
+        // $this->userRepo = new UserRepository();
+        // $result = $this->userRepo->makeSqlQuery("SELECT * FROM user WHERE user.id=?", ["2"]);
+        // var_dump($result);
+        // exit;
     }
 
     public function calculator() {
