@@ -50,13 +50,7 @@ class UserRepository {
 		return $executed->fetchAll(\PDO::FETCH_ASSOC);
 	}
 
-	public function getTrainingsById($userId) {
-		$trainingsIds = $this->getTrainingsIds($userId);
-
-		$myTrainings = [];
-
-		// For each training we get for a user all the exercises and put them into an array that is pushed itself in an another array containing all of the trainings
-		foreach ($trainingsIds as $tId) {
+	public function makeTraining($tId, $userId) {
 			$query = 'SELECT training.date, training.shape, exercise_catalog.name, exercise_practice.rest, exercise_practice.nb_sets, exercise_practice.nb_reps, exercise_practice.method FROM `user`
 	        LEFT JOIN training ON training.id_user = user.id
 			LEFT JOIN exercise_practice ON training.id = exercise_practice.id_training
@@ -67,20 +61,29 @@ class UserRepository {
 			$trainings = $executed->fetchAll(\PDO::FETCH_ASSOC);
 
 			$exercises = [];
-			foreach ($trainings AS $train) {
-				array_push($exercises, new Exercise($train['name'], $train['rest'], $train['nb_sets'], $train['nb_reps'], $train['method']));
+			foreach ($trainings AS $exo) {
+				array_push($exercises, new Exercise($exo['name'], $exo['rest'], $exo['nb_sets'], $exo['nb_reps'], $exo['method']));
 			}
-			array_push($myTrainings, new Training($exercises, $train['date'], $train['shape']));
+			return [$exercises, $trainings[0]['date'], $trainings[0]['shape']];
+	}
+
+	public function getAllTrainingsById($userId) {
+		$trainingsIds = $this->getTrainingsIds($userId);
+
+		$myTrainings = [];
+		foreach ($trainingsIds as $tId) {
+			$training = $this->makeTraining($tId, $userId);
+			array_push($myTrainings, new Training($training[0], $training[1], $training[2]));
 		}
 		return $myTrainings;
 	}
 
 	public function createUser($mail, $pwd, $sex, $age, $height, $weight, $activity, $goal) {
 		$query = 'INSERT INTO user (height, weight, activity, goal, age)
-		VALUES ("{$height}", "{$weight}", "{$activity}", "{$goal}", "{$age}")';
+		VALUES ("?", "?", "?", "?", "?")';
 		$createdUser = $this->pdo->prepare();
 		
-		return $createdUser->executed;
+		return $createdUser->execute([$height, $weight, $activity, $goal, $age]);
 	}
 
 	public function saveData($data) {
