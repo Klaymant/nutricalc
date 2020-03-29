@@ -2,9 +2,13 @@
 namespace Controller;
 
 require_once('Model/UserRepository.php');
+require_once('Model/TrainingRepository.php');
 require_once('Model/User.php');
+require_once('Model/Training.php');
 use Model\UserRepository;
+use Model\TrainingRepository;
 use Model\User;
+use Model\Training;
 
 class UserController {
     private $userRepo;
@@ -25,10 +29,11 @@ class UserController {
 
     public function dashboard() {
         $this->userRepo = new UserRepository();
+        $this->trainingRepo = new TrainingRepository();
         $user = $this->userRepo->getUserById($_SESSION['id']);
         $user->calcAllNeeds();
 
-        $trainings = $this->userRepo->getLastTrainings($_SESSION['id'], 5);
+        $trainings = $this->trainingRepo->makeLastTrainings($_SESSION['id'], 5);
         require_once("View/dashBoardView.php");
     }
 

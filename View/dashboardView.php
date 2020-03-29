@@ -86,9 +86,9 @@
 			</tr>
 			<?php
 				foreach ($trainings as $training) {
-					echo '<tr>
-					<td class="training"> <span class="value">' . $training['date'] . '</span></td>
-					<td class="training"><span class="value">' . $training['shape'] . '</span>/10</td>
+					echo '<tr class="training"> 
+					<td><span class="value">' . $training->getDate() . '</span></td>
+					<td><span class="value">' . $training->getShape() . '</span>/10</td>
 					</tr>';
 				}
 			?>
@@ -96,6 +96,9 @@
 		<tfoot>
 			<tr>
 				<td><a href="changedata">Add a training</a></td>
+			</tr>
+			<tr>
+				<td><a href="changedata">See all trainings</a></td>
 			</tr>
 		</tfoot>
 	</table>

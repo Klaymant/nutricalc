@@ -1,5 +1,4 @@
 <?php
-
 namespace Model;
 
 class Training {
@@ -22,7 +21,7 @@ class Training {
 		return $this->shape;
 	}
 
-	public function getExercices() {
+	public function getExercises() {
 		return $this->exercices;
 	}
 
@@ -35,7 +34,7 @@ class Training {
 		return $this->shape = $shape;
 	}
 
-	public function setExercices($exercices) {
+	public function setExercises($exercices) {
 		return $this->exercices = $exercices;
 	}
 }

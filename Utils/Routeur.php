@@ -4,17 +4,18 @@ namespace Utils;
 class Routeur {
     const USER_API_CONTROLLER = 'Controller\Api\UserApiController';
     const USER_CONTROLLER = 'Controller\UserController';
+    const TRAINING_CONTROLLER = 'Controller\UserController';
 
-	private $path;
+	private $uri;
 
-	function __construct($path) {
-		$this->path = $path;
+	function __construct($uri) {
+		$this->uri = $uri;
 		$this->error = false;
 	}
 
 	// Depending on the route of the URI, either a UserController or a UserApiController will be chosen in the index
 	public function route(){
-        switch ($this->path[0]){
+        switch ($this->uri[0]){
             case 'app':
                 return $this->routeApp();
                 break;
@@ -29,14 +30,14 @@ class Routeur {
 
     // When UserController is chosen
 	private function routeApp() {
-		if (array_key_exists(1, $this->path)) {
-			switch ($this->path[1]) {
+		if (array_key_exists(1, $this->uri)) {
+			switch ($this->uri[1]) {
 				case 'homepage':
 					return [self::USER_CONTROLLER, "homepage"];
 					break;
 				case 'id':
-					if (array_key_exists(2, $this->path)) {
-						return [self::USER_CONTROLLER, "getUserById", $this->path[2]];
+					if (array_key_exists(2, $this->uri)) {
+						return [self::USER_CONTROLLER, "getUserById", $this->uri[2]];
 						break;
 					}
 					else {
@@ -64,6 +65,9 @@ class Routeur {
 				case 'dashboard':
 					return [self::USER_CONTROLLER, "dashboard"];
 					break;
+				case 'training':
+					return [self::TRAINING_CONTROLLER, "training", $this->uri[3]];
+					break;
 				case 'usercalculator':
 					return [self::USER_CONTROLLER, "userCalculator"];
 					break;
@@ -84,12 +88,12 @@ class Routeur {
 
 	// When UserApiController is chosen
 	private function routeApi(){
-		if (array_key_exists(1, $this->path)) {
-			switch ($this->path[1]) {
+		if (array_key_exists(1, $this->uri)) {
+			switch ($this->uri[1]) {
 				case 'id':
 					// If a parameter is defined in URI
-					if (array_key_exists(2, $this->path)) {
-						return [self::USER_API_CONTROLLER, "getUserById", $this->path[2]];
+					if (array_key_exists(2, $this->uri)) {
+						return [self::USER_API_CONTROLLER, "getUserById", $this->uri[2]];
 						break;
 					}
 					else {
