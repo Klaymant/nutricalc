@@ -36,9 +36,12 @@
 				<td>| <span class="value"><?= $user->getGoal() ?></span></td>
 			</tr>
 		</tbody>
+		<tfoot>
+			<tr>
+				<td><a href="changedata">Change my data</a></td>
+			</tr>
+		</tfoot>
 	</table>
-
-	<a href="changedata">Change my data</a>
 </div>
 
 <div class="tile" id="needs">
@@ -82,14 +85,19 @@
 				<td>Shape<td>
 			</tr>
 			<?php
-				foreach ($user->getTrainings() as $training) {
+				foreach ($trainings as $training) {
 					echo '<tr>
-					<td> <span class="value">' . $training->getDate() . '</span></td>
-					<td><span class="value">' . $training->getShape() . '</span>/10</td>
+					<td class="training"> <span class="value">' . $training['date'] . '</span></td>
+					<td class="training"><span class="value">' . $training['shape'] . '</span>/10</td>
 					</tr>';
 				}
 			?>
 		</tbody>
+		<tfoot>
+			<tr>
+				<td><a href="changedata">Add a training</a></td>
+			</tr>
+		</tfoot>
 	</table>
 </div>
 

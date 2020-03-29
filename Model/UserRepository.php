@@ -54,7 +54,9 @@ class UserRepository {
         LEFT JOIN training ON training.id_user = user.id
 		WHERE training.id_user=?
 		ORDER BY training.id DESC';
-		return $this->makeSqlQuery($trainingsIdQuery, 'fetchAll', [$userId]);
+
+		$queryParams = [$userId];
+		return $this->makeSqlQuery($trainingsIdQuery, 'fetchAll', $queryParams);
 	}
 
 	// Create a Training thanks to the training_id by a user id
@@ -64,12 +66,26 @@ class UserRepository {
 		LEFT JOIN exercise_practice ON training.id = exercise_practice.id_training
 		LEFT JOIN exercise_catalog ON exercise_practice.id_exercise_catalog = exercise_catalog.id
 		WHERE training.id=? AND training.id_user=?';
+
 		$training = $this->makeSqlQuery($query, 'fetchAll', [$trainingId['id_trainings'], $userId]);
 		$exercises = [];
 		foreach ($training AS $exo) {
 			array_push($exercises, new Exercise($exo['name'], $exo['rest'], $exo['nb_sets'], $exo['nb_reps'], $exo['method']));
 		}
 		return ['exercises' => $exercises, 'date' => $training[0]['date'], 'shape' => $training[0]['shape']];
+	}
+
+	public function getLastTrainings($userId, $limit=NULL) {
+		$trainingIds = $this->getTrainingsIds($userId, $limit);
+		if ($limit != NULL) {
+			$trainingIds = array_slice($trainingIds, 0, $limit);
+		}
+		$trainings = [];
+
+		foreach ($trainingIds AS $id) {
+            array_push($trainings, $this->makeTrainingById($id, $_SESSION['id']));
+        }
+        return $trainings;
 	}
 
 	// Create a list of users' trainings by his id

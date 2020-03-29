@@ -11,10 +11,6 @@ class UserController {
 
     public function homepage() {
         require_once ("View/homepageView.php");
-        // $this->userRepo = new UserRepository();
-        // $result = $this->userRepo->makeSqlQuery("SELECT * FROM user WHERE user.id=?", ["2"]);
-        // var_dump($result);
-        // exit;
     }
 
     public function calculator() {
@@ -32,7 +28,7 @@ class UserController {
         $user = $this->userRepo->getUserById($_SESSION['id']);
         $user->calcAllNeeds();
 
-        $user->setTrainings($this->userRepo->getAllTrainingsById($_SESSION['id']));
+        $trainings = $this->userRepo->getLastTrainings($_SESSION['id'], 5);
         require_once("View/dashBoardView.php");
     }
 

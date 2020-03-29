@@ -106,12 +106,18 @@ DASHBOARD
 	padding-left: 10px;
 }
 
+.training:hover {
+	background: rgb(50, 50, 50);
+}
+
 #data {
 	float: left;
 }
 
 #needs {
 }
+
+
 
 /* ----------
 LINKS
