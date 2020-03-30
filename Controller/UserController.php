@@ -37,6 +37,13 @@ class UserController {
         require_once("View/dashBoardView.php");
     }
 
+    public function settings() {
+        $this->userRepo = new UserRepository();
+        $user = $this->userRepo->getUserById($_SESSION['id']);
+
+        require_once("View/settingsView.php");
+    }
+
     public function login() {
         require_once ("View/loginView.php");
     }

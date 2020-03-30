@@ -65,6 +65,9 @@ class Routeur {
 				case 'dashboard':
 					return [self::USER_CONTROLLER, "dashboard"];
 					break;
+				case 'settings':
+					return [self::USER_CONTROLLER, "settings"];
+					break;
 				case 'training':
 					return [self::TRAINING_CONTROLLER, "training", $this->uri[3]];
 					break;

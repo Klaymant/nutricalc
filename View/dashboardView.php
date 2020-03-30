@@ -3,7 +3,7 @@
 	ob_start();
 ?>
 
-<div class="tile" id="data">
+<!-- <div class="tile" id="data">
 	<table>
 		<thead>
 			<tr>
@@ -42,7 +42,7 @@
 			</tr>
 		</tfoot>
 	</table>
-</div>
+</div> -->
 
 <div class="tile" id="needs">
 	<table>
