@@ -4,7 +4,7 @@ namespace Utils;
 class Routeur {
     const USER_API_CONTROLLER = 'Controller\Api\UserApiController';
     const USER_CONTROLLER = 'Controller\UserController';
-    const TRAINING_CONTROLLER = 'Controller\UserController';
+    const TRAINING_CONTROLLER = 'Controller\TrainingController';
 
 	private $uri;
 
@@ -69,7 +69,7 @@ class Routeur {
 					return [self::USER_CONTROLLER, "settings"];
 					break;
 				case 'training':
-					return [self::TRAINING_CONTROLLER, "training", $this->uri[3]];
+					return [self::TRAINING_CONTROLLER, "training", $this->uri[2]];
 					break;
 				case 'usercalculator':
 					return [self::USER_CONTROLLER, "userCalculator"];

@@ -5,11 +5,13 @@ class Training {
 	private $date;
 	private $shape;
 	private $exercices;
+	private $id;
 
-	function __construct($exercices, $date=NULL, $shape=NULL) {
+	function __construct($exercices, $date=NULL, $shape=NULL, $id=NULL) {
 		$this->exercices = $exercices;
 		$this->date = $date;
 		$this->shape = $shape;
+		$this->id = $id;
 	}
 
 	// Getters
@@ -23,6 +25,10 @@ class Training {
 
 	public function getExercises() {
 		return $this->exercices;
+	}
+
+	public function getId() {
+		return $this->id;
 	}
 
 	// Setters

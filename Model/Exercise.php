@@ -9,11 +9,11 @@ class Exercise {
 	private $nbReps;
 	private $method;
 
-	function __construct($name, $rest, $nbSets, $nbReps, $method=NULL) {
+	function __construct($name, $rest, $sets, $reps, $method=NULL) {
 		$this->name = $name;
 		$this->rest = $rest;
-		$this->nbSets = $nbSets;
-		$this->nbReps = $nbReps;
+		$this->sets = $sets;
+		$this->reps = $reps;
 		$this->method = $method;
 	}
 
@@ -26,12 +26,12 @@ class Exercise {
 		return $this->rest;
 	}
 
-	public function getNbSets() {
-		return $this->nbSets;
+	public function getSets() {
+		return $this->sets;
 	}
 
-	public function getNbReps() {
-		return $this->$nbReps;
+	public function getReps() {
+		return $this->reps;
 	}
 
 	public function getMethod() {
@@ -47,12 +47,12 @@ class Exercise {
 		$this->rest = $rest;
 	}
 
-	public function setNbSets($nbSets) {
-		$this->nbSets = $nbSets;
+	public function setSets($sets) {
+		$this->sets = $sets;
 	}
 
-	public function setReps($nbReps) {
-		$this->nbReps = $nbReps;
+	public function setReps($reps) {
+		$this->reps = $reps;
 	}
 
 	public function setMethod($method) {

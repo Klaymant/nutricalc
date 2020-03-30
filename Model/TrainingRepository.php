@@ -32,7 +32,7 @@ class TrainingRepository {
 		foreach ($training AS $exo) {
 			array_push($exercises, new Exercise($exo['name'], $exo['rest'], $exo['nb_sets'], $exo['nb_reps'], $exo['method']));
 		}
-		return new Training($exercises, $training[0]['date'], $training[0]['shape']);
+		return new Training($exercises, $training[0]['date'], $training[0]['shape'], $training[0]['id']);
 	}
 
 	// Get the $nbTrainings last trainings

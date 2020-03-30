@@ -13,10 +13,21 @@
 			<td>Exercise</td>
 			<td>Sets</td>
 			<td>Reps</td>
+			<td>Rest</td>
+			<td>Method</td>
 		</tr>
-		<tr>
-			<td><?= $training['exercises'][0]['name'] ?></td>
-		</tr>
+		<?php
+			foreach ($training->getExercises() as $exo) {
+				$method = $exo->getMethod() != NULL ? $exo->getMethod() : "None";
+				echo '<tr>' .
+					'<td>' . $exo->getName() . '</td>' .
+					'<td>' . $exo->getSets() . '</td>' .
+					'<td>' . $exo->getReps() . '</td>' .
+					'<td>' . $exo->getRest() . '</td>' .
+					'<td>' . $method . '</td>' .
+				'</tr>';
+			}
+		?>
 	</thead>
 	<tbody>
 	</tbody>
