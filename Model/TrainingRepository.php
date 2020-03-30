@@ -62,4 +62,19 @@ class TrainingRepository {
 		}
 		return $myTrainings;
 	}
+
+	// To continue...
+	public function addExercise($exercise, $trainingId) {
+		$query = "INSERT INTO exercise_practice ('id_user', 'date', 'shape') VALUES ('?', '?', '?')";
+		$params = [$userId, $training->getDate(), $training->getShape()];
+		$sqlMaker = new SqlMaker($query, NULL, $params);
+		$sqlMaker->make();
+	}
+
+	public function addTraining($training, $userId) {
+		$query = "INSERT INTO training ('id_user', 'date', 'shape') VALUES ('?', '?', '?')";
+		$params = [$userId, $training->getDate(), $training->getShape()];
+		$sqlMaker = new SqlMaker($query, NULL, $params);
+		$sqlMaker->make();
+	}
 }
