@@ -22,7 +22,11 @@ class TrainingController {
     public function saveTraining() {
     	$this->trainingRepo = new TrainingRepository();
     	$trainingInfo = ['date' => $_POST['date'], 'shape' => $_POST['shape']];
-    	$this->trainingRepo->saveTraining($trainingInfo, $_SESSION['id']);
+    	$exos = [
+    		[1, 120, 4, 12, "lol"],
+    		[2, 180, 4, 10, "lol"]
+    	];
+    	$this->trainingRepo->saveTraining($trainingInfo, $_SESSION['id'], $exos);
     	header("Location: dashboard");
     }
 }

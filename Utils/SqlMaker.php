@@ -10,6 +10,7 @@ class SqlMaker {
 	private $command;
 	private $params;
 	private $fetchType;
+	private $lastId;
 
 	function __construct ($query, $command='fetch', $params=NULL, $fetchType=\PDO::FETCH_ASSOC) {
 		$dbc = new DbConnection();
@@ -20,9 +21,14 @@ class SqlMaker {
 		$this->fetchType = $fetchType;
 	}
 
+	public function getLastId() {
+		return $this->lastId;
+	}
+
 	public function make() {
 		$executed = $this->pdo->prepare($this->query);
 		$executed->execute($this->params);
+		$this->lastId = $this->pdo->lastInsertId();
 		switch ($this->command) {
 			case 'fetch':
 				return $executed->fetch($this->fetchType);

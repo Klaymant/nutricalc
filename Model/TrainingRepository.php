@@ -64,17 +64,25 @@ class TrainingRepository {
 	}
 
 	// To continue...
-	public function addExercise($exercise, $trainingId) {
-		$query = "INSERT INTO exercise_practice ('id_user', 'date', 'shape') VALUES ('?', '?', '?')";
-		$params = [$userId, $training->getDate(), $training->getShape()];
+	public function saveExercise($exercise, $trainingId) {
+		$query = "INSERT INTO exercise_practice (id_training, id_exercise_catalog, rest, nb_sets, nb_reps, method) VALUES (?, ?, ?, ?, ?, ?)";
+		
+		$params = [$trainingId];
+		foreach ($exercise as $col) {
+			array_push($params, $col);
+		}
 		$sqlMaker = new SqlMaker($query, NULL, $params);
 		$sqlMaker->make();
 	}
 
-	public function saveTraining($trainingInfo, $userId) {
+	public function saveTraining($trainingInfo, $userId, $exercises) {
 		$query = "INSERT INTO training (id_user, date, shape) VALUES (?, ?, ?)";
 		$params = [$userId, $trainingInfo['date'], $trainingInfo['shape']];
 		$sqlMaker = new SqlMaker($query, NULL, $params);
 		$sqlMaker->make();
+
+		foreach ($exercises as $exo) {
+			$this->saveExercise($exo, $sqlMaker->getLastId());
+		}
 	}
 }
