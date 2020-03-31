@@ -106,6 +106,10 @@ DASHBOARD
 	padding-left: 10px;
 }
 
+.trainings {
+	border-collapse: collapse;
+}
+
 .training:hover {
 	background: rgb(50, 50, 50);
 }

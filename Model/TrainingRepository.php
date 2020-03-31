@@ -71,9 +71,9 @@ class TrainingRepository {
 		$sqlMaker->make();
 	}
 
-	public function addTraining($training, $userId) {
-		$query = "INSERT INTO training ('id_user', 'date', 'shape') VALUES ('?', '?', '?')";
-		$params = [$userId, $training->getDate(), $training->getShape()];
+	public function saveTraining($trainingInfo, $userId) {
+		$query = "INSERT INTO training (id_user, date, shape) VALUES (?, ?, ?)";
+		$params = [$userId, $trainingInfo['date'], $trainingInfo['shape']];
 		$sqlMaker = new SqlMaker($query, NULL, $params);
 		$sqlMaker->make();
 	}

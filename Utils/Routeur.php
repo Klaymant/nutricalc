@@ -71,6 +71,12 @@ class Routeur {
 				case 'training':
 					return [self::TRAINING_CONTROLLER, "training", $this->uri[2]];
 					break;
+				case 'addtraining':
+					return [self::TRAINING_CONTROLLER, "addTraining"];
+					break;
+				case 'savetraining':
+					return [self::TRAINING_CONTROLLER, "saveTraining"];
+					break;
 				case 'usercalculator':
 					return [self::USER_CONTROLLER, "userCalculator"];
 					break;

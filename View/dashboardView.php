@@ -59,10 +59,10 @@
 		</tbody>
 		<tfoot>
 			<tr>
-				<td><a href="changedata">Add a training</a></td>
+				<td colspan=2><a href="alltraining">See all trainings</a></td>
 			</tr>
 			<tr>
-				<td><a href="changedata">See all trainings</a></td>
+				<td colspan=2><a href="addtraining">Add a training</a></td>
 			</tr>
 		</tfoot>
 	</table>

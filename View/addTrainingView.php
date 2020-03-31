@@ -3,18 +3,18 @@
 	ob_start();
 ?>
 
-<form action="addtraining" method="post">
+<form action="savetraining" method="post">
 	<table>
 		<tr>
 			<td>Date :</td>
-			<td><input type="text" name="mail"></td>
+			<td><input type="text" name="date"></td>
 		</tr>
 		<tr>
-			<td>Password :</td>
-			<td><input type="password" name="pwd"></td>
+			<td>Shape :</td>
+			<td><input type="text" name="shape"></td>
 		</tr>
 	</table>
-	<input type="submit" value="Here we go!">
+	<input type="submit" value="Here is my new training!">
 </form>
 
 <?php

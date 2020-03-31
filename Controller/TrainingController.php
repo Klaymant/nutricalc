@@ -14,4 +14,15 @@ class TrainingController {
         $training = $this->trainingRepo->makeTrainingById($trainingId, $_SESSION['id']);
         require_once("View/trainingView.php");
     }
+
+    public function addTraining() {
+    	require_once("View/addTrainingView.php");
+    }
+
+    public function saveTraining() {
+    	$this->trainingRepo = new TrainingRepository();
+    	$trainingInfo = ['date' => $_POST['date'], 'shape' => $_POST['shape']];
+    	$this->trainingRepo->saveTraining($trainingInfo, $_SESSION['id']);
+    	header("Location: dashboard");
+    }
 }
