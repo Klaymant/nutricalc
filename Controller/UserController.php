@@ -40,7 +40,6 @@ class UserController {
     public function settings() {
         $this->userRepo = new UserRepository();
         $user = $this->userRepo->getUserById($_SESSION['id']);
-
         require_once("View/settingsView.php");
     }
 
