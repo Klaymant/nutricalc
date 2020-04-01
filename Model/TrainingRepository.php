@@ -14,19 +14,21 @@ use Model\Exercise;
 
 class TrainingRepository {
 
-	// Get the training ids of a user by his id
+	private $sqlMaker;
+
+	function __construct() {
+		$this->sqlMaker = new SqlMaker();
+	}
+
 	public function getTrainingsIds($userId) {
 		$trainingsIdQuery = 'SELECT DISTINCT(training.id) AS id_trainings FROM `user` LEFT JOIN training ON training.id_user = user.id WHERE training.id_user=?
 		ORDER BY training.id DESC';
-		$sqlMaker = new SqlMaker($trainingsIdQuery, 'fetchAll', [$userId]);
-		return $sqlMaker->make();
+		return $this->sqlMaker->make($trainingsIdQuery, 'fetchAll', [$userId]);
 	}
 
-	// Create a Training thanks to the training id by a user id
 	public function makeTrainingById($trainingId, $userId) {
 		$query = 'SELECT training.id, training.date, training.shape, exercise_catalog.name, exercise_practice.rest, exercise_practice.nb_sets, exercise_practice.nb_reps, exercise_practice.method FROM `user` LEFT JOIN training ON training.id_user = user.id LEFT JOIN exercise_practice ON training.id = exercise_practice.id_training LEFT JOIN exercise_catalog ON exercise_practice.id_exercise_catalog = exercise_catalog.id WHERE training.id=? AND training.id_user=?';
-		$sqlMaker = new SqlMaker($query, 'fetchAll', [$trainingId, $userId]);
-		$training = $sqlMaker->make();
+		$training = $this->sqlMaker->make($query, 'fetchAll', [$trainingId, $userId]);
 
 		$exercises = [];
 		foreach ($training AS $exo) {
@@ -35,13 +37,11 @@ class TrainingRepository {
 		return new Training($exercises, $training[0]['date'], $training[0]['shape'], $training[0]['id']);
 	}
 
-	// Get the $nbTrainings last trainings
 	public function getLastTrainings($userId, $nbTrainings=NULL) {
 		$trainingIds = $this->getTrainingsIds($userId, $nbTrainings);
 		return $nbTrainings != NULL ? array_slice($trainingIds, 0, $nbTrainings) : $trainingIds;
 	}
 
-	// Create the $nbTrainings last trainings
 	public function makeLastTrainings($userId, $nbTrainings=NULL) {
 		$trainingIds = $this->getLastTrainings($userId, $nbTrainings);
 		$trainings = [];
@@ -52,7 +52,6 @@ class TrainingRepository {
         return $trainings;
 	}
 
-	// Create a list of users' trainings by his id
 	public function getAllTrainingsById($userId) {
 		$trainingIds = $this->getTrainingsIds($userId);
 		$myTrainings = [];
@@ -63,7 +62,6 @@ class TrainingRepository {
 		return $myTrainings;
 	}
 
-	// To continue...
 	public function saveExercise($exercise, $trainingId) {
 		$query = "INSERT INTO exercise_practice (id_training, id_exercise_catalog, rest, nb_sets, nb_reps, method) VALUES (?, ?, ?, ?, ?, ?)";
 		
@@ -71,15 +69,13 @@ class TrainingRepository {
 		foreach ($exercise as $col) {
 			array_push($params, $col);
 		}
-		$sqlMaker = new SqlMaker($query, NULL, $params);
-		$sqlMaker->make();
+		$this->sqlMaker->make($query, NULL, $params);
 	}
 
 	public function saveTraining($trainingInfo, $userId, $exercises) {
 		$query = "INSERT INTO training (id_user, date, shape) VALUES (?, ?, ?)";
 		$params = [$userId, $trainingInfo['date'], $trainingInfo['shape']];
-		$sqlMaker = new SqlMaker($query, NULL, $params);
-		$sqlMaker->make();
+		$this->sqlMaker->make($query, NULL, $params);
 
 		foreach ($exercises as $exo) {
 			$this->saveExercise($exo, $sqlMaker->getLastId());

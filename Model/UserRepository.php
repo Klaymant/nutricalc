@@ -9,41 +9,42 @@ use Utils\SqlMaker;
 use Model\User;
 
 class UserRepository {
+
+	private $sqlMaker;
+
+	function __construct() {
+		$this->sqlMaker = new SqlMaker();
+	}
+
 	public function getUserByMail($mail) {
 		$query = 'SELECT id, pwd FROM user WHERE mail=?';
-		$sqlMaker = new SqlMaker($query, 'fetch', [$mail]);
-		return $sqlMaker->make();
+		return $this->sqlMaker->make($query, 'fetch', [$mail]);
 	}
 
 	public function getUserById($id) {
 		$query = 'SELECT * FROM user LEFT JOIN activity ON user.id_activity = activity.id LEFT JOIN goal ON user.id_goal = goal.id WHERE user.id=?';
-		$sqlMaker = new SqlMaker($query, 'fetch', [$id]);
-		$user = $sqlMaker->make();
+		$user = $this->sqlMaker->make($query, 'fetch', [$id]);
 		return new User($user['sex'], $user['age'], $user['height'], $user['weight'], $user['activity_name'], $user['goal_name'], $id, $user['mail'], $user['pwd']);
 	}
 
 	public function createUser($mail, $pwd, $sex, $age, $height, $weight, $activity, $goal) {
 		$query = 'INSERT INTO user (height, weight, activity, goal, age) VALUES ("?", "?", "?", "?", "?")';
-		$sqlMaker = new SqlMaker($query, NULL, [$height, $weight, $activity, $goal, $age]);
-		return $sqlMaker->make();
+		return $this->sqlMaker->make($query, NULL, [$height, $weight, $activity, $goal, $age]);
 	}
 
 	public function saveData($data) {
 		$query = "UPDATE user SET age=?, height=?, weight=?, id_activity=?, id_goal=? WHERE id=?";
-		$sqlMaker = new SqlMaker($query, NULL, [$data['age'], $data['height'], $data['weight'], $data['activity'], $data['goal'], $_SESSION['id']]);
-		return $sqlMaker->make();
+		return $this->sqlMaker->make($query, NULL, [$data['age'], $data['height'], $data['weight'], $data['activity'], $data['goal'], $_SESSION['id']]);
 	}
 
 	public function createAccount($data) {
 		$query = "INSERT INTO user (mail, pwd) VALUES (?, ?)";
-		$sqlMaker = new SqlMaker($query, NULL, [$data['mail'], $data['pwd']]);
-		return $sqlMaker->make();
+		return $this->sqlMaker->make($query, NULL, [$data['mail'], $data['pwd']]);
 	}
 
 	public function mailExists($mail) {
 		$query = "SELECT COUNT(*) as c FROM user WHERE mail=?";
-		$sqlMaker = new SqlMaker($query, 'fetch', [$mail]);
-		$mailExists = $this->make();
+		$mailExists = $this->sqlMaker->make($query, 'fetch', [$mail]);
 		return $mailExists['c'] == 1 ? true : false;
 	}
 }

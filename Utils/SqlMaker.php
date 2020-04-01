@@ -6,38 +6,21 @@ use Utils\DbConnection;
 
 class SqlMaker {
 	private $pdo;
-	private $query;
-	private $command;
-	private $params;
-	private $fetchType;
 	private $lastId;
 
-	function __construct ($query, $command='fetch', $params=NULL, $fetchType=\PDO::FETCH_ASSOC) {
+	function __construct () {
 		$dbc = new DbConnection();
 		$this->pdo = $dbc->getPdo();
-		$this->query = $query;
-		$this->command = $command;
-		$this->params = $params;
-		$this->fetchType = $fetchType;
 	}
 
 	public function getLastId() {
 		return $this->lastId;
 	}
 
-	public function make() {
-		$executed = $this->pdo->prepare($this->query);
-		$executed->execute($this->params);
+	public function make($query, $command='fetch', $params=NULL, $fetchType=\PDO::FETCH_ASSOC) {
+		$executed = $this->pdo->prepare($query);
+		$executed->execute($params);
 		$this->lastId = $this->pdo->lastInsertId();
-		switch ($this->command) {
-			case 'fetch':
-				return $executed->fetch($this->fetchType);
-				break;
-			case 'fetchAll':
-				return $executed->fetchAll($this->fetchType);
-				break;
-			default:
-				break;
-		}
+		return $executed->$command($fetchType);
 	}
 }
