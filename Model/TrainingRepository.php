@@ -56,7 +56,7 @@ class TrainingRepository {
 		$trainingIds = $this->getTrainingsIds($userId);
 		$myTrainings = [];
 		foreach ($trainingIds as $trainingId) {
-			$training = $this->makeTrainingById($trainingId, $userId);
+			$training = $this->makeTrainingById($trainingId['id_trainings'], $userId);
 			array_push($myTrainings, $training);
 		}
 		return $myTrainings;

@@ -59,7 +59,7 @@
 		</tbody>
 		<tfoot>
 			<tr>
-				<td colspan=2><a href="alltraining">See all trainings</a></td>
+				<td colspan=2><a href="alltrainings">See all trainings</a></td>
 			</tr>
 			<tr>
 				<td colspan=2><a href="addtraining">(+) Add a training</a></td>

@@ -27,6 +27,12 @@ class TrainingController {
     	header("Location: dashboard");
     }
 
+    public function allTrainings() {
+        $this->trainingRepo = new TrainingRepository();
+        $trainings = $this->trainingRepo->getAllTrainingsById($_SESSION['id']);
+        require_once("View/allTrainingsView.php");
+    }
+
     public function getExosAsArray($array) {
         $array = array_slice($array, 2);
         $arrayIndex = 1;

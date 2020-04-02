@@ -77,6 +77,9 @@ class Routeur {
 				case 'savetraining':
 					return [self::TRAINING_CONTROLLER, "saveTraining"];
 					break;
+				case 'alltrainings':
+					return [self::TRAINING_CONTROLLER, "allTrainings"];
+					break;
 				case 'usercalculator':
 					return [self::USER_CONTROLLER, "userCalculator"];
 					break;

@@ -1,7 +1,6 @@
 <!-- DOCTYPE HTML -->
 <?php
 	ob_start();
-	$exoNb = 2;
 ?>
 
 <script text="text/javascript">
