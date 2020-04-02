@@ -66,8 +66,8 @@ class TrainingRepository {
 		$query = "INSERT INTO exercise_practice (id_training, id_exercise_catalog, rest, nb_sets, nb_reps, method) VALUES (?, ?, ?, ?, ?, ?)";
 		
 		$params = [$trainingId];
-		foreach ($exercise as $col) {
-			array_push($params, $col);
+		foreach ($exercise as $exoData) {
+			array_push($params, $exoData);
 		}
 		$this->sqlMaker->make($query, NULL, $params);
 	}
@@ -76,9 +76,10 @@ class TrainingRepository {
 		$query = "INSERT INTO training (id_user, date, shape) VALUES (?, ?, ?)";
 		$params = [$userId, $trainingInfo['date'], $trainingInfo['shape']];
 		$this->sqlMaker->make($query, NULL, $params);
+		$trainingId = $this->sqlMaker->getLastId();
 
 		foreach ($exercises as $exo) {
-			$this->saveExercise($exo, $sqlMaker->getLastId());
+			$this->saveExercise($exo, $trainingId);
 		}
 	}
 }

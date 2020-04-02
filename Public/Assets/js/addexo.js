@@ -5,6 +5,9 @@ function addExo () {
 			"<td>Name :</td><td><input type='text' name='name_" + exoNb + "'></td>" +
 		"</tr>" +
 		"<tr>" +
+			"<td>Rest :</td> <td><input type='text' name='rest_" + exoNb + "'></td>" +
+		"</tr>" +
+		"<tr>" +
 			"<td>Number of sets :</td><td><input size=1 type='number' min=0 max=10 step=1 value=4 name='sets_" + exoNb + "'></td>" +
 		"</tr>" +
 		"<tr>" +

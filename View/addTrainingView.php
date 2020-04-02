@@ -31,6 +31,10 @@
 			<td><input type="text" name="name_1"></td>
 		</tr>
 		<tr>
+			<td>Rest :</td>
+			<td><input type="text" name="rest_1"></td>
+		</tr>
+		<tr>
 			<td>Number of sets :</td>
 			<td><input size=1 type="number" min=0 max=10 step=1 value=4 name="sets_1"></td>
 		</tr>

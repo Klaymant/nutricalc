@@ -22,26 +22,27 @@ class TrainingController {
     public function saveTraining() {
     	$this->trainingRepo = new TrainingRepository();
     	$trainingInfo = ['date' => $_POST['date'], 'shape' => $_POST['shape']];
-        //$exos = getExosAsArray($_POST);
-        var_dump($_POST);
-        var_dump($exos);
-        exit;
+        $exos = $this->getExosAsArray($_POST);
     	$this->trainingRepo->saveTraining($trainingInfo, $_SESSION['id'], $exos);
     	header("Location: dashboard");
     }
 
     public function getExosAsArray($array) {
         $array = array_slice($array, 2);
-        $array_size = count($array);
-        $exos = [];
-        $index = 1;
+        $arrayIndex = 1;
+        $nbFields = 5;
 
-        for ($i=0; $i<$array_size; $i++) {
-            if ($index == 4) {
-                $index = 1;
+        $exercises = [];
+        $exo = [];
+
+        foreach ($array as $exoData) {
+            array_push($exo, $exoData);
+            if ($arrayIndex % $nbFields == 0) {
+                array_push($exercises, $exo);
+                $exo = [];
             }
-
-
+            $arrayIndex++;
         }
+        return $exercises;
     }
 }

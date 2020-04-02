@@ -17,10 +17,12 @@ class SqlMaker {
 		return $this->lastId;
 	}
 
-	public function make($query, $command='fetch', $params=NULL, $fetchType=\PDO::FETCH_ASSOC) {
+	public function make($query, $command=NULL, $params=NULL, $fetchType=\PDO::FETCH_ASSOC) {
 		$executed = $this->pdo->prepare($query);
 		$executed->execute($params);
 		$this->lastId = $this->pdo->lastInsertId();
-		return $executed->$command($fetchType);
+		if ($command != NULL) {
+			return $executed->$command($fetchType);
+		}
 	}
 }
