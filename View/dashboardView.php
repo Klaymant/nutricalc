@@ -45,7 +45,7 @@
 			</tr>
 			<?php
 				foreach ($trainings as $training) {
-					echo '<tr class="training">';
+					echo '<tr class="trainingLine">';
 					$date = '<td><span class="value">' .
 					'<a href="training/' . $training->getId() . '">' .
 					$training->getDate() . '</a>' .

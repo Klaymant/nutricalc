@@ -3,28 +3,30 @@
 	ob_start();
 ?>
 
-<table>
+<table class="training">
 	<thead>
 		<tr>
-			<td colspan=2>Date</td>
+			<td>Date</td>
+			<td colspan=2><?= $training->getDate() ?></td>
 			<td>Shape</td>
+			<td><?= $training->getShape() ?></td>
 		</tr>
 		<tr>
-			<td>Exercise</td>
-			<td>Sets</td>
-			<td>Reps</td>
-			<td>Rest</td>
-			<td>Method</td>
+			<td class ='title exofield'>Exercise</td>
+			<td class='exo title'>Sets</td>
+			<td class='exo title'>Reps</td>
+			<td class='exo title'>Rest</td>
+			<td class='exo title'>Method</td>
 		</tr>
 		<?php
 			foreach ($training->getExercises() as $exo) {
 				$method = $exo->getMethod() != NULL ? $exo->getMethod() : "None";
 				echo '<tr>' .
-					'<td>' . $exo->getName() . '</td>' .
-					'<td>' . $exo->getSets() . '</td>' .
-					'<td>' . $exo->getReps() . '</td>' .
-					'<td>' . $exo->getRest() . '</td>' .
-					'<td>' . $method . '</td>' .
+					'<td class="exoName">' . $exo->getName() . '</td>' .
+					'<td class="exo">' . $exo->getSets() . '</td>' .
+					'<td class="exo">' . $exo->getReps() . '</td>' .
+					'<td class="exo">' . $exo->getRest() . 's</td>' .
+					'<td class="exo">' . $method . '</td>' .
 				'</tr>';
 			}
 		?>

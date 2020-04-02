@@ -106,11 +106,36 @@ DASHBOARD
 	padding-left: 10px;
 }
 
-.trainings {
+.training {
+	background: rgb(50, 50, 50);
+	margin-bottom: 30px;
+	border: solid 2px white;
 	border-collapse: collapse;
 }
 
-.training:hover {
+.training td {
+	width: 80px;
+}
+
+.training .exo {
+	text-align: center;
+}
+
+.training .exofield {
+	width: 150px;
+}
+
+.training .title {
+	background: black;
+	font-size: 18px;
+}
+
+.training .exoName {
+	color: rgba(0, 255, 153);
+	font-weight: bold;
+}
+
+.trainingLine:hover {
 	background: rgb(50, 50, 50);
 }
 

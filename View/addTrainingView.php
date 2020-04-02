@@ -47,7 +47,7 @@
 	<input type="submit" value="Here is my new training!">
 </form>
 
-<button onclick="addExo(<?= $exoNb?>)">
+<button onclick="addExo()">
 	+ Add another exercise
 </button>
 
