@@ -62,6 +62,11 @@ class TrainingRepository {
 		return $myTrainings;
 	}
 
+	public function getAllExercisesInfo() {
+		$query = "SELECT id, name FROM `exercise_catalog`";
+		return $this->sqlMaker->make($query, "fetchAll");
+	}
+
 	public function saveExercise($exercise, $trainingId) {
 		$query = "INSERT INTO exercise_practice (id_training, id_exercise_catalog, rest, nb_sets, nb_reps, method) VALUES (?, ?, ?, ?, ?, ?)";
 		

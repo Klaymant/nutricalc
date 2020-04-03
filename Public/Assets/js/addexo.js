@@ -1,8 +1,9 @@
-function addExo () {
+function addExo (exoInfo) {
 		document.getElementById("exercises").innerHTML +=
 		"<h3>Exercises " + exoNb +"</h3>" +
 		"<tr>" +
-			"<td>Name :</td><td><input type='text' name='name_" + exoNb + "'></td>" +
+			"<td>Name :</td>" +
+			"<td><input type='text' name='name_" + exoNb + "'></td>" +
 		"</tr>" +
 		"<tr>" +
 			"<td>Rest :</td> <td><input type='text' name='rest_" + exoNb + "'></td>" +
@@ -17,4 +18,11 @@ function addExo () {
 			"<td>Method :</td><td><input type='text' name='method_" + exoNb + "'></td>" +
 		"</tr>";
 		exoNb += 1;
+	}
+
+	function makeSelect(exoInfo, exoNb) {
+		var select = "<select name='" + exoNb + "'>";
+		select += exoInfo.forEach();
+		select += "</select>";
+		return select
 	}

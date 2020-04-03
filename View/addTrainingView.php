@@ -27,7 +27,15 @@
 		</tr>
 		<tr>
 			<td>Name :</td>
-			<td><input type="text" name="name_1"></td>
+			<td>
+				<select name="name_1">
+					<?php
+						foreach ($exoInfo as $info) {
+							echo '<option value="' . $info['id'] . '">' . $info['name'] . '</option>';
+						}
+					?>
+				</select>
+			</td>
 		</tr>
 		<tr>
 			<td>Rest :</td>
@@ -44,10 +52,10 @@
 			<td><input type="text" name="method_1"></td>
 		</tr>
 	</table>
-	<input type="submit" value="Here is my new training!">
+	<input class="button" type="submit" value="Here is my new training!">
 </form>
 
-<button onclick="addExo()">
+<button class="button" onclick="addExo($exoInfo)">
 	+ Add another exercise
 </button>
 

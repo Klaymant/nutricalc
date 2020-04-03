@@ -54,7 +54,7 @@
 			</td>
 		</tr>
 	</table>
-	<input type="submit" value="Save my data">
+	<input class="button" type="submit" value="Save my data">
 </form>
 
 <?php

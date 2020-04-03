@@ -16,6 +16,8 @@ class TrainingController {
     }
 
     public function addTraining() {
+        $this->trainingRepo = new TrainingRepository();
+        $exoInfo = $this->trainingRepo->getAllExercisesInfo();
     	require_once("View/addTrainingView.php");
     }
 

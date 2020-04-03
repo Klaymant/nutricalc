@@ -38,7 +38,7 @@
 		</tbody>
 		<tfoot>
 			<tr>
-				<td><a href="changedata">Change my data</a></td>
+				<td><a class="button" href="changedata">Change my data</a></td>
 			</tr>
 		</tfoot>
 	</table>

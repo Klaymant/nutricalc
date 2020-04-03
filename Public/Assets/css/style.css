@@ -139,6 +139,19 @@ DASHBOARD
 	background: rgb(50, 50, 50);
 }
 
+.button {
+	background: rgba(0, 255, 153);
+	border: 0px;
+	color: white;
+	border-radius: 10px;
+	padding: 2px;
+}
+
+.button:hover {
+	background: white;
+	color: rgba(0, 255, 153);
+}
+
 #data {
 }
 
@@ -151,8 +164,8 @@ DASHBOARD
 LINKS
 ---------- */
 a:link, a:visited {
-	text-decoration: underline;
-	color: rgb(0, 255, 153);
+	text-decoration: none;
+/*	color: rgb(0, 255, 153);*/
 }
 
 a:hover {
