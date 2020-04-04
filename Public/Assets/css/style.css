@@ -3,10 +3,11 @@ COLOR CODES
 LEAF GREEN	: rgba(0, 255, 153)
 RAIN PURPLE	: rgba(160, 65, 255)
 RED LIGHT: rgba(255, 102, 102)
+BLUE TRELLO : rgba(0, 121, 191);
 */
 
 body {
-	background-color: rgb(18, 18, 18);
+	background: rgba(0, 121, 191);
 	font-family: 'Calibri';
 	font-size: 22px;
 	color: white;
@@ -19,12 +20,13 @@ header {
 TITLE
 ---------- */
 #website_title a:visited, #website_title a:link {
-	color: rgba(0, 255, 153);
+	color: white;
 	text-decoration: none;
 }
 
 #website_title a:hover {
-	color: rgba(255, 102, 102);
+	color: rgba(0, 61, 131);
+	background: white;
 }
 
 #website_title {
@@ -38,6 +40,7 @@ TITLE
 SUBTITLE
 ---------- */
 #subtitle {
+	background: rgba(0, 61, 131);
 	text-align: center;
 	font-style: italic;
 	font-size: 30px;
@@ -59,12 +62,11 @@ MENU
 	font-weight: bold;
 	font-size: 40px;
 	padding: 10px;
-	border-bottom: solid 5px rgb(0, 255, 153);
+	border-bottom: solid 5px rgba(0, 61, 131);
 }
 
 #menu a:hover {
-	background: rgb(0, 255, 153);
-	color: black;
+	background: rgba(0, 61, 131);
 }
 
 #menu li {
@@ -78,13 +80,13 @@ MENU
 DASHBOARD
 ---------- */
 .value {
-	color: rgba(0, 255, 153);
+	color: rgba(0, 121, 191);
 	font-weight: bold;
 }
 
 .tile {
 	display: inline-block;
-	background: rgb(30, 30, 30);
+	background: rgb(15, 15, 15);
 	border: solid 4px white;
 	margin: 20px;
 	width: 30%;
@@ -131,7 +133,7 @@ DASHBOARD
 }
 
 .training .exoName {
-	color: rgba(0, 255, 153);
+	color: rgba(0, 121, 191);
 	font-weight: bold;
 }
 
@@ -140,7 +142,7 @@ DASHBOARD
 }
 
 .button {
-	background: rgba(0, 255, 153);
+	background: rgba(0, 61, 131);
 	border: 0px;
 	color: white;
 	border-radius: 10px;
@@ -148,8 +150,8 @@ DASHBOARD
 }
 
 .button:hover {
-	background: white;
-	color: rgba(0, 255, 153);
+	background: rgba(0, 121, 191);
+	color: rgba(0, 61, 131);
 }
 
 #data {
@@ -158,27 +160,27 @@ DASHBOARD
 #needs {
 }
 
-
-
 /* ----------
 LINKS
 ---------- */
 a:link, a:visited {
 	text-decoration: none;
-/*	color: rgb(0, 255, 153);*/
+	color: rgba(0, 121, 191);
 }
 
 a:hover {
-	color: rgb(160, 65, 255);
+	color: white;
 }
 
 /* ----------
 FOOTER
 ---------- */
 footer {
-	color: rgb(0, 255, 153);
+	background: rgba(0, 61, 131);
+	border-radius: 30px;
+	color: white;
 	font-size: 18px;
 	text-align: center;
-	border-top: solid 2px rgb(0, 255, 153);
-	border-bottom: solid 2px rgb(0, 255, 153);
+	border-top: solid 2px rgba(0, 61, 131);
+	border-bottom: solid 2px rgba(0, 61, 131);
 }
