@@ -7,70 +7,69 @@ BLUE TRELLO : rgba(0, 121, 191);
 */
 
 body {
-	background: rgba(0, 121, 191);
-	font-family: 'Calibri';
+	background: rgb(50, 50, 50);
+	font-family: 'Trebuchet MS', 'Calibri';
 	font-size: 22px;
-	color: white;
+	color: black;
 }
 
 header {
+	background: rgb(115, 213, 124);
+	font-family: "Trebuchet MS";
+	border: solid 5px white;
+	border-radius: 10px;
 }
 
 /* ----------
 TITLE
 ---------- */
 #website_title a:visited, #website_title a:link {
-	color: white;
+	color: rgb(50, 50, 50);
 	text-decoration: none;
 }
 
 #website_title a:hover {
-	color: rgba(0, 61, 131);
+	color: rgb(135, 233, 144);
 	background: white;
 }
 
 #website_title {
-	font-size: 100px;
-	text-align: center;
-	margin: 0px;
-	padding: 0px;
+	font-size: 40px;
+	padding-left: 10px;
 }
 
 /* ----------
 SUBTITLE
 ---------- */
 #subtitle {
-	background: rgba(0, 61, 131);
-	text-align: center;
-	font-style: italic;
-	font-size: 30px;
+	background: rgb(95, 193, 104);
+	font-size: 20px;
 	color: white;
-	margin: 0px;
-	padding: 0px;
+	padding-left: 10px;
 }
 
 /* ----------
 MENU
 ---------- */
 #menu {
-	text-align: center;
 }
 
 #menu a:link, #menu a:visited {
+	background: rgb(135, 233, 144);
 	text-decoration: none;
-	color: white;
+	color: rgb(50, 50, 50);
 	font-weight: bold;
-	font-size: 40px;
+	font-size: 25px;
 	padding: 10px;
-	border-bottom: solid 5px rgba(0, 61, 131);
+	border-bottom: solid 10px rgb(95, 193, 104);
 }
 
 #menu a:hover {
-	background: rgba(0, 61, 131);
+	color: white;
+	background: rgb(95, 193, 104);
 }
 
 #menu li {
-	font-family: 'Calibri';
 	color: white;
 	display: inline;
 	list-style: none;
@@ -80,26 +79,27 @@ MENU
 DASHBOARD
 ---------- */
 .value {
-	color: rgba(0, 121, 191);
+	color: rgb(95, 193, 104);
 	font-weight: bold;
 }
 
 .tile {
 	display: inline-block;
-	background: rgb(15, 15, 15);
-	border: solid 4px white;
+	background: rgb(220, 220, 220);
+	border: solid 4px rgb(95, 193, 104);
 	margin: 20px;
 	width: 30%;
 	height: 250px;
 }
 
 .tile table {
+	border-collapse: collapse;
 	width: 100%;
 	padding: 0px;
 }
 
 .tile table thead {
-	background: rgb(50, 50, 50);
+	background: rgb(95, 193, 104);
 	font-size: 25px;
 	color: white;
 }
@@ -142,7 +142,7 @@ DASHBOARD
 }
 
 .button {
-	background: rgba(0, 61, 131);
+	background: rgb(95, 193, 104);
 	border: 0px;
 	color: white;
 	border-radius: 10px;
@@ -150,7 +150,7 @@ DASHBOARD
 }
 
 .button:hover {
-	background: rgba(0, 121, 191);
+	background: rgb(95, 193, 104);
 	color: rgba(0, 61, 131);
 }
 
@@ -176,11 +176,9 @@ a:hover {
 FOOTER
 ---------- */
 footer {
-	background: rgba(0, 61, 131);
+	background: rgb(95, 193, 104);
 	border-radius: 30px;
 	color: white;
 	font-size: 18px;
 	text-align: center;
-	border-top: solid 2px rgba(0, 61, 131);
-	border-bottom: solid 2px rgba(0, 61, 131);
 }
