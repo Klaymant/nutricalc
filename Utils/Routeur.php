@@ -77,6 +77,9 @@ class Routeur {
 				case 'savetraining':
 					return [self::TRAINING_CONTROLLER, "saveTraining"];
 					break;
+				case 'deletetraining':
+					return [self::TRAINING_CONTROLLER, "deleteTraining", $this->uri[2]];
+					break;
 				case 'alltrainings':
 					return [self::TRAINING_CONTROLLER, "allTrainings"];
 					break;

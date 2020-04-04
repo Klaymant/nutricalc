@@ -1,6 +1,8 @@
 <!-- DOCTYPE HTML -->
 <?php
 	ob_start();
+	require_once("Config/Path.php");
+	use Config\Path;
 ?>
 
 <div class="tile" id="needs">
@@ -59,7 +61,7 @@
 		</tbody>
 		<tfoot>
 			<tr>
-				<td colspan=2><a class="button" href="alltrainings">See all trainings</a></td>
+				<td colspan=2><a class="button" href="<?= PATH::KERNEL ?>app/alltrainings">See all trainings</a></td>
 			</tr>
 			<tr>
 				<td colspan=2><a class="button" href="addtraining">(+) Add a training</a></td>

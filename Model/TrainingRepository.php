@@ -21,18 +21,18 @@ class TrainingRepository {
 	}
 
 	public function getTrainingsIds($userId) {
-		$trainingsIdQuery = 'SELECT DISTINCT(training.id) AS id_trainings FROM `user` LEFT JOIN training ON training.id_user = user.id WHERE training.id_user=?
-		ORDER BY training.id DESC';
+		$trainingsIdQuery = 'SELECT DISTINCT(training.id) AS id_trainings, training.date FROM `user` LEFT JOIN training ON training.id_user = user.id WHERE training.id_user=?
+		ORDER BY training.date DESC';
 		return $this->sqlMaker->make($trainingsIdQuery, 'fetchAll', [$userId]);
 	}
 
 	public function makeTrainingById($trainingId, $userId) {
-		$query = 'SELECT training.id, training.date, training.shape, exercise_catalog.name, exercise_practice.rest, exercise_practice.nb_sets, exercise_practice.nb_reps, exercise_practice.method FROM `user` LEFT JOIN training ON training.id_user = user.id LEFT JOIN exercise_practice ON training.id = exercise_practice.id_training LEFT JOIN exercise_catalog ON exercise_practice.id_exercise_catalog = exercise_catalog.id WHERE training.id=? AND training.id_user=?';
+		$query = 'SELECT training.id, training.date, training.shape, exercise_catalog.name, exercise_practice.work_load ,exercise_practice.rest, exercise_practice.nb_sets, exercise_practice.nb_reps, exercise_practice.method FROM `user` LEFT JOIN training ON training.id_user = user.id LEFT JOIN exercise_practice ON training.id = exercise_practice.id_training LEFT JOIN exercise_catalog ON exercise_practice.id_exercise_catalog = exercise_catalog.id WHERE training.id=? AND training.id_user=?';
 		$training = $this->sqlMaker->make($query, 'fetchAll', [$trainingId, $userId]);
 
 		$exercises = [];
 		foreach ($training AS $exo) {
-			array_push($exercises, new Exercise($exo['name'], $exo['rest'], $exo['nb_sets'], $exo['nb_reps'], $exo['method']));
+			array_push($exercises, new Exercise($exo['name'], $exo['work_load'], $exo['rest'], $exo['nb_sets'], $exo['nb_reps'], $exo['method']));
 		}
 		return new Training($exercises, $training[0]['date'], $training[0]['shape'], $training[0]['id']);
 	}
@@ -68,7 +68,7 @@ class TrainingRepository {
 	}
 
 	public function saveExercise($exercise, $trainingId) {
-		$query = "INSERT INTO exercise_practice (id_training, id_exercise_catalog, rest, nb_sets, nb_reps, method) VALUES (?, ?, ?, ?, ?, ?)";
+		$query = "INSERT INTO exercise_practice (id_training, id_exercise_catalog, work_load, rest, nb_sets, nb_reps, method) VALUES (?, ?, ?, ?, ?, ?, ?)";
 		
 		$params = [$trainingId];
 		foreach ($exercise as $exoData) {
@@ -86,5 +86,14 @@ class TrainingRepository {
 		foreach ($exercises as $exo) {
 			$this->saveExercise($exo, $trainingId);
 		}
+	}
+
+	public function deleteTraining($trainingId) {
+		$query = "DELETE from training WHERE id=?";
+		$this->sqlMaker->make($query, NULL, [$trainingId]);
+	}
+
+	public function editTraining($trainingId, $trainingInfo, $exercises) {
+
 	}
 }

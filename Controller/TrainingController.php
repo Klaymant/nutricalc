@@ -3,34 +3,41 @@ namespace Controller;
 
 require_once('Model/TrainingRepository.php');
 require_once('Model/Training.php');
+require_once('Config/Path.php');
 use Model\TrainingRepository;
 use Model\Training;
+use Config\Path;
 
 class TrainingController {
     private $trainingRepo;
 
-    public function training($trainingId) {
+    function __construct() {
         $this->trainingRepo = new TrainingRepository();
+    }
+
+    public function training($trainingId) {
         $training = $this->trainingRepo->makeTrainingById($trainingId, $_SESSION['id']);
         require_once("View/trainingView.php");
     }
 
     public function addTraining() {
-        $this->trainingRepo = new TrainingRepository();
         $exoInfo = $this->trainingRepo->getAllExercisesInfo();
     	require_once("View/addTrainingView.php");
     }
 
     public function saveTraining() {
-    	$this->trainingRepo = new TrainingRepository();
     	$trainingInfo = ['date' => $_POST['date'], 'shape' => $_POST['shape']];
         $exos = $this->getExosAsArray($_POST);
     	$this->trainingRepo->saveTraining($trainingInfo, $_SESSION['id'], $exos);
     	header("Location: dashboard");
     }
 
+    public function deleteTraining($trainingId) {
+        header("Location: " . PATH::KERNEL . "app/dashboard");
+        $this->trainingRepo->deleteTraining($trainingId);
+    }
+
     public function allTrainings() {
-        $this->trainingRepo = new TrainingRepository();
         $trainings = $this->trainingRepo->getAllTrainingsById($_SESSION['id']);
         require_once("View/allTrainingsView.php");
     }
@@ -38,7 +45,7 @@ class TrainingController {
     public function getExosAsArray($array) {
         $array = array_slice($array, 2);
         $arrayIndex = 1;
-        $nbFields = 5;
+        $nbFields = 6;
 
         $exercises = [];
         $exo = [];

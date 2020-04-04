@@ -20,7 +20,7 @@ function addExo (exoInfo) {
 		exoNb += 1;
 	}
 
-	function makeSelect(exoInfo, exoNb) {
+	function makeSelect(exoInfo) {
 		var select = "<select name='" + exoNb + "'>";
 		select += exoInfo.forEach();
 		select += "</select>";

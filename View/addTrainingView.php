@@ -38,8 +38,12 @@
 			</td>
 		</tr>
 		<tr>
+			<td>Work load :</td>
+			<td><input size=1 type="number" min=0 value=10 name="workload_1">kg</td>
+		</tr>
+		<tr>
 			<td>Rest :</td>
-			<td><input type="text" name="rest_1"></td>
+			<td><input type="number" min=10 step=10 value=60 name="rest_1">seconds</td>
 		</tr>
 		<tr>
 			<td>Number of sets :</td>
@@ -55,7 +59,7 @@
 	<input class="button" type="submit" value="Here is my new training!">
 </form>
 
-<button class="button" onclick="addExo($exoInfo)">
+<button class="button" onclick="addExo()">
 	+ Add another exercise
 </button>
 

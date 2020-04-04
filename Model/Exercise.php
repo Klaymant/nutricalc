@@ -4,13 +4,15 @@ namespace Model;
 
 class Exercise {
 	private $name;
+	private $workLoad;
 	private $rest;
 	private $nbSets;
 	private $nbReps;
 	private $method;
 
-	function __construct($name, $rest, $sets, $reps, $method=NULL) {
+	function __construct($name, $workLoad, $rest, $sets, $reps, $method=NULL) {
 		$this->name = $name;
+		$this->workLoad = $workLoad;
 		$this->rest = $rest;
 		$this->sets = $sets;
 		$this->reps = $reps;
@@ -20,6 +22,10 @@ class Exercise {
 	// Getters
 	public function getName() {
 		return $this->name;
+	}
+
+	public function getWorkLoad() {
+		return $this->workLoad;
 	}
 
 	public function getRest() {
@@ -41,6 +47,10 @@ class Exercise {
 	// Setters
 	public function setName($name) {
 		$this->name = $name;
+	}
+
+	public function setWorkLoad($workLoad) {
+		$this->workLoad = $workLoad;
 	}
 
 	public function setRest($rest) {

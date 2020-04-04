@@ -12,6 +12,12 @@ use Model\Training;
 
 class UserController {
     private $userRepo;
+    private $trainingRepo;
+
+    function __construct() {
+        $this->userRepo = new UserRepository();
+        $this->trainingRepo = new TrainingRepository();
+    }
 
     public function homepage() {
         require_once ("View/homepageView.php");
@@ -28,8 +34,6 @@ class UserController {
     }
 
     public function dashboard() {
-        $this->userRepo = new UserRepository();
-        $this->trainingRepo = new TrainingRepository();
         $user = $this->userRepo->getUserById($_SESSION['id']);
         $user->calcAllNeeds();
 
@@ -38,7 +42,6 @@ class UserController {
     }
 
     public function settings() {
-        $this->userRepo = new UserRepository();
         $user = $this->userRepo->getUserById($_SESSION['id']);
         require_once("View/settingsView.php");
     }
@@ -48,7 +51,6 @@ class UserController {
     }
 
     public function account() {
-        $this->userRepo = new UserRepository();
         $user = $this->userRepo->getUserByMail($_POST['mail']);
         if ($user['pwd'] == $_POST['pwd']) {
             session_start();
@@ -85,7 +87,6 @@ class UserController {
     }
 
     public function createAccount() {
-        $this->userRepo = new UserRepository();
         if ($this->userRepo->mailExists($_POST['mail'])) {
             $error = true;
             require_once("View/newAccountView.php");
@@ -98,7 +99,6 @@ class UserController {
 
     public function createUser($mail, $pwd, $sex, $age, $height, $weight, $activityId, $goalId)
     {
-    	$userRepo = new UserRepository;
     	$this->userRepo->createUser($mail, $pwd, $sex, $age, $height, $weight, $activityId, $goalId);
     }
 }
