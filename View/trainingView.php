@@ -8,11 +8,13 @@
 <table class="training">
 	<thead>
 		<tr>
-			<td>Date</td>
-			<td colspan=2><?= $training->getDate() ?></td>
-			<td>Shape</td>
-			<td colspan=2><?= $training->getShape() ?></td>
+			<th>Date</th>
+			<th colspan=2><?= $training->getDate() ?></th>
+			<th>Shape</th>
+			<th colspan=2><?= $training->getShape() ?></th>
 		</tr>
+	</thead>
+	<tbody>
 		<tr>
 			<td class ='title exofield'>Exercise</td>
 			<td class='exo title'>Work load</td>
@@ -21,9 +23,6 @@
 			<td class='exo title'>Rest</td>
 			<td class='exo title'>Method</td>
 		</tr>
-	</thead>
-
-	<tbody>
 		<?php
 			foreach ($training->getExercises() as $exo) {
 				$method = $exo->getMethod() != NULL ? $exo->getMethod() : "None";
@@ -37,7 +36,7 @@
 				'</tr>';
 			}
 		?>
-		<a class="button" href="<?= PATH::KERNEL?>app/deletetraining/<?= $training->getId() ?>">Delete this training</a>
+		<a class="buttonDangerous" href="<?= PATH::KERNEL?>app/deletetraining/<?= $training->getId() ?>">Delete this training</a>
 	</tbody>
 </table>
 

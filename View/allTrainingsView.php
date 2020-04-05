@@ -8,10 +8,10 @@
 		echo "<table class='training'>
 			<thead>
 				<tr>
-					<td>Date</td>
-					<td colspan=2>" . $trainee->getDate() . "</td>
-					<td>Shape</td>
-					<td colspan=2>" . $trainee->getShape() . "</td>
+					<th>Date</th>
+					<th colspan=2>" . $trainee->getDate() . "</th>
+					<th>Shape</th>
+					<th colspan=2>" . $trainee->getShape() . "</th>
 				</tr>
 			</thead>
 			<tbody>
