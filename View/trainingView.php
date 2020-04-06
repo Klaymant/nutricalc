@@ -36,9 +36,10 @@
 				'</tr>';
 			}
 		?>
-		<a class="buttonDangerous" href="<?= PATH::KERNEL?>app/deletetraining/<?= $training->getId() ?>">Delete this training</a>
 	</tbody>
 </table>
+
+<a class="buttonDangerous" href="<?= PATH::KERNEL?>app/deletetraining/<?= $training->getId() ?>">Delete this training</a>
 
 <?php
 	// $content contains the html content from ob_start so far

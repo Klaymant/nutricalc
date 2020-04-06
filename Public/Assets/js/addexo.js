@@ -6,6 +6,9 @@ function addExo (exoInfo) {
 			"<td><input type='text' name='name_" + exoNb + "'></td>" +
 		"</tr>" +
 		"<tr>" +
+			"<td>Work load :</td> <td><input type='text' name='work_load_" + exoNb + "'></td>" +
+		"</tr>" +
+		"<tr>" +
 			"<td>Rest :</td> <td><input type='text' name='rest_" + exoNb + "'></td>" +
 		"</tr>" +
 		"<tr>" +

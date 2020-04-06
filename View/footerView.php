@@ -1,5 +1,5 @@
 <footer>
-	Nutricalc
+	Nutricalc&#169;
 	</br>
-	Since now
+	2020
 </footer>

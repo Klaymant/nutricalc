@@ -5,6 +5,11 @@
 	use Config\Path;
 ?>
 
+<div class="content">
+	<p>&#10077;<strong>Hello!</strong></p>
+	<p>What are you going to do <strong>today</strong> ?&#10078;</p>
+</div>
+
 <div class="tile" id="needs">
 	<table>
 		<thead>
@@ -14,20 +19,20 @@
 		</thead>
 		<tbody>
 			<tr>
-				<td class="attribute">Calories </td>
-				<td>| <span class="value"><?= round($user->getNutrient()->getKcalNeeds(), 0) ?></span>kcal</td>
+				<td class="nutrient calories">Calories </td>
+				<td><span class="value"><?= round($user->getNutrient()->getKcalNeeds(), 0) ?></span>kcal</td>
 			</tr>
 			<tr>
-				<td class="attribute">Proteins </td>
-				<td>| <span class="value"><?= round($user->getNutrient()->getProteinsNeeds(), 0) ?></span>g</td>
+				<td class="nutrient proteins">Proteins </td>
+				<td><span class="value"><?= round($user->getNutrient()->getProteinsNeeds(), 0) ?></span>g</td>
 			</tr>
 			<tr>
-				<td class="attribute">Fat </td>
-				<td>| <span class="value"><?= round($user->getNutrient()->getFatNeeds(), 0) ?></span>g</td>
+				<td class="nutrient fat">Fat </td>
+				<td><span class="value"><?= round($user->getNutrient()->getFatNeeds(), 0) ?></span>g</td>
 			</tr>
 			<tr>
-				<td class="attribute">Carbs </td>
-				<td>| <span class="value"><?= round($user->getNutrient()->getCarbsNeeds(), 0) ?></span>g</td>
+				<td class="nutrient carbs">Carbs </td>
+				<td><span class="value"><?= round($user->getNutrient()->getCarbsNeeds(), 0) ?></span>g</td>
 			</tr>
 		</tbody>
 	</table>
@@ -58,15 +63,15 @@
 					echo '</tr>';
 				}
 			?>
+			<tfoot>
+				<tr>
+					<td><a class="button" href="<?= PATH::KERNEL ?>app/alltrainings">See all trainings</a></td>
+				</tr>
+				<tr>
+					<td><a class="button" href="addtraining">(+) Add a training</a></td>
+				</tr>
+			</tfoot>
 		</tbody>
-		<tfoot>
-			<tr>
-				<td colspan=2><a class="button" href="<?= PATH::KERNEL ?>app/alltrainings">See all trainings</a></td>
-			</tr>
-			<tr>
-				<td colspan=2><a class="button" href="addtraining">(+) Add a training</a></td>
-			</tr>
-		</tfoot>
 	</table>
 </div>
 

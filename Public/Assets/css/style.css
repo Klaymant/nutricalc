@@ -8,7 +8,7 @@ BLUE TRELLO : rgba(0, 121, 191);
 
 body {
 	background: rgb(50, 50, 50);
-	font-family: 'Trebuchet MS', 'Calibri';
+	font-family: 'Sen', sans-serif;
 	font-size: 22px;
 	color: black;
 }
@@ -17,23 +17,19 @@ header {
 	background: rgb(115, 213, 124);
 }
 
+form td {
+	color: white;
+}
+
 /* ----------
 TITLE
 ---------- */
 #website_title:visited, #website_title:link {
+	font-family: 'Libre Barcode 39 Text', 'Do Hyeon', sans-serif;
+	font-size: 50px;
+	padding-left: 10px;
 	color: rgb(50, 50, 50);
 	text-decoration: none;
-}
-
-#website_title:hover {
-	color: rgb(135, 233, 144);
-	background: white;
-}
-
-#website_title {
-	font-family: Impact;
-	font-size: 60px;
-	padding-left: 5px;
 }
 
 /* ----------
@@ -41,7 +37,7 @@ SUBTITLE
 ---------- */
 #subtitle {
 	font-size: 18px;
-	font-family: Helvetica;
+	font-family: 'Do Hyeon', sans-serif;
 	color: rgb(50, 50, 50);
 	padding-left: 5px;
 }
@@ -67,54 +63,97 @@ MENU
 	background: rgb(80, 80, 80);
 	text-decoration: none;
 	color: white;
-	font-family: "Impact";
+	font-family: 'Do Hyeon', sans-serif;
 	font-weight: bold;
 	font-size: 20px;
 	padding: 10px;
-	border-bottom: solid 3px white;
+	border-bottom: solid 5px white;
 }
 
 #menu a:hover {
-	color: rgb(80, 80, 80);
-	background: rgb(95, 193, 104);
-	border-bottom: solid 3px rgb(55, 153, 64);
+	background: rgb(100, 100, 100);
 }
 
 .content {
 	display: table;
+	font-size: 18px;
+	width: 100%;
+	color: white;
+	background: rgb(80, 80, 80);
+	border: solid 2px rgb(100, 100, 100);
+	padding: 10px;
+	margin-top: 20px;
+	margin-bottom: 20px;
 }
 
 /* ----------
 DASHBOARD
 ---------- */
 .value {
-	color: rgb(95, 193, 104);
 	font-weight: bold;
 }
 
 .tile {
 	display: inline-block;
 	background: rgb(220, 220, 220);
-	border: solid 4px rgb(95, 193, 104);
-	margin: 20px;
+	border: solid 2px rgb(100, 100, 100);
+	margin-top: 20px;
+	margin-bottom: 20px;
 	width: 15%;
-	height: 250px;
+	height: 350px;
 }
 
 .tile table {
 	border-collapse: collapse;
 	width: 100%;
-	padding: 0px;
 }
 
 .tile table thead {
-	background: rgb(95, 193, 104);
+	background: rgb(80, 80, 80);
 	font-size: 22px;
 	color: white;
 }
 
+.tile th {
+	padding: 5px;
+}
+
 .tile table tbody {
 	padding-left: 10px;
+}
+
+.tile td {
+	height: 30px;
+	padding-left: 10px;
+}
+
+.tile tfoot td {
+}
+
+/* ----------
+NUTRIENTS
+---------- */
+.calories {
+	background: rgb(91, 215, 91);
+}
+
+.nutrient {
+	font-size: 15px;
+	width: 30%;
+	color: white;
+	font-weight: bold;
+}
+
+.proteins {
+	background: rgb(178, 34, 34);
+}
+
+.fat {
+	background: rgb(218, 165, 32);
+}
+
+.carbs {
+	background: rgb(30, 144, 255);
 }
 
 /* ----------
@@ -123,7 +162,8 @@ TRAINING
 
 .training {
 	background: rgb(50, 50, 50);
-	margin-bottom: 30px;
+	margin-top: 20px;
+	margin-bottom: 20px;
 	border: solid 5px rgb(115, 213, 124);
 	border-collapse: collapse;
 }
@@ -157,57 +197,65 @@ TRAINING
 }
 
 .trainingLine:hover {
-	background: rgb(50, 50, 50);
+	background: rgb(80, 80, 80);
 }
 
 /* ----------
 BUTTON
 ---------- */
 
-.button {
+input.button {
 	background: rgb(95, 193, 104);
 	border: 0px;
 	color: white;
 	border-radius: 10px;
-	padding: 2px;
+	padding: 5px;
+}
+
+.button:visited, .button:link {
+	background: rgb(95, 193, 104);
+	border: 0px;
+	color: white;
+	border-radius: 10px;
+	padding: 5px;
 }
 
 .button:hover {
-	background: rgb(95, 193, 104);
-	color: rgba(0, 61, 131);
+	background: rgb(115, 213, 124);
 }
 
-.buttonDangerous {
-	background: red;
+.buttonDangerous:visited, .buttonDangerous:link {
+	background: rgb(220, 20, 60);
 	color: white;
 	border-radius: 10px;
-	padding: 2px;
+	padding: 5px;
 }
 
 .buttonDangerous:hover {
-	background: white;
-	color: red;
+	background: rgb(250, 50, 90);
 }
 
 /* ----------
 LINKS
 ---------- */
 a:link, a:visited {
+	color: rgb(115, 213, 124);
 	text-decoration: none;
 }
 
 a:hover {
-	color: white;
+	color: rgb(145, 243, 154);
 }
 
 /* ----------
 FOOTER
 ---------- */
 footer {
-	font-family: Helvetica;
+	font-family: 'Do Hyeon', sans-serif;
 	background: rgb(95, 193, 104);
 	border-radius: 10px;
 	color: white;
 	font-size: 18px;
+	margin-top: 10px;
 	text-align: center;
 }

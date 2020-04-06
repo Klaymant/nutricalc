@@ -3,29 +3,30 @@
 	ob_start();
 ?>
 
-<form action="account" method="post">
-	<table>
-		<tr>
-			<td>Mail :</td>
-			<td><input type="text" name="mail"></td>
-		</tr>
-		<tr>
-			<td>Password :</td>
-			<td><input type="password" name="pwd"></td>
-		</tr>
-	</table>
-	<input type="submit" value="Connection">
-</form>
+<div class="content">
+	<form action="account" method="post">
+		<table>
+			<tr>
+				<td>Mail :</td>
+				<td><input type="text" name="mail"></td>
+			</tr>
+			<tr>
+				<td>Password :</td>
+				<td><input type="password" name="pwd"></td>
+			</tr>
+		</table>
+		<input class="button" type="submit" value="Connection">
+	</form>
 
-<?php
-	if (isset($error)) {
-		echo 'Incorrect login. Try again!';
-	}
-?>
-
-<p>
-	<a href="newaccount">No account yet ? Follow this link !</a>
-</p>
+	<?php
+		if (isset($error)) {
+			echo 'Incorrect login. Try again!';
+		}
+	?>
+	<p>
+		<a class="button" href="newaccount">No account yet ? Follow this link !</a>
+	</p>
+</div>
 
 <?php
 	// $content contains the html content from ob_start so far
