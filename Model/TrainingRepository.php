@@ -21,19 +21,23 @@ class TrainingRepository {
 	}
 
 	public function getTrainingsIds($userId) {
-		$trainingsIdQuery = 'SELECT DISTINCT(training.id) AS id_trainings, training.date FROM `user` LEFT JOIN training ON training.id_user = user.id WHERE training.id_user=?
-		ORDER BY training.date DESC';
-		return $this->sqlMaker->make($trainingsIdQuery, 'fetchAll', [$userId]);
+		$query = $this->queryRouter('selectTrainingIds');
+		return $this->sqlMaker->make($query, 'fetchAll', [$userId]);
 	}
 
-	public function makeTrainingById($trainingId, $userId) {
-		$query = 'SELECT training.id, training.date, training.shape, exercise_catalog.name, exercise_practice.work_load ,exercise_practice.rest, exercise_practice.nb_sets, exercise_practice.nb_reps, exercise_practice.method FROM `user` LEFT JOIN training ON training.id_user = user.id LEFT JOIN exercise_practice ON training.id = exercise_practice.id_training LEFT JOIN exercise_catalog ON exercise_practice.id_exercise_catalog = exercise_catalog.id WHERE training.id=? AND training.id_user=?';
-		$training = $this->sqlMaker->make($query, 'fetchAll', [$trainingId, $userId]);
-
-		$exercises = [];
+	public function fillExoArray($training, $exercises) {
 		foreach ($training AS $exo) {
 			array_push($exercises, new Exercise($exo['name'], $exo['work_load'], $exo['rest'], $exo['nb_sets'], $exo['nb_reps'], $exo['method']));
 		}
+		return $exercises;
+	}
+
+	public function makeTrainingById($trainingId, $userId) {
+		$query = $this->queryRouter('makeTraining');
+		$training = $this->sqlMaker->make($query, 'fetchAll', [$trainingId, $userId]);
+
+		$exercises = [];
+		$exercises = $this->fillExoArray($training, $exercises);
 		return new Training($exercises, $training[0]['date'], $training[0]['shape'], $training[0]['id']);
 	}
 
@@ -72,8 +76,7 @@ class TrainingRepository {
 	*/
 
 	public function addExercise($exercise, $trainingId) {
-		$query = "INSERT INTO exercise_practice (id_training, id_exercise_catalog, work_load, rest, nb_sets, nb_reps, method) VALUES (?, ?, ?, ?, ?, ?, ?)";
-		
+		$query = $this->queryRouter('insertExercise');
 		$params = [$trainingId];
 		foreach ($exercise as $exoData) {
 			array_push($params, $exoData);
@@ -89,7 +92,7 @@ class TrainingRepository {
 
 	public function addTraining($userId, $training) {
 		$query = "INSERT INTO training (id_user, date, shape) VALUES (?, ?, ?)";
-		$params = [$userId, $training['trainingInfo']['date'], $training['trainingInfo']['shape']];
+		$params = [$userId, $training['trainingMeta']['date'], $training['trainingMeta']['shape']];
 		$this->sqlMaker->make($query, NULL, $params);
 		$trainingId = $this->sqlMaker->getLastId();
 		$this->addExercises($training['exos'], $trainingId);
@@ -105,7 +108,7 @@ class TrainingRepository {
 		$query = "UPDATE training
 		SET date = ?
 		shape = ?";
-		$params = [$training['trainingInfo']['date'], $trainingInfo['trainingInfo']['shape']];
+		$params = [$training['trainingMeta']['date'], $trainingInfo['trainingMeta']['shape']];
 		$this->sqlMaker->make($query);
 	}
 
@@ -121,5 +124,26 @@ class TrainingRepository {
 	public function deleteTraining($trainingId) {
 		$query = "DELETE FROM training WHERE id=?";
 		$this->sqlMaker->make($query, NULL, [$trainingId]);
+	}
+
+	public function queryRouter($queryTag) {
+		switch ($queryTag) {
+			case 'makeTraining':
+				$query = "SELECT training.id, training.date, training.shape, exercise_catalog.name, exercise_practice.work_load ,exercise_practice.rest, exercise_practice.nb_sets, exercise_practice.nb_reps, exercise_practice.method
+				FROM `user`
+				LEFT JOIN training ON training.id_user = user.id
+				LEFT JOIN exercise_practice ON training.id = exercise_practice.id_training
+				LEFT JOIN exercise_catalog ON exercise_practice.id_exercise_catalog = exercise_catalog.id
+				WHERE training.id=? AND training.id_user=?";
+				break;
+			case 'insertExercise':
+				$query = "INSERT INTO exercise_practice (id_training, id_exercise_catalog, work_load, rest, nb_sets, nb_reps, method) VALUES (?, ?, ?, ?, ?, ?, ?)";
+				break;
+			case 'selectTrainingIds':
+					$query = 'SELECT DISTINCT(training.id) AS id_trainings, training.date FROM `user` LEFT JOIN training ON training.id_user = user.id WHERE training.id_user=?
+						ORDER BY training.date DESC';
+					break;
+		}
+		return $query;
 	}
 }

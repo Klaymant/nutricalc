@@ -69,10 +69,13 @@ class Routeur {
 					$route = [self::USER_CONTROLLER, "settings"];
 					break;
 				case 'training':
-					$route = [self::TRAINING_CONTROLLER, "training", $this->uri[2]];
+					$route = [self::TRAINING_CONTROLLER, "showTrainingById", $this->uri[2]];
 					break;
 				case 'addtraining':
-					$route = [self::TRAINING_CONTROLLER, "addTraining"];
+					$route = [self::TRAINING_CONTROLLER, "showAddTraining"];
+					break;
+				case 'edittraining':
+					$route = [self::TRAINING_CONTROLLER, "showEditTraining"];
 					break;
 				case 'savetraining':
 					$route = [self::TRAINING_CONTROLLER, "saveTraining"];
@@ -81,7 +84,7 @@ class Routeur {
 					$route = [self::TRAINING_CONTROLLER, "deleteTraining", $this->uri[2]];
 					break;
 				case 'alltrainings':
-					$route = [self::TRAINING_CONTROLLER, "allTrainings"];
+					$route = [self::TRAINING_CONTROLLER, "showAllTrainings"];
 					break;
 				case 'usercalculator':
 					$route = [self::USER_CONTROLLER, "userCalculator"];
@@ -109,20 +112,21 @@ class Routeur {
 				case 'id':
 					// If a parameter is defined in URI
 					if (array_key_exists(2, $this->uri)) {
-						return [self::USER_API_CONTROLLER, "getUserById", $this->uri[2]];
+						$route = [self::USER_API_CONTROLLER, "getUserById", $this->uri[2]];
 						break;
 					}
 					else {
-						return [self::USER_API_CONTROLLER, "404"];
+						$route = [self::USER_API_CONTROLLER, "404"];
 						break;
 					}
 					break;
 				case 'bmr':
-					return [self::USER_API_CONTROLLER, "calculateBmr"]; //fixme
+					$route = [self::USER_API_CONTROLLER, "calculateBmr"]; //fixme
 					break;
 				default:
-					return [self::USER_CONTROLLER, "404"];
+					$route = [self::USER_CONTROLLER, "404"];
 			}
+			return $route;
 		}
     }
 

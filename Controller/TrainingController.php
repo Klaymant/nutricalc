@@ -15,25 +15,36 @@ class TrainingController {
         $this->trainingRepo = new TrainingRepository();
     }
 
-    public function training($trainingId) {
+    public function showTrainingById($trainingId) {
         $training = $this->trainingRepo->makeTrainingById($trainingId, $_SESSION['id']);
         require_once("View/trainingView.php");
     }
 
-    public function addTraining() {
+    public function showAllTrainings() {
+        $trainings = $this->trainingRepo->getAllTrainingsById($_SESSION['id']);
+        require_once("View/allTrainingsView.php");
+    }
+
+    public function showAddTraining() {
         $exoInfo = $this->trainingRepo->getAllExercisesInfo();
     	require_once("View/addTrainingView.php");
     }
 
+    public function showEditTraining($trainingId) {
+        $exoInfo = $this->trainingRepo->getAllExercisesInfo();
+        $training = $this->trainingRepo->makeTrainingById($trainingId, $_SESSION['id']);
+        require_once("View/editTrainingView.php");
+    }
+
     public function getnewTrainingInfo() {
-        $trainingInfo = ['date' => $_POST['date'], 'shape' => $_POST['shape']];
+        $trainingMeta = ['date' => $_POST['date'], 'shape' => $_POST['shape']];
         $exos = $this->getExosAsArray($_POST);
-        return ['trainingInfo' => $trainingInfo, 'exos' => $exos];
+        return ['trainingMeta' => $trainingMeta, 'exos' => $exos];
     }
 
     public function saveTraining() {
-        $training = $this->getnewTrainingInfo();
-    	$this->trainingRepo->addTraining($_SESSION['id'], $training);
+        $trainingInfo = $this->getnewTrainingInfo();
+    	$this->trainingRepo->addTraining($_SESSION['id'], $trainingInfo);
     	header("Location: dashboard");
     }
 
@@ -46,11 +57,6 @@ class TrainingController {
         $training = $this->getnewTrainingInfo();
         $this->trainingRepo->updateTraining($trainingId, $training);
         header("Location: dashboard");
-    }
-
-    public function allTrainings() {
-        $trainings = $this->trainingRepo->getAllTrainingsById($_SESSION['id']);
-        require_once("View/allTrainingsView.php");
     }
 
     public function getExosAsArray($array, $cutoff=2, $nbFields=6) {

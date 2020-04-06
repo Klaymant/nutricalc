@@ -212,6 +212,14 @@ input.button {
 	padding: 5px;
 }
 
+button.button {
+	background: rgb(95, 193, 104);
+	border: 0px;
+	color: white;
+	border-radius: 10px;
+	padding: 5px;	
+}
+
 .button:visited, .button:link {
 	background: rgb(95, 193, 104);
 	border: 0px;
