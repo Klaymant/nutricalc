@@ -67,7 +67,11 @@ class TrainingRepository {
 		return $this->sqlMaker->make($query, "fetchAll");
 	}
 
-	public function saveExercise($exercise, $trainingId) {
+	/*
+	** INSERTING
+	*/
+
+	public function addExercise($exercise, $trainingId) {
 		$query = "INSERT INTO exercise_practice (id_training, id_exercise_catalog, work_load, rest, nb_sets, nb_reps, method) VALUES (?, ?, ?, ?, ?, ?, ?)";
 		
 		$params = [$trainingId];
@@ -77,23 +81,45 @@ class TrainingRepository {
 		$this->sqlMaker->make($query, NULL, $params);
 	}
 
-	public function saveTraining($trainingInfo, $userId, $exercises) {
-		$query = "INSERT INTO training (id_user, date, shape) VALUES (?, ?, ?)";
-		$params = [$userId, $trainingInfo['date'], $trainingInfo['shape']];
-		$this->sqlMaker->make($query, NULL, $params);
-		$trainingId = $this->sqlMaker->getLastId();
-
+	public function addExercises($exercises, $trainingId) {
 		foreach ($exercises as $exo) {
-			$this->saveExercise($exo, $trainingId);
+			$this->addExercise($exo, $trainingId);
 		}
 	}
 
-	public function deleteTraining($trainingId) {
-		$query = "DELETE from training WHERE id=?";
+	public function addTraining($userId, $training) {
+		$query = "INSERT INTO training (id_user, date, shape) VALUES (?, ?, ?)";
+		$params = [$userId, $training['trainingInfo']['date'], $training['trainingInfo']['shape']];
+		$this->sqlMaker->make($query, NULL, $params);
+		$trainingId = $this->sqlMaker->getLastId();
+		$this->addExercises($training['exos'], $trainingId);
+	}
+
+	/*
+	** UPDATING
+	*/
+
+	public function updateTraining($trainingId, $training) {
+		$this->deleteAllExercises($trainingId);
+		$this->addExercises($training['exos'], $trainingId);
+		$query = "UPDATE training
+		SET date = ?
+		shape = ?";
+		$params = [$training['trainingInfo']['date'], $trainingInfo['trainingInfo']['shape']];
+		$this->sqlMaker->make($query);
+	}
+
+	/*
+	** DELETING
+	*/
+
+	public function deleteAllExercises($trainingId) {
+		$query = "DELETE FROM exercise_practice WHERE id_training=?";
 		$this->sqlMaker->make($query, NULL, [$trainingId]);
 	}
 
-	public function editTraining($trainingId, $trainingInfo, $exercises) {
-
+	public function deleteTraining($trainingId) {
+		$query = "DELETE FROM training WHERE id=?";
+		$this->sqlMaker->make($query, NULL, [$trainingId]);
 	}
 }

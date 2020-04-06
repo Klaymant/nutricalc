@@ -13,19 +13,19 @@ class Routeur {
 		$this->error = false;
 	}
 
-	// Depending on the route of the URI, either a UserController or a UserApiController will be chosen in the index
 	public function route(){
         switch ($this->uri[0]){
             case 'app':
-                return $this->routeApp();
+                $route = $this->routeApp();
                 break;
             case 'api':
-                return $this->routeApi();
+                $route = $this->routeApi();
                 break;
             default:
-                return $this->toggle404();
+                $route = $this->toggle404();
                 break;
         }
+        return $route;
     }
 
     // When UserController is chosen
@@ -33,75 +33,76 @@ class Routeur {
 		if (array_key_exists(1, $this->uri)) {
 			switch ($this->uri[1]) {
 				case 'homepage':
-					return [self::USER_CONTROLLER, "homepage"];
+					$route = [self::USER_CONTROLLER, "homepage"];
 					break;
 				case 'id':
 					if (array_key_exists(2, $this->uri)) {
-						return [self::USER_CONTROLLER, "getUserById", $this->uri[2]];
+						$route = [self::USER_CONTROLLER, "getUserById", $this->uri[2]];
 						break;
 					}
 					else {
-						return [self::USER_CONTROLLER, "404"];
+						$route = [self::USER_CONTROLLER, "404"];
 						break;
 					}
 				case 'calculator':
-					return [self::USER_CONTROLLER, "calculator"];
+					$route = [self::USER_CONTROLLER, "calculator"];
 					break;
 				case 'login':
-					return [self::USER_CONTROLLER, "login"];
+					$route = [self::USER_CONTROLLER, "login"];
 					break;
 				case 'logout':
-					return [self::USER_CONTROLLER, "logout"];
+					$route = [self::USER_CONTROLLER, "logout"];
 					break;
 				case 'account':
-					return [self::USER_CONTROLLER, "account"];
+					$route = [self::USER_CONTROLLER, "account"];
 					break;
 				case 'newaccount':
-					return [self::USER_CONTROLLER, "newAccount"];
+					$route = [self::USER_CONTROLLER, "newAccount"];
 					break;
 				case 'createaccount':
-					return [self::USER_CONTROLLER, "createAccount"];
+					$route = [self::USER_CONTROLLER, "createAccount"];
 					break;
 				case 'dashboard':
-					return [self::USER_CONTROLLER, "dashboard"];
+					$route = [self::USER_CONTROLLER, "dashboard"];
 					break;
 				case 'settings':
-					return [self::USER_CONTROLLER, "settings"];
+					$route = [self::USER_CONTROLLER, "settings"];
 					break;
 				case 'training':
-					return [self::TRAINING_CONTROLLER, "training", $this->uri[2]];
+					$route = [self::TRAINING_CONTROLLER, "training", $this->uri[2]];
 					break;
 				case 'addtraining':
-					return [self::TRAINING_CONTROLLER, "addTraining"];
+					$route = [self::TRAINING_CONTROLLER, "addTraining"];
 					break;
 				case 'savetraining':
-					return [self::TRAINING_CONTROLLER, "saveTraining"];
+					$route = [self::TRAINING_CONTROLLER, "saveTraining"];
 					break;
 				case 'deletetraining':
-					return [self::TRAINING_CONTROLLER, "deleteTraining", $this->uri[2]];
+					$route = [self::TRAINING_CONTROLLER, "deleteTraining", $this->uri[2]];
 					break;
 				case 'alltrainings':
-					return [self::TRAINING_CONTROLLER, "allTrainings"];
+					$route = [self::TRAINING_CONTROLLER, "allTrainings"];
 					break;
 				case 'usercalculator':
-					return [self::USER_CONTROLLER, "userCalculator"];
+					$route = [self::USER_CONTROLLER, "userCalculator"];
 					break;
 				case 'changedata':
-					return [self::USER_CONTROLLER, "changeData"];
+					$route = [self::USER_CONTROLLER, "changeData"];
 					break;
 				case 'savedata':
-					return [self::USER_CONTROLLER, "saveData"];
+					$route = [self::USER_CONTROLLER, "saveData"];
 					break;
 				default:
-					return [self::USER_CONTROLLER, "404"];
+					$route = [self::USER_CONTROLLER, "404"];
+					break;
 			}
 		}
 		else {
-			return [self::USER_CONTROLLER, "404"];
+			$route =  [self::USER_CONTROLLER, "404"];
 		}
+		return $route;
 	}
 
-	// When UserApiController is chosen
 	private function routeApi(){
 		if (array_key_exists(1, $this->uri)) {
 			switch ($this->uri[1]) {

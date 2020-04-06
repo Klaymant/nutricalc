@@ -39,6 +39,7 @@
 	</tbody>
 </table>
 
+<a class="button" href="<?= PATH::KERNEL?>app/deletetraining/<?= $training->getId() ?>">Edit</a>
 <a class="buttonDangerous" href="<?= PATH::KERNEL?>app/deletetraining/<?= $training->getId() ?>">Delete this training</a>
 
 <?php

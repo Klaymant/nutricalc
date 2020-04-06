@@ -25,10 +25,15 @@ class TrainingController {
     	require_once("View/addTrainingView.php");
     }
 
-    public function saveTraining() {
-    	$trainingInfo = ['date' => $_POST['date'], 'shape' => $_POST['shape']];
+    public function getnewTrainingInfo() {
+        $trainingInfo = ['date' => $_POST['date'], 'shape' => $_POST['shape']];
         $exos = $this->getExosAsArray($_POST);
-    	$this->trainingRepo->saveTraining($trainingInfo, $_SESSION['id'], $exos);
+        return ['trainingInfo' => $trainingInfo, 'exos' => $exos];
+    }
+
+    public function saveTraining() {
+        $training = $this->getnewTrainingInfo();
+    	$this->trainingRepo->addTraining($_SESSION['id'], $training);
     	header("Location: dashboard");
     }
 
@@ -37,27 +42,31 @@ class TrainingController {
         $this->trainingRepo->deleteTraining($trainingId);
     }
 
+    public function updateTraining ($trainingId) {
+        $training = $this->getnewTrainingInfo();
+        $this->trainingRepo->updateTraining($trainingId, $training);
+        header("Location: dashboard");
+    }
+
     public function allTrainings() {
         $trainings = $this->trainingRepo->getAllTrainingsById($_SESSION['id']);
         require_once("View/allTrainingsView.php");
     }
 
-    public function getExosAsArray($array) {
-        $array = array_slice($array, 2);
-        $arrayIndex = 1;
-        $nbFields = 6;
-
-        $exercises = [];
+    public function getExosAsArray($array, $cutoff=2, $nbFields=6) {
+        $array = array_slice($array, $cutoff);
+        $exoList = [];
         $exo = [];
+        $i = 1;
 
         foreach ($array as $exoData) {
             array_push($exo, $exoData);
-            if ($arrayIndex % $nbFields == 0) {
-                array_push($exercises, $exo);
+            if ($i % $nbFields == 0) {
+                array_push($exoList, $exo);
                 $exo = [];
             }
-            $arrayIndex++;
+            $i++;
         }
-        return $exercises;
+        return $exoList;
     }
 }
