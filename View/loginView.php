@@ -19,7 +19,7 @@
 	</form>
 
 	<?php
-		if (isset($error)) {
+		if (isset($badLogin)) {
 			echo 'Incorrect login. Try again!';
 		}
 	?>
