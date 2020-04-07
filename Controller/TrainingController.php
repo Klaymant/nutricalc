@@ -16,7 +16,7 @@ class TrainingController {
     }
 
     public function showTrainingById($trainingId) {
-        $training = $this->trainingRepo->makeTrainingById($trainingId, $_SESSION['id']);
+        $training = $this->trainingRepo->makeTrainingById($trainingId);
         require_once("View/trainingView.php");
     }
 
@@ -32,7 +32,7 @@ class TrainingController {
 
     public function showEditTraining($trainingId) {
         $exoInfo = $this->trainingRepo->getAllExercisesInfo();
-        $training = $this->trainingRepo->makeTrainingById($trainingId, $_SESSION['id']);
+        $training = $this->trainingRepo->makeTrainingById($trainingId);
         require_once("View/editTrainingView.php");
     }
 
@@ -53,9 +53,9 @@ class TrainingController {
         $this->trainingRepo->deleteTraining($trainingId);
     }
 
-    public function updateTraining ($trainingId) {
+    public function updateTraining () {
         $training = $this->getnewTrainingInfo();
-        $this->trainingRepo->updateTraining($trainingId, $training);
+        $this->trainingRepo->updateTraining($_POST['trainingId'], $training);
         header("Location: dashboard");
     }
 

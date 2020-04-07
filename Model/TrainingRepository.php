@@ -25,19 +25,20 @@ class TrainingRepository {
 		return $this->sqlMaker->make($query, 'fetchAll', [$userId]);
 	}
 
-	public function fillExoArray($training, $exercises) {
+	public function makeExoArray($training) {
+		$exercises = [];
+
 		foreach ($training AS $exo) {
 			array_push($exercises, new Exercise($exo['name'], $exo['work_load'], $exo['rest'], $exo['nb_sets'], $exo['nb_reps'], $exo['method']));
 		}
 		return $exercises;
 	}
 
-	public function makeTrainingById($trainingId, $userId) {
+	public function makeTrainingById($trainingId) {
 		$query = $this->queryRouter('makeTraining');
-		$training = $this->sqlMaker->make($query, 'fetchAll', [$trainingId, $userId]);
+		$training = $this->sqlMaker->make($query, 'fetchAll', [$trainingId]);
 
-		$exercises = [];
-		$exercises = $this->fillExoArray($training, $exercises);
+		$exercises = $this->makeExoArray($training);
 		return new Training($exercises, $training[0]['date'], $training[0]['shape'], $training[0]['id']);
 	}
 
@@ -51,7 +52,7 @@ class TrainingRepository {
 		$trainings = [];
 
 		foreach ($trainingIds AS $trainingId) {
-            array_push($trainings, $this->makeTrainingById($trainingId['id_trainings'], $userId));
+            array_push($trainings, $this->makeTrainingById($trainingId['id_trainings']));
         }
         return $trainings;
 	}
@@ -59,8 +60,9 @@ class TrainingRepository {
 	public function getAllTrainingsById($userId) {
 		$trainingIds = $this->getTrainingsIds($userId);
 		$myTrainings = [];
+
 		foreach ($trainingIds as $trainingId) {
-			$training = $this->makeTrainingById($trainingId['id_trainings'], $userId);
+			$training = $this->makeTrainingById($trainingId['id_trainings']);
 			array_push($myTrainings, $training);
 		}
 		return $myTrainings;
@@ -106,10 +108,11 @@ class TrainingRepository {
 		$this->deleteAllExercises($trainingId);
 		$this->addExercises($training['exos'], $trainingId);
 		$query = "UPDATE training
-		SET date = ?
-		shape = ?";
-		$params = [$training['trainingMeta']['date'], $trainingInfo['trainingMeta']['shape']];
-		$this->sqlMaker->make($query);
+		SET date = ?,
+		shape = ?
+		WHERE id=?";
+		$params = [$training['trainingMeta']['date'], $training['trainingMeta']['shape'], $trainingId];
+		$this->sqlMaker->make($query, NULL, $params);
 	}
 
 	/*
@@ -134,7 +137,7 @@ class TrainingRepository {
 				LEFT JOIN training ON training.id_user = user.id
 				LEFT JOIN exercise_practice ON training.id = exercise_practice.id_training
 				LEFT JOIN exercise_catalog ON exercise_practice.id_exercise_catalog = exercise_catalog.id
-				WHERE training.id=? AND training.id_user=?";
+				WHERE training.id=?";
 				break;
 			case 'insertExercise':
 				$query = "INSERT INTO exercise_practice (id_training, id_exercise_catalog, work_load, rest, nb_sets, nb_reps, method) VALUES (?, ?, ?, ?, ?, ?, ?)";

@@ -1,5 +1,7 @@
 <!-- DOCTYPE HTML -->
 <?php
+	require_once("Config/Path.php");
+	use Config\Path;
 	ob_start();
 	date_default_timezone_set('Europe/paris');
 	$today = date('yy-m-d');
@@ -10,7 +12,7 @@
 </script>
 
 <div class="content">
-	<form action="savetraining" method="post">
+	<form action="<?= PATH::KERNEL?>app/updateTraining" method="post">
 		<h1>Edit training</h1>
 		<table>
 			<h2>Info of the day</h2>
@@ -60,6 +62,7 @@
 			</tr>
 		</table>
 		<input class="button" type="submit" value="Here is my new training!">
+		<input type="hidden" id="trainingId" name="trainingId" value=<?= $trainingId ?>>
 	</form>
 
 	<button class="button" onclick="addExo()">

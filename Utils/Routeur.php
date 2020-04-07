@@ -28,7 +28,6 @@ class Routeur {
         return $route;
     }
 
-    // When UserController is chosen
 	private function routeApp() {
 		if (array_key_exists(1, $this->uri)) {
 			switch ($this->uri[1]) {
@@ -75,7 +74,10 @@ class Routeur {
 					$route = [self::TRAINING_CONTROLLER, "showAddTraining"];
 					break;
 				case 'edittraining':
-					$route = [self::TRAINING_CONTROLLER, "showEditTraining"];
+					$route = [self::TRAINING_CONTROLLER, "showEditTraining", $this->uri[2]];
+					break;
+				case 'updateTraining':
+					$route = [self::TRAINING_CONTROLLER, "updateTraining"];
 					break;
 				case 'savetraining':
 					$route = [self::TRAINING_CONTROLLER, "saveTraining"];
