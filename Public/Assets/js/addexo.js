@@ -23,9 +23,10 @@ function addExo (exoInfo) {
 		exoNb += 1;
 	}
 
-	function makeSelect(exoInfo) {
-		var select = "<select name='" + exoNb + "'>";
-		select += exoInfo.forEach();
-		select += "</select>";
-		return select
-	}
+function check() {
+	var inputs = document.querySelectorAll('input'),
+    inputsLength = inputs.length;
+}
+
+function makeSelect(exoInfo) {
+}

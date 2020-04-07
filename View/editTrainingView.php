@@ -14,8 +14,8 @@
 <div class="content">
 	<form action="<?= PATH::KERNEL?>app/updateTraining" method="post">
 		<h1>Edit training</h1>
+		<h2>Info of the day</h2>
 		<table>
-			<h2>Info of the day</h2>
 			<tr>
 				<td>Date :</td>
 				<td><input size=7 type="date" name="date" value="<?= $today ?>"></td>
@@ -61,7 +61,7 @@
 				<td><input type="text" name="method_1"></td>
 			</tr>
 		</table>
-		<input class="button" type="submit" value="Here is my new training!">
+		<input class="button" type="submit" value="Modifications made!">
 		<input type="hidden" id="trainingId" name="trainingId" value=<?= $trainingId ?>>
 	</form>
 
