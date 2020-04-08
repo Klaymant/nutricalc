@@ -1,15 +1,15 @@
-function addExo (exoInfo) {
+function addExo () {
 		document.getElementById("exercises").innerHTML +=
-		"<h3>Exercises " + exoNb +"</h3>" +
+		"<h3>Exercise " + exoNb + "</h3>" +
 		"<tr>" +
 			"<td>Name :</td>" +
-			"<td><input type='text' name='name_" + exoNb + "'></td>" +
+			"<td>" + makeSelect() + "</td>" +
 		"</tr>" +
 		"<tr>" +
-			"<td>Work load :</td> <td><input type='text' name='work_load_" + exoNb + "'></td>" +
+			"<td>Work load :</td> <td><input type='text' name='work_load_" + exoNb + "'>kg</td>" +
 		"</tr>" +
 		"<tr>" +
-			"<td>Rest :</td> <td><input type='text' name='rest_" + exoNb + "'></td>" +
+			"<td>Rest :</td> <td><input type='text' name='rest_" + exoNb + "'>seconds</td>" +
 		"</tr>" +
 		"<tr>" +
 			"<td>Number of sets :</td><td><input size=1 type='number' min=0 max=10 step=1 value=4 name='sets_" + exoNb + "'></td>" +
@@ -21,12 +21,15 @@ function addExo (exoInfo) {
 			"<td>Method :</td><td><input type='text' name='method_" + exoNb + "'></td>" +
 		"</tr>";
 		exoNb += 1;
-	}
-
-function check() {
-	var inputs = document.querySelectorAll('input'),
-    inputsLength = inputs.length;
 }
 
-function makeSelect(exoInfo) {
+function makeSelect() {
+	var select = '<select name="name_' + '">';
+	for(i=0; i<exoInfo.length; i++) {
+		select += '<option value="' + exoInfo[i]['id'] + '">' +
+		exoInfo[i]["name"] +
+		'</option>';
+	}
+	select += "</select>";
+	return select;
 }

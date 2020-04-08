@@ -7,8 +7,10 @@
 	$today = date('yy-m-d');
 ?>
 
-<script text="text/javascript">
+<script type="text/javascript">
 	var exoNb = 2;
+	var exoInfo = <?php $exoInfoJs = json_encode($exoInfo); echo "'" . $exoInfoJs . "'"; ?>;
+	exoInfo = JSON.parse(exoInfo);
 </script>
 
 <div class="content">

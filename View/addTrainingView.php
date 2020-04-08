@@ -5,8 +5,10 @@
 	$today = date('yy-m-d');
 ?>
 
-<script text="text/javascript">
+<script type="text/javascript">
 	var exoNb = 2;
+	var exoInfo = <?php $exoInfoJs = json_encode($exoInfo); echo "'" . $exoInfoJs . "'"; ?>;
+	exoInfo = JSON.parse(exoInfo);
 </script>
 
 <div class="content">
@@ -26,7 +28,7 @@
 		<table id="exercises">
 			<h2>Exercises</h2>
 			<tr>
-				<h3>Exercice 1</h3>
+				<h3>Exercise 1</h3>
 			</tr>
 			<tr>
 				<td>Name :</td>
@@ -62,13 +64,15 @@
 		<input class="button" type="submit" value="Here is my new training!">
 	</form>
 
-	<button class="button" onclick="addExo()">
+	<button class="button" onclick="addExo(exoInfo)">
 		+ Add another exercise
 	</button>
-
-	<script src="http://localhost/nutricalc/Public/Assets/js/addexo.js" type="text/javascript"></script>
-
 </div>
+
+<script>
+</script>
+
+<script src="http://localhost/nutricalc/Public/Assets/js/addexo.js" type="text/javascript"></script>
 
 <?php
 	// $content contains the html content from ob_start so far
