@@ -6,7 +6,7 @@
 ?>
 
 <script type="text/javascript">
-	var exoNb = 2;
+	var exoNb = 1;
 	var exoInfo = <?php $exoInfoJs = json_encode($exoInfo); echo "'" . $exoInfoJs . "'"; ?>;
 	exoInfo = JSON.parse(exoInfo);
 </script>
@@ -25,57 +25,18 @@
 				<td><input size=1 type="number" min=0 max=10 step=1 value=5 name="shape">/10</td>
 			</tr>
 		</table>
-		<table id="exercises">
-			<h2>Exercises</h2>
-			<tr>
-				<h3>Exercise 1</h3>
-			</tr>
-			<tr>
-				<td>Name :</td>
-				<td>
-					<select name="name_1">
-						<?php
-							foreach ($exoInfo as $info) {
-								echo '<option value="' . $info['id'] . '">' . $info['name'] . '</option>';
-							}
-						?>
-					</select>
-				</td>
-			</tr>
-			<tr>
-				<td>Work load :</td>
-				<td><input size=1 type="number" min=0 value=10 name="workload_1">kg</td>
-			</tr>
-			<tr>
-				<td>Rest :</td>
-				<td><input type="number" min=10 step=10 value=60 name="rest_1">seconds</td>
-			</tr>
-			<tr>
-				<td>Number of sets :</td>
-				<td><input size=1 type="number" min=0 max=10 step=1 value=4 name="sets_1"></td>
-			</tr>
-				<td>Number of reps :</td>
-				<td><input size=1 type="number" min=0 max=100 step=1 value=10 name="reps_1"></td>
-			<tr>
-				<td>Method :</td>
-				<td><input type="text" name="method_1"></td>
-			</tr>
-		</table>
+		<table id="exercises"></table>
 		<input class="button" type="submit" value="Here is my new training!">
 	</form>
 
-	<button class="button" onclick="addExo(exoInfo)">
-		+ Add another exercise
+	<button class="button" onclick="addExo()">
+		(+) Add an exercise
 	</button>
 </div>
 
-<script>
-</script>
-
-<script src="http://localhost/nutricalc/Public/Assets/js/addexo.js" type="text/javascript"></script>
+<script src="http://localhost/nutricalc/Public/Assets/js/exo.js" type="text/javascript"></script>
 
 <?php
-	// $content contains the html content from ob_start so far
 	$content = ob_get_clean();
 	require ("template.php");
 ?>

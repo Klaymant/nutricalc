@@ -68,7 +68,7 @@
 	</form>
 
 	<button class="button" onclick="addExo()">
-		+ Add another exercise
+		(+) Add an exercise
 	</button>
 
 	<script src="http://localhost/nutricalc/Public/Assets/js/addexo.js" type="text/javascript"></script>

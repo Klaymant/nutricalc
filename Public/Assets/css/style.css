@@ -200,6 +200,36 @@ TRAINING
 	background: rgb(80, 80, 80);
 }
 
+/*
+** EXERCISES
+*/
+
+#exercises {
+	border: solid 2px rgb(50, 50, 50);
+	border-collapse: collapse;
+	background: white;
+}
+
+#exercises th {
+	color: white;
+	text-align: left;
+	background: rgb(50, 50, 50);
+}
+
+#exercises .exoField {
+	background: rgb(80, 80, 80);
+}
+
+#exercises input {
+	border: solid 3px rgb(95, 193, 104);
+	background: rgb(115, 213, 124);
+}
+
+#exercises select {
+	border: solid 3px rgb(95, 193, 104);
+	background: rgb(115, 213, 124);
+}
+
 /* ----------
 BUTTON
 ---------- */
@@ -214,7 +244,7 @@ input.button {
 
 button.button {
 	background: rgb(95, 193, 104);
-	border: 0px;
+	border: solid 2px rgb(75, 173, 84);
 	color: white;
 	border-radius: 10px;
 	padding: 5px;	
