@@ -25,7 +25,7 @@
 				<td><input size=1 type="number" min=0 max=10 step=1 value=5 name="shape">/10</td>
 			</tr>
 		</table>
-		<table id="exercises"></table>
+		<div id="exercises"></div>
 		<input class="button" type="submit" value="Here is my new training!">
 	</form>
 
