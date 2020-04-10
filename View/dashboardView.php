@@ -14,7 +14,7 @@
 	<table>
 		<thead>
 			<tr>
-				<th colspan=2>My needs</th>
+				<th colspan=2>My daily needs</th>
 			</tr>
 		</thead>
 		<tbody>

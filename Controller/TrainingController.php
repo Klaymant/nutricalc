@@ -36,6 +36,19 @@ class TrainingController {
         require_once("View/editTrainingView.php");
     }
 
+    public function checkForm($form) {
+        $errors = [];
+
+        foreach ($form as $field=>$value) {
+            if ($value == NULL) {
+                $fieldName = explode("_", $field)[0];
+                $fieldNumber = explode("_", $field)[1];
+                array_push($errors, ["fieldName"=>$fieldName, "fieldNumber"=>$fieldNumber]);
+            }
+        }
+        return $errors;
+    }
+
     public function getnewTrainingInfo() {
         $trainingMeta = ['date' => $_POST['date'], 'shape' => $_POST['shape']];
         $exos = $this->getExosAsArray($_POST);
@@ -54,9 +67,9 @@ class TrainingController {
     }
 
     public function updateTraining () {
-        $training = $this->getnewTrainingInfo();
-        $this->trainingRepo->updateTraining($_POST['trainingId'], $training);
-        header("Location: dashboard");
+            $training = $this->getnewTrainingInfo();
+            $this->trainingRepo->updateTraining($_POST['trainingId'], $training);
+            header("Location: dashboard");
     }
 
     public function getExosAsArray($array, $cutoff=2, $nbFields=6) {
@@ -66,6 +79,7 @@ class TrainingController {
         $i = 1;
 
         foreach ($array as $exoData) {
+            $exoData = $exoData == NULL ? 0 : $exoData;
             array_push($exo, $exoData);
             if ($i % $nbFields == 0) {
                 array_push($exoList, $exo);

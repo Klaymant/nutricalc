@@ -1,5 +1,6 @@
 function addExo () {
 	var table = document.createElement('table');
+	table.setAttribute("class", "exercise");
 	var content =
 	"<thead>" +
 		"<tr>" +
@@ -13,7 +14,7 @@ function addExo () {
 		"</tr>" +
 		"<tr>" +
 			"<td class='exoField'>Work load (kg)</td>" +
-			"<td><input size=1 type='number' min=0 value=10 name='work_load_" + exoNb + "'></td>" +
+			"<td><input size=1 type='number' min=0 value=10 name='workload_" + exoNb + "'></td>" +
 		"</tr>" +
 		"<tr>" +
 			"<td class='exoField'>Rest (seconds)</td>" +

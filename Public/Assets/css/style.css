@@ -230,6 +230,10 @@ TRAINING
 	background: rgb(115, 213, 124);
 }
 
+.exercise {
+	background: green;
+}
+
 /* ----------
 BUTTON
 ---------- */
