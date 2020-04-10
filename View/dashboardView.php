@@ -34,6 +34,9 @@
 				<td class="nutrient carbs">Carbs </td>
 				<td><span class="value"><?= round($user->getNutrient()->getCarbsNeeds(), 0) ?></span>g</td>
 			</tr>
+			<tr>
+				<td colspan=2>Your daily needs have been calculated thanks to <a href="<?= PATH::KERNEL ?>app/settings">your data</a>.</td>
+			</tr>
 		</tbody>
 	</table>
 </div>

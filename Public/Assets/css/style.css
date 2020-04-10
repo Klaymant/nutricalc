@@ -74,6 +74,28 @@ MENU
 	background: rgb(100, 100, 100);
 }
 
+#menu img {
+	height: 15px;
+	width: 15px;
+	padding-right: 10px;
+}
+
+#login a:visited, #login a:link{
+	background: rgb(95, 193, 104);
+}
+
+#login a:hover {
+	background: rgb(115, 213, 124);
+}
+
+#logout a:visited, #logout a:link{
+	background: rgb(220, 20, 60);
+}
+
+#logout a:hover {
+	background: rgb(250, 50, 90);
+}
+
 .content {
 	display: table;
 	font-size: 18px;
@@ -238,15 +260,7 @@ TRAINING
 BUTTON
 ---------- */
 
-input.button {
-	background: rgb(95, 193, 104);
-	border: 0px;
-	color: white;
-	border-radius: 10px;
-	padding: 5px;
-}
-
-button.button {
+button.button, input.button {
 	background: rgb(95, 193, 104);
 	border: solid 2px rgb(75, 173, 84);
 	color: white;
@@ -256,14 +270,15 @@ button.button {
 
 .button:visited, .button:link {
 	background: rgb(95, 193, 104);
-	border: 0px;
 	color: white;
 	border-radius: 10px;
 	padding: 5px;
+	text-decoration: none;
 }
 
 .button:hover {
 	background: rgb(115, 213, 124);
+	text-decoration: none;
 }
 
 .buttonDangerous:visited, .buttonDangerous:link {
@@ -275,18 +290,21 @@ button.button {
 
 .buttonDangerous:hover {
 	background: rgb(250, 50, 90);
+	text-decoration: none;
 }
 
 /* ----------
 LINKS
 ---------- */
 a:link, a:visited {
-	color: rgb(115, 213, 124);
+	background: rgb(115, 213, 124);
+	color: white;
 	text-decoration: none;
 }
 
 a:hover {
-	color: rgb(145, 243, 154);
+	text-decoration: underline;
+	background: rgb(145, 243, 154);
 }
 
 /* ----------
