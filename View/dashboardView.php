@@ -68,7 +68,7 @@
 			?>
 			<tfoot>
 				<tr>
-					<td><a class="button" href="<?= PATH::KERNEL ?>app/alltrainings">See all trainings</a></td>
+					<td><a class="button" href="<?= PATH::APP ?>/alltrainings">See all trainings</a></td>
 				</tr>
 				<tr>
 					<td><a class="button" href="addtraining">(+) Add a training</a></td>
