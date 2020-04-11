@@ -39,8 +39,8 @@
 	</tbody>
 </table>
 
-<a class="button" href="<?= PATH::KERNEL?>app/edittraining/<?= $training->getId() ?>">Edit</a>
-<a class="buttonDangerous" href="<?= PATH::KERNEL?>app/deletetraining/<?= $training->getId() ?>">Delete this training</a>
+<a class="button" href="<?= PATH::APP ?>/edittraining/<?= $training->getId() ?>">Edit</a>
+<a class="buttonDangerous" href="<?= PATH::APP ?>/deletetraining/<?= $training->getId() ?>">Delete this training</a>
 
 <?php
 	// $content contains the html content from ob_start so far

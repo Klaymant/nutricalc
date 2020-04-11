@@ -59,7 +59,7 @@ class TrainingController {
     public function saveTraining() {
         $trainingInfo = $this->getnewTrainingInfo();
     	$this->trainingRepo->addTraining($_SESSION['id'], $trainingInfo);
-    	header("Location: dashboard");
+    	header("Location: " . PATH::APP . "/dashboard");
     }
 
     public function deleteTraining($trainingId) {
@@ -70,7 +70,7 @@ class TrainingController {
     public function updateTraining () {
         $training = $this->getnewTrainingInfo();
         $this->trainingRepo->updateTraining($_POST['trainingId'], $training);
-        header("Location: dashboard");
+        header("Location: " . PATH::APP . "/dashboard");
     }
 
     public function getExosAsArray($array, $cutoff=2, $nbFields=6) {

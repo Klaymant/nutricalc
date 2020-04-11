@@ -47,6 +47,7 @@ MENU
 ---------- */
 #menu {
 	display: table;
+	margin-top: 10px;
 }
 
 #menu ul {
@@ -56,6 +57,7 @@ MENU
 
 #menu li {
 	float: left;
+	margin-right: 10px;
 }
 
 #menu a:link, #menu a:visited {
@@ -65,9 +67,10 @@ MENU
 	color: white;
 	font-family: 'Do Hyeon', sans-serif;
 	font-weight: bold;
-	font-size: 20px;
+	font-size: 23px;
 	padding: 10px;
-	border-bottom: solid 5px white;
+	border-radius: 10px;
+	border-bottom: solid 4px rgb(20, 20, 20);
 }
 
 #menu a:hover {
@@ -75,8 +78,8 @@ MENU
 }
 
 #menu img {
-	height: 12px;
-	width: 12px;
+	height: 15px;
+	width: 15px;
 	padding-right: 10px;
 }
 
@@ -104,7 +107,7 @@ MENU
 	background: rgb(80, 80, 80);
 	border: solid 2px rgb(100, 100, 100);
 	padding: 10px;
-	margin-top: 20px;
+	margin-top: 10px;
 	margin-bottom: 20px;
 }
 
@@ -119,8 +122,8 @@ DASHBOARD
 	display: inline-block;
 	background: rgb(230, 230, 230);
 	border: solid 2px rgb(100, 100, 100);
-	margin-top: 20px;
-	margin-bottom: 20px;
+	margin-top: 10px;
+	margin-bottom: 10px;
 	width: 15%;
 	height: 350px;
 }
@@ -267,9 +270,9 @@ BUTTON
 
 button.button, input.button {
 	background: rgb(95, 193, 104);
-	border: solid 2px rgb(75, 173, 84);
 	color: white;
 	border-radius: 10px;
+	border-bottom: solid 3px rgb(20, 20, 20);
 	padding: 5px;	
 }
 
@@ -277,6 +280,7 @@ button.button, input.button {
 	background: rgb(95, 193, 104);
 	color: white;
 	border-radius: 10px;
+	border-bottom: solid 3px rgb(20, 20, 20);
 	padding: 5px;
 	text-decoration: none;
 }
@@ -290,6 +294,7 @@ button.button, input.button {
 	background: rgb(220, 20, 60);
 	color: white;
 	border-radius: 10px;
+	border-bottom: solid 3px rgb(20, 20, 20);
 	padding: 5px;
 }
 

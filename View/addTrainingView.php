@@ -3,6 +3,8 @@
 	ob_start();
 	date_default_timezone_set('Europe/paris');
 	$today = date('yy-m-d');
+	require_once("Config/Path.php");
+	use Config\Path;
 ?>
 
 <script type="text/javascript">
@@ -37,7 +39,7 @@
 	</button>
 </div>
 
-<script src="http://localhost/nutricalc/Public/Assets/js/exo.js" type="text/javascript"></script>
+<script src="<?= PATH::JS ?>/exo.js" type="text/javascript"></script>
 
 <?php
 	$content = ob_get_clean();

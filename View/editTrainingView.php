@@ -44,7 +44,7 @@
 		(+) Add an exercise
 	</button>
 
-	<script src="http://localhost/nutricalc/Public/Assets/js/exo.js" type="text/javascript"></script>
+	<script src="<?= PATH::JS ?>/exo.js" type="text/javascript"></script>
 
 </div>
 

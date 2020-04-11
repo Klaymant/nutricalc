@@ -5,10 +5,12 @@ require_once('Model/UserRepository.php');
 require_once('Model/TrainingRepository.php');
 require_once('Model/User.php');
 require_once('Model/Training.php');
+require_once('Config/Path.php');
 use Model\UserRepository;
 use Model\TrainingRepository;
 use Model\User;
 use Model\Training;
+use Config\Path;
 
 class UserController {
     private $userRepo;
@@ -37,7 +39,6 @@ class UserController {
         $user = $this->userRepo->getUserById($_SESSION['id']);
         $user->calcAllNeeds();
         $mail = $this->userRepo->getMailById($_SESSION['id']);
-
         $trainings = $this->trainingRepo->makeLastTrainings($_SESSION['id'], 5);
         require_once("View/dashBoardView.php");
     }
@@ -57,7 +58,7 @@ class UserController {
             session_start();
             $_SESSION['id'] = $user['id'];
             $_SESSION['logged'] = true;
-            header("Location: dashboard");
+            header("Location: " . PATH::APP . "/dashboard");
         }
         else {
             $badLogin = true;
@@ -68,7 +69,7 @@ class UserController {
     public function logout() {
         $_SESSION['logged'] = false;
         session_write_close();
-        header ("Location: homepage");
+        header ("Location: " . PATH::APP . "/homepage");
     }
 
     public function changeData() {
@@ -79,7 +80,7 @@ class UserController {
     public function saveData() {
         $this->userRepo = new UserRepository();
         $user = $this->userRepo->saveData($_POST);
-        header("Location: dashboard");
+        header("Location: " . PATH::APP . "/dashboard");
     }
 
     public function newAccount()
