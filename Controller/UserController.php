@@ -52,7 +52,7 @@ class UserController {
 
     public function account() {
         $user = $this->userRepo->getUserByMail($_POST['mail']);
-        if ($user != NULL & $user['pwd'] == $_POST['pwd']) {
+        if ($user != NULL AND $user['pwd'] == $_POST['pwd']) {
             session_start();
             $_SESSION['id'] = $user['id'];
             $_SESSION['logged'] = true;

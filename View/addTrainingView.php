@@ -9,6 +9,9 @@
 	var exoNb = 1;
 	var exoInfo = <?php $exoInfoJs = json_encode($exoInfo); echo "'" . $exoInfoJs . "'"; ?>;
 	exoInfo = JSON.parse(exoInfo);
+	
+	var methodInfo = <?php $methodInfoJs = json_encode($methodInfo); echo "'" . $methodInfoJs . "'"; ?>;
+	methodInfo = JSON.parse(methodInfo);
 </script>
 
 <div class="content">

@@ -117,7 +117,7 @@ DASHBOARD
 
 .tile {
 	display: inline-block;
-	background: rgb(220, 220, 220);
+	background: rgb(230, 230, 230);
 	border: solid 2px rgb(100, 100, 100);
 	margin-top: 20px;
 	margin-bottom: 20px;
@@ -133,7 +133,7 @@ DASHBOARD
 .tile table thead {
 	background: rgb(80, 80, 80);
 	font-size: 22px;
-	color: white;
+	color: rgb(230, 230, 230);
 }
 
 .tile th {
@@ -155,15 +155,15 @@ DASHBOARD
 /* ----------
 NUTRIENTS
 ---------- */
-.calories {
-	background: rgb(91, 215, 91);
-}
-
 .nutrient {
 	font-size: 15px;
 	width: 30%;
-	color: white;
+	color: rgb(230, 230, 230);
 	font-weight: bold;
+}
+
+.calories {
+	background: rgb(91, 215, 91);
 }
 
 .proteins {
@@ -297,14 +297,13 @@ button.button, input.button {
 LINKS
 ---------- */
 a:link, a:visited {
-	background: rgb(115, 213, 124);
-	color: white;
+	color: rgb(115, 213, 124);
 	text-decoration: none;
+	font-weight: bold;
 }
 
 a:hover {
-	text-decoration: underline;
-	background: rgb(145, 243, 154);
+	color: rgb(145, 243, 154);
 }
 
 /* ----------

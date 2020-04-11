@@ -10,7 +10,7 @@ function addExo () {
 	"<tbody>" +
 		"<tr>" +
 			"<td class='exoField'>Name</td>" +
-			"<td>" + makeSelect() + "</td>" +
+			"<td>" + exoSelect() + "</td>" +
 		"</tr>" +
 		"<tr>" +
 			"<td class='exoField'>Work load (kg)</td>" +
@@ -30,7 +30,7 @@ function addExo () {
 		"</tr>" +
 		"<tr>" +
 			"<td class='exoField'>Method</td>" +
-			"<td><input size=1 type='text' name='method_" + exoNb + "'></td>" +
+			"<td>" + methodSelect() + "</td>" +
 		"</tr>" +
 	"</tbody>";
 
@@ -39,11 +39,22 @@ function addExo () {
 	exoNb += 1;
 }
 
-function makeSelect() {
+function exoSelect() {
 	var select = '<select name="name_' + exoNb + '">';
 	for(i=0; i<exoInfo.length; i++) {
 		select += '<option value="' + exoInfo[i]['id'] + '">' +
 		exoInfo[i]["name"] +
+		'</option>';
+	}
+	select += "</select>";
+	return select;
+}
+
+function methodSelect() {
+	var select = '<select name="method_' + exoNb + '">';
+	for(i=0; i<methodInfo.length; i++) {
+		select += '<option value="' + methodInfo[i]['id'] + '">' +
+		methodInfo[i]["name"] +
 		'</option>';
 	}
 	select += "</select>";

@@ -27,6 +27,7 @@ class TrainingController {
 
     public function showAddTraining() {
         $exoInfo = $this->trainingRepo->getAllExercisesInfo();
+        $methodInfo = $this->trainingRepo->getAllMethodsInfo();
     	require_once("View/addTrainingView.php");
     }
 
@@ -67,9 +68,9 @@ class TrainingController {
     }
 
     public function updateTraining () {
-            $training = $this->getnewTrainingInfo();
-            $this->trainingRepo->updateTraining($_POST['trainingId'], $training);
-            header("Location: dashboard");
+        $training = $this->getnewTrainingInfo();
+        $this->trainingRepo->updateTraining($_POST['trainingId'], $training);
+        header("Location: dashboard");
     }
 
     public function getExosAsArray($array, $cutoff=2, $nbFields=6) {
