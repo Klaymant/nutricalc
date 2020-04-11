@@ -152,6 +152,11 @@ DASHBOARD
 .tile tfoot td {
 }
 
+.userName {
+	color: rgb(115, 213, 124);
+	font-weight: bold;
+}
+
 /* ----------
 NUTRIENTS
 ---------- */

@@ -6,8 +6,8 @@
 ?>
 
 <div class="content">
-	<p>&#10077;<strong>Hello!</strong></p>
-	<p>What are you going to do <strong>today</strong> ?&#10078;</p>
+	<p>&#10077;<strong>Hello</strong> <span class="userName"><?= $mail['mail'] ?></span>!&#10078;</p>
+	<p>&#10077;What are you going to do <strong>today</strong> ?&#10078;</p>
 </div>
 
 <div class="tile" id="needs">

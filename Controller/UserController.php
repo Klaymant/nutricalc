@@ -36,6 +36,7 @@ class UserController {
     public function dashboard() {
         $user = $this->userRepo->getUserById($_SESSION['id']);
         $user->calcAllNeeds();
+        $mail = $this->userRepo->getMailById($_SESSION['id']);
 
         $trainings = $this->trainingRepo->makeLastTrainings($_SESSION['id'], 5);
         require_once("View/dashBoardView.php");

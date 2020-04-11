@@ -27,6 +27,11 @@ class UserRepository {
 		return new User($user['sex'], $user['age'], $user['height'], $user['weight'], $user['activity_name'], $user['goal_name'], $id, $user['mail'], $user['pwd']);
 	}
 
+	public function getMailById($userId) {
+		$query = "SELECT mail FROM user WHERE id=?";
+		return $this->sqlMaker->make($query, 'fetch', [$userId]);
+	}
+
 	public function createUser($mail, $pwd, $sex, $age, $height, $weight, $activity, $goal) {
 		$query = 'INSERT INTO user (height, weight, activity, goal, age) VALUES ("?", "?", "?", "?", "?")';
 		return $this->sqlMaker->make($query, NULL, [$height, $weight, $activity, $goal, $age]);
