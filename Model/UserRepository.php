@@ -1,20 +1,12 @@
 <?php
 namespace Model;
 
-require_once ('Utils/DbConnection.php');
-require_once ('Utils/SqlMaker.php');
+require_once ('Model/Repository.php');
 require_once ('Model/User.php');
-use Utils\DbConnection;
-use Utils\SqlMaker;
+use Model\Repository;
 use Model\User;
 
-class UserRepository {
-
-	private $sqlMaker;
-
-	function __construct() {
-		$this->sqlMaker = new SqlMaker();
-	}
+class UserRepository extends Repository {
 
 	public function getUserByMail($mail) {
 		$query = 'SELECT id, pwd FROM user WHERE mail=?';

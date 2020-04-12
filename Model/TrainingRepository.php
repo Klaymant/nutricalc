@@ -1,24 +1,16 @@
 <?php
 namespace Model;
 
-require_once ('Utils/DbConnection.php');
-require_once ('Utils/SqlMaker.php');
+require_once ('Model/Repository.php');
 require_once ('Model/User.php');
 require_once ('Model/Training.php');
 require_once ('Model/Exercise.php');
-use Utils\DbConnection;
-use Utils\SqlMaker;
+use Model\Repository;
 use Model\User;
 use Model\Training;
 use Model\Exercise;
 
-class TrainingRepository {
-
-	private $sqlMaker;
-
-	function __construct() {
-		$this->sqlMaker = new SqlMaker();
-	}
+class TrainingRepository extends Repository {
 
 	public function getTrainingsIds($userId) {
 		$query = $this->queryRouter('selectTrainingIds');
@@ -37,8 +29,6 @@ class TrainingRepository {
 	public function makeTrainingById($trainingId) {
 		$query = $this->queryRouter('makeTraining');
 		$training = $this->sqlMaker->make($query, 'fetchAll', [$trainingId]);
-/*		var_dump($training);
-		exit;*/
 		$exercises = $this->makeExoArray($training);
 		return new Training($exercises, $training[0]['date'], $training[0]['shape'], $training[0]['id']);
 	}

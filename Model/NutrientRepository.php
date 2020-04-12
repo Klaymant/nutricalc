@@ -1,16 +1,11 @@
 <?php
 namespace Model;
 
-require_once ('Utils/DbConnection.php');
+require_once ('Model/Repository.php');
 require_once ('Model/Nutrient.php');
-use Utils\DbConnection;
 use Model\Nutrient;
+use Model\Repository;
 
-class NutrientRepository {
-	private $pdo;
+class NutrientRepository extends Repository {
 
-	function __construct () {
-		$dbc = new DbConnection();
-		$this->pdo = $dbc->getPdo();
-	}
 }
