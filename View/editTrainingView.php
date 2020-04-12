@@ -1,28 +1,23 @@
 <!-- DOCTYPE HTML -->
 <?php
-	require_once("Config/Path.php");
-	use Config\Path;
 	ob_start();
 	date_default_timezone_set('Europe/paris');
 	$today = date('yy-m-d');
+	require_once("Config/Path.php");
+	use Config\Path;
 ?>
 
 <script type="text/javascript">
+	var exoNb = 1;
 	var exoInfo = <?php $exoInfoJs = json_encode($exoInfo); echo "'" . $exoInfoJs . "'"; ?>;
 	exoInfo = JSON.parse(exoInfo);
-	var exercises = <?php $exercisesJs = json_encode($training->getExercises()); echo "'" . $exercisesJs . "'"; ?>;
-	var exoNb = exercises.length + 1;
-	console.log(exercises);
-	console.log(exoNb);
+	
+	var methodInfo = <?php $methodInfoJs = json_encode($methodInfo); echo "'" . $methodInfoJs . "'"; ?>;
+	methodInfo = JSON.parse(methodInfo);
 </script>
 
 <div class="content">
-	<?php
-		if (isset($errors) AND count($errors) > 0) {
-			echo "ERROR!";
-		}
-	?>
-	<form action="<?= PATH::KERNEL?>app/updateTraining" method="post">
+	<form action="<?= PATH::APP?>/updateTraining" method="post">
 		<h1>Edit training</h1>
 		<h2>Info of the day</h2>
 		<table>

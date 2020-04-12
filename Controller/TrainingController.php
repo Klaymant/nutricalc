@@ -33,6 +33,7 @@ class TrainingController {
 
     public function showEditTraining($trainingId) {
         $exoInfo = $this->trainingRepo->getAllExercisesInfo();
+        $methodInfo = $this->trainingRepo->getAllMethodsInfo();
         $training = $this->trainingRepo->makeTrainingById($trainingId);
         require_once("View/editTrainingView.php");
     }
@@ -63,7 +64,7 @@ class TrainingController {
     }
 
     public function deleteTraining($trainingId) {
-        header("Location: " . PATH::KERNEL . "app/dashboard");
+        header("Location: " . PATH::APP . "/dashboard");
         $this->trainingRepo->deleteTraining($trainingId);
     }
 
