@@ -1,20 +1,27 @@
-/*
-COLOR CODES
-LEAF GREEN	: rgba(0, 255, 153)
-RAIN PURPLE	: rgba(160, 65, 255)
-RED LIGHT: rgba(255, 102, 102)
-BLUE TRELLO : rgba(0, 121, 191);
-*/
+:root {
+	/* colors used */
+	--LEAF_GREEN: rgb(115, 213, 124);
+	--LEAF_GREEN_LIGHTER: rgb(145, 243, 154);
+	--LEAF_GREEN_DARKER: rgb(95, 193, 104);
+	--SPACE_GREY: rgb(50, 50, 50);
+	--SPACE_GREY_LIGHTER: rgb(80, 80, 80);
+	--SPACE_GREY_LIGHTERER: rgb(100, 100, 100);
+	--DEEP_GREY: rgb(20, 20, 20);
+
+	--tile-bg-color: var(--SPACE_GREY_LIGHTER);
+	--main-bg-color: var(--SPACE_GREY);
+	--main-txt-color: black;
+}
 
 body {
-	background: rgb(50, 50, 50);
+	background: var(--main-bg-color);
 	font-family: 'Sen', sans-serif;
 	font-size: 22px;
-	color: black;
+	color: var(--main-txt-color);
 }
 
 header {
-	background: rgb(115, 213, 124);
+	background: var(--LEAF_GREEN);
 }
 
 form td {
@@ -28,7 +35,7 @@ TITLE
 	font-family: 'Libre Barcode 39 Text', 'Do Hyeon', sans-serif;
 	font-size: 50px;
 	padding-left: 10px;
-	color: rgb(50, 50, 50);
+	color: var(--SPACE_GREY);
 	text-decoration: none;
 }
 
@@ -38,7 +45,7 @@ SUBTITLE
 #subtitle {
 	font-size: 18px;
 	font-family: 'Do Hyeon', sans-serif;
-	color: rgb(50, 50, 50);
+	color: var(--SPACE_GREY);
 	padding-left: 5px;
 }
 
@@ -62,7 +69,7 @@ MENU
 
 #menu a:link, #menu a:visited {
 	display: block;
-	background: rgb(80, 80, 80);
+	background: var(--SPACE_GREY_LIGHTER);
 	text-decoration: none;
 	color: white;
 	font-family: 'Do Hyeon', sans-serif;
@@ -70,11 +77,11 @@ MENU
 	font-size: 23px;
 	padding: 10px;
 	border-radius: 10px;
-	border-bottom: solid 4px rgb(20, 20, 20);
+	border-bottom: solid 4px var(--DEEP_GREY);
 }
 
 #menu a:hover {
-	background: rgb(100, 100, 100);
+	background: var(--SPACE_GREY_LIGHTERER);
 }
 
 #menu img {
@@ -84,11 +91,11 @@ MENU
 }
 
 #login a:visited, #login a:link{
-	background: rgb(95, 193, 104);
+	background: var(--LEAF_GREEN_DARKER);
 }
 
 #login a:hover {
-	background: rgb(115, 213, 124);
+	background: var(--LEAF_GREEN);
 }
 
 #logout a:visited, #logout a:link{
@@ -104,8 +111,8 @@ MENU
 	font-size: 18px;
 	width: 100%;
 	color: white;
-	background: rgb(80, 80, 80);
-	border: solid 2px rgb(100, 100, 100);
+	background: var(--SPACE_GREY_LIGHTER);
+	border: solid 2px var(--SPACE_GREY_LIGHTERER);
 	padding: 10px;
 	margin-top: 10px;
 	margin-bottom: 20px;
@@ -121,7 +128,7 @@ DASHBOARD
 .tile {
 	display: inline-block;
 	background: rgb(230, 230, 230);
-	border: solid 2px rgb(100, 100, 100);
+	border: solid 2px var(--SPACE_GREY_LIGHTERER);
 	margin-top: 10px;
 	margin-bottom: 10px;
 	width: 15%;
@@ -134,7 +141,7 @@ DASHBOARD
 }
 
 .tile table thead {
-	background: rgb(80, 80, 80);
+	background: var(--tile-bg-color);
 	font-size: 22px;
 	color: rgb(230, 230, 230);
 }
@@ -152,11 +159,8 @@ DASHBOARD
 	padding-left: 10px;
 }
 
-.tile tfoot td {
-}
-
 .userName {
-	color: rgb(115, 213, 124);
+	color: var(--LEAF_GREEN);
 	font-weight: bold;
 }
 
@@ -191,10 +195,10 @@ TRAINING
 ---------- */
 
 .training {
-	background: rgb(50, 50, 50);
+	background: var(--main-bg-color);
 	margin-top: 20px;
 	margin-bottom: 20px;
-	border: solid 5px rgb(115, 213, 124);
+	border: solid 5px var(--LEAF_GREEN);
 	border-collapse: collapse;
 }
 
@@ -203,7 +207,7 @@ TRAINING
 }
 
 .training th {
-	background: rgb(115, 213, 124);
+	background: var(--LEAF_GREEN);
 }
 
 .training .exo {
@@ -221,7 +225,7 @@ TRAINING
 }
 
 .training .exoName {
-	color: rgb(115, 213, 124);
+	color: var(--LEAF_GREEN);
 	background: white;
 	font-weight: bold;
 }
@@ -235,7 +239,7 @@ TRAINING
 */
 
 #exercises table {
-	border: solid 2px rgb(50, 50, 50);
+	border: solid 2px var(--main-bg-color);
 	border-collapse: collapse;
 	background: white;
 }
@@ -243,25 +247,21 @@ TRAINING
 #exercises table th {
 	color: white;
 	text-align: left;
-	background: rgb(50, 50, 50);
+	background: var(--main-bg-color);
 }
 
 #exercises table .exoField {
-	background: rgb(80, 80, 80);
+	background: var(--SPACE_GREY_LIGHTER);
 }
 
 #exercises input {
-	border: solid 3px rgb(95, 193, 104);
-	background: rgb(115, 213, 124);
+	border: solid 3px var(--LEAF_GREEN_DARKER);
+	background: var(--LEAF_GREEN);
 }
 
 #exercises table select {
-	border: solid 3px rgb(95, 193, 104);
-	background: rgb(115, 213, 124);
-}
-
-.exercise {
-	background: green;
+	border: solid 3px var(--LEAF_GREEN_DARKER);
+	background: var(--LEAF_GREEN);
 }
 
 /* ----------
@@ -269,24 +269,24 @@ BUTTON
 ---------- */
 
 button.button, input.button {
-	background: rgb(95, 193, 104);
+	background: var(--LEAF_GREEN);
 	color: white;
 	border-radius: 10px;
-	border-bottom: solid 3px rgb(20, 20, 20);
+	border-bottom: solid 3px var(--DEEP_GREY);
 	padding: 5px;	
 }
 
 .button:visited, .button:link {
-	background: rgb(95, 193, 104);
+	background: var(--LEAF_GREEN_DARKER);
 	color: white;
 	border-radius: 10px;
-	border-bottom: solid 3px rgb(20, 20, 20);
+	border-bottom: solid 3px var(--DEEP_GREY);
 	padding: 5px;
 	text-decoration: none;
 }
 
 .button:hover {
-	background: rgb(115, 213, 124);
+	background: var(--LEAF_GREEN);
 	text-decoration: none;
 }
 
@@ -294,7 +294,7 @@ button.button, input.button {
 	background: rgb(220, 20, 60);
 	color: white;
 	border-radius: 10px;
-	border-bottom: solid 3px rgb(20, 20, 20);
+	border-bottom: solid 3px var(--DEEP_GREY);
 	padding: 5px;
 }
 
@@ -307,13 +307,13 @@ button.button, input.button {
 LINKS
 ---------- */
 a:link, a:visited {
-	color: rgb(115, 213, 124);
+	color: var(--LEAF_GREEN);
 	text-decoration: none;
 	font-weight: bold;
 }
 
 a:hover {
-	color: rgb(145, 243, 154);
+	color: var(--LEAF_GREEN_LIGHTER);
 }
 
 /* ----------
@@ -321,7 +321,7 @@ FOOTER
 ---------- */
 footer {
 	font-family: 'Do Hyeon', sans-serif;
-	background: rgb(95, 193, 104);
+	background: var(--LEAF_GREEN);
 	border-radius: 10px;
 	color: white;
 	font-size: 18px;

@@ -4,7 +4,7 @@ namespace Model;
 require_once ('Utils/SqlMaker.php');
 use Utils\SqlMaker;
 
-class Repository {
+abstract class Repository {
 	protected $sqlMaker;
 
 	function __construct() {
