@@ -3,14 +3,20 @@
 	--LEAF_GREEN: rgb(115, 213, 124);
 	--LEAF_GREEN_LIGHTER: rgb(145, 243, 154);
 	--LEAF_GREEN_DARKER: rgb(95, 193, 104);
+	--SPACE_GREY_DARKER: rgb(35, 35, 35);
 	--SPACE_GREY: rgb(50, 50, 50);
 	--SPACE_GREY_LIGHTER: rgb(80, 80, 80);
 	--SPACE_GREY_LIGHTERER: rgb(100, 100, 100);
-	--DEEP_GREY: rgb(20, 20, 20);
+	--DEEP_GREY: rgb(25, 25, 25);
+	--DEEP_GREY_DARKER: rgb(10, 10, 10);
 
-	--tile-bg-color: var(--SPACE_GREY_LIGHTER);
-	--main-bg-color: var(--SPACE_GREY);
+	--menu-icon-size: 25px;
+	--tile-bg-color: var(--SPACE_GREY_DARKER);
+	--main-bg-color: var(--SPACE_GREY_DARKER);
 	--main-txt-color: black;
+	--second-txt-color: white;
+	--header-bg-color: var(--DEEP_GREY);
+	--footer-bg-color: var(--DEEP_GREY);
 }
 
 body {
@@ -21,11 +27,25 @@ body {
 }
 
 header {
-	background: var(--LEAF_GREEN);
+	background: var(--header-bg-color);
+	border-bottom: solid 4px var(--LEAF_GREEN);
+	padding-top: 10px;
+	padding-bottom: 10px;
+	text-align: center;
+}
+
+form table {
+	margin-left: auto;
+	margin-right: auto;
 }
 
 form td {
-	color: white;
+	color: var(--second-txt-color);
+}
+
+#needs table {
+	margin: 0 auto;
+	color: var(--second-txt-color);
 }
 
 /* ----------
@@ -33,9 +53,9 @@ TITLE
 ---------- */
 #website_title:visited, #website_title:link {
 	font-family: 'Libre Barcode 39 Text', 'Do Hyeon', sans-serif;
-	font-size: 50px;
+	font-size: 40px;
 	padding-left: 10px;
-	color: var(--SPACE_GREY);
+	color: var(--LEAF_GREEN);
 	text-decoration: none;
 }
 
@@ -43,9 +63,9 @@ TITLE
 SUBTITLE
 ---------- */
 #subtitle {
-	font-size: 18px;
+	font-size: 12px;
 	font-family: 'Do Hyeon', sans-serif;
-	color: var(--SPACE_GREY);
+	color: var(--second-txt-color);
 	padding-left: 5px;
 }
 
@@ -76,7 +96,7 @@ MENU
 	color: white;
 	font-family: 'Do Hyeon', sans-serif;
 	font-weight: bold;
-	font-size: 23px;
+	font-size: 18px;
 	padding: 10px;
 	border-radius: 10px;
 	border-bottom: solid 4px var(--DEEP_GREY);
@@ -87,9 +107,10 @@ MENU
 }
 
 #menu img {
-	height: 15px;
-	width: 15px;
+	height: var(--menu-icon-size);
+	width: var(--menu-icon-size);
 	padding-right: 10px;
+	vertical-align: middle;
 }
 
 #login a:visited, #login a:link{
@@ -108,15 +129,22 @@ MENU
 	background: rgb(250, 50, 90);
 }
 
+/* ----------
+CONTENT
+---------- */
+
 .content {
 	display: table;
 	font-size: 18px;
 	width: 50%;
 	color: white;
 	background: var(--SPACE_GREY_LIGHTER);
-	border: solid 2px var(--SPACE_GREY_LIGHTERER);
+	border: solid 2px var(--LEAF_GREEN);
+	border-radius: 10px;
 	padding: 10px;
 	margin: 0 auto;
+	margin-bottom: 20px;
+	text-align: center;
 }
 
 /* ----------
@@ -130,10 +158,11 @@ DASHBOARD
 	display: block;
 	background: rgb(230, 230, 230);
 	border: solid 2px var(--SPACE_GREY_LIGHTERER);
+	border-radius: 10px;
 	margin: 0 auto;
 	margin-top: 10px;
 	margin-bottom: 10px;
-	width: 25%;
+	width: 50%;
 	height: 350px;
 }
 
@@ -144,7 +173,7 @@ DASHBOARD
 
 .tile table thead {
 	background: var(--tile-bg-color);
-	font-size: 22px;
+	font-size: 18px;
 	color: rgb(230, 230, 230);
 }
 
@@ -171,7 +200,7 @@ NUTRIENTS
 ---------- */
 .nutrient {
 	font-size: 15px;
-	width: 30%;
+	width: 20%;
 	color: rgb(230, 230, 230);
 	font-weight: bold;
 }
@@ -267,6 +296,14 @@ TRAINING
 }
 
 /* ----------
+SETTINGS
+---------- */
+
+#data .attribute {
+	width: 20%;
+}
+
+/* ----------
 BUTTON
 ---------- */
 
@@ -323,10 +360,12 @@ FOOTER
 ---------- */
 footer {
 	font-family: 'Do Hyeon', sans-serif;
-	background: var(--LEAF_GREEN);
-	border-radius: 10px;
-	color: white;
+	background: var(--footer-bg-color);
+	border-top: solid 4px var(--LEAF_GREEN);
+	color: var(--second-txt-color);
 	font-size: 18px;
 	margin-top: 10px;
+	padding-top: 15px;
+	padding-bottom: 15px;
 	text-align: center;
 }

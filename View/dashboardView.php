@@ -10,6 +10,7 @@
 	<p>&#10077;What are you going to do <strong>today</strong> ?&#10078;</p>
 </div>
 
+<div class="content">
 	<div class="tile" id="needs">
 		<table>
 			<thead>
@@ -77,6 +78,7 @@
 			</tbody>
 		</table>
 	</div>
+</div>
 
 <?php
 	// $content contains the html content from ob_start so far
