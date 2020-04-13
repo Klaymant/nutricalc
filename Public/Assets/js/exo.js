@@ -4,7 +4,6 @@ function addExo () {
 	var content = getContent();
 	var removeButton = '<input type="button" class="buttonDangerous" id="removeExoButton_' + exoNb + '"' + 'value="(-) Remove this exercise" onclick="removeExo()">';
 	
-
 	table.setAttribute("class", "exercise");
 	table.setAttribute("id", "exo" + exoNb);
 	table.innerHTML = content + removeButton;
@@ -73,7 +72,6 @@ function methodSelect() {
 }
 
 function removeExo() {
-	var actualExoNb = ;
 	var exercisesElement = document.getElementById("exercises");
 	var exo = document.getElementById("exo" + actualExoNb);
 	exercisesElement.removeChild(exo);

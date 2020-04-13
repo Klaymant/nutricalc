@@ -35,10 +35,12 @@
 					<td class="nutrient carbs">Carbs </td>
 					<td><span class="value"><?= round($user->getNutrient()->getCarbsNeeds(), 0) ?></span>g</td>
 				</tr>
-				<tr>
-					<td colspan=2>Your daily needs have been calculated thanks to <a href="<?= PATH::KERNEL ?>app/settings">your data</a>.</td>
-				</tr>
-			</tbody>
+				</tbody>
+				<tfoot>
+					<tr>
+						<td colspan=2>Your daily needs have been calculated thanks to <a href="<?= PATH::KERNEL ?>app/settings">your data</a>.</td>
+					</tr>
+				</tfoot>
 		</table>
 	</div>
 
@@ -67,14 +69,12 @@
 						echo '</tr>';
 					}
 				?>
-				<tfoot>
-					<tr>
-						<td><a class="button" href="<?= PATH::APP ?>/alltrainings">See all trainings</a></td>
-					</tr>
-					<tr>
-						<td><a class="button" href="addtraining">(+) Add a training</a></td>
-					</tr>
-				</tfoot>
+				<tr>
+					<td><a class="button" href="<?= PATH::APP ?>/alltrainings">See all trainings</a></td>
+				</tr>
+				<tr>
+					<td><a class="button" href="addtraining">(+) Add a training</a></td>
+				</tr>
 			</tbody>
 		</table>
 	</div>

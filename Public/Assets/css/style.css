@@ -3,6 +3,7 @@
 	--LEAF_GREEN: rgb(115, 213, 124);
 	--LEAF_GREEN_LIGHTER: rgb(145, 243, 154);
 	--LEAF_GREEN_DARKER: rgb(95, 193, 104);
+	--LIGHT-GREY: rgb(200, 200, 200);
 	--SPACE_GREY_DARKER: rgb(35, 35, 35);
 	--SPACE_GREY: rgb(50, 50, 50);
 	--SPACE_GREY_LIGHTER: rgb(80, 80, 80);
@@ -10,9 +11,10 @@
 	--DEEP_GREY: rgb(25, 25, 25);
 	--DEEP_GREY_DARKER: rgb(10, 10, 10);
 
+	--tile-bg-color: var(--LIGHT-GREY);
 	--menu-icon-size: 25px;
 	--tile-bg-color: var(--SPACE_GREY_DARKER);
-	--main-bg-color: var(--SPACE_GREY_DARKER);
+	--main-bg-color: var(--SPACE_GREY);
 	--main-txt-color: black;
 	--second-txt-color: white;
 	--header-bg-color: var(--DEEP_GREY);
@@ -28,7 +30,7 @@ body {
 
 header {
 	background: var(--header-bg-color);
-	border-bottom: solid 4px var(--LEAF_GREEN);
+	border-bottom: solid 2px var(--LEAF_GREEN);
 	padding-top: 10px;
 	padding-bottom: 10px;
 	text-align: center;
@@ -156,24 +158,26 @@ DASHBOARD
 
 .tile {
 	display: block;
-	background: rgb(230, 230, 230);
+	background: var(--tile-bg-color);
 	border: solid 2px var(--SPACE_GREY_LIGHTERER);
 	border-radius: 10px;
 	margin: 0 auto;
 	margin-top: 10px;
 	margin-bottom: 10px;
 	width: 50%;
-	height: 350px;
+	/*height: 350px;*/
 }
 
 .tile table {
 	border-collapse: collapse;
 	width: 100%;
+	color: rgb(230, 230, 230)
 }
 
 .tile table thead {
 	background: var(--tile-bg-color);
 	font-size: 18px;
+	font-weight: bold;
 	color: rgb(230, 230, 230);
 }
 
@@ -188,6 +192,10 @@ DASHBOARD
 .tile td {
 	height: 30px;
 	padding-left: 10px;
+}
+
+.tile tfoot {
+	background: var(--SPACE_GREY_LIGHTER);
 }
 
 .userName {
@@ -206,19 +214,19 @@ NUTRIENTS
 }
 
 .calories {
-	background: rgb(91, 215, 91);
+	background: rgba(71, 195, 71, 0.75);
 }
 
 .proteins {
-	background: rgb(178, 34, 34);
+	background: rgba(178, 34, 34, 0.75);
 }
 
 .fat {
-	background: rgb(218, 165, 32);
+	background: rgba(218, 165, 32, 0.75);
 }
 
 .carbs {
-	background: rgb(30, 144, 255);
+	background: rgba(30, 144, 255, 0.75);
 }
 
 /* ----------
@@ -272,7 +280,7 @@ TRAINING
 #exercises table {
 	border: solid 2px var(--main-bg-color);
 	border-collapse: collapse;
-	background: white;
+	background: var(--SPACE_GREY_LIGHTER);
 }
 
 #exercises table th {
@@ -361,7 +369,7 @@ FOOTER
 footer {
 	font-family: 'Do Hyeon', sans-serif;
 	background: var(--footer-bg-color);
-	border-top: solid 4px var(--LEAF_GREEN);
+	border-top: solid 2px var(--LEAF_GREEN);
 	color: var(--second-txt-color);
 	font-size: 18px;
 	margin-top: 10px;
