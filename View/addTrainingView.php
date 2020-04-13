@@ -31,12 +31,9 @@
 			</tr>
 		</table>
 		<div id="exercises"></div>
-		<input class="button" type="submit" value="Here is my new training!">
+		<input type="button" class="button" id="addExoButton" value="(+) Add an exercise" onclick="addExo()"> </br></br>
+		<input type="submit" class="button" value="Here is my new training!">
 	</form>
-
-	<button class="button" onclick="addExo()">
-		(+) Add an exercise
-	</button>
 </div>
 
 <script src="<?= PATH::JS ?>/exo.js" type="text/javascript"></script>

@@ -54,7 +54,9 @@ MENU
 ---------- */
 #menu {
 	display: table;
+	margin: 0 auto;
 	margin-top: 10px;
+	margin-bottom: 10px;
 }
 
 #menu ul {
@@ -109,13 +111,12 @@ MENU
 .content {
 	display: table;
 	font-size: 18px;
-	width: 100%;
+	width: 50%;
 	color: white;
 	background: var(--SPACE_GREY_LIGHTER);
 	border: solid 2px var(--SPACE_GREY_LIGHTERER);
 	padding: 10px;
-	margin-top: 10px;
-	margin-bottom: 20px;
+	margin: 0 auto;
 }
 
 /* ----------
@@ -126,12 +127,13 @@ DASHBOARD
 }
 
 .tile {
-	display: inline-block;
+	display: block;
 	background: rgb(230, 230, 230);
 	border: solid 2px var(--SPACE_GREY_LIGHTERER);
+	margin: 0 auto;
 	margin-top: 10px;
 	margin-bottom: 10px;
-	width: 15%;
+	width: 25%;
 	height: 350px;
 }
 
