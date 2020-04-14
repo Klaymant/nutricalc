@@ -1,12 +1,20 @@
 function addExo () {
 	var table = document.createElement('table');
+	var content = getContent();
+
+	table.setAttribute("id", "exo_" + exoNb);
 	table.setAttribute("class", "exercise");
+
+	var removeExoId = "rmv_" + exoNb;
+	var removeButton = "<input type='button' id='" + removeExoId + "' value='(-) Remove this exo' onclick='removeExo(this.id)'>";
+
+	table.innerHTML = content + removeButton;
+	document.getElementById("exercises").appendChild(table);
+	exoNb += 1;
+}
+
+function getContent() {
 	var content =
-	"<thead>" +
-		"<tr>" +
-			"<th colspan=2>Exercise n°" + exoNb + "</th>" +
-		"</tr>" +
-	"</thead>" +
 	"<tbody>" +
 		"<tr>" +
 			"<td class='exoField'>Name</td>" +
@@ -33,10 +41,7 @@ function addExo () {
 			"<td>" + methodSelect() + "</td>" +
 		"</tr>" +
 	"</tbody>";
-
-	table.innerHTML = content;
-	document.getElementById("exercises").appendChild(table);
-	exoNb += 1;
+	return content;
 }
 
 function exoSelect() {
@@ -61,5 +66,9 @@ function methodSelect() {
 	return select;
 }
 
-function removeExo() {
+function removeExo(id) {
+	var actualExoNb = id.slice(4);
+	var exoToRmv = document.getElementById("exo_" + actualExoNb);
+	var exoDiv = document.getElementById("exercises");
+	exoDiv.removeChild(exoToRmv);
 }
