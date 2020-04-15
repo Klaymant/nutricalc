@@ -54,7 +54,7 @@ class UserController {
 
     public function account() {
         $user = $this->userRepo->getUserByMail($_POST['mail']);
-        if ($user != NULL AND $user['pwd'] == $_POST['pwd']) {
+        if ($user != NULL AND password_verify($_POST['pwd'], $user['pwd'])) {
             session_start();
             $_SESSION['id'] = $user['id'];
             $_SESSION['logged'] = true;
@@ -73,7 +73,6 @@ class UserController {
     }
 
     public function changeData() {
-        //$user = $this->userRepo->getUserById($_SESSION['id']);
         require_once("View/accountView.php");
     }
 
@@ -83,8 +82,7 @@ class UserController {
         header("Location: " . PATH::APP . "/dashboard");
     }
 
-    public function newAccount()
-    {
+    public function newAccount() {
         require_once("View/newAccountView.php");
     }
 
@@ -94,7 +92,8 @@ class UserController {
             require_once("View/newAccountView.php");
         }
         else {
-            $user = $this->userRepo->createAccount($_POST);
+            $data = ['mail'=>$_POST['mail'], 'pwd'=>password_hash($_POST['pwd'], PASSWORD_DEFAULT)];
+            $user = $this->userRepo->createAccount($data);
             require_once("View/accountView.php");
         }
     }
