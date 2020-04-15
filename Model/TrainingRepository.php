@@ -17,7 +17,7 @@ class TrainingRepository extends Repository {
 		return $this->sqlMaker->make($query, 'fetchAll', [$userId]);
 	}
 
-	public function makeExoArray($training) {
+	public function makeExercises($training) {
 		$exercises = [];
 
 		foreach ($training AS $exo) {
@@ -26,10 +26,32 @@ class TrainingRepository extends Repository {
 		return $exercises;
 	}
 
+	public function makeExercisesAsArray($training) {
+		$exercises = [];
+
+		foreach ($training AS $exo) {
+			array_push($exercises,
+				['exoName'=>$exo['exoName'],
+				'workLoad'=>$exo['work_load'],
+				'rest'=>$exo['rest'],
+				'nbSets'=>$exo['nb_sets'],
+				'nbReps'=>$exo['nb_reps'],
+				'method'=>$exo['methodName']]);
+		}
+		return $exercises;
+	}
+
+	public function makeTrainingByIdAsArray($trainingId) {
+		$query = $this->queryRouter('makeTraining');
+		$training = $this->sqlMaker->make($query, 'fetchAll', [$trainingId]);
+		$exercises = $this->makeExercisesAsArray($training);
+		return ['exercises'=>$exercises, 'date'=>$training[0]['date'], 'shape'=>$training[0]['shape'], 'id'=>$training[0]['id']];
+	}
+
 	public function makeTrainingById($trainingId) {
 		$query = $this->queryRouter('makeTraining');
 		$training = $this->sqlMaker->make($query, 'fetchAll', [$trainingId]);
-		$exercises = $this->makeExoArray($training);
+		$exercises = $this->makeExercises($training);
 		return new Training($exercises, $training[0]['date'], $training[0]['shape'], $training[0]['id']);
 	}
 

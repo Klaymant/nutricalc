@@ -34,7 +34,7 @@ class TrainingController {
     public function showEditTraining($trainingId) {
         $exoInfo = $this->trainingRepo->getAllExercisesInfo();
         $methodInfo = $this->trainingRepo->getAllMethodsInfo();
-        $training = $this->trainingRepo->makeTrainingById($trainingId);
+        $training = $this->trainingRepo->makeTrainingByIdAsArray($trainingId);
         require_once("View/editTrainingView.php");
     }
 

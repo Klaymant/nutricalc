@@ -68,4 +68,20 @@ class Exercise {
 	public function setMethod($method) {
 		$this->method = $method;
 	}
+
+	public function jsonSerialize($fields=NULL)
+    {
+    	$vars = array();
+    	if ($fields == NULL) {
+        	$vars = get_object_vars($this);
+        }
+        else {
+        	foreach ($fields as $elem) {
+        		if (property_exists($this, $elem)) {
+        			array_push($vars, array($elem, $this->$elem));
+        		}
+        	}
+        }
+        return $vars;
+    }
 }

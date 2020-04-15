@@ -4,11 +4,11 @@ namespace Model;
 class Training {
 	private $date;
 	private $shape;
-	private $exercices;
+	private $exercises;
 	private $id;
 
-	function __construct($exercices, $date=NULL, $shape=NULL, $id=NULL) {
-		$this->exercices = $exercices;
+	function __construct($exercises, $date=NULL, $shape=NULL, $id=NULL) {
+		$this->exercises = $exercises;
 		$this->date = $date;
 		$this->shape = $shape;
 		$this->id = $id;
@@ -24,7 +24,7 @@ class Training {
 	}
 
 	public function getExercises() {
-		return $this->exercices;
+		return $this->exercises;
 	}
 
 	public function getId() {
@@ -43,4 +43,20 @@ class Training {
 	public function setExercises($exercices) {
 		return $this->exercices = $exercices;
 	}
+
+	public function jsonSerialize($fields=NULL)
+    {
+    	$vars = array();
+    	if ($fields == NULL) {
+        	$vars = get_object_vars($this);
+        }
+        else {
+        	foreach ($fields as $elem) {
+        		if (property_exists($this, $elem)) {
+        			array_push($vars, array($elem, $this->$elem));
+        		}
+        	}
+        }
+        return $vars;
+    }
 }

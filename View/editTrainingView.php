@@ -14,7 +14,20 @@
 	
 	var methodInfo = <?php $methodInfoJs = json_encode($methodInfo); echo "'" . $methodInfoJs . "'"; ?>;
 	methodInfo = JSON.parse(methodInfo);
+
+	var exercises = <?php $exercisesJs = json_encode($training['exercises']); echo "'" . $exercisesJs . "'"; ?>;
+	exercises = JSON.parse(exercises);
 </script>
+
+<script src="<?= PATH::JS ?>/exo.js" type="text/javascript"></script>
+
+<?php
+	function displayExos($exercises) {
+		foreach ($exercises as $exo) {
+			echo "<script type='text/javascript'>displayExos();</script>";
+		}
+	}
+?>
 
 <div class="content">
 	<form action="<?= PATH::APP?>/updateTraining" method="post">
@@ -30,7 +43,11 @@
 				<td><input size=1 type="number" min=0 max=10 step=1 value=5 name="shape">/10</td>
 			</tr>
 		</table>
-		<div id="exercises"></div>
+		<div id="exercises">
+			<?php
+				displayExos($training['exercises']);
+			?>
+		</div>
 		<input class="button" type="submit" value="Modifications made!">
 		<input type="hidden" id="trainingId" name="trainingId" value=<?= $trainingId ?>>
 	</form>
@@ -40,7 +57,6 @@
 	</button>
 
 	<script src="<?= PATH::JS ?>/exo.js" type="text/javascript"></script>
-
 </div>
 
 <?php
