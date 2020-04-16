@@ -152,7 +152,7 @@ function getIdFromExoName(exoName) {
 
 function exoSelect() {
 	var select = '<select name="exoName_' + exoNb + '">';
-	for(i=0; i<exoInfo.length; i++) {
+	for (i=0; i<exoInfo.length; i++) {
 		select += '<option value="' + exoInfo[i]['id'] + '">' +
 		exoInfo[i]["name"] +
 		'</option>';
