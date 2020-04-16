@@ -77,14 +77,13 @@ function getIdFromMethodName(methodName) {
 
 function exoExistingSelect() {
 	var actualExoName = exercises[exoNb-1]['exoName'];
-	var exoId = getIdFromExoName(actualExoName);
 	var select = '<select name="name_' + exoNb + '">';
 
 	for (i=0; i<exoInfo.length; i++) {
 		var selected = '';
 		if (actualExoName == exoInfo[i]['name']) {
 			selected = ' selected';
-		};
+		}
 		select += '<option value="' + exoInfo[i]['id'] + '"' + selected +'>' +
 		exoInfo[i]["name"] +
 		'</option>';
@@ -95,7 +94,6 @@ function exoExistingSelect() {
 
 function methodExistingSelect() {
 	var actualMethod = exercises[exoNb-1]['method']
-	var methodId = getIdFromMethodName(actualMethod);
 	var select = '<select name="method_' + exoNb + '">';
 	console.log("Actual method : " + actualMethod);
 
@@ -104,7 +102,7 @@ function methodExistingSelect() {
 		if (actualMethod == methodInfo[i]['name']) {
 			console.log(methodInfo[i]['name']);
 			selected = ' selected';
-		};
+		}
 		select += '<option value="' + methodInfo[i]['id'] + '"' + selected +'>' +
 		methodInfo[i]["name"] +
 		'</option>';
