@@ -198,7 +198,7 @@ class User {
         $this->nutrient->setCarbsNeeds($this->carbsNeeds());
     }
 
-    public function jsonSerialize($fields)
+    public function jsonSerialize($fields=NULL)
     {
     	$vars = array();
     	if ($fields == NULL) {

@@ -13,7 +13,7 @@
 	$action = $routeur->route();
 	if ($action[1] == "404") {
 		echo '404 NOT FOUND';
-		exit;
+		exit; //you need to implement this with something else than an exit
 	}
     $controllerName = $action[0];
 	$methodName = $action[1];
