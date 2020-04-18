@@ -45,7 +45,6 @@ class User {
 		return $this->pwd;
 	}
 
-
 	public function getAge() {
 		return $this->age;
 	}

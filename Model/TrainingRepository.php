@@ -5,15 +5,17 @@ require_once ('Model/Repository.php');
 require_once ('Model/User.php');
 require_once ('Model/Training.php');
 require_once ('Model/Exercise.php');
+require_once ('Utils/SqlShortcut.php');
 use Model\Repository;
 use Model\User;
 use Model\Training;
 use Model\Exercise;
+use Utils\SqlTrainingShortcut;
 
 class TrainingRepository extends Repository {
 
 	public function getTrainingsIds($userId) {
-		$query = $this->queryRouter('selectTrainingIds');
+		$query = SqlTrainingShortcut::SELECT_TRAININGS_IDS;
 		return $this->sqlMaker->make($query, 'fetchAll', [$userId]);
 	}
 
@@ -21,7 +23,7 @@ class TrainingRepository extends Repository {
 		$exercises = [];
 
 		foreach ($training AS $exo) {
-			array_push($exercises, new Exercise($exo['exoName'], $exo['work_load'], $exo['rest'], $exo['nb_sets'], $exo['nb_reps'], $exo['methodName']));
+			array_push($exercises, new Exercise($exo['exo_c_name'], $exo['exo_p_work_load'], $exo['exo_p_rest'], $exo['exo_p_nb_sets'], $exo['exo_p_nb_reps'], $exo['m_name']));
 		}
 		return $exercises;
 	}
@@ -31,28 +33,28 @@ class TrainingRepository extends Repository {
 
 		foreach ($training AS $exo) {
 			array_push($exercises,
-				['exoName'=>$exo['exoName'],
-				'workLoad'=>$exo['work_load'],
-				'rest'=>$exo['rest'],
-				'nbSets'=>$exo['nb_sets'],
-				'nbReps'=>$exo['nb_reps'],
-				'method'=>$exo['methodName']]);
+				['exoName'=>$exo['exo_c_name'],
+				'workLoad'=>$exo['exo_p_work_load'],
+				'rest'=>$exo['exo_p_rest'],
+				'nbSets'=>$exo['exo_p_nb_sets'],
+				'nbReps'=>$exo['exo_p_nb_reps'],
+				'method'=>$exo['m_name']]);
 		}
 		return $exercises;
 	}
 
 	public function makeTrainingByIdAsArray($trainingId) {
-		$query = $this->queryRouter('makeTraining');
+		$query = SqlTrainingShortcut::MAKE_TRAINING;
 		$training = $this->sqlMaker->make($query, 'fetchAll', [$trainingId]);
 		$exercises = $this->makeExercisesAsArray($training);
-		return ['exercises'=>$exercises, 'date'=>$training[0]['date'], 'shape'=>$training[0]['shape'], 'id'=>$training[0]['id']];
+		return ['exercises'=>$exercises, 'date'=>$training[0]['t_date'], 'shape'=>$training[0]['t_shape'], 'id'=>$training[0]['t_id']];
 	}
 
 	public function makeTrainingById($trainingId) {
-		$query = $this->queryRouter('makeTraining');
+		$query = SqlTrainingShortcut::MAKE_TRAINING;
 		$training = $this->sqlMaker->make($query, 'fetchAll', [$trainingId]);
 		$exercises = $this->makeExercises($training);
-		return new Training($exercises, $training[0]['date'], $training[0]['shape'], $training[0]['id']);
+		return new Training($exercises, $training[0]['t_date'], $training[0]['t_shape'], $training[0]['t_id']);
 	}
 
 	public function getLastTrainings($userId, $nbTrainings=NULL) {
@@ -82,12 +84,12 @@ class TrainingRepository extends Repository {
 	}
 
 	public function getAllExercisesInfo() {
-		$query = "SELECT id, name FROM `exercise_catalog`";
+		$query = "SELECT exo_c_id, exo_c_name FROM `exercise_catalog`";
 		return $this->sqlMaker->make($query, "fetchAll");
 	}
 
 	public function getAllMethodsInfo() {
-		$query = "SELECT id, name FROM `method`";
+		$query = "SELECT m_id, m_name FROM `method`";
 		return $this->sqlMaker->make($query, "fetchAll");
 	}
 
@@ -96,7 +98,7 @@ class TrainingRepository extends Repository {
 	*/
 
 	public function addExercise($exercise, $trainingId) {
-		$query = $this->queryRouter('insertExercise');
+		$query = SqlTrainingShortcut::INSERT_EXERCISE;
 		$params = [$trainingId];
 		foreach ($exercise as $exoData) {
 			array_push($params, $exoData);
@@ -104,18 +106,18 @@ class TrainingRepository extends Repository {
 		$this->sqlMaker->make($query, NULL, $params);
 	}
 
-	public function addExercises($exercises, $trainingId) {
+	public function addListOfExercises($exercises, $trainingId) {
 		foreach ($exercises as $exo) {
 			$this->addExercise($exo, $trainingId);
 		}
 	}
 
 	public function addTraining($userId, $training) {
-		$query = "INSERT INTO training (id_user, date, shape) VALUES (?, ?, ?)";
+		$query = SqlTrainingShortcut::INSERT_TRAINING;
 		$params = [$userId, $training['trainingMeta']['date'], $training['trainingMeta']['shape']];
 		$this->sqlMaker->make($query, NULL, $params);
 		$trainingId = $this->sqlMaker->getLastId();
-		$this->addExercises($training['exos'], $trainingId);
+		$this->addListOfExercises($training['exos'], $trainingId);
 	}
 
 	/*
@@ -124,11 +126,8 @@ class TrainingRepository extends Repository {
 
 	public function updateTraining($trainingId, $training) {
 		$this->deleteAllExercises($trainingId);
-		$this->addExercises($training['exos'], $trainingId);
-		$query = "UPDATE training
-		SET date = ?,
-		shape = ?
-		WHERE id=?";
+		$this->addListOfExercises($training['exos'], $trainingId);
+		$query = SqlTrainingShortcut::UPDATE_TRAINING;
 		$params = [$training['trainingMeta']['date'], $training['trainingMeta']['shape'], $trainingId];
 		$this->sqlMaker->make($query, NULL, $params);
 	}
@@ -138,34 +137,12 @@ class TrainingRepository extends Repository {
 	*/
 
 	public function deleteAllExercises($trainingId) {
-		$query = "DELETE FROM exercise_practice WHERE id_training=?";
+		$query = "DELETE FROM exercise_practice WHERE exo_p_fk_training_id=?";
 		$this->sqlMaker->make($query, NULL, [$trainingId]);
 	}
 
 	public function deleteTraining($trainingId) {
-		$query = "DELETE FROM training WHERE id=?";
+		$query = "DELETE FROM training WHERE t_id=?";
 		$this->sqlMaker->make($query, NULL, [$trainingId]);
-	}
-
-	public function queryRouter($queryTag) {
-		switch ($queryTag) {
-			case 'makeTraining':
-				$query = "SELECT training.id, training.date, training.shape, exercise_catalog.name AS exoName, exercise_practice.work_load ,exercise_practice.rest, exercise_practice.nb_sets, exercise_practice.nb_reps, method.name AS methodName
-				FROM `user`
-				LEFT JOIN training ON training.id_user = user.id
-				LEFT JOIN exercise_practice ON training.id = exercise_practice.id_training
-				LEFT JOIN exercise_catalog ON exercise_practice.id_exercise_catalog = exercise_catalog.id
-				LEFT JOIN method ON exercise_practice.method_id = method.id
-				WHERE training.id=?";
-				break;
-			case 'insertExercise':
-				$query = "INSERT INTO exercise_practice (id_training, id_exercise_catalog, work_load, rest, nb_sets, nb_reps, method_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
-				break;
-			case 'selectTrainingIds':
-					$query = 'SELECT DISTINCT(training.id) AS id_trainings, training.date FROM `user` LEFT JOIN training ON training.id_user = user.id WHERE training.id_user=?
-						ORDER BY training.date DESC';
-					break;
-		}
-		return $query;
 	}
 }

@@ -32,7 +32,7 @@ class Routeur {
 		if (array_key_exists(1, $this->uri)) {
 			switch ($this->uri[1]) {
 				case 'homepage':
-					$route = [self::USER_CONTROLLER, "homepage"];
+					$route = [self::USER_CONTROLLER, "showHomepage"];
 					break;
 				case 'id':
 					if (array_key_exists(2, $this->uri)) {
@@ -44,7 +44,7 @@ class Routeur {
 						break;
 					}
 				case 'calculator':
-					$route = [self::USER_CONTROLLER, "calculator"];
+					$route = [self::USER_CONTROLLER, "showCalculator"];
 					break;
 				case 'login':
 					$route = [self::USER_CONTROLLER, "login"];
@@ -56,16 +56,16 @@ class Routeur {
 					$route = [self::USER_CONTROLLER, "account"];
 					break;
 				case 'newaccount':
-					$route = [self::USER_CONTROLLER, "newAccount"];
+					$route = [self::USER_CONTROLLER, "showAccountCreator"];
 					break;
 				case 'createaccount':
-					$route = [self::USER_CONTROLLER, "createAccount"];
+					$route = [self::USER_CONTROLLER, "accountCreator"];
 					break;
 				case 'dashboard':
-					$route = [self::USER_CONTROLLER, "dashboard"];
+					$route = [self::USER_CONTROLLER, "showDashboard"];
 					break;
 				case 'settings':
-					$route = [self::USER_CONTROLLER, "settings"];
+					$route = [self::USER_CONTROLLER, "showSettings"];
 					break;
 				case 'training':
 					$route = [self::TRAINING_CONTROLLER, "showTrainingById", $this->uri[2]];
@@ -88,11 +88,20 @@ class Routeur {
 				case 'alltrainings':
 					$route = [self::TRAINING_CONTROLLER, "showAllTrainings"];
 					break;
+				case 'showweight':
+					$route = [self::USER_CONTROLLER, "showWeightTracking"];
+					break;
+				case 'showaddweight':
+					$route = [self::USER_CONTROLLER, "showAddWeight"];
+					break;
+				case 'addweight':
+					$route = [self::USER_CONTROLLER, "addWeight"];
+					break;
 				case 'usercalculator':
 					$route = [self::USER_CONTROLLER, "userCalculator"];
 					break;
 				case 'changedata':
-					$route = [self::USER_CONTROLLER, "changeData"];
+					$route = [self::USER_CONTROLLER, "showChangeData"];
 					break;
 				case 'savedata':
 					$route = [self::USER_CONTROLLER, "saveData"];

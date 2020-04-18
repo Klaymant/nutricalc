@@ -4,16 +4,19 @@
 	date_default_timezone_set('Europe/paris');
 	$today = date('yy-m-d');
 	require_once("Config/Path.php");
+	require_once("Utils/JsHelper.php");
 	use Config\Path;
+	use Config\PathView;
+	use Config\PathAsset;
+	use Utils\JsHelper;
+
+	$jsHelper = new JsHelper();
 ?>
 
 <script type="text/javascript">
 	var exoNb = 1;
-	var exoInfo = <?php $exoInfoJs = json_encode($exoInfo); echo "'" . $exoInfoJs . "'"; ?>;
-	exoInfo = JSON.parse(exoInfo);
-	
-	var methodInfo = <?php $methodInfoJs = json_encode($methodInfo); echo "'" . $methodInfoJs . "'"; ?>;
-	methodInfo = JSON.parse(methodInfo);
+	var exoInfo = <?php $jsHelper->jsEncode($exoInfo) ?>;
+	var methodInfo = <?php $jsHelper->jsEncode($methodInfo) ?>;
 </script>
 
 <div class="content">
@@ -39,9 +42,9 @@
 	</button>
 </div>
 
-<script src="<?= PATH::JS ?>/exo.js" type="text/javascript"></script>
+<script src="<?= PathAsset::JS ?>/exo.js" type="text/javascript"></script>
 
 <?php
 	$content = ob_get_clean();
-	require ("template.php");
+	require_once (PathView::TEMPLATE . "/template.php");
 ?>
