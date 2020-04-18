@@ -70,6 +70,7 @@ function exoExistingSelect() {
 		};
 		select += '<option value="' + exoInfo[i]['exo_c_id'] + '"' + selected +'>' +
 		exoInfo[i]["exo_c_name"] +
+
 		'</option>';
 	}
 	select += "</select>";
