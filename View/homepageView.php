@@ -1,6 +1,9 @@
 <!-- DOCTYPE HTML -->
 <?php
 	ob_start();
+	require_once("Config/Path.php");
+	use Config\Path;
+	use Config\PathView;
 ?>
 
 <div class="content">
@@ -19,17 +22,17 @@
 
 	<p>
 		Ready to finally know what you need ?</br>
-		It's <a href="calculator">THIS WAY!</a>
+		It's <a href="<?= PATH::APP ?>/calculator">THIS WAY!</a>
 	</p>
 
 	<p>
 		Want to create an account ?</br>
-		It's <a href="newaccount">THIS WAY!</a>
+		It's <a href="<?= PATH::APP ?>/newaccount">THIS WAY!</a>
 	</p>
 </div>
 
 <?php
 	// $content contains the html content from ob_start so far
 	$content = ob_get_clean();
-	require ("template.php");
+	require (PathView::TEMPLATE . "/template.php");
 ?>

@@ -11,6 +11,7 @@ use Model\TrainingRepository;
 use Model\User;
 use Model\Training;
 use Config\Path;
+use Config\PathView;
 
 class UserController {
     private $userRepo;
@@ -21,85 +22,119 @@ class UserController {
         $this->trainingRepo = new TrainingRepository();
     }
 
-    public function homepage() {
-        require_once ("View/homepageView.php");
-    }
+    /*
+    ** ========== 1 - ACCOUNT ==========
+    */
 
-    public function calculator() {
-        require_once("View/calculatorView.php");
-    }
-
-    public function userCalculator() {
-        $user = new User($_POST['sex'], $_POST['age'], $_POST['height'], $_POST['weight'], $_POST['activity'], $_POST['goal']);
-        $user->calcAllNeeds();
-        require_once("View/calculatorView.php");
-    }
-
-    public function dashboard() {
-        $user = $this->userRepo->getUserById($_SESSION['id']);
-        $user->calcAllNeeds();
-        $mail = $this->userRepo->getMailById($_SESSION['id']);
-        $trainings = $this->trainingRepo->makeLastTrainings($_SESSION['id'], 5);
-        require_once("View/dashBoardView.php");
-    }
-
-    public function settings() {
-        $user = $this->userRepo->getUserById($_SESSION['id']);
-        require_once("View/settingsView.php");
-    }
-
+    /*
+    ** 1.1 - Connection & deconnection
+    */
     public function login() {
-        require_once ("View/loginView.php");
+        require_once (PathView::ACCOUNT . "/loginView.php");
     }
 
     public function account() {
         $user = $this->userRepo->getUserByMail($_POST['mail']);
-        if ($user != NULL AND password_verify($_POST['pwd'], $user['pwd'])) {
+        if ($user != NULL AND password_verify($_POST['pwd'], $user['u_pwd'])) {
             session_start();
-            $_SESSION['id'] = $user['id'];
+            $_SESSION['id'] = $user['u_id'];
             $_SESSION['logged'] = true;
-            header("Location: " . PATH::APP . "/dashboard");
+            header("Location: " . Path::APP . "/dashboard");
         }
         else {
             $badLogin = true;
-            require_once ("View/loginView.php");
+            require_once (PathView::ACCOUNT . "/loginView.php");
         }
     }
 
     public function logout() {
         $_SESSION['logged'] = false;
         session_write_close();
-        header ("Location: " . PATH::APP . "/homepage");
+        header ("Location: " . Path::APP . "/homepage");
     }
 
-    public function changeData() {
-        require_once("View/accountView.php");
-    }
+    /*
+    ** 1.2 - Account creation
+    */
 
-    public function saveData() {
-        $this->userRepo = new UserRepository();
-        $user = $this->userRepo->saveData($_POST);
-        header("Location: " . PATH::APP . "/dashboard");
-    }
-
-    public function newAccount() {
-        require_once("View/newAccountView.php");
-    }
-
-    public function createAccount() {
+    public function accountCreator() {
         if ($this->userRepo->mailExists($_POST['mail'])) {
             $error = true;
-            require_once("View/newAccountView.php");
+            require_once(PathView::ACCOUNT . "/newAccountView.php");
         }
         else {
             $data = ['mail'=>$_POST['mail'], 'pwd'=>password_hash($_POST['pwd'], PASSWORD_DEFAULT)];
             $user = $this->userRepo->createAccount($data);
-            require_once("View/accountView.php");
+            require_once(PathView::ACCOUNT . "/accountView.php");
         }
     }
 
     public function createUser($mail, $pwd, $sex, $age, $height, $weight, $activityId, $goalId)
     {
-    	$this->userRepo->createUser($mail, $pwd, $sex, $age, $height, $weight, $activityId, $goalId);
+        $this->userRepo->createUser($mail, $pwd, $sex, $age, $height, $weight, $activityId, $goalId);
+    }
+
+    /*
+    ** ========== 2 - CALCULATION & TREATMENT ==========
+    */
+
+    public function userCalculator() {
+        $user = new User($_POST['sex'], $_POST['age'], $_POST['height'], $_POST['weight'], $_POST['activity'], $_POST['goal']);
+        $user->calcAllNeeds();
+        require_once(Path::VIEW . "/calculatorView.php");
+    }
+
+    public function saveData() {
+        $this->userRepo = new UserRepository();
+        $user = $this->userRepo->saveData($_POST);
+        header("Location: " . Path::APP . "/dashboard");
+    }
+
+    public function addWeight() {
+        $this->userRepo->addWeight($_SESSION['id'], $_POST['date'], $_POST['weight']);
+        header("Location: " . Path::APP . "/dashboard");
+    }
+
+    /*
+    ** ========== 3 - DISPLAY ==========
+    */
+
+    public function showHomepage() {
+        require_once (Path::VIEW . "/homepageView.php");
+    }
+
+    public function showAccountCreator() {
+        require_once(PathView::ACCOUNT . "/newAccountView.php");
+    }
+
+    public function showDashboard() {
+        $user = $this->userRepo->getUserById($_SESSION['id']);
+        $user->calcAllNeeds();
+        $mail = $this->userRepo->getMailById($_SESSION['id']);
+        $trainings = $this->trainingRepo->makeLastTrainings($_SESSION['id'], 5);
+        $weightTracking = $this->userRepo->makeWeightTracking($_SESSION['id'], 5);
+        require_once(Path::VIEW . "/dashBoardView.php");
+    }
+
+    public function showChangeData() {
+        require_once(PathView::ACCOUNT . "/accountView.php");
+    }
+
+    public function showSettings() {
+        $user = $this->userRepo->getUserById($_SESSION['id']);
+        require_once(Path::VIEW . "/settingsView.php");
+    }
+
+    public function showCalculator() {
+        require_once(Path::VIEW . "/calculatorView.php");
+    }
+
+    public function showAddWeight() {
+        require_once(PathView::WEIGHT_TRACKING . "/addWeightView.php");
+    }
+
+    public function showWeightTracking() {
+        $weightTracking = $this->userRepo->makeWeightTracking($_SESSION['id']);
+        require_once(PathView::WEIGHT_TRACKING . "/weightTrackingView.php");
     }
 }

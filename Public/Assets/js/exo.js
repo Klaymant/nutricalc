@@ -59,34 +59,17 @@ function getExistingContent() {
 	return existingContent;
 }
 
-function getIdFromExoName(exoName) {
-	for (i=0; i<exoInfo.length; i++) {
-		if (exoName == exoInfo[i]['name']) {
-			return exoInfo[i]['id'];
-		}
-	}
-}
-
-function getIdFromMethodName(methodName) {
-	for (i=0; i<methodInfo.length; i++) {
-		if (methodName == methodInfo[i]['name']) {
-			return methodInfo[i]['id'];
-		}
-	}
-}
-
 function exoExistingSelect() {
 	var actualExoName = exercises[exoNb-1]['exoName'];
-	var exoId = getIdFromExoName(actualExoName);
 	var select = '<select name="name_' + exoNb + '">';
 
 	for (i=0; i<exoInfo.length; i++) {
 		var selected = '';
-		if (actualExoName == exoInfo[i]['name']) {
+		if (actualExoName == exoInfo[i]['exo_c_name']) {
 			selected = ' selected';
 		};
-		select += '<option value="' + exoInfo[i]['id'] + '"' + selected +'>' +
-		exoInfo[i]["name"] +
+		select += '<option value="' + exoInfo[i]['exo_c_id'] + '"' + selected +'>' +
+		exoInfo[i]["exo_c_name"] +
 		'</option>';
 	}
 	select += "</select>";
@@ -94,19 +77,16 @@ function exoExistingSelect() {
 }
 
 function methodExistingSelect() {
-	var actualMethod = exercises[exoNb-1]['method']
-	var methodId = getIdFromMethodName(actualMethod);
+	var thatMethodName = exercises[exoNb-1]['method']
 	var select = '<select name="method_' + exoNb + '">';
-	console.log("Actual method : " + actualMethod);
 
 	for (i=0; i<methodInfo.length; i++) {
 		var selected = '';
-		if (actualMethod == methodInfo[i]['name']) {
-			console.log(methodInfo[i]['name']);
+		if (thatMethodName == methodInfo[i]['m_name']) {
 			selected = ' selected';
 		};
-		select += '<option value="' + methodInfo[i]['id'] + '"' + selected +'>' +
-		methodInfo[i]["name"] +
+		select += '<option value="' + methodInfo[i]['m_id'] + '"' + selected +'>' +
+		methodInfo[i]["m_name"] +
 		'</option>';
 	}
 	select += "</select>";
@@ -144,19 +124,11 @@ function getContent() {
 	return content;
 }
 
-function getIdFromExoName(exoName) {
-	for (i=0; i<exoInfo.length; i++) {
-		if (exoName == exoInfo[i]['name']) {
-			return exoInfo[i]['id'];
-		}
-	}
-}
-
 function exoSelect() {
 	var select = '<select name="exoName_' + exoNb + '">';
 	for(i=0; i<exoInfo.length; i++) {
-		select += '<option value="' + exoInfo[i]['id'] + '">' +
-		exoInfo[i]["name"] +
+		select += '<option value="' + exoInfo[i]['exo_c_id'] + '">' +
+		exoInfo[i]["exo_c_name"] +
 		'</option>';
 	}
 	select += "</select>";
@@ -166,17 +138,17 @@ function exoSelect() {
 function methodSelect() {
 	var select = '<select name="method_' + exoNb + '">';
 	for(i=0; i<methodInfo.length; i++) {
-		select += '<option value="' + methodInfo[i]['id'] + '">' +
-		methodInfo[i]["name"] +
+		select += '<option value="' + methodInfo[i]['m_id'] + '">' +
+		methodInfo[i]["m_name"] +
 		'</option>';
 	}
 	select += "</select>";
 	return select;
 }
 
-function removeExo(id) {
-	var actualExoNb = id.slice(4);
+function removeExo(exoId) {
+	var actualExoNb = exoId.slice(4);
 	var exoToRmv = document.getElementById("exo_" + actualExoNb);
-	var exoDiv = document.getElementById("exercises");
-	exoDiv.removeChild(exoToRmv);
+	var exoContainer = document.getElementById("exercises");
+	exoContainer.removeChild(exoToRmv);
 }

@@ -7,6 +7,7 @@ require_once('Config/Path.php');
 use Model\TrainingRepository;
 use Model\Training;
 use Config\Path;
+use Config\PathView;
 
 class TrainingController {
     private $trainingRepo;
@@ -17,25 +18,25 @@ class TrainingController {
 
     public function showTrainingById($trainingId) {
         $training = $this->trainingRepo->makeTrainingById($trainingId);
-        require_once("View/trainingView.php");
+        require_once(PathView::TRAINING . "/trainingView.php");
     }
 
     public function showAllTrainings() {
         $trainings = $this->trainingRepo->getAllTrainingsById($_SESSION['id']);
-        require_once("View/allTrainingsView.php");
+        require_once(PathView::TRAINING . "/allTrainingsView.php");
     }
 
     public function showAddTraining() {
         $exoInfo = $this->trainingRepo->getAllExercisesInfo();
         $methodInfo = $this->trainingRepo->getAllMethodsInfo();
-    	require_once("View/addTrainingView.php");
+       	require_once(PathView::TRAINING . "/addTrainingView.php");
     }
 
     public function showEditTraining($trainingId) {
         $exoInfo = $this->trainingRepo->getAllExercisesInfo();
         $methodInfo = $this->trainingRepo->getAllMethodsInfo();
         $training = $this->trainingRepo->makeTrainingByIdAsArray($trainingId);
-        require_once("View/editTrainingView.php");
+        require_once(PathView::TRAINING . "/editTrainingView.php");
     }
 
     public function checkForm($form) {

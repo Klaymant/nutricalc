@@ -3,6 +3,7 @@
 	ob_start();
 	require_once("Config/Path.php");
 	use Config\Path;
+	use Config\PathView;
 ?>
 
 <table class="training">
@@ -39,11 +40,11 @@
 	</tbody>
 </table>
 
-<a class="button" href="<?= PATH::APP ?>/edittraining/<?= $training->getId() ?>">Edit</a>
-<a class="buttonDangerous" href="<?= PATH::APP ?>/deletetraining/<?= $training->getId() ?>">Delete this training</a>
+<a class="button" href="<?= Path::APP ?>/edittraining/<?= $training->getId() ?>">Edit</a>
+<a class="buttonDangerous" href="<?= Path::APP ?>/deletetraining/<?= $training->getId() ?>">Delete this training</a>
 
 <?php
 	// $content contains the html content from ob_start so far
 	$content = ob_get_clean();
-	require ("template.php");
+	require (PathView::TEMPLATE . "/template.php");
 ?>

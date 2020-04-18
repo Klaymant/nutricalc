@@ -3,45 +3,59 @@ namespace Model;
 
 require_once ('Model/Repository.php');
 require_once ('Model/User.php');
+require_once ('Utils/SqlShortcut.php');
 use Model\Repository;
 use Model\User;
+use Utils\SqlUserShortcut;
 
 class UserRepository extends Repository {
-
 	public function getUserByMail($mail) {
-		$query = 'SELECT id, pwd FROM user WHERE mail=?';
+		$query = 'SELECT u_id, u_pwd FROM user WHERE u_mail=?';
 		return $this->sqlMaker->make($query, 'fetch', [$mail]);
 	}
 
 	public function getUserById($id) {
-		$query = 'SELECT * FROM user LEFT JOIN activity ON user.id_activity = activity.id LEFT JOIN goal ON user.id_goal = goal.id WHERE user.id=?';
+		$query = SqlUserShortcut::GET_USER_BY_ID;
 		$user = $this->sqlMaker->make($query, 'fetch', [$id]);
-		return new User($user['sex'], $user['age'], $user['height'], $user['weight'], $user['activity_name'], $user['goal_name'], $id, $user['mail'], $user['pwd']);
+		return new User($user['u_sex'], $user['u_age'], $user['u_height'], $user['u_weight'], $user['a_name'], $user['g_name'], $id, $user['u_mail'], $user['u_pwd']);
 	}
 
 	public function getMailById($userId) {
-		$query = "SELECT mail FROM user WHERE id=?";
+		$query = "SELECT u_mail FROM user WHERE u_id=?";
 		return $this->sqlMaker->make($query, 'fetch', [$userId]);
 	}
 
-	public function createUser($mail, $pwd, $sex, $age, $height, $weight, $activity, $goal) {
-		$query = 'INSERT INTO user (height, weight, activity, goal, age) VALUES ("?", "?", "?", "?", "?")';
+	public function createUser($age, $height, $weight, $activityId, $goalId) {
+		$query = SqlUserShortcut::CREATE_USER;
 		return $this->sqlMaker->make($query, NULL, [$height, $weight, $activity, $goal, $age]);
 	}
 
 	public function saveData($data) {
-		$query = "UPDATE user SET age=?, height=?, weight=?, id_activity=?, id_goal=? WHERE id=?";
-		return $this->sqlMaker->make($query, NULL, [$data['age'], $data['height'], $data['weight'], $data['activity'], $data['goal'], $_SESSION['id']]);
+		$query = SqlUserShortcut::SAVE_DATA;
+		$params = [$data['age'], $data['height'], $data['weight'], $data['activity'], $data['goal'], $_SESSION['id']];
+		return $this->sqlMaker->make($query, NULL, $params);
 	}
 
 	public function createAccount($data) {
-		$query = "INSERT INTO user (mail, pwd) VALUES (?, ?)";
+		$query = "INSERT INTO user (u_mail, u_pwd) VALUES (?, ?)";
 		return $this->sqlMaker->make($query, NULL, [$data['mail'], $data['pwd']]);
 	}
 
 	public function mailExists($mail) {
-		$query = "SELECT COUNT(*) as c FROM user WHERE mail=?";
+		$query = "SELECT COUNT(*) as nb_mail FROM user WHERE u_mail=?";
 		$mailExists = $this->sqlMaker->make($query, 'fetch', [$mail]);
-		return $mailExists['c'] == 1 ? true : false;
+		return ($mailExists['nb_mail'] == 1) ? true : false;
+	}
+
+	public function addWeight($userId, $date, $weight) {
+		$query = SqlUserShortcut::ADD_WEIGHT;
+		$params = [$userId, $date, $weight];
+		$this->sqlMaker->make($query, NULL, $params);
+	}
+
+	public function makeWeightTracking($userId, $max=NULL) {
+		$query = SqlUserShortcut::GET_WEIGHT_TRACKING_BY_ID;
+		$weightTracking = $this->sqlMaker->make($query, "fetchAll", [$userId]);
+		return array_slice($weightTracking, 0, $max);
 	}
 }

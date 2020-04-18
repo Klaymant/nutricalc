@@ -4,22 +4,23 @@
 	date_default_timezone_set('Europe/paris');
 	$today = date('yy-m-d');
 	require_once("Config/Path.php");
+	require_once("Utils/JsHelper.php");
 	use Config\Path;
+	use Config\PathView;
+	Use Config\PathAsset;
+	use Utils\JsHelper;
+
+	$jsHelper = new JsHelper();
 ?>
 
 <script type="text/javascript">
 	var exoNb = 1;
-	var exoInfo = <?php $exoInfoJs = json_encode($exoInfo); echo "'" . $exoInfoJs . "'"; ?>;
-	exoInfo = JSON.parse(exoInfo);
-	
-	var methodInfo = <?php $methodInfoJs = json_encode($methodInfo); echo "'" . $methodInfoJs . "'"; ?>;
-	methodInfo = JSON.parse(methodInfo);
-
-	var exercises = <?php $exercisesJs = json_encode($training['exercises']); echo "'" . $exercisesJs . "'"; ?>;
-	exercises = JSON.parse(exercises);
+	var exoInfo = <?php $jsHelper->jsEncode($exoInfo) ?>;
+	var methodInfo = <?php $jsHelper->jsEncode($methodInfo) ?>;
+	var exercises = <?php $jsHelper->jsEncode($training['exercises']) ?>;
 </script>
 
-<script src="<?= PATH::JS ?>/exo.js" type="text/javascript"></script>
+<script src="<?= PathAsset::JS ?>/exo.js" type="text/javascript"></script>
 
 <?php
 	function displayExos($exercises) {
@@ -30,7 +31,7 @@
 ?>
 
 <div class="content">
-	<form action="<?= PATH::APP?>/updateTraining" method="post">
+	<form action="<?= Path::APP ?>/updateTraining" method="post">
 		<h1>Edit training</h1>
 		<h2>Info of the day</h2>
 		<table>
@@ -56,11 +57,11 @@
 		(+) Add an exercise
 	</button>
 
-	<script src="<?= PATH::JS ?>/exo.js" type="text/javascript"></script>
+	<script src="<?= PathAsset::JS ?>/exo.js" type="text/javascript"></script>
 </div>
 
 <?php
 	// $content contains the html content from ob_start so far
 	$content = ob_get_clean();
-	require ("template.php");
+	require (PathView::TEMPLATE . "/template.php");
 ?>

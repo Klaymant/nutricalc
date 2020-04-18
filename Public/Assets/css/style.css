@@ -7,11 +7,22 @@
 	--SPACE_GREY_LIGHTER: rgb(80, 80, 80);
 	--SPACE_GREY_LIGHTERER: rgb(100, 100, 100);
 	--DEEP_GREY: rgb(20, 20, 20);
+	--BEIGE: rgb(255, 214, 153);
+	--CORNFLOWERBLUE_DARKER: rgb(80, 129, 217);
+	--CORNFLOWERBLUE_LIGHTER: rgb(120, 169, 255);
+	--CORNSILK_DARKER: rgb(235, 228, 200);
+	--CORNSILK_DARKERER: rgb(215, 208, 180);
 
-	--tile-bg-color: var(--SPACE_GREY_LIGHTER);
-	--main-bg-color: var(--SPACE_GREY);
+	--tile-bg-color: CornFlowerBlue;
+	--main-bg-color: Bisque;
 	--main-txt-color: black;
+	--footer-bg-color: Cornsilk;
+	--header-bg-color: Cornsilk;
 }
+
+/* ----------
+GENERAL BALISES
+---------- */
 
 body {
 	background: var(--main-bg-color);
@@ -21,11 +32,32 @@ body {
 }
 
 header {
-	background: var(--LEAF_GREEN);
+	background: var(--header-bg-color);
+	padding-top: 40px;
+	padding-bottom: 20px;
+	margin-top: -10px;
+	margin-left: -10px;
+	margin-right: -10px;
+	text-align: center;
 }
 
-form td {
-	color: white;
+form table {
+	margin: 0 auto;
+	}
+
+p {
+	font-size: 16px;
+	padding-left: 10px;
+}
+
+a:link, a:visited {
+	color: CornFlowerBlue;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+a:hover {
+	color: var(--CORNFLOWERBLUE_DARKER);
 }
 
 /* ----------
@@ -54,7 +86,9 @@ MENU
 ---------- */
 #menu {
 	display: table;
-	margin-top: 10px;
+	margin-top: 20px;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 #menu ul {
@@ -69,19 +103,17 @@ MENU
 
 #menu a:link, #menu a:visited {
 	display: block;
-	background: var(--SPACE_GREY_LIGHTER);
+	background: CornSilk;
 	text-decoration: none;
-	color: white;
+	color: black;
 	font-family: 'Do Hyeon', sans-serif;
 	font-weight: bold;
 	font-size: 23px;
 	padding: 10px;
-	border-radius: 10px;
-	border-bottom: solid 4px var(--DEEP_GREY);
 }
 
 #menu a:hover {
-	background: var(--SPACE_GREY_LIGHTERER);
+	background: var(--CORNFLOWERBLUE_DARKER);
 }
 
 #menu img {
@@ -106,16 +138,22 @@ MENU
 	background: rgb(250, 50, 90);
 }
 
+#welcome {
+	line-height: 0.5;
+}
+
 .content {
 	display: table;
 	font-size: 18px;
+	line-height: 1;
 	width: 100%;
-	color: white;
-	background: var(--SPACE_GREY_LIGHTER);
-	border: solid 2px var(--SPACE_GREY_LIGHTERER);
-	padding: 10px;
-	margin-top: 10px;
-	margin-bottom: 20px;
+	text-align: center;
+	color: black;
+	background: CornSilk;
+	padding: 30px;
+	margin-left: -10px;
+	margin-top: 20px;
+	margin-bottom: 30px;
 }
 
 /* ----------
@@ -126,28 +164,28 @@ DASHBOARD
 }
 
 .tile {
-	display: inline-block;
-	background: rgb(230, 230, 230);
-	border: solid 2px var(--SPACE_GREY_LIGHTERER);
+	display: block;
+	background: Cornsilk;
 	margin-top: 10px;
 	margin-bottom: 10px;
-	width: 15%;
-	height: 350px;
 }
 
 .tile table {
 	border-collapse: collapse;
 	width: 100%;
+	margin: 0 auto;
 }
 
 .tile table thead {
 	background: var(--tile-bg-color);
-	font-size: 22px;
+	border-bottom: solid 5px var(--CORNFLOWERBLUE_DARKER);
+	font-size: 16px;
 	color: rgb(230, 230, 230);
 }
 
 .tile th {
-	padding: 5px;
+	text-align: left;
+	padding: 10px;
 }
 
 .tile table tbody {
@@ -155,12 +193,24 @@ DASHBOARD
 }
 
 .tile td {
-	height: 30px;
+	height: 40px;
 	padding-left: 10px;
 }
 
+.tile .firstCol {
+	width: 150px;
+}
+
+#data .attribute {
+	background: var(--CORNSILK_DARKER);
+}
+
+#data td {
+	height: 30px;
+}
+
 .userName {
-	color: var(--LEAF_GREEN);
+	color: CornFlowerBlue;
 	font-weight: bold;
 }
 
@@ -169,25 +219,25 @@ NUTRIENTS
 ---------- */
 .nutrient {
 	font-size: 15px;
-	width: 30%;
-	color: rgb(230, 230, 230);
+	width: 150px;
 	font-weight: bold;
+	border-bottom: solid 6px;
 }
 
 .calories {
-	background: rgb(91, 215, 91);
+	border-bottom-color: rgb(91, 215, 91);
 }
 
 .proteins {
-	background: rgb(178, 34, 34);
+	border-bottom-color: rgb(178, 34, 34);
 }
 
 .fat {
-	background: rgb(218, 165, 32);
+	border-bottom-color: rgb(218, 165, 32);
 }
 
 .carbs {
-	background: rgb(30, 144, 255);
+	border-bottom-color: rgb(30, 144, 255);
 }
 
 /* ----------
@@ -198,7 +248,7 @@ TRAINING
 	background: var(--main-bg-color);
 	margin-top: 20px;
 	margin-bottom: 20px;
-	border: solid 5px var(--LEAF_GREEN);
+	border: solid 3px CornFlowerBlue;
 	border-collapse: collapse;
 }
 
@@ -207,7 +257,7 @@ TRAINING
 }
 
 .training th {
-	background: var(--LEAF_GREEN);
+	background: CornFlowerBlue;
 }
 
 .training .exo {
@@ -225,13 +275,14 @@ TRAINING
 }
 
 .training .exoName {
-	color: var(--LEAF_GREEN);
+	color: CornFlowerBlue;
 	background: white;
 	font-weight: bold;
 }
 
 .trainingLine:hover {
-	background: rgb(80, 80, 80);
+	background: Peru;
+	color: white;
 }
 
 /*
@@ -241,7 +292,6 @@ TRAINING
 #exercises table {
 	border: solid 2px var(--main-bg-color);
 	border-collapse: collapse;
-	background: white;
 }
 
 #exercises table th {
@@ -251,17 +301,17 @@ TRAINING
 }
 
 #exercises table .exoField {
-	background: var(--SPACE_GREY_LIGHTER);
+	background: var(--CORNSILK_DARKER);
 }
 
 #exercises input {
-	border: solid 3px var(--LEAF_GREEN_DARKER);
-	background: var(--LEAF_GREEN);
+	border: solid 2px var(--CORNSILK_DARKERER);
+	background: var(--CORNSILK_DARKER);
 }
 
 #exercises table select {
-	border: solid 3px var(--LEAF_GREEN_DARKER);
-	background: var(--LEAF_GREEN);
+	border: solid 2px var(--CORNSILK_DARKERER);
+	background: var(--CORNSILK_DARKER);
 }
 
 /* ----------
@@ -269,32 +319,31 @@ BUTTON
 ---------- */
 
 button.button, input.button {
-	background: var(--LEAF_GREEN);
+	background: CornFlowerBlue;
 	color: white;
-	border-radius: 10px;
-	border-bottom: solid 3px var(--DEEP_GREY);
+	font-family: 'Sen', sans-serif;
+	font-size: 14px;
+	border: none;
 	padding: 5px;	
 }
 
 .button:visited, .button:link {
-	background: var(--LEAF_GREEN_DARKER);
+	background: CornFlowerBlue;
+	font-size: 14px;
 	color: white;
-	border-radius: 10px;
-	border-bottom: solid 3px var(--DEEP_GREY);
 	padding: 5px;
 	text-decoration: none;
 }
 
 .button:hover {
-	background: var(--LEAF_GREEN);
+	background: var(--CORNFLOWERBLUE_DARKER);
 	text-decoration: none;
 }
 
 .buttonDangerous:visited, .buttonDangerous:link {
 	background: rgb(220, 20, 60);
+	font-size: 14px;
 	color: white;
-	border-radius: 10px;
-	border-bottom: solid 3px var(--DEEP_GREY);
 	padding: 5px;
 }
 
@@ -304,27 +353,16 @@ button.button, input.button {
 }
 
 /* ----------
-LINKS
----------- */
-a:link, a:visited {
-	color: var(--LEAF_GREEN);
-	text-decoration: none;
-	font-weight: bold;
-}
-
-a:hover {
-	color: var(--LEAF_GREEN_LIGHTER);
-}
-
-/* ----------
 FOOTER
 ---------- */
 footer {
 	font-family: 'Do Hyeon', sans-serif;
-	background: var(--LEAF_GREEN);
-	border-radius: 10px;
-	color: white;
+	background: var(--footer-bg-color);
+	color: black;
 	font-size: 18px;
-	margin-top: 10px;
+	margin-top: 20px;
+	margin-left: -10px;
+	margin-right: -10px;
+	padding: 30px;
 	text-align: center;
 }
