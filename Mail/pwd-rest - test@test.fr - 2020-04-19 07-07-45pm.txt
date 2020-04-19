@@ -1,1 +1,0 @@
-Hello dear test@test.fr!</br></br>It seems that you asked for changing your password. </br>Follow this <a href='http://localhost/nutricalc/index.php/app/newpwd/givwxtkcmfuvq1au7ezd'>link</a> to do it!
