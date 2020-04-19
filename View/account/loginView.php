@@ -6,7 +6,7 @@
 ?>
 
 <div class="content">
-	<form action="account" method="post">
+	<form action="login" method="post">
 		<table>
 			<tr>
 				<td>Mail :</td>
@@ -27,6 +27,9 @@
 	?>
 	<p>
 		<a class="button" href="newaccount">No account yet ? Follow this link !</a>
+	</p>
+	<p>
+		<a class="button" href="forgottenpwdpage">Forgotten password ? Follow this link !</a>
 	</p>
 </div>
 

@@ -4,9 +4,12 @@ namespace Model;
 require_once ('Model/Repository.php');
 require_once ('Model/User.php');
 require_once ('Utils/SqlShortcut.php');
+require_once ('Config/Path.php');
 use Model\Repository;
 use Model\User;
 use Utils\SqlUserShortcut;
+use Config\Path;
+use Config\PathView;
 
 class UserRepository extends Repository {
 	public function getUserByMail($mail) {
@@ -39,6 +42,18 @@ class UserRepository extends Repository {
 	public function createAccount($data) {
 		$query = "INSERT INTO user (u_mail, u_pwd) VALUES (?, ?)";
 		return $this->sqlMaker->make($query, NULL, [$data['mail'], $data['pwd']]);
+	}
+
+	public function forgottenPwd($user) {
+		$userMail = $user->getMail();
+		date_default_timezone_set('Europe/paris');
+		$dateTime = date('yy-m-d h-i-sa');
+		$link = Path::APP . "/newpwd";
+		$fileName = "Mail/pwd-rest - ${userMail} - ${dateTime}.txt";
+		$message = "Hello dear " . $userMail . "!</br></br>It seems that you asked for changing your password. </br>Follow this <a href='${link}'>link</a> to do it!";
+/*		var_dump($fileName);
+		exit;*/
+		file_put_contents($fileName, $message);
 	}
 
 	public function mailExists($mail) {

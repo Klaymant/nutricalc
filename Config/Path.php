@@ -9,7 +9,7 @@ abstract class Path {
 	const APP = self::KERNEL . "/app";
 	const API = self::KERNEL . "/api";
 
-	const VIEW = "./View";
+	const VIEW = self::ROOT . "/View";
 	const CONTROLLER = self::ROOT . "/Controller";
 	const MODEL = self::ROOT . "/Model";
 }

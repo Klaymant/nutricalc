@@ -7,7 +7,7 @@
 
 			if (isset($_SESSION['logged']) && $_SESSION['logged'] == false) {
 				echo '<li><a href="' . Path::APP . '/calculator"><img src="' . PathAsset::IMG . '/calculator_icon.png" />Calculator</a></li>';
-				echo '<li id="login"><a href="' . Path::APP . '/login"><img src="' . PathAsset::IMG . '/switch_icon.png" />Login</a></li>';
+				echo '<li id="login"><a href="' . Path::APP . '/loginpage"><img src="' . PathAsset::IMG . '/switch_icon.png" />Login</a></li>';
 			}
 			if (isset($_SESSION['logged']) && $_SESSION['logged'] == true) {
 				echo '<li><a href="' . Path::APP . '/dashboard"><img src="' . PathAsset::IMG . '/dashboard_icon.png" />Dashboard</a></li>';
