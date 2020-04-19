@@ -26,14 +26,19 @@ class UserController {
     ** ========== 1 - ACCOUNT ==========
     */
 
+    public function showHomepage() {
+        require_once (Path::VIEW . "/homepageView.php");
+    }
+
     /*
     ** 1.1 - Connection & deconnection
     */
-    public function login() {
+
+    public function showLogin() {
         require_once (PathView::ACCOUNT . "/loginView.php");
     }
 
-    public function account() {
+    public function login() {
         $user = $this->userRepo->getUserByMail($_POST['mail']);
         if ($user != NULL AND password_verify($_POST['pwd'], $user['u_pwd'])) {
             session_start();
@@ -57,6 +62,10 @@ class UserController {
     ** 1.2 - Account creation
     */
 
+    public function showAccountCreator() {
+        require_once(PathView::ACCOUNT . "/newAccountView.php");
+    }
+
     public function accountCreator() {
         if ($this->userRepo->mailExists($_POST['mail'])) {
             $error = true;
@@ -72,6 +81,34 @@ class UserController {
     public function createUser($mail, $pwd, $sex, $age, $height, $weight, $activityId, $goalId)
     {
         $this->userRepo->createUser($mail, $pwd, $sex, $age, $height, $weight, $activityId, $goalId);
+    }
+
+    /*
+    ** 1.3 - Password
+    */
+
+    public function showForgottenPwd() {
+        require_once(PathView::ACCOUNT . "/forgottenPwdView.php");
+    }
+
+    public function forgottenPwd() {
+        $userId = $this->userRepo->getUserByMail($_POST['mail'])['u_id'];
+        $user = $this->userRepo->getUserById($userId);
+        $this->userRepo->forgottenPwd($user);
+    }
+
+    public function showNewPwd($pwdId) {
+        $pwdIdExisting = $this->userRepo->resetPwdIdExists($pwdId);
+        $userId = $this->userRepo->getUserByResetPwdId($pwdId)['u_id'];
+        $userMail = $this->userRepo->getMailById($userId)['u_mail'];
+        require_once(PathView::ACCOUNT . "/newPwdView.php");
+    }
+
+    public function changePwd() {
+        $newPwd = $_POST['newPwd'];
+        $userId = $_POST['userId'];
+        $this->userRepo->savePwd($userId, $newPwd);
+        header("Location: " . Path::APP . "/dashboard");
     }
 
     /*
@@ -96,16 +133,8 @@ class UserController {
     }
 
     /*
-    ** ========== 3 - DISPLAY ==========
+    ** ========== 3 - DASHBOARD ==========
     */
-
-    public function showHomepage() {
-        require_once (Path::VIEW . "/homepageView.php");
-    }
-
-    public function showAccountCreator() {
-        require_once(PathView::ACCOUNT . "/newAccountView.php");
-    }
 
     public function showDashboard() {
         $user = $this->userRepo->getUserById($_SESSION['id']);

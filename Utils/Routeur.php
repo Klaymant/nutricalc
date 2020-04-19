@@ -46,14 +46,32 @@ class Routeur {
 				case 'calculator':
 					$route = [self::USER_CONTROLLER, "showCalculator"];
 					break;
-				case 'login':
-					$route = [self::USER_CONTROLLER, "login"];
+				case 'loginpage':
+					$route = [self::USER_CONTROLLER, "showLogin"];
 					break;
 				case 'logout':
 					$route = [self::USER_CONTROLLER, "logout"];
 					break;
-				case 'account':
-					$route = [self::USER_CONTROLLER, "account"];
+				case 'login':
+					$route = [self::USER_CONTROLLER, "login"];
+					break;
+				case 'forgottenpwdpage':
+					$route = [self::USER_CONTROLLER, "showForgottenPwd"];
+					break;
+				case 'forgottenpwd':
+					$route = [self::USER_CONTROLLER, "forgottenPwd"];
+					break;
+				case 'newpwd':
+					if (array_key_exists(2, $this->uri)) {
+						$route = [self::USER_CONTROLLER, "showNewPwd", $this->uri[2]];
+						break;
+					}
+					else {
+						$route = [self::USER_CONTROLLER, "404"];
+						break;
+					}
+				case 'changepwd':
+					$route = [self::USER_CONTROLLER, "changePwd"];
 					break;
 				case 'newaccount':
 					$route = [self::USER_CONTROLLER, "showAccountCreator"];
