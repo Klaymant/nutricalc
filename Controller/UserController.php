@@ -97,12 +97,18 @@ class UserController {
         $this->userRepo->forgottenPwd($user);
     }
 
-    public function showNewPwd() {
+    public function showNewPwd($pwdId) {
+        $pwdIdExisting = $this->userRepo->resetPwdIdExists($pwdId);
+        $userId = $this->userRepo->getUserByResetPwdId($pwdId)['u_id'];
+        $userMail = $this->userRepo->getMailById($userId)['u_mail'];
         require_once(PathView::ACCOUNT . "/newPwdView.php");
     }
 
     public function changePwd() {
-        $newPwd = $_POST["newPwd"];
+        $newPwd = $_POST['newPwd'];
+        $userId = $_POST['userId'];
+        $this->userRepo->savePwd($userId, $newPwd);
+        header("Location: " . Path::APP . "/dashboard");
     }
 
     /*

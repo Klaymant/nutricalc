@@ -62,8 +62,14 @@ class Routeur {
 					$route = [self::USER_CONTROLLER, "forgottenPwd"];
 					break;
 				case 'newpwd':
-					$route = [self::USER_CONTROLLER, "showNewPwd"];
-					break;
+					if (array_key_exists(2, $this->uri)) {
+						$route = [self::USER_CONTROLLER, "showNewPwd", $this->uri[2]];
+						break;
+					}
+					else {
+						$route = [self::USER_CONTROLLER, "404"];
+						break;
+					}
 				case 'changepwd':
 					$route = [self::USER_CONTROLLER, "changePwd"];
 					break;
