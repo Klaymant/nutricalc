@@ -5,26 +5,36 @@
 	ob_start();
 ?>
 
-<div class="content">
-	<form action="createaccount" method="post">
-		<table>
-			<tr>
-				<td>Mail :</td>
-				<td><input type="text" name="mail"></td>
-			</tr>
-			<tr>
-				<td>Password :</td>
-				<td><input type="password" name="pwd"></td>
-			</tr>
-		</table>
-		<input class="button" type="submit" value="Here we go!">
-	</form>
+<div class="columns is-centered">
+	<div class="column is-one-quarter">
+		<div class="box has-text-centered">
+			<h1 class="title">Join our team, fellow!</h1>
+			<p>
+				You will be able to follow your progress. How awesome it is!
+			</p>
+		</div>
 
-	<?php
-		if (isset($error)) {
-			echo 'This mail is already used. Try another one!';
-		}
-	?>
+		<div class="box">
+			<form class="form" action="createaccount" method="post">
+				<div class="field">
+					<label class="label">Mail</label>
+					<input class="input" type="mail" placeholder="address@mail.com" name="mail">
+				</div>
+
+				<div class="field">
+					<label class="label">Password</label>
+					<input class="input" type="password" name="pwd">
+				</div>
+				<input class="button is-info" type="submit" value="Here we go!">
+			</form>
+
+			<?php
+				if (isset($error)) {
+					echo 'This mail is already used. Try another one!';
+				}
+			?>
+		</div>
+	</div>
 </div>
 
 <?php

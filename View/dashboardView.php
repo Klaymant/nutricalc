@@ -1,32 +1,27 @@
 <!-- DOCTYPE HTML -->
 <?php
-	require_once("Config/Path.php");
 	use Config\Path;
 	use Config\PathView;
 	ob_start();
 
 	function displayWeights($weightTracking) {
-		echo '<tr>
-				<td>Date</td>
-				<td>Weight</td>
-			</tr>';
 		foreach($weightTracking as $weightData) {
 			echo '
 			<tr>
-				<td class="firstCol">&#10026; ' . $weightData['wt_date'] . '</td>
-				<td>' . '<span class="value">' . $weightData['wt_weight'] . '</span>kg</td>
+				<td>&#10026; ' . $weightData['wt_date'] . '</td>
+				<td class="has-text-right">'. $weightData['wt_weight'] . 'kg</td>
 			</tr>';
 		}
 	}
 
 		function showLastTrainings($trainings) {
 		foreach ($trainings as $training) {
-			echo '<tr class="trainingLine">';
-			$date = '<td class="firstCol">&#10026; <span class="value">' .
+			echo '<tr>';
+			$date = '<td>&#10026; ' .
 			'<a href="training/' . $training->getId() . '">' .
 			$training->getDate() . '</a>' .
-			'</span></td>';
-			$shape = '<td><span class="value">' . $training->getShape() . '</span>/10</td>';
+			'</td>';
+			$shape = '<td class="has-text-right">' . $training->getShape() . '/10</td>';
 			echo $date;
 			echo $shape;
 			echo '</tr>';
@@ -34,105 +29,106 @@
 	}
 ?>
 
-<div id="welcome" class="content">
-	<p>&#10077; Hello <span class="userName"><?= $mail['u_mail'] ?></span>! 🙋‍♂️ &#10078;</p>
-	<?php
-		if (isset($trainings[0]))
-		{
-			echo "<p>&#10077; The last time you 💪 was the <strong>" . $trainings[0]->getDate() . "</strong> &#10078;</p>";
-		}
-	?>
+<!-- WELCOME MESSAGE -->
+
+<div class="message is-success has-text-centered">
+	<div class="message-body">
+		<p>
+			Hello <span class="userName"><?= $mail['u_mail'] ?></span>!
+		</p>
+		<?php
+			if (isset($trainings[0]))
+			{
+				echo "<p>&#10077; The last time you 💪 was the <strong>" . $trainings[0]->getDate() . "</strong> &#10078;</p>";
+			}
+		?>
+	</div>
 </div>
 
-<!--
----- TILE 1 : DAILY NEEDS
--->
-	<div class="tile" id="needs">
-		<table>
-			<thead>
-				<tr>
-					<th colspan=2>🍌 My daily needs</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td class="nutrient calories" width="10px">Calories</td>
-					<td><span class="value"><?= round($user->getNutrient()->getKcalNeeds(), 0) ?></span>kcal</td>
+<!-- DASHBOARD TILES -->
+
+<!-- 1. Daily Needs -->
+
+<div class="columns is-variable is-8 is-centered">
+	<div class="column is-one-quarter has-text-centered">
+		<div class="box">
+			<h1 class="title">🍌 My daily needs</h1>
+			<table class="table is-fullwidth dashboard is-narrow">
+				<tr class="nutrient calories">
+					<td>Calories</td>
+					<td class="has-text-right">1300kcal / <?= round($user->getNutrient()->getKcalNeeds(), 0) ?>kcal</td>
 				</tr>
 				<tr>
-					<td class="nutrient proteins">Proteins</td>
-					<td><span class="value"><?= round($user->getNutrient()->getProteinsNeeds(), 0) ?></span>g</td>
+					<td colspan=2><progress class="progress is-success" value="50" max="80"></progress></td>
+				</tr>
+				<tr class="nutrient proteins">
+					<td>Proteins</td>
+					<td class="has-text-right">80g / <?= round($user->getNutrient()->getProteinsNeeds(), 0) ?>g</td>
 				</tr>
 				<tr>
-					<td class="nutrient fat">Fat </td>
-					<td><span class="value"><?= round($user->getNutrient()->getFatNeeds(), 0) ?></span>g</td>
+					<td colspan=2><progress class="progress is-danger" value="50" max="80"></progress></td>
+				</tr>
+				<tr class="nutrient fat">
+					<td>Fat </td>
+					<td class="has-text-right">50g / <?= round($user->getNutrient()->getFatNeeds(), 0) ?>g</td>
 				</tr>
 				<tr>
-					<td class="nutrient carbs">Carbs</td>
-					<td><span class="value"><?= round($user->getNutrient()->getCarbsNeeds(), 0) ?></span>g</td>
+					<td colspan=2><progress class="progress is-warning" value="50" max="80"></progress></td>
 				</tr>
+				<tr class="nutrient carbs">
+					<td>Carbs</td>
+					<td class="has-text-right">250g / <?= round($user->getNutrient()->getCarbsNeeds(), 0) ?>g</td>
 				</tr>
-			</tbody>
-		</table>
-		<p>
-			Your daily needs have been calculated thanks to <a href="<?= Path::APP ?>/settings">your data</a>.
-		</p>
+				<tr>
+					<td colspan=2><progress class="progress is-info" value="50" max="80"></progress></td>
+				</tr>
+			</table>
+			<p>
+				Your daily needs have been calculated thanks to <a href="<?= Path::APP ?>/settings">your data</a>.
+			</p>
+		</div>
 	</div>
 
-	<!--
-	---- TILE 2 : TRAININGS
-	-->
+<!-- 2. Trainings -->
 
-	<div class="tile" id="trainings">
-		<table>
-			<thead>
-				<tr>
-					<th colspan=2>🏋️‍  My trainings</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td>Date</td>
-					<td>Shape</td>
-				</tr>
-				<?php
-					showLastTrainings($trainings);
-				?>
+	<div class="column is-one-quarter has-text-centered">
+		<div class="box">
+			<h1 class="title">🏋️‍  My trainings</h1>
+			<table class="table is-fullwidth is-striped has-content-centered is-narrow">
+				<thead>
+					<tr>
+						<th>Date</th>
+						<th class="has-text-right">Shape</th>
+					</tr>
+				</thead>
+				<tbody>
+					<?php showLastTrainings($trainings); ?>
 				</tbody>
-				<tfoot>
-					<tr>
-						<td colspan=2><a class="button" href="<?= Path::APP ?>/alltrainings">See all trainings</a></td>
-					</tr>
-					<tr>
-						<td colspan=2><a class="button" href="addtraining">&#10012; Add a training</a></td>
-					</tr>
-				</tfoot>
-		</table>
+			</table>
+			<a class="button is-info is-small" href="<?= Path::APP ?>/alltrainings">See all trainings</a>
+			<a class="button is-success is-small" href="<?= Path::APP ?>/addtraining">&#10012; Add a training</a>
+		</div>
 	</div>
 
-	<!--
-	---- TILE 3 : WEIGHT TRACKING
-	-->
+<!-- 3. Weight Tracking -->
 
-	<div class="tile" id="weightTracking">
-		<table>
-			<thead>
-				<tr>
-					<th colspan=2>⚖️ My Weight Tracking</th>
-				</tr>
-			<tbody>
-				<?php displayWeights($weightTracking); ?>
-			</tbody>
-			<tfoot>
-				<tr>
-					<td colspan=2><a class="button" href="<?= Path::APP ?>/showweight">Display my whole weight tracking</a></td>
-				</tr>
-				<tr>
-					<td colspan=2><a class="button" href="<?= Path::APP ?>/showaddweight">&#10012; Add a new weight</a></td>
-				</tr>
-			</tfoot>
-		</table>
+	<div class="column is-one-quarter has-text-centered">			
+		<div class="box">
+			<h1 class="title">⚖️ My Weight Tracking</h1>
+			<table class="table is-fullwidth is-striped dashboard is-narrow">
+				<thead>
+					<th>Date</th>
+					<th class="has-text-right">Weight</th>
+				</thead>
+				<tbody>
+					<?php displayWeights($weightTracking); ?>
+				</tbody>
+			</table>
+			<a class="button is-info is-small" href="<?= Path::APP ?>/showweight">Display my whole weight tracking</a>
+			<a class="button is-success is-small" href="<?= Path::APP ?>/showaddweight">&#10012; Add a new weight</a>
+		</div>
 	</div>
+</div>
 
 <?php
 	// $content contains the html content from ob_start so far

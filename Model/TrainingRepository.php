@@ -145,4 +145,11 @@ class TrainingRepository extends Repository {
 		$query = "DELETE FROM training WHERE t_id=?";
 		$this->sqlMaker->make($query, NULL, [$trainingId]);
 	}
+
+	public function dateExists($userId, $date) {
+		$query = "SELECT COUNT(*) as nb_date FROM training WHERE t_fk_user_id=? AND t_date=?";
+		$params = [$userId, $date];
+		$dateExists = $this->sqlMaker->make($query, 'fetch', $params);
+		return ($dateExists['nb_date'] > 0) ? true : false;
+	}
 }
