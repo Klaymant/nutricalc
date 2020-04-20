@@ -108,7 +108,7 @@ class UserRepository extends Repository {
 
 	public function weightDateExists($userId, $weightDate) {
 		$query = "SELECT COUNT(*) as nb_weight_date FROM weight_tracking WHERE wt_fk_user_id=? AND wt_date=?";
-		$params = [$userId, $weight];
+		$params = [$userId, $weightDate];
 		$weightDateExists = $this->sqlMaker->make($query, 'fetch', $params);
 		return ($weightDateExists['nb_weight_date'] > 0) ? true : false;
 	}

@@ -7,21 +7,36 @@
 	use Config\PathView;
 ?>
 
-<div class="content">
-	<form action="addweight" method="post">
-		<h1>New weight</h1>
-		<table>
-			<tr>
-				<td>Date :</td>
-				<td><input size=7 type="date" name="date" value="<?= $today ?>"></td>
-			</tr>
-			<tr>
-				<td>Weight :</td>
-				<td><input size=1 type="number" min=40 max=150 step=1 value=60 name="weight">kg</td>
-			</tr>
-		</table>
-		<input class="button" type="submit" value="Here is my new weight!">
-	</form>
+<div class="columns is-centered">
+	<div class="column is-one-quarter">
+		<div class="box has-text-centered">
+			<h1 class="title">New weight for a new life</h1>
+		</div>
+
+		<?php
+			if (isset($weightDateExists) && $weightDateExists) {
+				echo '
+				<div class="box has-background-danger has-text-white has-text-centered">
+					<p>You already weighed this day!</p>
+					</br>
+					<p>Weighing twice a day seems to be a bit exagerated, nope? 😮</p>
+				</div>';
+			}
+		?>
+		<form class="form" action="addweight" method="post">
+			<div class="field">
+				<label class="label">Date</label>
+				<input class="input" type="date" name="date" value="<?= $today ?>">
+			</div>
+
+			<div class="field">
+				<label class="label">Weight</label>
+				<input class="input" type="number" min=40 max=150 step=1 value=60 name="weight">
+			</div>
+
+			<input class="button is-info" type="submit" value="Here is my new weight!">
+		</form>
+	</div>
 </div>
 
 <?php
