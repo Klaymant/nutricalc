@@ -19,27 +19,48 @@
 	var methodInfo = <?php $jsHelper->jsEncode($methodInfo) ?>;
 </script>
 
-<div class="content">
-	<form action="savetraining" method="post">
-		<h1>New training</h1>
-		<table>
-			<h2>Info of the day</h2>
-			<tr>
-				<td>Date :</td>
-				<td><input size=7 type="date" name="date" value="<?= $today ?>"></td>
-			</tr>
-			<tr>
-				<td>Shape :</td>
-				<td><input size=1 type="number" min=0 max=10 step=1 value=5 name="shape">/10</td>
-			</tr>
-		</table>
-		<div id="exercises"></div>
-		<input class="button" type="submit" value="Here is my new training!">
-	</form>
+<div class="columns is-centered">
+	<div class="column is-one-quarter">
+		<div class="box has-text-centered">
+			<h1 class="title">New training</h1>
+			<p>
+				Show me what you've got!
+			</p>
+		</div>
 
-	<button class="button" onclick="addExo()">
-		(+) Add an exercise
-	</button>
+		<?php
+			if (isset($dateError) && $dateError) {
+				echo '
+				<div class="box has-background-danger has-text-white has-text-centered">
+					<p>You can\'t train twice a day!</p>
+				</div>';
+			}
+		?>
+
+		<div class="content">
+			<form action="savetraining" method="post">
+				<div class="box">
+					<h2 class="subtitle has-text-centered">Info of the day</h2>
+					<div class="field">
+						<label class="label">Date</label>
+						<input class="input" size=7 type="date" name="date" value="<?= $today ?>">
+					</div>
+
+					<div class="field">
+						<label class="label">Shape</label>
+						<input class="input" size=1 type="number" min=0 max=10 step=1 placeholder="Your shape out of 10" name="shape">
+					</div>
+				</div>
+
+				<h2 class="subtitle has-text-centered">Exercises made with pleasure and pain</h2>
+				<div class="box" id="exercises"></div>
+				<div class="buttons">
+					<input class="button is-success" type="button" value="(+) Add an exercise" onclick="addExo()">
+					<input class="button is-info" type="submit" value="Here is my new training!">
+				</div>
+			</form>
+		</div>
+	</div>
 </div>
 
 <script src="<?= PathAsset::JS ?>/exo.js" type="text/javascript"></script>

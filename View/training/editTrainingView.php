@@ -30,34 +30,45 @@
 	}
 ?>
 
-<div class="content">
-	<form action="<?= Path::APP ?>/updateTraining" method="post">
-		<h1>Edit training</h1>
-		<h2>Info of the day</h2>
-		<table>
-			<tr>
-				<td>Date :</td>
-				<td><input size=7 type="date" name="date" value="<?= $today ?>"></td>
-			</tr>
-			<tr>
-				<td>Shape :</td>
-				<td><input size=1 type="number" min=0 max=10 step=1 value=5 name="shape">/10</td>
-			</tr>
-		</table>
-		<div id="exercises">
-			<?php
-				displayExos($training['exercises']);
-			?>
+<div class="columns is-centered">
+	<div class="column is-one-quarter">
+		<div class="box has-text-centered">
+			<h1 class="title">Edit training</h1>
+			<p>
+				You made more efforts, didn't you ?
+			</p>
 		</div>
-		<input class="button" type="submit" value="Modifications made!">
-		<input type="hidden" id="trainingId" name="trainingId" value=<?= $trainingId ?>>
-	</form>
 
-	<button class="button" onclick="addExo()">
-		(+) Add an exercise
-	</button>
+		<div class="content">
+			<form action="<?= Path::APP ?>/updateTraining" method="post">
+				<div class="box">
+					<h2 class="subtitle has-text-centered">Info of the day</h2>
+					<div class="field">
+						<label class="label">Date</label>
+						<input class="input" size=7 type="date" name="date" value="<?= $today ?>">
+					</div>
 
-	<script src="<?= PathAsset::JS ?>/exo.js" type="text/javascript"></script>
+					<div class="field">
+						<label class="label">Shape</label>
+						<input class="input" size=1 type="number" min=0 max=10 step=1 placeholder="Your shape out of 10" name="shape">
+					</div>
+				</div>
+
+				<div class="box" id="exercises">
+					<?php
+						displayExos($training['exercises']);
+					?>
+				</div>
+				<div class="buttons">
+					<input class="button is-success" value="(+) Add an exercise" onclick="addExo()">
+					<input class="button is-info" type="submit" value="Modifications made!">
+					<input type="hidden" id="trainingId" name="trainingId" value=<?= $trainingId ?>>
+				</div>
+			</form>
+		</div>
+
+		<script src="<?= PathAsset::JS ?>/exo.js" type="text/javascript"></script>
+	</div>
 </div>
 
 <?php

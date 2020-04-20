@@ -4,42 +4,44 @@
 	use Config\PathView;
 ?>
 
-<?php
-	foreach ($trainings as $trainee) {
-		echo "<table class='training'>
-			<thead>
-				<tr>
-					<th>Date</th>
-					<th colspan=2>" . $trainee->getDate() . "</th>
-					<th>Shape</th>
-					<th colspan=2>" . $trainee->getShape() . "</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td class='title exofield'>Exercise</td>
-					<td class='exo title'>Work load</td>
-					<td class='exo title'>Sets</td>
-					<td class='exo title'>Reps</td>
-					<td class='exo title'>Rest</td>
-					<td class='exo title'>Method</td>
-				</tr>
-";
-		foreach ($trainee->getExercises() as $exo) {
-			$method = $exo->getMethod() != NULL ? $exo->getMethod() : "None";
-			echo '<tr>' .
-				'<td class="exoName">' . $exo->getName() . '</td>' .
-				'<td class="exo">' . $exo->getWorkLoad() . 'kg</td>' .
-				'<td class="exo">' . $exo->getSets() . '</td>' .
-				'<td class="exo">' . $exo->getReps() . '</td>' .
-				'<td class="exo">' . $exo->getRest() . 's</td>' .
-				'<td class="exo">' . $method . '</td>' .
-			'</tr>';
+<div class="columns is-centered">
+	<?php
+		foreach ($trainings as $trainee) {
+			echo '
+			<div class="column">
+				<div class="box">
+					<h2 class="subtitle is-5">Date : ' . $trainee->getDate() . '</h2>' .
+					'<h2 class="subtitle">Shape : ' . $trainee->getShape() . '</h2>'.
+				'</div>
+				<table class="table is-fullwidth is-narrow">
+					<thead>
+						<tr>
+							<th>Exercise</th>
+							<th>Work load</th>
+							<th>Sets</th>
+							<th>Reps</th>
+							<th>Rest</th>
+							<th>Method</th>
+						</tr>
+					</thead>
+					<tbody>';
+				foreach ($trainee->getExercises() as $exo) {
+					$method = $exo->getMethod() != NULL ? $exo->getMethod() : "None";
+					echo '<tr>' .
+						'<td>' . $exo->getName() . '</td>' .
+						'<td class="has-text-centered">' . $exo->getWorkLoad() . 'kg</td>' .
+						'<td class="has-text-centered">' . $exo->getSets() . '</td>' .
+						'<td class="has-text-centered">' . $exo->getReps() . '</td>' .
+						'<td class="has-text-centered">' . $exo->getRest() . 's</td>' .
+						'<td class="has-text-centered">' . $method . '</td>' .
+					'</tr>';
+				}
+					echo "<tbody>
+				</table>
+			</div>";
 		}
-			echo "<tbody>
-		</table>";
-	}
-?>
+	?>
+</div>
 
 <?php
 	// $content contains the html content from ob_start so far

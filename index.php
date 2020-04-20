@@ -4,6 +4,7 @@
     require_once('Controller/api/UserApiController.php');
     require_once('Utils/Routeur.php');
     require_once('Utils/UriParser.php');
+    require_once('Config/Path.php');
 	use Utils\Routeur;
 	use Utils\UriParser;
 

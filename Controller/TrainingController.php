@@ -59,9 +59,15 @@ class TrainingController {
     }
 
     public function saveTraining() {
-        $trainingInfo = $this->getnewTrainingInfo();
-    	$this->trainingRepo->addTraining($_SESSION['id'], $trainingInfo);
-    	header("Location: " . PATH::APP . "/dashboard");
+        $dateError = $this->trainingRepo->dateExists($_SESSION['id'], $_POST['date']);
+        if ($dateError) {
+            require(PathView::TRAINING . "/addtrainingView.php");
+        }
+        else {
+            $trainingInfo = $this->getnewTrainingInfo();
+        	$this->trainingRepo->addTraining($_SESSION['id'], $trainingInfo);
+        	header("Location: " . PATH::APP . "/dashboard");
+        }
     }
 
     public function deleteTraining($trainingId) {

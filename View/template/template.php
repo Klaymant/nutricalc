@@ -4,9 +4,8 @@
 ?>
 
 <html>
-	<body>
+	<body class="has-navbar-fixed-top">
 		<?php include(PathView::ELEMENT . "/headView.php"); ?>
-		<?php include(PathView::ELEMENT . "/headerView.php"); ?>
 		<?php include(PathView::ELEMENT . "/navView.php"); ?>
 		<?php echo $content; ?>
 		<?php include(PathView::ELEMENT . "/footerView.php"); ?>

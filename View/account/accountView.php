@@ -5,60 +5,73 @@
 	ob_start();
 ?>
 
-<div class="content">
-	<p>
-		It is now time to give your personal data so that you can estimate the calories you need to reach your goal!
-	</p>
+<div class="columns is-centered">
 
-	<form action="savedata" method="post">
-		<table>
-			<tr>
-				<td>Sex :</td>
-				<td>
-					<input type="radio" name="sex" value="F">Female
-					<input type="radio" name="sex" value="M" checked="checked">Male
-				</td>
-			</tr>
-			<tr>
-				<td>Age :</td>
-				<td><input type="text" name="age"></td>
-				<td>years old</td>
-			</tr>
-			<tr>
-				<td>Height :</td>
-				<td><input type="text" name="height"></td>
-				<td>cm</td>
-			</tr>
-			<tr>
-				<td>Weight :</td>
-				<td><input type="text" name="weight"></td>
-				<td>kg</td>
-			</tr>
-			<tr>
-				<td>Activity level :</td>
-				<td>
-					<select name="activity">
-						<option value=1>Any (0 time a week)</option>
-	  					<option value=2>Low (1 to 2 times a week)</option>
-	  					<option value=3>Moderate (2 to 3 times a week)</option>
-	  					<option value=4>High (3 to 4 times a week)</option>
-	  					<option value=5>Very high (4+ times a week)</option>
-					</select>
-				</td>
-			</tr>
-			<tr>
-				<td>Goal :</td>
-				<td>
-					<select name="goal">
-						<option value=1>Fat Loss</option>
-	  					<option value=2>Maintain</option>
-	  					<option value=3>Muscle Gain</option>
-					</select>
-				</td>
-			</tr>
-		</table>
-		<input class="button" type="submit" value="Save my data">
-	</form>
+	<div class="column is-one-quarter">
+		<div class="box has-text-centered">
+			<h2 class="title is-3">Edit your data</h2>
+			<p>
+				You did it wrong when creating your account ? No panic! Thanks to this form you can change this!
+			</p>
+		</div>
+
+		<div class="box">
+			<form class="form" action="savedata" method="post">
+				<div class="field">
+					<div class="control">
+						<label class="label">Sex</label>
+						<input type="radio" name="sex" value="F">Female
+						<input type="radio" name="sex" value="M" checked="checked">Male
+					</div>
+				</div>
+				<div class="field">
+					<div class="control">
+						<label class="label">Age</label>
+						<input class="input" type="number" placeholder="Your age" name="age" min=16 max=120>
+					</div>
+				</div>
+				<div class="field">
+					<div class="control">
+						<label class="label">Height</label>
+						<input class="input" type="number" placeholder="Your height (in cm)" min=130 max=230 name="height">
+					</div>
+				</div>
+				<div class="field">
+					<div class="control">
+						<label class="label">Weight</label>
+						<input class="input" type="number" placeholder="Your weight (in kg)" min=30 max=120  name="weight">
+					</div>
+				</div>
+				<div class="field">
+					<div class="control">
+						<label class="label">Activity Level</label>
+						<div class="select is-info">
+							<select name="activity">
+								<option value=1>Any (0 time a week)</option>
+			  					<option value=2>Low (1 to 2 times a week)</option>
+			  					<option value=3>Moderate (2 to 3 times a week)</option>
+			  					<option value=4>High (3 to 4 times a week)</option>
+			  					<option value=5>Very high (4+ times a week)</option>
+								</select>
+						</div>
+					</div>
+				</div>
+				<div class="field">
+					<div class="control">
+						<label class="label">Goal</label>
+						<div class="select is-info">
+							<select name="goal">
+								<option value=1>Fat Loss</option>
+			  					<option value=2>Maintain</option>
+			  					<option value=3>Muscle Gain</option>
+								</select>
+						</div>
+					</div>
+				</div>
+				<button class="button is-info is-focused" type="submit">Save my data</button>
+			</form>
+		</div>
+	</div>
 </div>
 
 <?php

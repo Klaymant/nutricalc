@@ -106,6 +106,13 @@ class UserRepository extends Repository {
 		$this->sqlMaker->make($query, NULL, $params);
 	}
 
+	public function weightDateExists($userId, $weightDate) {
+		$query = "SELECT COUNT(*) as nb_weight_date FROM weight_tracking WHERE wt_fk_user_id=? AND wt_date=?";
+		$params = [$userId, $weight];
+		$weightDateExists = $this->sqlMaker->make($query, 'fetch', $params);
+		return ($weightDateExists['nb_weight_date'] > 0) ? true : false;
+	}
+
 	public function makeWeightTracking($userId, $max=NULL) {
 		$query = SqlUserShortcut::GET_WEIGHT_TRACKING_BY_ID;
 		$weightTracking = $this->sqlMaker->make($query, "fetchAll", [$userId]);

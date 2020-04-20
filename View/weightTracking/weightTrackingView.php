@@ -9,25 +9,30 @@
 	function displayWeights($weightTracking) {
 		foreach($weightTracking as $weight) {
 			echo '<tr>'
-			. '<td class="firstCol">' . $weight['wt_date'] . '</td>'
-			. '<td>' . '<span class="value">' . $weight['wt_weight'] . '</span>kg</td>'
+			. '<td>' . $weight['wt_date'] . '</td>'
+			. '<td class="has-text-right">' . '<span class="value">' . $weight['wt_weight'] . '</span>kg</td>'
 			. '</tr>';
 		}
 	}
 ?>
 
-<div class="tile">
-	<table>
-		<thead>
-			<tr>
-				<th>Date</th>
-				<th>Weight</th>
-			</tr>
-		</thead>
-		<tbody>
-			<?php displayWeights($weightTracking); ?>
-		</tbody>
-	</table>
+<div class="columns is-centered">
+	<div class="column is-one-fifth">
+		<div class="box">
+			<h1 class="title">All my weight Tracking</h1>
+		</div>
+		<table class="table is-fullwidth">
+			<thead>
+				<tr>
+					<th>Date</th>
+					<th class="has-text-right">Weight</th>
+				</tr>
+			</thead>
+			<tbody>
+				<?php displayWeights($weightTracking); ?>
+			</tbody>
+		</table>
+	</div>
 </div>
 
 <?php
