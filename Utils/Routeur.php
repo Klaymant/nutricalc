@@ -104,8 +104,14 @@ class Routeur {
 					$route = [self::TRAINING_CONTROLLER, "deleteTraining", $this->uri[2]];
 					break;
 				case 'alltrainings':
-					$route = [self::TRAINING_CONTROLLER, "showAllTrainings"];
-					break;
+					if (array_key_exists(2, $this->uri)) {
+						$route = [self::TRAINING_CONTROLLER, "showAllTrainings", $this->uri[2]];
+						break;
+					}
+					else {
+						$route = [self::USER_CONTROLLER, "404"];
+						break;
+					}
 				case 'showweight':
 					$route = [self::USER_CONTROLLER, "showWeightTracking"];
 					break;

@@ -105,7 +105,7 @@
 					<?php showLastTrainings($trainings); ?>
 				</tbody>
 			</table>
-			<a class="button is-info is-small" href="<?= Path::APP ?>/alltrainings">See all trainings</a>
+			<a class="button is-info is-small" href="<?= Path::APP ?>/alltrainings/1">See all trainings</a>
 			<a class="button is-success is-small" href="<?= Path::APP ?>/addtraining">&#10012; Add a training</a>
 		</div>
 	</div>

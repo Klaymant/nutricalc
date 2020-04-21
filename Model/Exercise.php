@@ -1,5 +1,4 @@
 <?php
-
 namespace Model;
 
 class Exercise {
@@ -14,8 +13,8 @@ class Exercise {
 		$this->name = $name;
 		$this->workLoad = $workLoad;
 		$this->rest = $rest;
-		$this->sets = $sets;
-		$this->reps = $reps;
+		$this->nbSets = $sets;
+		$this->nbReps = $reps;
 		$this->method = $method;
 	}
 
@@ -33,11 +32,11 @@ class Exercise {
 	}
 
 	public function getSets() {
-		return $this->sets;
+		return $this->nbSets;
 	}
 
 	public function getReps() {
-		return $this->reps;
+		return $this->nbReps;
 	}
 
 	public function getMethod() {
@@ -57,12 +56,12 @@ class Exercise {
 		$this->rest = $rest;
 	}
 
-	public function setSets($sets) {
-		$this->sets = $sets;
+	public function setSets($nbSets) {
+		$this->nbSets = $nbSets;
 	}
 
-	public function setReps($reps) {
-		$this->reps = $reps;
+	public function setReps($nbReps) {
+		$this->nbReps = $nbReps;
 	}
 
 	public function setMethod($method) {
