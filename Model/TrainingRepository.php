@@ -67,7 +67,7 @@ class TrainingRepository extends Repository {
 		$trainings = [];
 
 		foreach ($trainingIds AS $trainingId) {
-            array_push($trainings, $this->makeTrainingById($trainingId['id_trainings']));
+            array_push($trainings, $this->makeTrainingById($trainingId['t_id']));
         }
         return $trainings;
 	}
@@ -77,7 +77,7 @@ class TrainingRepository extends Repository {
 		$myTrainings = [];
 
 		foreach ($trainingIds as $trainingId) {
-			$training = $this->makeTrainingById($trainingId['id_trainings']);
+			$training = $this->makeTrainingById($trainingId['t_id']);
 			array_push($myTrainings, $training);
 		}
 		return $myTrainings;

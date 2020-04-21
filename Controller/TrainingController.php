@@ -21,8 +21,22 @@ class TrainingController {
         require_once(PathView::TRAINING . "/trainingView.php");
     }
 
-    public function showAllTrainings() {
+    public function getPaginationFromTrainings($trainings, $pageNb, $amount=5) {
+        return array_slice($trainings, ($pageNb-1)*$amount, $amount);
+    }
+
+    public function getMaxNbPages($trainings, $amount=5) {
+        $value = (count($trainings) % $amount == 0) ? count($trainings) / $amount : count($trainings) / $amount + 1;
+        return (int) $value;
+    }
+
+    public function showAllTrainings($pageNb) {
+        $actualPageNb = $pageNb;
+        $nbTrainingsByPage = 5;
         $trainings = $this->trainingRepo->getAllTrainingsById($_SESSION['id']);
+        $maxNbPages = $this->getMaxNbPages($trainings, $nbTrainingsByPage);
+        $trainings = $this->getPaginationFromTrainings($trainings, $pageNb, $nbTrainingsByPage);
+
         require_once(PathView::TRAINING . "/allTrainingsView.php");
     }
 

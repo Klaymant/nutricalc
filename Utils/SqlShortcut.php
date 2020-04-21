@@ -11,7 +11,7 @@ abstract class SqlTrainingShortcut {
 				WHERE t_id=?";
 	const INSERT_TRAINING = "INSERT INTO training (t_fk_user_id, t_date, t_shape) VALUES (?, ?, ?)";
 	const INSERT_EXERCISE = "INSERT INTO exercise_practice (exo_p_fk_training_id, exo_p_fk_exercise_catalog_id, exo_p_work_load, exo_p_rest, exo_p_nb_sets, exo_p_nb_reps, exo_p_fk_method_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
-	const SELECT_TRAININGS_IDS = "SELECT DISTINCT(t_id) AS id_trainings, t_date FROM `user` LEFT JOIN training ON t_fk_user_id = u_id WHERE t_fk_user_id =? ORDER BY t_date DESC";
+	const SELECT_TRAININGS_IDS = "SELECT DISTINCT(t_id), t_date FROM `user` LEFT JOIN training ON t_fk_user_id = u_id WHERE t_fk_user_id =? ORDER BY t_date DESC";
 	const UPDATE_TRAINING = "UPDATE training SET t_date = ?, t_shape = ? WHERE t_id=?";
 }
 
