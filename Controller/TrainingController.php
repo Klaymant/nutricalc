@@ -30,12 +30,23 @@ class TrainingController {
         return (int) $value;
     }
 
+    public function checkActualPageNb($pageNb, $maxNbPages) {
+        if ($pageNb > $maxNbPages) {
+            return $maxNbPages;
+        }
+        if ($pageNb < 1) {
+            return 1;
+        }
+        return $pageNb;
+
+    }
+
     public function showAllTrainings($pageNb) {
-        $actualPageNb = $pageNb;
         $nbTrainingsByPage = 5;
         $trainings = $this->trainingRepo->getAllTrainingsById($_SESSION['id']);
         $maxNbPages = $this->getMaxNbPages($trainings, $nbTrainingsByPage);
-        $trainings = $this->getPaginationFromTrainings($trainings, $pageNb, $nbTrainingsByPage);
+        $actualPageNb = $this->checkActualPageNb($pageNb, $maxNbPages);
+        $trainings = $this->getPaginationFromTrainings($trainings, $actualPageNb, $nbTrainingsByPage);
 
         require_once(PathView::TRAINING . "/allTrainingsView.php");
     }
