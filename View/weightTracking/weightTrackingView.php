@@ -18,7 +18,7 @@
 
 <div class="columns is-centered">
 	<div class="column is-one-fifth">
-		<div class="box">
+		<div class="box has-text-centered">
 			<h1 class="title">All my weight Tracking</h1>
 		</div>
 		<table class="table is-fullwidth">

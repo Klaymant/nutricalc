@@ -128,8 +128,14 @@ class UserController {
     }
 
     public function addWeight() {
-        $this->userRepo->addWeight($_SESSION['id'], $_POST['date'], $_POST['weight']);
-        header("Location: " . Path::APP . "/dashboard");
+        $weightDateExists = $this->userRepo->weightDateExists($_SESSION['id'], $_POST['date']);
+        if ($weightDateExists) {
+            require_once(PathView::WEIGHT_TRACKING . "/addWeightView.php");
+        }
+        else {
+            $this->userRepo->addWeight($_SESSION['id'], $_POST['date'], $_POST['weight']);
+            header("Location: " . Path::APP . "/dashboard");
+        }
     }
 
     /*
