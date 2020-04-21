@@ -42,7 +42,7 @@ class TrainingController {
     }
 
     public function showAllTrainings($pageNb) {
-        $nbTrainingsByPage = 5;
+        $nbTrainingsByPage = 10;
         $trainings = $this->trainingRepo->getAllTrainingsById($_SESSION['id']);
         $maxNbPages = $this->getMaxNbPages($trainings, $nbTrainingsByPage);
         $actualPageNb = $this->checkActualPageNb($pageNb, $maxNbPages);
