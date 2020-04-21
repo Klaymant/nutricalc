@@ -15,7 +15,7 @@
 
 	<?php
 		$iTraining = 0;
-		foreach ($trainings as $trainee) {
+		foreach ($trainings as $trainee) :
 			$actualDate = new DateTime($trainee->getDate());
 			$actualShape = getActualShape($trainee->getShape());
 			if ($iTraining % 2 == 0 or $iTraining == 0) {
@@ -25,10 +25,12 @@
 			<div class="column is-two-fifths">
 				<div class="box has-text-centered">
 					
-					<!-- Date -->
+					<!-- Header -->
 					<div class="columns">
+
+						<!-- Date -->
 						<div class="column has-text-left">
-							<a class="button has-background-info has-text-white" href="<?= Path::APP ?>/training/<?= $trainee->getId() ?>">
+							<a class="button has-background-success has-text-white" href="<?= Path::APP ?>/training/<?= $trainee->getId() ?>">
 								<?= $actualDate->format('l') ?>
 							</a>
 							<a class="button has-background-light" href="<?= Path::APP ?>/training/<?= $trainee->getId() ?>"><?= $trainee->getDate() ?></a>			
@@ -41,22 +43,23 @@
 							</button>
 						</div>	
 					</div>
+					<!-- #END Header -->
 
 					<!-- Exercises -->
 					<table class="table is-fullwidth">
 						<thead>
 							<tr>
 								<th>Exercise</th>
-								<th>Work load</th>
-								<th>Sets</th>
-								<th>Reps</th>
-								<th>Rest</th>
-								<th>Method</th>
+								<th class="has-text-centered">Work load</th>
+								<th class="has-text-centered">Sets</th>
+								<th class="has-text-centered">Reps</th>
+								<th class="has-text-centered">Rest</th>
+								<th class="has-text-centered">Method</th>
 							</tr>
 						</thead>
 						<tbody>
 					<?php
-						foreach ($trainee->getExercises() as $exo) {
+						foreach ($trainee->getExercises() as $exo) :
 							$method = ($exo->getMethod() != NULL) ? $exo->getMethod() : "None";
 					?>
 							<tr>
@@ -68,20 +71,24 @@
 								<td class="has-text-centered"><?= $method ?></td>
 							</tr>
 					<?php
-						}
+						endforeach;
 					?>
 						</tbody>
 					</table>
-					<!-- # Exercises -->
+					<!-- #END Exercises -->
 
+					<div class="content has-text-left">
+						<a class="button is-info" href="<?= Path::APP ?>/edittraining/<?= $trainee->getId() ?>">Edit</a>
+						<a class="button is-danger" href="<?= Path::APP ?>/deletetraining/<?= $trainee->getId() ?>">(-) Remove</a>
+					</div>
 				</div>
 			</div>
 		<?php
-			if ($iTraining % 2 != 0) {
+			if ($iTraining % 2 != 0) :
 				echo '</div>';
-			}
+			endif;
 			$iTraining++;
-		}
+		endforeach;
 	?>				
 </div>
 
