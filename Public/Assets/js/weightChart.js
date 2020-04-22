@@ -2,7 +2,6 @@ var ctx = document.getElementById('myChart').getContext('2d');
 
 var dates = [];
 var weights = [];
-var duration = 14;
 
 for (var i=0; i<weightTracking.length; i++) {
 	weights[i] = weightTracking[i]['wt_weight'];
@@ -15,7 +14,7 @@ Chart.scaleService.updateScaleDefaults('linear', {
     }
 });
 
-var chart = new Chart(ctx, {
+new Chart(ctx, {
     // The type of chart we want to create
     type: 'bar',
     data: {
