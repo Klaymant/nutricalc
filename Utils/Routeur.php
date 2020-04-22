@@ -14,7 +14,7 @@ class Routeur {
 	}
 
 	public function route(){
-        switch ($this->uri[0]){
+        switch ($this->uri[0]) :
             case 'app':
                 $route = $this->routeApp();
                 break;
@@ -24,25 +24,75 @@ class Routeur {
             default:
                 $route = $this->toggle404();
                 break;
-        }
+        endswitch;
         return $route;
     }
 
+    private function routeTraining($methodName) {
+    	$param = $methodName[1];
+
+    	switch ($methodName) :
+			case 'training':
+			$route = [self::TRAINING_CONTROLLER, "showTrainingById", $param];
+			break;
+			case 'addtraining':
+				$route = [self::TRAINING_CONTROLLER, "showAddTraining"];
+				break;
+			case 'edittraining':
+				$route = [self::TRAINING_CONTROLLER, "showEditTraining", $param];
+				break;
+			case 'updateTraining':
+				$route = [self::TRAINING_CONTROLLER, "updateTraining"];
+				break;
+			case 'savetraining':
+				$route = [self::TRAINING_CONTROLLER, "saveTraining"];
+				break;
+			case 'deletetraining':
+				$route = [self::TRAINING_CONTROLLER, "deleteTraining", $param];
+				break;
+			case 'alltrainings':
+				if (array_key_exists(2, $this->uri)) :
+					$route = [self::TRAINING_CONTROLLER, "showAllTrainings", $param];
+					break;
+				else :
+					$route = [self::USER_CONTROLLER, "404"];
+					break;
+				endif;
+		endswitch;
+		return $route;
+    }
+
+	private function routeApp2() {
+		$trainingMethods = ['training',
+		'addtraining',
+		'edittraining',
+		'updateTraining',
+		'savetraining',
+		'deletetraining',
+		'alltrainings'];
+
+		if (array_key_exists(1, $this->uri)) :
+			if (in_array($this->uri[1], $trainingMethods)) :
+				$route = $this->routeTraining($this->uri[1]);
+			endif;
+			return $route;
+		endif;
+	}
+
 	private function routeApp() {
-		if (array_key_exists(1, $this->uri)) {
-			switch ($this->uri[1]) {
+		if (array_key_exists(1, $this->uri)) :
+			switch ($this->uri[1]) :
 				case 'homepage':
 					$route = [self::USER_CONTROLLER, "showHomepage"];
 					break;
 				case 'id':
-					if (array_key_exists(2, $this->uri)) {
+					if (array_key_exists(2, $this->uri)) :
 						$route = [self::USER_CONTROLLER, "getUserById", $this->uri[2]];
 						break;
-					}
-					else {
+					else :
 						$route = [self::USER_CONTROLLER, "404"];
 						break;
-					}
+					endif;
 				case 'calculator':
 					$route = [self::USER_CONTROLLER, "showCalculator"];
 					break;
@@ -62,14 +112,13 @@ class Routeur {
 					$route = [self::USER_CONTROLLER, "forgottenPwd"];
 					break;
 				case 'newpwd':
-					if (array_key_exists(2, $this->uri)) {
+					if (array_key_exists(2, $this->uri)) :
 						$route = [self::USER_CONTROLLER, "showNewPwd", $this->uri[2]];
 						break;
-					}
-					else {
+					else :
 						$route = [self::USER_CONTROLLER, "404"];
 						break;
-					}
+					endif;
 				case 'changepwd':
 					$route = [self::USER_CONTROLLER, "changePwd"];
 					break;
@@ -104,14 +153,13 @@ class Routeur {
 					$route = [self::TRAINING_CONTROLLER, "deleteTraining", $this->uri[2]];
 					break;
 				case 'alltrainings':
-					if (array_key_exists(2, $this->uri)) {
+					if (array_key_exists(2, $this->uri)) :
 						$route = [self::TRAINING_CONTROLLER, "showAllTrainings", $this->uri[2]];
 						break;
-					}
-					else {
+					else :
 						$route = [self::USER_CONTROLLER, "404"];
 						break;
-					}
+					endif;
 				case 'showweight':
 					$route = [self::USER_CONTROLLER, "showWeightTracking"];
 					break;
@@ -133,11 +181,10 @@ class Routeur {
 				default:
 					$route = [self::USER_CONTROLLER, "404"];
 					break;
-			}
-		}
-		else {
+			endswitch;
+		else :
 			$route =  [self::USER_CONTROLLER, "404"];
-		}
+		endif;
 		return $route;
 	}
 
@@ -146,15 +193,13 @@ class Routeur {
 			switch ($this->uri[1]) {
 				case 'id':
 					// If a parameter is defined in URI
-					if (array_key_exists(2, $this->uri)) {
+					if (array_key_exists(2, $this->uri)) :
 						$route = [self::USER_API_CONTROLLER, "getUserById", $this->uri[2]];
 						break;
-					}
-					else {
+					else :
 						$route = [self::USER_API_CONTROLLER, "404"];
 						break;
-					}
-					break;
+					endif;
 				case 'bmr':
 					$route = [self::USER_API_CONTROLLER, "calculateBmr"]; //fixme
 					break;

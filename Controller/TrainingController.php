@@ -38,11 +38,10 @@ class TrainingController {
             return 1;
         }
         return $pageNb;
-
     }
 
     public function showAllTrainings($pageNb) {
-        $nbTrainingsByPage = 10;
+        $nbTrainingsByPage = 2;
         $trainings = $this->trainingRepo->getAllTrainingsById($_SESSION['id']);
         $maxNbPages = $this->getMaxNbPages($trainings, $nbTrainingsByPage);
         $actualPageNb = $this->checkActualPageNb($pageNb, $maxNbPages);
@@ -51,7 +50,8 @@ class TrainingController {
         require_once(PathView::TRAINING . "/allTrainingsView.php");
     }
 
-    public function showAddTraining() {
+    public function showAddTraining($error=false) {
+        $dateError = $error;
         $exoInfo = $this->trainingRepo->getAllExercisesInfo();
         $methodInfo = $this->trainingRepo->getAllMethodsInfo();
        	require_once(PathView::TRAINING . "/addTrainingView.php");
@@ -77,22 +77,32 @@ class TrainingController {
         return $errors;
     }
 
+    public function getTrainingMeta($post) {
+        $trainingMeta = [];
+        date_default_timezone_set('Europe/paris');
+        $today = date('yy-m-d');
+
+        $trainingMeta['date'] = ($post['date'] == NULL) ? $today : $post['date'];
+        $trainingMeta['shape'] = ($post['shape'] == NULL) ? 3 : $post['shape'];
+
+        return $trainingMeta;
+    }
+
     public function getnewTrainingInfo() {
-        $trainingMeta = ['date' => $_POST['date'], 'shape' => $_POST['shape']];
+        $trainingMeta = $this->getTrainingMeta($_POST);
         $exos = $this->getExosAsArray($_POST);
         return ['trainingMeta' => $trainingMeta, 'exos' => $exos];
     }
 
     public function saveTraining() {
         $dateError = $this->trainingRepo->dateExists($_SESSION['id'], $_POST['date']);
-        if ($dateError) {
-            require(PathView::TRAINING . "/addtrainingView.php");
-        }
-        else {
+        if ($dateError) :
+            $this->showAddTraining($dateError);
+        else :
             $trainingInfo = $this->getnewTrainingInfo();
         	$this->trainingRepo->addTraining($_SESSION['id'], $trainingInfo);
         	header("Location: " . PATH::APP . "/dashboard");
-        }
+        endif;
     }
 
     public function deleteTraining($trainingId) {
