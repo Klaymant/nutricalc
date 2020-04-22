@@ -170,6 +170,8 @@ class UserController {
 
     public function showWeightTracking() {
         $weightTracking = $this->userRepo->makeWeightTracking($_SESSION['id']);
+        $amount = 5;
+        $weightTracking = array_slice($weightTracking, 0, $amount);
         require_once(PathView::WEIGHT_TRACKING . "/weightTrackingView.php");
     }
 }
