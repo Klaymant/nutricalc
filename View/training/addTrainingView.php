@@ -3,8 +3,6 @@
 	ob_start();
 	date_default_timezone_set('Europe/paris');
 	$today = date('yy-m-d');
-	require_once("Config/Path.php");
-	require_once("Utils/JsHelper.php");
 	use Config\Path;
 	use Config\PathView;
 	use Config\PathAsset;
