@@ -26,14 +26,11 @@
 			</p>
 		</div>
 
-		<?php
-			if (isset($dateError) && $dateError) {
-				echo '
-				<div class="box has-background-danger has-text-white has-text-centered">
-					<p>You can\'t train twice a day!</p>
-				</div>';
-			}
-		?>
+		<?php if (isset($dateError) && $dateError) : ?>
+			<div class="box has-background-danger has-text-white has-text-centered">
+				<p>You can't train twice a day!</p>
+			</div>
+		<?php endif; ?>
 
 		<div class="content">
 			<form action="savetraining" method="post">

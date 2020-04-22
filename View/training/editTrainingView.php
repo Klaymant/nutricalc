@@ -24,11 +24,13 @@
 
 <?php
 	function displayExos($exercises) {
-		foreach ($exercises as $exo) {
-			echo "<script type='text/javascript'>displayExos();</script>";
-		}
-	}
+		foreach ($exercises as $exo) :
 ?>
+			<script type='text/javascript'>displayExos();</script>
+		<?php
+		endforeach;
+	}
+	?>
 
 <div class="columns is-centered">
 	<div class="column is-one-quarter">

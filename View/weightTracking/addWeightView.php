@@ -13,16 +13,14 @@
 			<h1 class="title">New weight for a new life</h1>
 		</div>
 
-		<?php
-			if (isset($weightDateExists) && $weightDateExists) {
-				echo '
-				<div class="box has-background-danger has-text-white has-text-centered">
-					<p>You already weighed this day!</p>
-					</br>
-					<p>Weighing twice a day seems to be a bit exagerated, nope? 😮</p>
-				</div>';
-			}
-		?>
+		<?php if (isset($weightDateExists) && $weightDateExists) : ?>
+			<div class="box has-background-danger has-text-white has-text-centered">
+				<p>You already weighed this day!</p>
+				</br>
+				<p>Weighing twice a day seems to be a bit exagerated, nope? 😮</p>
+			</div>
+		<?php endif; ?>
+
 		<form class="form" action="addweight" method="post">
 			<div class="field">
 				<label class="label">Date</label>

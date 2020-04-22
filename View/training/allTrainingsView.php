@@ -7,7 +7,7 @@
 	function getActualShape($shape) {
 		$actualShape = "";
 		for ($iShape=0; $iShape<$shape; $iShape++) :
-			$actualShape .= "💪";
+			$actualShape .= mb_convert_encoding('&#x1f4aa;', 'UTF-8', 'HTML-ENTITIES');
 		endfor;
 		return $actualShape;
 	}
@@ -18,10 +18,10 @@
 		foreach ($trainings as $trainee) :
 			$actualDate = new DateTime($trainee->getDate());
 			$actualShape = getActualShape($trainee->getShape());
-			if ($iTraining % 2 == 0 or $iTraining == 0) {
-				echo '<div class="columns is-centered">';
-			}
+			if ($iTraining % 2 == 0 or $iTraining == 0) :
 	?>
+				<div class="columns is-centered">;
+	<?php endif; ?>
 			<div class="column is-two-fifths">
 				<div class="box has-text-centered">
 					
@@ -98,7 +98,7 @@
 	<?php endif; ?>
 
 	<?php if ($actualPageNb < $maxNbPages) : ?>
-	<a class="pagination-next" href="<?= Path::APP ?>/alltrainings/<?= $actualPageNb+1 ?>">Next page</a>
+		<a class="pagination-next" href="<?= Path::APP ?>/alltrainings/<?= $actualPageNb+1 ?>">Next page</a>
 	<?php endif; ?>
 
 	<ul class="pagination-list">
