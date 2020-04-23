@@ -21,6 +21,7 @@ abstract class PathView {
 	const ELEMENT = self::VIEW . "/element";
 	const TRAINING = self::VIEW . "/training";
 	const WEIGHT_TRACKING = self::VIEW . "/weightTracking";
+	const ERROR = self::VIEW . "/error";
 }
 
 abstract class PathAsset {
