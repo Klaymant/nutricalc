@@ -7,10 +7,53 @@ class Routeur {
     const TRAINING_CONTROLLER = 'Controller\TrainingController';
 
 	private $uri;
+	private $allMethods;
+	private $allTags;
 
 	function __construct($uri) {
 		$this->uri = $uri;
 		$this->error = false;
+
+		$userMethods = [
+			['calculator', 'showCalculator', self::USER_CONTROLLER, false],
+			['usercalculator', 'userCalculator', self::USER_CONTROLLER, false],
+			['dashboard', 'showDashboard', self::USER_CONTROLLER, false],
+			['homepage', 'showHomepage', self::USER_CONTROLLER, false]
+		];
+
+		$trainingMethods = [
+			['training', 'showTrainingById', self::TRAINING_CONTROLLER, true],
+			['addtraining', 'showAddTraining', self::TRAINING_CONTROLLER, false],
+			['edittraining', 'showEditTraining', self::TRAINING_CONTROLLER, true],
+			['updateTraining', 'updateTraining', self::TRAINING_CONTROLLER, false],
+			['savetraining', 'saveTraining', self::TRAINING_CONTROLLER, false],
+			['deletetraining', 'deleteTraining', self::TRAINING_CONTROLLER, true],
+			['alltrainings', 'showAllTrainings', self::TRAINING_CONTROLLER, true]
+		];
+
+		$accountMethods = [
+			['loginpage', 'showLogin', self::USER_CONTROLLER, false],
+			['logout', 'logout', self::USER_CONTROLLER, false],
+			['login', 'login', self::USER_CONTROLLER, false],
+			['forgottenpwdpage', 'showForgottenPwd', self::USER_CONTROLLER, false],
+			['forgottenpwd', 'forgottenPwd', self::USER_CONTROLLER, false],
+			['newpwd', 'showNewPwd', self::USER_CONTROLLER, true],
+			['changepwd', 'changePwd', self::USER_CONTROLLER, false],
+			['newaccount', 'showAccountCreator', self::USER_CONTROLLER, false],
+			['createaccount', 'accountCreator', self::USER_CONTROLLER, false],
+			['settings', 'showSettings', self::USER_CONTROLLER, false],
+			['changedata', 'showChangeData', self::USER_CONTROLLER, false],
+			['savedata', 'saveData', self::USER_CONTROLLER, false]
+		];
+
+		$weightMethods = [
+			['showweight', 'showWeightTracking', self::USER_CONTROLLER, false],
+			['showaddweight', 'showAddWeight', self::USER_CONTROLLER, false],
+			['addweight', 'addWeight', self::USER_CONTROLLER, false]
+		];
+
+		$this->allMethods = $this->createMethodsLists(array_merge($trainingMethods, $accountMethods, $weightMethods, $userMethods));
+		$this->allTags = $this->getTagsFromMethods($this->allMethods);
 	}
 
 	public function route(){
@@ -28,165 +71,60 @@ class Routeur {
         return $route;
     }
 
-    private function routeTraining($methodName) {
-    	$param = $methodName[1];
-
-    	switch ($methodName) :
-			case 'training':
-			$route = [self::TRAINING_CONTROLLER, "showTrainingById", $param];
-			break;
-			case 'addtraining':
-				$route = [self::TRAINING_CONTROLLER, "showAddTraining"];
-				break;
-			case 'edittraining':
-				$route = [self::TRAINING_CONTROLLER, "showEditTraining", $param];
-				break;
-			case 'updateTraining':
-				$route = [self::TRAINING_CONTROLLER, "updateTraining"];
-				break;
-			case 'savetraining':
-				$route = [self::TRAINING_CONTROLLER, "saveTraining"];
-				break;
-			case 'deletetraining':
-				$route = [self::TRAINING_CONTROLLER, "deleteTraining", $param];
-				break;
-			case 'alltrainings':
-				if (array_key_exists(2, $this->uri)) :
-					$route = [self::TRAINING_CONTROLLER, "showAllTrainings", $param];
-					break;
-				else :
-					$route = [self::USER_CONTROLLER, "404"];
-					break;
-				endif;
-		endswitch;
-		return $route;
-    }
-
-	private function routeApp2() {
-		$trainingMethods = ['training',
-		'addtraining',
-		'edittraining',
-		'updateTraining',
-		'savetraining',
-		'deletetraining',
-		'alltrainings'];
-
-		if (array_key_exists(1, $this->uri)) :
-			if (in_array($this->uri[1], $trainingMethods)) :
-				$route = $this->routeTraining($this->uri[1]);
-			endif;
-			return $route;
-		endif;
-	}
-
 	private function routeApp() {
 		if (array_key_exists(1, $this->uri)) :
-			switch ($this->uri[1]) :
-				case 'homepage':
-					$route = [self::USER_CONTROLLER, "showHomepage"];
-					break;
-				case 'id':
-					if (array_key_exists(2, $this->uri)) :
-						$route = [self::USER_CONTROLLER, "getUserById", $this->uri[2]];
-						break;
-					else :
-						$route = [self::USER_CONTROLLER, "404"];
-						break;
-					endif;
-				case 'calculator':
-					$route = [self::USER_CONTROLLER, "showCalculator"];
-					break;
-				case 'loginpage':
-					$route = [self::USER_CONTROLLER, "showLogin"];
-					break;
-				case 'logout':
-					$route = [self::USER_CONTROLLER, "logout"];
-					break;
-				case 'login':
-					$route = [self::USER_CONTROLLER, "login"];
-					break;
-				case 'forgottenpwdpage':
-					$route = [self::USER_CONTROLLER, "showForgottenPwd"];
-					break;
-				case 'forgottenpwd':
-					$route = [self::USER_CONTROLLER, "forgottenPwd"];
-					break;
-				case 'newpwd':
-					if (array_key_exists(2, $this->uri)) :
-						$route = [self::USER_CONTROLLER, "showNewPwd", $this->uri[2]];
-						break;
-					else :
-						$route = [self::USER_CONTROLLER, "404"];
-						break;
-					endif;
-				case 'changepwd':
-					$route = [self::USER_CONTROLLER, "changePwd"];
-					break;
-				case 'newaccount':
-					$route = [self::USER_CONTROLLER, "showAccountCreator"];
-					break;
-				case 'createaccount':
-					$route = [self::USER_CONTROLLER, "accountCreator"];
-					break;
-				case 'dashboard':
-					$route = [self::USER_CONTROLLER, "showDashboard"];
-					break;
-				case 'settings':
-					$route = [self::USER_CONTROLLER, "showSettings"];
-					break;
-				case 'training':
-					$route = [self::TRAINING_CONTROLLER, "showTrainingById", $this->uri[2]];
-					break;
-				case 'addtraining':
-					$route = [self::TRAINING_CONTROLLER, "showAddTraining"];
-					break;
-				case 'edittraining':
-					$route = [self::TRAINING_CONTROLLER, "showEditTraining", $this->uri[2]];
-					break;
-				case 'updateTraining':
-					$route = [self::TRAINING_CONTROLLER, "updateTraining"];
-					break;
-				case 'savetraining':
-					$route = [self::TRAINING_CONTROLLER, "saveTraining"];
-					break;
-				case 'deletetraining':
-					$route = [self::TRAINING_CONTROLLER, "deleteTraining", $this->uri[2]];
-					break;
-				case 'alltrainings':
-					if (array_key_exists(2, $this->uri)) :
-						$route = [self::TRAINING_CONTROLLER, "showAllTrainings", $this->uri[2]];
-						break;
-					else :
-						$route = [self::USER_CONTROLLER, "404"];
-						break;
-					endif;
-				case 'showweight':
-					$route = [self::USER_CONTROLLER, "showWeightTracking"];
-					break;
-				case 'showaddweight':
-					$route = [self::USER_CONTROLLER, "showAddWeight"];
-					break;
-				case 'addweight':
-					$route = [self::USER_CONTROLLER, "addWeight"];
-					break;
-				case 'usercalculator':
-					$route = [self::USER_CONTROLLER, "userCalculator"];
-					break;
-				case 'changedata':
-					$route = [self::USER_CONTROLLER, "showChangeData"];
-					break;
-				case 'savedata':
-					$route = [self::USER_CONTROLLER, "saveData"];
-					break;
-				default:
-					$route = [self::USER_CONTROLLER, "404"];
-					break;
-			endswitch;
+			if (in_array($this->uri[1], $this->allTags)) :
+				$route = $this->routeMethod();
+			else :
+				$route = $this->toggle404();
+			endif;
 		else :
-			$route =  [self::USER_CONTROLLER, "404"];
+			$route = $this->toggle404();
 		endif;
 		return $route;
 	}
+
+    private function routeMethod() {
+    	$tag = $this->uri[1];
+    	$param = (array_key_exists(2, $this->uri)) ? $this->uri[2] : NULL;
+    	$method = $this->getMethodInfoFromTag($tag)['method'];
+    	$controller = $this->getMethodInfoFromTag($tag)['controller'];
+    	$hasParam = $this->getMethodInfoFromTag($tag)['hasParam'];
+
+    	return $hasParam ? [$controller, $method , $param] : [$controller, $method];
+
+    }
+
+	private function createMethodsLists($array) {
+		$methods = [];
+		for ($i=0; $i<count($array); $i++) :
+			array_push($methods, ['tag'=>$array[$i][0], 'method'=>$array[$i][1], 'controller'=>$array[$i][2], 'hasParam'=>$array[$i][3]]);
+		endfor;
+		return $methods;
+	}
+
+	private function getMethods() {
+		return $this->allMethods;
+	}
+
+    private function getTagsFromMethods($methods) {
+    	$tags = [];
+
+		foreach ($methods as $method) :
+			array_push($tags, $method['tag']);
+		endforeach;
+		return $tags;
+    }
+
+    private function getMethodInfoFromTag($tagValue) {
+    	$methods = $this->getMethods();
+
+    	for ($i=0; $i<count($methods); $i++) :
+    		if ($tagValue == $methods[$i]['tag']) :
+    			return ['method'=>$methods[$i]['method'], 'controller'=>$methods[$i]['controller'], 'hasParam'=>$methods[$i]['hasParam']];
+    		endif;
+    	endfor;
+    }
 
 	private function routeApi(){
 		if (array_key_exists(1, $this->uri)) {
@@ -201,7 +139,7 @@ class Routeur {
 						break;
 					endif;
 				case 'bmr':
-					$route = [self::USER_API_CONTROLLER, "calculateBmr"]; //fixme
+					$route = [self::USER_API_CONTROLLER, "calculateBmr"];
 					break;
 				default:
 					$route = [self::USER_CONTROLLER, "404"];
@@ -211,6 +149,6 @@ class Routeur {
     }
 
     private function toggle404(){
-        return '404';
+        return 'error404';
     }
 }

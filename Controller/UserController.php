@@ -174,4 +174,8 @@ class UserController {
         $weightTracking = array_slice($weightTracking, 0, $amount);
         require_once(PathView::WEIGHT_TRACKING . "/weightTrackingView.php");
     }
+
+    public function show404() {
+        require_once(PathView::ERROR . "/error404.php");
+    }
 }
