@@ -3,45 +3,57 @@
 	use Config\Path;
 	use Config\PathView;
 	ob_start();
+?>
 
+<?php
 	function displayWeights($weightTracking) {
-		foreach($weightTracking as $weightData) {
-			echo '
-			<tr>
-				<td>&#10026; ' . $weightData['wt_date'] . '</td>
-				<td class="has-text-right">'. $weightData['wt_weight'] . 'kg</td>
-			</tr>';
-		}
-	}
+		$size = count($weightTracking);
+		$lastIndex = $size-1;
 
+		for ($i=0; $i<$size; $i++) :
+			$currentWeight = $weightTracking[$i]['wt_weight'];
+			$nextIndex = ($i < $lastIndex) ? $i + 1 : $lastIndex;
+			$weightDiff = ($i < $lastIndex) ? $currentWeight - $weightTracking[$nextIndex]['wt_weight'] : '-';
+			$color = ($weightDiff < 0) ? 'has-text-success' : 'has-text-danger';
+?>
+			<tr>
+				<td>&#10026;<?= $weightTracking[$i]['wt_date'] ?></td>
+				<td class="has-text-centered"><?= $currentWeight ?>kg</td>
+				<?php if ($i < $lastIndex) : ?>
+					<td class="has-text-right <?= $color ?>"><?= $weightDiff ?>kg</td>
+				<?php else : ?>
+					<td class="has-text-right"><?= $weightDiff ?></td>
+				<?php endif; ?>
+			</tr>
+<?php
+		endfor; }
+?>
+
+
+<?php
 		function showLastTrainings($trainings) {
-		foreach ($trainings as $training) {
-			echo '<tr>';
-			$date = '<td>&#10026; ' .
-			'<a href="training/' . $training->getId() . '">' .
-			$training->getDate() . '</a>' .
-			'</td>';
-			$shape = '<td class="has-text-right">' . $training->getShape() . '/10</td>';
-			echo $date;
-			echo $shape;
-			echo '</tr>';
-		}
-	}
+			foreach ($trainings as $training) :
+?>
+			<tr>
+				<td>
+					&#10026;<a href="training/<?= $training->getId() ?>"><?= $training->getDate() ?></a>
+				</td>
+				<td class="has-text-right">
+					<?= $training->getShape() ?>/10
+				</td>
+			</tr>
+<?php
+			endforeach;  }
 ?>
 
 <!-- WELCOME MESSAGE -->
 
 <div class="message is-success has-text-centered">
 	<div class="message-body">
-		<p>
-			Hello <span class="userName"><?= $mail['u_mail'] ?></span>!
-		</p>
-		<?php
-			if (isset($trainings[0]))
-			{
-				echo "<p>&#10077; The last time you 💪 was the <strong>" . $trainings[0]->getDate() . "</strong> &#10078;</p>";
-			}
-		?>
+		<p>Hello <span class="userName"><?= $mail['u_mail'] ?></span>!</p>
+		<?php if (isset($trainings[0])) : ?>
+				<p>&#10077; The last time you 💪 was the <strong><?= $trainings[0]->getDate() ?></strong> &#10078;</p>;
+		<?php endif; ?>
 	</div>
 </div>
 
@@ -118,7 +130,8 @@
 			<table class="table is-fullwidth is-striped dashboard is-narrow">
 				<thead>
 					<th>Date</th>
-					<th class="has-text-right">Weight</th>
+					<th class="has-text-centered">Weight</th>
+					<th class="has-text-right">Difference</th>
 				</thead>
 				<tbody>
 					<?php displayWeights($weightTracking); ?>
@@ -131,7 +144,6 @@
 </div>
 
 <?php
-	// $content contains the html content from ob_start so far
 	$content = ob_get_clean();
 	require_once(PathView::TEMPLATE . "/template.php");
 ?>

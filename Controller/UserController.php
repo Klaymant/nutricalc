@@ -129,13 +129,12 @@ class UserController {
 
     public function addWeight() {
         $weightDateExists = $this->userRepo->weightDateExists($_SESSION['id'], $_POST['date']);
-        if ($weightDateExists) {
+        if ($weightDateExists) :
             require_once(PathView::WEIGHT_TRACKING . "/addWeightView.php");
-        }
-        else {
+        else :
             $this->userRepo->addWeight($_SESSION['id'], $_POST['date'], $_POST['weight']);
             header("Location: " . Path::APP . "/dashboard");
-        }
+        endif;
     }
 
     /*
