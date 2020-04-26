@@ -4,12 +4,9 @@ namespace Model;
 require_once ('Model/Repository.php');
 require_once ('Model/User.php');
 require_once ('Utils/SqlShortcut.php');
-require_once ('Config/Path.php');
 use Model\Repository;
 use Model\User;
 use Utils\SqlUserShortcut;
-use Config\Path;
-use Config\PathView;
 
 class UserRepository extends Repository {
 	public function getUserByMail($mail) {

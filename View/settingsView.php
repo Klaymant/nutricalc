@@ -1,7 +1,9 @@
 <!-- DOCTYPE HTML -->
 <?php
-	use Config\Path;
-	use Config\PathView;
+	use Utils\YamlHelper;
+
+	$yamlHelper = new YamlHelper('path.yaml');
+	$paths = $yamlHelper->getPaths();
 	ob_start();
 ?>
 
@@ -49,5 +51,5 @@
 <?php
 	// $content contains the html content from ob_start so far
 	$content = ob_get_clean();
-	require (PathView::TEMPLATE . "/template.php");
+	require ($paths['TEMPLATE'] . "template.php");
 ?>

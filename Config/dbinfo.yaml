@@ -1,0 +1,14 @@
+---
+  HostInfos: 
+    - &host http://localhost
+    - &projectname nutricalc
+  Host:
+    - shortcut: HOST
+      path: "212.47.245.96"
+    - shortcut: DB_NAME
+      path: nutricalc
+    - shortcut: USERNAME
+      path: nutridev
+    - shortcut: PWD
+      path: nutridev
+...

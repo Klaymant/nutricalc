@@ -1,0 +1,33 @@
+---
+  HostInfos: 
+    - &host http://localhost
+    - &projectname nutricalc
+  Asset:
+    - shortcut: JS
+      path: http://localhost/nutricalc/Public/Assets/js/
+    - shortcut: CSS
+      path: http://localhost/nutricalc/Public/Assets/css/
+    - shortcut: IMG
+      path: http://localhost/nutricalc/Public/Assets/img/
+  View:
+    - shortcut: VIEW
+      path: View/
+    - shortcut: ACCOUNT
+      path: View/account/
+    - shortcut: TEMPLATE
+      path: View/template/
+    - shortcut: WEIGHT_TRACKING
+      path: View/weightTracking/
+    - shortcut: ERROR
+      path: View/error/
+    - shortcut: TRAINING
+      path: View/training/
+  Controller:
+    - shortcut: APP
+      path: http://localhost/nutricalc/index.php/app/
+    - shortcut: API
+      path: http://localhost/nutricalc/index.php/api/
+  Other:
+    - shortcut: ELEMENT
+      path: View/element/
+...

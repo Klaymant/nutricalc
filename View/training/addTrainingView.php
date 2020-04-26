@@ -1,14 +1,14 @@
 <!-- DOCTYPE HTML -->
 <?php
-	ob_start();
-	date_default_timezone_set('Europe/paris');
-	$today = date('yy-m-d');
-	use Config\Path;
-	use Config\PathView;
-	use Config\PathAsset;
+	use Utils\YamlHelper;
 	use Utils\JsHelper;
 
+	$today = date('yy-m-d');
+	$yamlHelper = new YamlHelper('path.yaml');
+	$paths = $yamlHelper->getPaths();
 	$jsHelper = new JsHelper();
+
+	ob_start();
 ?>
 
 <script type="text/javascript">
@@ -58,9 +58,9 @@
 	</div>
 </div>
 
-<script src="<?= PathAsset::JS ?>/exo.js" type="text/javascript"></script>
+<script src="<?= $paths['JS'] ?>exo.js" type="text/javascript"></script>
 
 <?php
 	$content = ob_get_clean();
-	require_once (PathView::TEMPLATE . "/template.php");
+	require_once ($paths['TEMPLATE'] . "template.php");
 ?>
