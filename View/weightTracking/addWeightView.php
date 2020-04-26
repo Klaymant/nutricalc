@@ -1,10 +1,12 @@
 <!-- DOCTYPE HTML -->
 <?php
-	ob_start();
-	date_default_timezone_set('Europe/paris');
+	use Utils\YamlHelper;
+
+	$yamlHelper = new YamlHelper('path.yaml');
+	$paths = $yamlHelper->getPaths();
 	$today = date('yy-m-d');
-	require_once("Config/Path.php");
-	use Config\PathView;
+
+	ob_start();
 ?>
 
 <div class="columns is-centered">
@@ -39,5 +41,5 @@
 
 <?php
 	$content = ob_get_clean();
-	require_once(PathView::TEMPLATE . "/template.php");
+	require_once($paths['TEMPLATE'] . "template.php");
 ?>

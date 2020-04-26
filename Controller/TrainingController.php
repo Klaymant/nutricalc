@@ -3,22 +3,23 @@ namespace Controller;
 
 require_once('Model/TrainingRepository.php');
 require_once('Model/Training.php');
-require_once('Config/Path.php');
 use Model\TrainingRepository;
 use Model\Training;
-use Config\Path;
-use Config\PathView;
+use Utils\YamlHelper;
 
 class TrainingController {
     private $trainingRepo;
+    private $paths;
 
     function __construct() {
         $this->trainingRepo = new TrainingRepository();
+        $yamlHelper = new YamlHelper('path.yaml');
+        $this->paths = $yamlHelper->getPaths();
     }
 
     public function showTrainingById($trainingId) {
         $training = $this->trainingRepo->makeTrainingById($trainingId);
-        require_once(PathView::TRAINING . "/trainingView.php");
+        require_once($this->paths['TRAINING'] . "trainingView.php");
     }
 
     public function getPaginationFromTrainings($trainings, $pageNb, $amount=5) {
@@ -47,33 +48,33 @@ class TrainingController {
         $actualPageNb = $this->checkActualPageNb($pageNb, $maxNbPages);
         $trainings = $this->getPaginationFromTrainings($trainings, $actualPageNb, $nbTrainingsByPage);
 
-        require_once(PathView::TRAINING . "/allTrainingsView.php");
+        require_once($this->paths['TRAINING'] . "allTrainingsView.php");
     }
 
     public function showAddTraining($error=false) {
         $dateError = $error;
         $exoInfo = $this->trainingRepo->getAllExercisesInfo();
         $methodInfo = $this->trainingRepo->getAllMethodsInfo();
-       	require_once(PathView::TRAINING . "/addTrainingView.php");
+       	require_once($this->paths['TRAINING'] . "addTrainingView.php");
     }
 
     public function showEditTraining($trainingId) {
         $exoInfo = $this->trainingRepo->getAllExercisesInfo();
         $methodInfo = $this->trainingRepo->getAllMethodsInfo();
         $training = $this->trainingRepo->makeTrainingByIdAsArray($trainingId);
-        require_once(PathView::TRAINING . "/editTrainingView.php");
+        require_once($this->paths['TRAINING'] . "editTrainingView.php");
     }
 
     public function checkForm($form) {
         $errors = [];
 
-        foreach ($form as $field=>$value) {
-            if ($value == NULL) {
+        foreach ($form as $field=>$value) :
+            if ($value == NULL) :
                 $fieldName = explode("_", $field)[0];
                 $fieldNumber = explode("_", $field)[1];
                 array_push($errors, ["fieldName"=>$fieldName, "fieldNumber"=>$fieldNumber]);
-            }
-        }
+            endif;
+        endforeach;
         return $errors;
     }
 
@@ -101,19 +102,19 @@ class TrainingController {
         else :
             $trainingInfo = $this->getnewTrainingInfo();
         	$this->trainingRepo->addTraining($_SESSION['id'], $trainingInfo);
-        	header("Location: " . PATH::APP . "/dashboard");
+        	header("Location: " . $this->paths['APP'] . "dashboard");
         endif;
     }
 
     public function deleteTraining($trainingId) {
-        header("Location: " . PATH::APP . "/dashboard");
+        header("Location: " . $this->paths['APP'] . "dashboard");
         $this->trainingRepo->deleteTraining($trainingId);
     }
 
     public function updateTraining () {
         $training = $this->getnewTrainingInfo();
         $this->trainingRepo->updateTraining($_POST['trainingId'], $training);
-        header("Location: " . PATH::APP . "/dashboard");
+        header("Location: " . $this->paths['APP'] . "dashboard");
     }
 
     public function getExosAsArray($array, $cutoff=2, $nbFields=6) {
@@ -122,15 +123,17 @@ class TrainingController {
         $exo = [];
         $i = 1;
 
-        foreach ($array as $exoData) {
+        foreach ($array as $exoData) :
             $exoData = $exoData == NULL ? 0 : $exoData;
             array_push($exo, $exoData);
-            if ($i % $nbFields == 0) {
+
+            if ($i % $nbFields == 0) :
                 array_push($exoList, $exo);
                 $exo = [];
-            }
+            endif;
+
             $i++;
-        }
+        endforeach;
         return $exoList;
     }
 }

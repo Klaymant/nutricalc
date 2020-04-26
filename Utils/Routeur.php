@@ -12,7 +12,6 @@ class Routeur {
 
 	function __construct($uri) {
 		$this->uri = $uri;
-		$this->error = false;
 
 		$userMethods = [
 			['calculator', 'showCalculator', self::USER_CONTROLLER, false],

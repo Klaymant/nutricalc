@@ -1,13 +1,15 @@
 <?php
-	require_once("Config/Path.php");
-	use Config\PathView;
+	use Utils\YamlHelper;
+
+	$yamlHelper = new YamlHelper('path.yaml');
+	$paths = $yamlHelper->getPaths();
 ?>
 
 <html>
 	<body class="has-navbar-fixed-top">
-		<?php include(PathView::ELEMENT . "/headView.php"); ?>
-		<?php include(PathView::ELEMENT . "/navView.php"); ?>
+		<?php include($paths['ELEMENT'] . "headView.php"); ?>
+		<?php include($paths['ELEMENT'] . "navView.php"); ?>
 		<?php echo $content; ?>
-		<?php include(PathView::ELEMENT . "/footerView.php"); ?>
+		<?php include($paths['ELEMENT'] . "footerView.php"); ?>
 	</body>
 </html>

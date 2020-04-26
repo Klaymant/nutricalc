@@ -1,8 +1,7 @@
 <?php
 namespace Utils;
 
-require_once ('Config/DbInfo.php');
-use Config\DbInfo;
+use Utils\YamlHelper;
 use \PDO;
 
 class DbConnection {
@@ -10,10 +9,12 @@ class DbConnection {
 
 	function __construct()
 	{
+		$yamlHelper = new YamlHelper('dbinfo.yaml');
+        $dbInfo = $yamlHelper->getPaths();
 		$this->pdo = new PDO(
-	        'mysql:host=' . DbInfo::HOST . ';dbname=' . DbInfo::DB_NAME . ';',
-	        DbInfo::USERNAME,
-	        DbInfo::PWD,
+	        'mysql:host=' . $dbInfo['HOST'] . ';dbname=' . $dbInfo['DB_NAME'] . ';',
+	        $dbInfo['USERNAME'],
+	        $dbInfo['PWD'],
 	        [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
 	}
 

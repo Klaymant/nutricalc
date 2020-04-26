@@ -1,7 +1,9 @@
 <!-- DOCTYPE HTML -->
 <?php
-	use Config\Path;
-	use Config\PathView;
+	use Utils\YamlHelper;
+
+	$yamlHelper = new YamlHelper('path.yaml');
+	$paths = $yamlHelper->getPaths();
 	ob_start();
 ?>
 
@@ -52,7 +54,7 @@
 	<div class="message-body">
 		<p>Hello <span class="userName"><?= $mail['u_mail'] ?></span>!</p>
 		<?php if (isset($trainings[0])) : ?>
-				<p>&#10077; The last time you 💪 was the <strong><?= $trainings[0]->getDate() ?></strong> &#10078;</p>;
+				<p>&#10077; The last time you 💪 was the <strong><?= $trainings[0]->getDate() ?></strong> &#10078;</p>
 		<?php endif; ?>
 	</div>
 </div>
@@ -96,7 +98,7 @@
 				</tr>
 			</table>
 			<p>
-				Your daily needs have been calculated thanks to <a href="<?= Path::APP ?>/settings">your data</a>.
+				Your daily needs have been calculated thanks to <a href="<?= $paths['APP'] ?>settings">your data</a>.
 			</p>
 		</div>
 	</div>
@@ -117,8 +119,8 @@
 					<?php showLastTrainings($trainings); ?>
 				</tbody>
 			</table>
-			<a class="button is-info is-small" href="<?= Path::APP ?>/alltrainings/1">See all trainings</a>
-			<a class="button is-success is-small" href="<?= Path::APP ?>/addtraining">&#10012; Add a training</a>
+			<a class="button is-info is-small" href="<?= $paths['APP'] ?>alltrainings/1">See all trainings</a>
+			<a class="button is-success is-small" href="<?= $paths['APP'] ?>addtraining">&#10012; Add a training</a>
 		</div>
 	</div>
 
@@ -137,13 +139,13 @@
 					<?php displayWeights($weightTracking); ?>
 				</tbody>
 			</table>
-			<a class="button is-info is-small" href="<?= Path::APP ?>/showweight">Display my whole weight tracking</a>
-			<a class="button is-success is-small" href="<?= Path::APP ?>/showaddweight">&#10012; Add a new weight</a>
+			<a class="button is-info is-small" href="<?= $paths['APP'] ?>showweight">Display my whole weight tracking</a>
+			<a class="button is-success is-small" href="<?= $paths['APP'] ?>showaddweight">&#10012; Add a new weight</a>
 		</div>
 	</div>
 </div>
 
 <?php
 	$content = ob_get_clean();
-	require_once(PathView::TEMPLATE . "/template.php");
+	require_once($paths['TEMPLATE'] . "/template.php");
 ?>

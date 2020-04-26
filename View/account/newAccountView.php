@@ -1,7 +1,10 @@
 <!-- DOCTYPE HTML -->
 <?php
-	require_once("Config/Path.php");
-	use Config\PathView;
+	use Utils\YamlHelper;
+
+	$yamlHelper = new YamlHelper('path.yaml');
+	$paths = $yamlHelper->getPaths();
+
 	ob_start();
 ?>
 
@@ -28,17 +31,14 @@
 				<input class="button is-info" type="submit" value="Here we go!">
 			</form>
 
-			<?php
-				if (isset($error)) {
+			<?php if (isset($error)) : ?>
 					echo 'This mail is already used. Try another one!';
-				}
-			?>
+			<?php endif; ?>
 		</div>
 	</div>
 </div>
 
 <?php
-	// $content contains the html content from ob_start so far
 	$content = ob_get_clean();
-	require (PathView::TEMPLATE . "/template.php");
+	require ($paths['TEMPLATE'] . "template.php");
 ?>
