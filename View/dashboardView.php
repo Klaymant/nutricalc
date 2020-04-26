@@ -1,10 +1,8 @@
 <!-- DOCTYPE HTML -->
 <?php
-/*	use Config\Path;
-	use Config\PathView;*/
 	use Utils\YamlHelper;
 
-	$yamlHelper = new YamlHelper();
+	$yamlHelper = new YamlHelper('path.yaml');
 	$paths = $yamlHelper->getPaths();
 	ob_start();
 ?>

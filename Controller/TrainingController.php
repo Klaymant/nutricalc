@@ -13,7 +13,7 @@ class TrainingController {
 
     function __construct() {
         $this->trainingRepo = new TrainingRepository();
-        $yamlHelper = new YamlHelper();
+        $yamlHelper = new YamlHelper('path.yaml');
         $this->paths = $yamlHelper->getPaths();
     }
 

@@ -4,8 +4,8 @@ namespace Utils;
 class YamlHelper {
 	private $yamlFile;
 
-	function __construct() {
-		$this->yamlFile = "Config/path.yaml";
+	function __construct($fileName) {
+		$this->yamlFile = "Config/" . $fileName;
 		$this->yamlFile = yaml_parse_file($this->yamlFile);
 		$this->yamlFile = array_slice($this->yamlFile, 1);
 	}

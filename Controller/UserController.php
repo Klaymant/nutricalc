@@ -19,7 +19,7 @@ class UserController {
     function __construct() {
         $this->userRepo = new UserRepository();
         $this->trainingRepo = new TrainingRepository();
-        $yamlHelper = new YamlHelper();
+        $yamlHelper = new YamlHelper('path.yaml');
         $this->paths = $yamlHelper->getPaths();
     }
 

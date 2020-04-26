@@ -4,7 +4,7 @@
 	use Utils\JsHelper;
 
 	$today = date('yy-m-d');
-	$yamlHelper = new YamlHelper();
+	$yamlHelper = new YamlHelper('path.yaml');
 	$paths = $yamlHelper->getPaths();
 	$jsHelper = new JsHelper();
 

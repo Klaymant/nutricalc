@@ -5,7 +5,7 @@
 
 	$today = date('yy-m-d');
 	$jsHelper = new JsHelper();
-	$yamlHelper = new YamlHelper();
+	$yamlHelper = new YamlHelper('path.yaml');
 	$paths = $yamlHelper->getPaths();
 
 	ob_start();

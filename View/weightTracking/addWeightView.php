@@ -2,7 +2,7 @@
 <?php
 	use Utils\YamlHelper;
 
-	$yamlHelper = new YamlHelper();
+	$yamlHelper = new YamlHelper('path.yaml');
 	$paths = $yamlHelper->getPaths();
 	$today = date('yy-m-d');
 
