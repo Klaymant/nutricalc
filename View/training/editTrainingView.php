@@ -1,16 +1,14 @@
 <!-- DOCTYPE HTML -->
 <?php
-	ob_start();
-	date_default_timezone_set('Europe/paris');
-	$today = date('yy-m-d');
-	require_once("Config/Path.php");
-	require_once("Utils/JsHelper.php");
-	use Config\Path;
-	use Config\PathView;
-	Use Config\PathAsset;
+	use Utils\YamlHelper;
 	use Utils\JsHelper;
 
+	$today = date('yy-m-d');
+	$yamlHelper = new YamlHelper();
+	$paths = $yamlHelper->getPaths();
 	$jsHelper = new JsHelper();
+
+	ob_start();
 ?>
 
 <script type="text/javascript">
@@ -20,7 +18,7 @@
 	var exercises = <?php $jsHelper->jsEncode($training['exercises']) ?>;
 </script>
 
-<script src="<?= PathAsset::JS ?>/exo.js" type="text/javascript"></script>
+<script src="<?= $paths['JS'] ?>exo.js" type="text/javascript"></script>
 
 <?php
 	function displayExos($exercises) {
@@ -42,7 +40,7 @@
 		</div>
 
 		<div class="content">
-			<form action="<?= Path::APP ?>/updateTraining" method="post">
+			<form action="<?= $paths['APP'] ?>updateTraining" method="post">
 				<div class="box">
 					<h2 class="subtitle has-text-centered">Info of the day</h2>
 					<div class="field">
@@ -69,12 +67,11 @@
 			</form>
 		</div>
 
-		<script src="<?= PathAsset::JS ?>/exo.js" type="text/javascript"></script>
+		<script src="<?= $paths['APP'] ?>exo.js" type="text/javascript"></script>
 	</div>
 </div>
 
 <?php
-	// $content contains the html content from ob_start so far
 	$content = ob_get_clean();
-	require (PathView::TEMPLATE . "/template.php");
+	require ($paths['TEMPLATE'] . "template.php");
 ?>

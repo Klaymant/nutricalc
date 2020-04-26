@@ -1,9 +1,11 @@
 <!-- DOCTYPE HTML -->
 <?php
+	use Utils\YamlHelper;
+
+	$yamlHelper = new YamlHelper();
+	$paths = $yamlHelper->getPaths();
+
 	ob_start();
-	require_once("Config/Path.php");
-	use Config\Path;
-	use Config\PathView;
 ?>
 
 <div class="columns is-centered">
@@ -26,28 +28,27 @@
 			</thead>
 				<tbody>
 				<?php
-					foreach ($training->getExercises() as $exo) {
+					foreach ($training->getExercises() as $exo) :
 						$method = $exo->getMethod() != NULL ? $exo->getMethod() : "None";
-						echo '<tr>' .
-							'<td>' . $exo->getName() . '</td>' .
-							'<td>' . $exo->getWorkLoad() . 'kg</td>' .
-							'<td>' . $exo->getSets() . '</td>' .
-							'<td>' . $exo->getReps() . '</td>' .
-							'<td>' . $exo->getRest() . 's</td>' .
-							'<td>' . $method . '</td>' .
-						'</tr>';
-					}
 				?>
+						<tr>
+							<td><?= $exo->getName() ?></td>
+							<td><?= $exo->getWorkLoad() ?>kg</td>
+							<td><?= $exo->getSets() ?></td>
+							<td><?= $exo->getReps() ?></td>
+							<td><?= $exo->getRest() ?>s</td>
+							<td><?= $method ?></td>
+						</tr>
+				<?php endforeach; ?>
 			</tbody>
 		</table>
 
-		<a class="button is-info" href="<?= Path::APP ?>/edittraining/<?= $training->getId() ?>">Edit</a>
-		<a class="button is-danger" href="<?= Path::APP ?>/deletetraining/<?= $training->getId() ?>">❌ Delete this training</a>
+		<a class="button is-info" href="<?= $paths['APP'] ?>edittraining/<?= $training->getId() ?>">Edit</a>
+		<a class="button is-danger" href="<?= $paths['APP'] ?>deletetraining/<?= $training->getId() ?>">❌ Delete this training</a>
 	</div>
 </div>
 
 <?php
-	// $content contains the html content from ob_start so far
 	$content = ob_get_clean();
-	require (PathView::TEMPLATE . "/template.php");
+	require ($paths['TEMPLATE'] . "template.php");
 ?>

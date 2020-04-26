@@ -1,15 +1,18 @@
 <?php
     require_once ('Controller/UserController.php');
     require_once ('Controller/TrainingController.php');
-    require_once('Controller/api/UserApiController.php');
-    require_once('Utils/Routeur.php');
-    require_once('Utils/UriParser.php');
-    require_once('Config/Path.php');
-    require_once('Utils/JsHelper.php');
-    require_once('Controller/UserController.php');
+    require_once ('Controller/api/UserApiController.php');
+    require_once ('Utils/Routeur.php');
+    require_once ('Utils/UriParser.php');
+    require_once ('Config/Path.php');
+    require_once ('Utils/JsHelper.php');
+    require_once ('Utils/YamlHelper.php');
+    require_once ('Controller/UserController.php');
 	use Utils\Routeur;
 	use Utils\UriParser;
 	use Controller\UserController;
+
+	date_default_timezone_set('Europe/paris');
 
 	session_start();
 	$path = UriParser::parseUri();

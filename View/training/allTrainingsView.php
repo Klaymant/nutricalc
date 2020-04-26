@@ -1,8 +1,12 @@
 <!-- DOCTYPE HTML -->
 <?php
+	use Utils\YamlHelper;
+
+	$yamlHelper = new YamlHelper();
+	$paths = $yamlHelper->getPaths();
+
 	ob_start();
-	use Config\PathView;
-	use Config\Path;
+
 
 	function getActualShape($shape) {
 		$actualShape = "";
@@ -22,6 +26,7 @@
 	?>
 				<div class="columns is-centered">;
 	<?php endif; ?>
+
 			<div class="column is-two-fifths">
 				<div class="box has-text-centered">
 					
@@ -30,10 +35,10 @@
 
 						<!-- Date -->
 						<div class="column has-text-left">
-							<a class="button has-background-success has-text-white" href="<?= Path::APP ?>/training/<?= $trainee->getId() ?>">
+							<a class="button has-background-success has-text-white" href="<?= $paths['APP'] ?>training/<?= $trainee->getId() ?>">
 								<?= $actualDate->format('l') ?>
 							</a>
-							<a class="button has-background-light" href="<?= Path::APP ?>/training/<?= $trainee->getId() ?>"><?= $trainee->getDate() ?></a>			
+							<a class="button has-background-light" href="<?= $paths['APP'] ?>training/<?= $trainee->getId() ?>"><?= $trainee->getDate() ?></a>			
 						</div>
 
 						<!-- Shape -->
@@ -78,8 +83,8 @@
 					<!-- #END Exercises -->
 
 					<div class="content has-text-left">
-						<a class="button is-info" href="<?= Path::APP ?>/edittraining/<?= $trainee->getId() ?>">Edit</a>
-						<a class="button is-danger" href="<?= Path::APP ?>/deletetraining/<?= $trainee->getId() ?>">(-) Remove</a>
+						<a class="button is-info" href="<?= $paths['APP'] ?>edittraining/<?= $trainee->getId() ?>">Edit</a>
+						<a class="button is-danger" href="<?= $paths['APP'] ?>deletetraining/<?= $trainee->getId() ?>">(-) Remove</a>
 					</div>
 				</div>
 			</div>
@@ -94,31 +99,32 @@
 
 <nav class="pagination" role="navigation" aria-label="pagination">
 	<?php if ($actualPageNb != 1) : ?>
-		<a class="pagination-previous" href="<?= Path::APP ?>/alltrainings/<?= $actualPageNb-1 ?>">Previous</a>
+		<a class="pagination-previous" href="<?= $paths['APP'] ?>alltrainings/<?= $actualPageNb-1 ?>">Previous</a>
 	<?php endif; ?>
 
 	<?php if ($actualPageNb < $maxNbPages) : ?>
-		<a class="pagination-next" href="<?= Path::APP ?>/alltrainings/<?= $actualPageNb+1 ?>">Next page</a>
+		<a class="pagination-next" href="<?= $paths['APP'] ?>alltrainings/<?= $actualPageNb+1 ?>">Next page</a>
 	<?php endif; ?>
 
 	<ul class="pagination-list">
 		<?php
-			for ($i=1; $i<=$maxNbPages;$i++) {
+			for ($i=1; $i<=$maxNbPages;$i++) :
 				$isCurrent = "";
-				if ($i == $actualPageNb) {
+
+				if ($i == $actualPageNb) :
 					$isCurrent = "has-background-success";
-				}
+				endif;
 		?>
 		<li>
-			<a href="<?= Path::APP ?>/alltrainings/<?= $i ?>" class="pagination-link <?= $isCurrent ?>" aria-label="Page <?= $i ?>">
+			<a href="<?= $paths['APP'] ?>alltrainings/<?= $i ?>" class="pagination-link <?= $isCurrent ?>" aria-label="Page <?= $i ?>">
 				<?= $i ?>
 			</a>
 		</li>
-		<?php } ?>
+		<?php endfor; ?>
 	</ul>
 </nav>
 
 <?php
 	$content = ob_get_clean();
-	require (PathView::TEMPLATE . "/template.php");
+	require ($paths['TEMPLATE'] . "/template.php");
 ?>

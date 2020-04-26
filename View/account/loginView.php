@@ -1,7 +1,10 @@
 <!-- DOCTYPE HTML -->
 <?php
-	require_once("Config/Path.php");
-	use Config\PathView;
+	use Utils\YamlHelper;
+
+	$yamlHelper = new YamlHelper();
+	$paths = $yamlHelper->getPaths();
+
 	ob_start();
 ?>
 
@@ -14,14 +17,11 @@
 			</p>
 		</div>
 
-		<?php
-			if (isset($badLogin)) {
-				echo '
+		<?php if (isset($badLogin)) : ?>
 				<div class="box has-background-danger has-text-white">
-				Incorrect login. Try again!
-				</div>';
-			}
-		?>
+					Incorrect login. Try again!
+				</div>
+		<?php endif; ?>
 
 		<div class="content">
 			<form class="form" action="login" method="post">
@@ -54,5 +54,5 @@
 <?php
 	// $content contains the html content from ob_start so far
 	$content = ob_get_clean();
-	require (PathView::TEMPLATE . "/template.php");
+	require ($paths['TEMPLATE'] . "template.php");
 ?>

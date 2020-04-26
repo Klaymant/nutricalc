@@ -1,7 +1,10 @@
 <!-- DOCTYPE HTML -->
 <?php
-	require_once("Config/Path.php");
-	use Config\PathView;
+	use Utils\YamlHelper;
+
+	$yamlHelper = new YamlHelper();
+	$paths = $yamlHelper->getPaths();
+
 	ob_start();
 ?>
 
@@ -17,42 +20,39 @@
 			</div>
 		</article>
 
-		<?php
-			if(isset($user)) {
-			echo '
+		<?php if(isset($user)) : ?>
 			<div class="box has-text-centered">
-			<h2 class="subtitle has-text-weight-bold">Daily needs</h2>
-			<table class="table is-centered">
-				<tbody>
-					<tr>
-						<td class="has-background-success has-text-white">Calories</td>
-						<td class="has-text-right">
-							' . round($user->getNutrient()->getKcalNeeds(), 0) . 'kcal' .
-						'</td>
-					</tr>
-					<tr>
-						<td class="has-background-danger has-text-white">Proteins</td>
-						<td class="has-text-right">
-							' . round($user->getNutrient()->getProteinsNeeds(), 0) . 'g' .
-						'</td>
-					</tr>
-					<tr>
-						<td class="has-background-warning has-text-white">Fat</td>
-						<td class="has-text-right">
-							' . round($user->getNutrient()->getFatNeeds(), 0) . 'g' .
-						'</td>
-					</tr>
-					<tr>
-						<td class="has-background-info has-text-white">Carbs</td>
-						<td class="has-text-right">
-							' . round($user->getNutrient()->getCarbsNeeds(), 0) . 'g' .
-						'</td>
-					</tr>
-				</tbody>
-			</table>
-		</div>';
-			}
-		?>
+				
+				<table class="table is-centered">
+					<tbody>
+						<tr>
+							<td class="has-background-success has-text-white">Calories</td>
+							<td class="has-text-right">
+								<?= round($user->getNutrient()->getKcalNeeds(), 0) ?>kcal
+							</td>
+						</tr>
+						<tr>
+							<td class="has-background-danger has-text-white">Proteins</td>
+							<td class="has-text-right">
+								<?=round($user->getNutrient()->getProteinsNeeds(), 0) ?>g
+							</td>
+						</tr>
+						<tr>
+							<td class="has-background-warning has-text-white">Fat</td>
+							<td class="has-text-right">
+								<? round($user->getNutrient()->getFatNeeds(), 0) ?>g
+							</td>
+						</tr>
+						<tr>
+							<td class="has-background-info has-text-white">Carbs</td>
+							<td class="has-text-right">
+								<?= round($user->getNutrient()->getCarbsNeeds(), 0) ?>g
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		<?php endif; ?>
 
 		<div class="box">
 			<form class="form" action="usercalculator" method="post">
@@ -108,7 +108,6 @@
 </div>
 
 <?php
-	// $content contains the html content from ob_start so far
 	$content = ob_get_clean();
-	require (PathView::TEMPLATE . "/template.php");
+	require ($paths['TEMPLATE'] . "template.php");
 ?>
