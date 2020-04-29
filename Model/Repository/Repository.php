@@ -1,5 +1,5 @@
 <?php
-namespace Model;
+namespace Model\Repository;
 
 require_once ('Utils/SqlMaker.php');
 use Utils\SqlMaker;

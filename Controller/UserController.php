@@ -1,14 +1,14 @@
 <?php
 namespace Controller;
 
-require_once('Model/UserRepository.php');
-require_once('Model/TrainingRepository.php');
-require_once('Model/User.php');
-require_once('Model/Training.php');
-use Model\UserRepository;
-use Model\TrainingRepository;
-use Model\User;
-use Model\Training;
+require_once('Model/Repository/UserRepository.php');
+require_once('Model/Repository/TrainingRepository.php');
+require_once('Model/Entity/User.php');
+require_once('Model/Entity/Training.php');
+use Model\Repository\UserRepository;
+use Model\Repository\TrainingRepository;
+use Model\Entity\User;
+use Model\Entity\Training;
 use Utils\YamlHelper;
 
 class UserController {
@@ -28,7 +28,7 @@ class UserController {
     */
 
     public function showHomepage() {
-        require_once ($this->paths['VIEW'] . "homepageView.php");
+        require_once ($this->paths['USER'] . "homepageView.php");
     }
 
     /*
@@ -67,7 +67,7 @@ class UserController {
     }
 
     public function accountCreator() {
-        if ($this->userRepo->mailExists($_POST['mail'])) {
+        if ($this->userRepo->doesMailExist($_POST['mail'])) {
             $error = true;
             require_once($this->paths['ACCOUNT'] . "newAccountView.php");
         }
@@ -98,7 +98,7 @@ class UserController {
     }
 
     public function showNewPwd($pwdId) {
-        $pwdIdExisting = $this->userRepo->resetPwdIdExists($pwdId);
+        $pwdIdExisting = $this->userRepo->doesResetPwdExist($pwdId);
         $userId = $this->userRepo->getUserByResetPwdId($pwdId)['u_id'];
         $userMail = $this->userRepo->getMailById($userId)['u_mail'];
         require_once($this->paths['ACCOUNT'] . "newPwdView.php");
@@ -118,7 +118,7 @@ class UserController {
     public function userCalculator() {
         $user = new User($_POST['sex'], $_POST['age'], $_POST['height'], $_POST['weight'], $_POST['activity'], $_POST['goal']);
         $user->calcAllNeeds();
-        require_once($this->paths['VIEW'] . "calculatorView.php");
+        require_once($this->paths['USER'] . "calculatorView.php");
     }
 
     public function saveData() {
@@ -137,6 +137,11 @@ class UserController {
         endif;
     }
 
+    public function removeWeightById($weightId) {
+        $this->userRepo->removeWeightById($weightId);
+        header("Location: " . $this->paths['APP'] . "dashboard");
+    }
+
     /*
     ** ========== 3 - DASHBOARD ==========
     */
@@ -147,7 +152,7 @@ class UserController {
         $mail = $this->userRepo->getMailById($_SESSION['id']);
         $trainings = $this->trainingRepo->makeLastTrainings($_SESSION['id'], 5);
         $weightTracking = $this->userRepo->makeWeightTracking($_SESSION['id'], 5);
-        require_once($this->paths['VIEW'] . "dashBoardView.php");
+        require_once($this->paths['USER'] . "dashBoardView.php");
     }
 
     public function showChangeData() {
@@ -156,11 +161,11 @@ class UserController {
 
     public function showSettings() {
         $user = $this->userRepo->getUserById($_SESSION['id']);
-        require_once($this->paths['VIEW'] . "settingsView.php");
+        require_once($this->paths['SETTING'] . "settingsView.php");
     }
 
     public function showCalculator() {
-        require_once($this->paths['VIEW'] . "calculatorView.php");
+        require_once($this->paths['USER'] . "calculatorView.php");
     }
 
     public function showAddWeight() {

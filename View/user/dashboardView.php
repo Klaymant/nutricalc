@@ -8,24 +8,26 @@
 ?>
 
 <?php
-	function displayWeights($weightTracking) {
+	function displayWeights($weightTracking, $paths) {
 		$size = count($weightTracking);
 		$lastIndex = $size-1;
 
 		for ($i=0; $i<$size; $i++) :
 			$currentWeight = $weightTracking[$i]['wt_weight'];
+			$currentId = $weightTracking[$i]['wt_id'];
 			$nextIndex = ($i < $lastIndex) ? $i + 1 : $lastIndex;
 			$weightDiff = ($i < $lastIndex) ? $currentWeight - $weightTracking[$nextIndex]['wt_weight'] : '-';
 			$color = ($weightDiff < 0) ? 'has-text-success' : 'has-text-danger';
 ?>
 			<tr>
-				<td>&#10026;<?= $weightTracking[$i]['wt_date'] ?></td>
+				<td><?= $weightTracking[$i]['wt_date'] ?></td>
 				<td class="has-text-centered"><?= $currentWeight ?>kg</td>
 				<?php if ($i < $lastIndex) : ?>
-					<td class="has-text-right <?= $color ?>"><?= $weightDiff ?>kg</td>
+					<td class="has-text-centered <?= $color ?>"><?= $weightDiff ?>kg</td>
 				<?php else : ?>
-					<td class="has-text-right"><?= $weightDiff ?></td>
+					<td class="has-text-centered"><?= $weightDiff ?></td>
 				<?php endif; ?>
+				<td><a class="button is-danger is-small is-outlined" href="<?= $paths['APP'] ?>removeweight/<?= $currentId ?>">X</a></td>
 			</tr>
 <?php
 		endfor; }
@@ -38,7 +40,7 @@
 ?>
 			<tr>
 				<td>
-					&#10026;<a href="training/<?= $training->getId() ?>"><?= $training->getDate() ?></a>
+					<a href="training/<?= $training->getId() ?>"><?= $training->getDate() ?></a>
 				</td>
 				<td class="has-text-right">
 					<?= $training->getShape() ?>/10
@@ -119,8 +121,8 @@
 					<?php showLastTrainings($trainings); ?>
 				</tbody>
 			</table>
-			<a class="button is-info is-small" href="<?= $paths['APP'] ?>alltrainings/1">See all trainings</a>
-			<a class="button is-success is-small" href="<?= $paths['APP'] ?>addtraining">&#10012; Add a training</a>
+			<a class="button is-info is-small" href="<?= $paths['APP'] ?>alltrainings/1">See all</a>
+			<a class="button is-success is-small" href="<?= $paths['APP'] ?>addtraining">&#10012;</a>
 		</div>
 	</div>
 
@@ -133,14 +135,15 @@
 				<thead>
 					<th>Date</th>
 					<th class="has-text-centered">Weight</th>
-					<th class="has-text-right">Difference</th>
+					<th class="has-text-centered">Difference</th>
+					<th></th>
 				</thead>
 				<tbody>
-					<?php displayWeights($weightTracking); ?>
+					<?php displayWeights($weightTracking, $paths); ?>
 				</tbody>
 			</table>
-			<a class="button is-info is-small" href="<?= $paths['APP'] ?>showweight">Display my whole weight tracking</a>
-			<a class="button is-success is-small" href="<?= $paths['APP'] ?>showaddweight">&#10012; Add a new weight</a>
+			<a class="button is-info is-small" href="<?= $paths['APP'] ?>showweight">See all</a>
+			<a class="button is-success is-small" href="<?= $paths['APP'] ?>showaddweight">&#10012;</a>
 		</div>
 	</div>
 </div>
