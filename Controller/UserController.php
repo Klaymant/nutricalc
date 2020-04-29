@@ -67,7 +67,7 @@ class UserController {
     }
 
     public function accountCreator() {
-        if ($this->userRepo->mailExists($_POST['mail'])) {
+        if ($this->userRepo->doesMailExist($_POST['mail'])) {
             $error = true;
             require_once($this->paths['ACCOUNT'] . "newAccountView.php");
         }
@@ -98,7 +98,7 @@ class UserController {
     }
 
     public function showNewPwd($pwdId) {
-        $pwdIdExisting = $this->userRepo->resetPwdIdExists($pwdId);
+        $pwdIdExisting = $this->userRepo->doesResetPwdExist($pwdId);
         $userId = $this->userRepo->getUserByResetPwdId($pwdId)['u_id'];
         $userMail = $this->userRepo->getMailById($userId)['u_mail'];
         require_once($this->paths['ACCOUNT'] . "newPwdView.php");
@@ -135,6 +135,11 @@ class UserController {
             $this->userRepo->addWeight($_SESSION['id'], $_POST['date'], $_POST['weight']);
             header("Location: " . $this->paths['APP'] . "dashboard");
         endif;
+    }
+
+    public function removeWeightById($weightId) {
+        $this->userRepo->removeWeightById($weightId);
+        header("Location: " . $this->paths['APP'] . "dashboard");
     }
 
     /*

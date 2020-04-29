@@ -48,7 +48,8 @@ class Routeur {
 		$weightMethods = [
 			['showweight', 'showWeightTracking', self::USER_CONTROLLER, false],
 			['showaddweight', 'showAddWeight', self::USER_CONTROLLER, false],
-			['addweight', 'addWeight', self::USER_CONTROLLER, false]
+			['addweight', 'addWeight', self::USER_CONTROLLER, false],
+			['removeweight', 'removeWeightById', self::USER_CONTROLLER, true]
 		];
 
 		$this->allMethods = $this->createMethodsLists(array_merge($trainingMethods, $accountMethods, $weightMethods, $userMethods));
