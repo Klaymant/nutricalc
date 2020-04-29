@@ -85,11 +85,11 @@ class UserRepository extends Repository {
 		$alphabet = ($alphaString == NULL) ? "abcdefghijklmnopqrstuvwxyz0123456789" : $alphaString;
 		$randomString = "";
 
-		for ($i=0; $i<$length; $i++) { 
+		for ($i=0; $i<$length; $i++) :
 			$r = rand(0, strlen($alphabet)-1);
 			$letter = $alphabet[$r];
 			$randomString .= $letter;
-		}
+		endfor;
 		return $randomString;
 	}
 
@@ -107,13 +107,13 @@ class UserRepository extends Repository {
 		file_put_contents($fileName, $message);
 	}
 
-	public function resetPwdIdExists($resetPwdId) {
+	public function doesResetPwdExist($resetPwdId) {
 		$query = "SELECT COUNT(*) as nb_reset_pwd_id FROM user WHERE u_reset_pwd_id=?";
 		$pwdIdExists = $this->sqlMaker->make($query, 'fetch', [$resetPwdId]);
 		return ($pwdIdExists['nb_reset_pwd_id'] == 1) ? true : false;	
 	}
 
-	public function mailExists($mail) {
+	public function doesMailExist($mail) {
 		$query = "SELECT COUNT(*) as nb_mail FROM user WHERE u_mail=?";
 		$mailExists = $this->sqlMaker->make($query, 'fetch', [$mail]);
 		return ($mailExists['nb_mail'] == 1) ? true : false;
@@ -136,5 +136,10 @@ class UserRepository extends Repository {
 		$query = self::GET_WEIGHT_TRACKING_BY_ID;
 		$weightTracking = $this->sqlMaker->make($query, "fetchAll", [$userId]);
 		return array_slice($weightTracking, 0, $max);
+	}
+
+	public function removeWeightById($weightId) {
+		$query ="DELETE FROM weight_tracking WHERE wt_id=?";
+		$this->sqlMaker->make($query, NULL, [$weightId]);
 	}
 }
