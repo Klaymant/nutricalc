@@ -1,9 +1,9 @@
 <?php
 namespace App\Tests\Repository;
-require("Model/UserRepository.php");
+require("Model/Repository/UserRepository.php");
 
 use PHPUnit\Framework\TestCase;
-use Model\UserRepository;
+use Model\Repository\UserRepository;
 
 class UserRepositoryTest extends TestCase {
 	private $userRepo;

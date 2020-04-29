@@ -1,5 +1,5 @@
 <?php
-namespace Model;
+namespace Model\Entity;
 
 class Exercise {
 	private $name;

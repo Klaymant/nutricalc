@@ -10,6 +10,8 @@
     - shortcut: IMG
       path: http://localhost/nutricalc/Public/Assets/img/
   View:
+    - shortcut: ELEMENT
+      path: View/element/
     - shortcut: VIEW
       path: View/
     - shortcut: ACCOUNT
@@ -22,12 +24,21 @@
       path: View/error/
     - shortcut: TRAINING
       path: View/training/
+    - shortcut: SETTING
+      path: View/settings/
+    - shortcut: USER
+      path: View/user/
   Controller:
     - shortcut: APP
       path: http://localhost/nutricalc/index.php/app/
     - shortcut: API
       path: http://localhost/nutricalc/index.php/api/
-  Other:
-    - shortcut: ELEMENT
-      path: View/element/
+  Model:
+    - shortcut: MODEL
+      path: Model/
+    - shortcut: REPOSITORY
+      path: Model/Repository/
+    - shortcut: ENTITY
+      path: Model/Entity
+
 ...
