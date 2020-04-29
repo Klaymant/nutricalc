@@ -1,21 +1,46 @@
 <?php
-namespace Model;
+namespace Model\Repository;
 
-require_once ('Model/Repository.php');
-require_once ('Model/User.php');
-require_once ('Model/Training.php');
-require_once ('Model/Exercise.php');
-require_once ('Utils/SqlShortcut.php');
-use Model\Repository;
-use Model\User;
-use Model\Training;
-use Model\Exercise;
-use Utils\SqlTrainingShortcut;
+require_once ('Model/Repository/Repository.php');
+require_once ('Model/Entity/User.php');
+require_once ('Model/Entity/Training.php');
+require_once ('Model/Entity/Exercise.php');
+use Model\Repository\Repository;
+use Model\Entity\User;
+use Model\Entity\Training;
+use Model\Entity\Exercise;
 
 class TrainingRepository extends Repository {
+	const TRAININGS_IDS =
+	"SELECT DISTINCT(t_id), t_date FROM `user`
+	LEFT JOIN training ON t_fk_user_id = u_id
+	WHERE t_fk_user_id =?
+	ORDER BY t_date DESC";
+
+	const MAKE_TRAINING =
+	"SELECT t_id, t_date, t_shape, exo_c_name, exo_p_work_load, exo_p_rest, exo_p_nb_sets, exo_p_nb_reps, m_name
+	FROM `user`
+	LEFT JOIN training ON t_fk_user_id = u_id
+	LEFT JOIN exercise_practice ON t_id = exo_p_fk_training_id
+	LEFT JOIN exercise_catalog ON exo_p_fk_exercise_catalog_id = exo_c_id
+	LEFT JOIN method ON exo_p_fk_method_id = m_id
+	WHERE t_id=?";
+
+	const INSERT_TRAINING =
+	"INSERT INTO training (t_fk_user_id, t_date, t_shape)
+	VALUES (?, ?, ?)";
+
+	const INSERT_EXERCISE =
+	"INSERT INTO exercise_practice (exo_p_fk_training_id, exo_p_fk_exercise_catalog_id, exo_p_work_load, exo_p_rest, exo_p_nb_sets, exo_p_nb_reps, exo_p_fk_method_id)
+	VALUES (?, ?, ?, ?, ?, ?, ?)";
+
+	const UPDATE_TRAINING =
+	"UPDATE training
+	SET t_date = ?, t_shape = ?
+	WHERE t_id=?";
 
 	public function getTrainingsIds($userId) {
-		$query = SqlTrainingShortcut::SELECT_TRAININGS_IDS;
+		$query = self::TRAININGS_IDS;
 		return $this->sqlMaker->make($query, 'fetchAll', [$userId]);
 	}
 
@@ -44,14 +69,14 @@ class TrainingRepository extends Repository {
 	}
 
 	public function makeTrainingByIdAsArray($trainingId) {
-		$query = SqlTrainingShortcut::MAKE_TRAINING;
+		$query = self::MAKE_TRAINING;
 		$training = $this->sqlMaker->make($query, 'fetchAll', [$trainingId]);
 		$exercises = $this->makeExercisesAsArray($training);
 		return ['exercises'=>$exercises, 'date'=>$training[0]['t_date'], 'shape'=>$training[0]['t_shape'], 'id'=>$training[0]['t_id']];
 	}
 
 	public function makeTrainingById($trainingId) {
-		$query = SqlTrainingShortcut::MAKE_TRAINING;
+		$query = self::MAKE_TRAINING;
 		$training = $this->sqlMaker->make($query, 'fetchAll', [$trainingId]);
 		$exercises = $this->makeExercises($training);
 		return new Training($exercises, $training[0]['t_date'], $training[0]['t_shape'], $training[0]['t_id']);
@@ -98,7 +123,7 @@ class TrainingRepository extends Repository {
 	*/
 
 	public function addExercise($exercise, $trainingId) {
-		$query = SqlTrainingShortcut::INSERT_EXERCISE;
+		$query = self::INSERT_EXERCISE;
 		$params = [$trainingId];
 		foreach ($exercise as $exoData) {
 			array_push($params, $exoData);
@@ -113,7 +138,7 @@ class TrainingRepository extends Repository {
 	}
 
 	public function addTraining($userId, $training) {
-		$query = SqlTrainingShortcut::INSERT_TRAINING;
+		$query = self::INSERT_TRAINING;
 		$params = [$userId, $training['trainingMeta']['date'], $training['trainingMeta']['shape']];
 		$this->sqlMaker->make($query, NULL, $params);
 		$trainingId = $this->sqlMaker->getLastId();
@@ -127,7 +152,7 @@ class TrainingRepository extends Repository {
 	public function updateTraining($trainingId, $training) {
 		$this->deleteAllExercises($trainingId);
 		$this->addListOfExercises($training['exos'], $trainingId);
-		$query = SqlTrainingShortcut::UPDATE_TRAINING;
+		$query = self::UPDATE_TRAINING;
 		$params = [$training['trainingMeta']['date'], $training['trainingMeta']['shape'], $trainingId];
 		$this->sqlMaker->make($query, NULL, $params);
 	}

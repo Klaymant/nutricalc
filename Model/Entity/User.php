@@ -1,10 +1,10 @@
 <?php
-namespace Model;
+namespace Model\Entity;
 
-require_once('Model/Nutrient.php');
-require_once('Model/Training.php');
-use Model\Nutrient;
-use Model\Training;
+require_once('Model/Entity/Nutrient.php');
+require_once('Model/Entity/Training.php');
+use Model\Entity\Nutrient;
+use Model\Entity\Training;
 
 class User {
 	private $sex;

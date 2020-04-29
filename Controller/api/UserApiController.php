@@ -1,10 +1,10 @@
 <?php
 namespace Controller\api;
 
-require_once('Model/UserRepository.php');
-require_once('Model/User.php');
-use Model\UserRepository;
-use Model\User;
+require_once('Model/Repository/UserRepository.php');
+require_once('Model/Entity/User.php');
+use Model\Repository\UserRepository;
+use Model\Entity\User;
 
 class UserApiController {
     private $userRepo;

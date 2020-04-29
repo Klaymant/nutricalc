@@ -1,21 +1,43 @@
 <?php
-namespace Model;
+namespace Model\Repository;
 
-require_once ('Model/Repository.php');
-require_once ('Model/User.php');
-require_once ('Utils/SqlShortcut.php');
-use Model\Repository;
-use Model\User;
-use Utils\SqlUserShortcut;
+require_once ('Model/Repository/Repository.php');
+require_once ('Model/Entity/User.php');
+use Model\Repository\Repository;
+use Model\Entity\User;
 
 class UserRepository extends Repository {
+	const GET_USER_BY_ID =
+	"SELECT * FROM user
+	LEFT JOIN activity ON u_fk_activity_id = a_id
+	LEFT JOIN goal ON u_fk_goal_id = g_id
+	WHERE u_id=?";
+
+	const CREATE_USER =
+	"INSERT INTO user (u_height, u_weight, u_fk_activity_id, u_fk_goal_id, u_age)
+	VALUES (?, ?, ?, ?, ?)";
+
+	const SAVE_DATA =
+	"UPDATE user
+	SET u_age=?, u_height=?, u_weight=?, u_fk_activity_id=?, u_fk_goal_id=?
+	WHERE u_id=?";
+
+	const ADD_WEIGHT =
+	"INSERT INTO weight_tracking (wt_fk_user_id, wt_date, wt_weight)
+	VALUES (?, ?, ?)";
+
+	const GET_WEIGHT_TRACKING_BY_ID =
+	"SELECT * FROM weight_tracking
+	WHERE wt_fk_user_id = ?
+	ORDER BY wt_date DESC";
+
 	public function getUserByMail($mail) {
 		$query = 'SELECT u_id, u_pwd FROM user WHERE u_mail=?';
 		return $this->sqlMaker->make($query, 'fetch', [$mail]);
 	}
 
 	public function getUserById($id) {
-		$query = SqlUserShortcut::GET_USER_BY_ID;
+		$query = self::GET_USER_BY_ID;
 		$user = $this->sqlMaker->make($query, 'fetch', [$id]);
 		return new User($user['u_sex'], $user['u_age'], $user['u_height'], $user['u_weight'], $user['a_name'], $user['g_name'], $id, $user['u_mail'], $user['u_pwd']);
 	}
@@ -31,12 +53,12 @@ class UserRepository extends Repository {
 	}
 
 	public function createUser($age, $height, $weight, $activityId, $goalId) {
-		$query = SqlUserShortcut::CREATE_USER;
+		$query = self::CREATE_USER;
 		return $this->sqlMaker->make($query, NULL, [$height, $weight, $activity, $goal, $age]);
 	}
 
 	public function saveData($data) {
-		$query = SqlUserShortcut::SAVE_DATA;
+		$query = self::SAVE_DATA;
 		$params = [$data['age'], $data['height'], $data['weight'], $data['activity'], $data['goal'], $_SESSION['id']];
 		return $this->sqlMaker->make($query, NULL, $params);
 	}
@@ -98,7 +120,7 @@ class UserRepository extends Repository {
 	}
 
 	public function addWeight($userId, $date, $weight) {
-		$query = SqlUserShortcut::ADD_WEIGHT;
+		$query = self::ADD_WEIGHT;
 		$params = [$userId, $date, $weight];
 		$this->sqlMaker->make($query, NULL, $params);
 	}
@@ -111,7 +133,7 @@ class UserRepository extends Repository {
 	}
 
 	public function makeWeightTracking($userId, $max=NULL) {
-		$query = SqlUserShortcut::GET_WEIGHT_TRACKING_BY_ID;
+		$query = self::GET_WEIGHT_TRACKING_BY_ID;
 		$weightTracking = $this->sqlMaker->make($query, "fetchAll", [$userId]);
 		return array_slice($weightTracking, 0, $max);
 	}

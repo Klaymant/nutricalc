@@ -1,10 +1,10 @@
 <?php
 namespace Controller;
 
-require_once('Model/TrainingRepository.php');
-require_once('Model/Training.php');
-use Model\TrainingRepository;
-use Model\Training;
+require_once('Model/Repository/TrainingRepository.php');
+require_once('Model/Entity/Training.php');
+use Model\Repository\TrainingRepository;
+use Model\Entity\Training;
 use Utils\YamlHelper;
 
 class TrainingController {
@@ -63,19 +63,6 @@ class TrainingController {
         $methodInfo = $this->trainingRepo->getAllMethodsInfo();
         $training = $this->trainingRepo->makeTrainingByIdAsArray($trainingId);
         require_once($this->paths['TRAINING'] . "editTrainingView.php");
-    }
-
-    public function checkForm($form) {
-        $errors = [];
-
-        foreach ($form as $field=>$value) :
-            if ($value == NULL) :
-                $fieldName = explode("_", $field)[0];
-                $fieldNumber = explode("_", $field)[1];
-                array_push($errors, ["fieldName"=>$fieldName, "fieldNumber"=>$fieldNumber]);
-            endif;
-        endforeach;
-        return $errors;
     }
 
     public function getTrainingMeta($post) {
