@@ -1,21 +1,10 @@
 <?php
 namespace Controller;
 
-require_once('Model/Repository/TrainingRepository.php');
-require_once('Model/Entity/Training.php');
-use Model\Repository\TrainingRepository;
-use Model\Entity\Training;
-use Utils\YamlHelper;
+require_once('Controller/Controller.php');
+use Controller\Controller;
 
-class TrainingController {
-    private $trainingRepo;
-    private $paths;
-
-    function __construct() {
-        $this->trainingRepo = new TrainingRepository();
-        $yamlHelper = new YamlHelper('path.yaml');
-        $this->paths = $yamlHelper->getPaths();
-    }
+class TrainingController extends Controller {
 
     public function showTrainingById($trainingId) {
         $training = $this->trainingRepo->makeTrainingById($trainingId);
@@ -32,13 +21,13 @@ class TrainingController {
     }
 
     public function checkActualPageNb($pageNb, $maxNbPages) {
-        if ($pageNb > $maxNbPages) {
+        if ($pageNb > $maxNbPages) :
             return $maxNbPages;
-        }
-        if ($pageNb < 1) {
+        elseif ($pageNb < 1) :
             return 1;
-        }
-        return $pageNb;
+        else :
+            return $pageNb;
+        endif;
     }
 
     public function showAllTrainings($pageNb) {

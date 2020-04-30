@@ -7,6 +7,8 @@ use Model\Entity\Nutrient;
 use Model\Entity\Training;
 
 class User {
+	private $mail;
+	private $pwd;
 	private $sex;
 	private $age;
 	private $height;
@@ -32,112 +34,22 @@ class User {
 		$this->trainings = [];
 	}
 
-	// Getters
-	public function getId() {
-		return $this->id;
+	public function getAttribute($attributeName) {
+		return $this->{$attributeName};
 	}
 
-	public function getMail() {
-		return $this->mail;
-	}
-
-	public function getPwd() {
-		return $this->pwd;
-	}
-
-	public function getAge() {
-		return $this->age;
-	}
-
-	public function getSex() {
-		return $this->sex;
-	}
-
-	public function getHeight() {
-		return $this->height;
-	}
-
-	public function getWeight() {
-		return $this->weight;
-	}
-
-	public function getActivity() {
-		return $this->activity;
-	}
-
-	public function getGoal() {
-		return $this->goal;
-	}
-
-	public function getBmr() {
-		return $this->bmr;
-	}
-
-	public function getNutrient() {
-		return $this->nutrient;
-	}
-
-	public function getTrainings() {
-		return $this->trainings;
-	}
-
-	public function getKcalNeeds() {
-		return $this->kcalNeeds;
-	}
-
-	// Setters
-	public function setAge($age) {
-		$this->age = $age;
-	}
-
-	public function setMail($mail) {
-		$this->mail = $mail;
-	}
-
-	public function setPwd($pwd) {
-		$this->pwd = $pwd;
-	}
-
-	public function setSex($sex) {
-		$this->sex = $sex;
-	}
-
-	public function setHeight($height) {
-		$this->height = $height;
-	}
-
-	public function setWeight($weight) {
-		$this->weight = $weight;
-	}
-
-	public function setActivity($activity) {
-		$this->activity = $activity;
-	}
-
-	public function setGoal($goal) {
-		$this->goal = $goal;
-	}
-
-	public function setBmr($bmr) {
-		$this->bmr = $bmr;
-	}
-
-	public function setTrainings($trainings) {
-		$this->trainings = $trainings;
-	}
-
-	public function setKcalNeeds($kcalNeeds) {
-		$this->kcalNeeds = $kcalNeeds;
+	public function setAttribute($attributeName, $value) {
+		$this->{$attributeName} = $value;
 	}
 
     public function calculateBmr() {
     	$menFormula = ($this->weight*13.707) + ($this->height/100*492.2) - ($this->age*6.673) + 77.607;
     	$womenFormula = ($this->weight*9.74) + ($this->height/100*172.9) - ($this->age*4.737) + 667.05;
     	
-    	return $this->sex == 'H' ? $menFormula : $womenFormula;
+    	return ($this->sex == 'H') ? $menFormula : $womenFormula;
     }
 
-    public function kcalNeeds() {
+    public function calcKcalNeeds() {
     	switch ($this->goal) {
     		case "Fat loss":
     			return ($this->bmr*$this->activityQuotient($this->activity)*0.8);
@@ -148,7 +60,7 @@ class User {
     	}
     }
 
-    public function proteinsNeeds() {
+    public function calcProteinsNeeds() {
         switch ($this->goal) {
             case "Fat loss":
                 return ($this->weight*1.4);
@@ -159,7 +71,7 @@ class User {
         }
     }
 
-    public function fatNeeds() {
+    public function calcFatNeeds() {
         switch ($this->goal) {
             case "Fat loss":
                 return ($this->weight*1.2);
@@ -170,12 +82,12 @@ class User {
         }
     }
 
-    public function carbsNeeds() {
-        return ($this->nutrient->getKcalNeeds()-($this->nutrient->getProteinsNeeds()*4)-($this->nutrient->getFatNeeds()*9))/4;
+    public function calcCarbsNeeds() {
+        return ($this->nutrient->getAttribute("kcalNeeds")-($this->nutrient->getAttribute("proteinsNeeds")*4)-($this->nutrient->getAttribute("fatNeeds")*9))/4;
     }
 
     private function activityQuotient() {
-    	switch ($this->activity) {
+    	switch ($this->activity) :
     		case "Any":
     			return 1;
     		case "Low":
@@ -186,30 +98,14 @@ class User {
     			return 1.5;
     		case "Very high":
     			return 1.8;
-    	}
+    	endswitch;
     }
 
     public function calcAllNeeds() {
     	$this->bmr = $this->calculateBmr();
-        $this->nutrient->setKcalNeeds($this->kcalNeeds());
-        $this->nutrient->setProteinsNeeds($this->proteinsNeeds());
-        $this->nutrient->setFatNeeds($this->fatNeeds());
-        $this->nutrient->setCarbsNeeds($this->carbsNeeds());
-    }
-
-    public function jsonSerialize($fields=NULL)
-    {
-    	$vars = array();
-    	if ($fields == NULL) {
-        	$vars = get_object_vars($this);
-        }
-        else {
-        	foreach ($fields as $elem) {
-        		if (property_exists($this, $elem)) {
-        			array_push($vars, array($elem, $this->$elem));
-        		}
-        	}
-        }
-        return $vars;
+        $this->nutrient->setAttribute("kcalNeeds", $this->calcKcalNeeds());
+        $this->nutrient->setAttribute("proteinsNeeds", $this->calcProteinsNeeds());
+        $this->nutrient->setAttribute("fatNeeds", $this->calcFatNeeds());
+        $this->nutrient->setAttribute("carbsNeeds" ,$this->calcCarbsNeeds());
     }
 }

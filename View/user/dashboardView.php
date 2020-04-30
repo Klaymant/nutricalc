@@ -40,10 +40,10 @@
 ?>
 			<tr>
 				<td>
-					<a href="training/<?= $training->getId() ?>"><?= $training->getDate() ?></a>
+					<a href="training/<?= $training->getAttribute('id') ?>"><?= $training->getAttribute("date") ?></a>
 				</td>
 				<td class="has-text-right">
-					<?= $training->getShape() ?>/10
+					<?= $training->getAttribute("shape") ?>/10
 				</td>
 			</tr>
 <?php
@@ -56,7 +56,7 @@
 	<div class="message-body">
 		<p>Hello <span class="userName"><?= $mail['u_mail'] ?></span>!</p>
 		<?php if (isset($trainings[0])) : ?>
-				<p>&#10077; The last time you 💪 was the <strong><?= $trainings[0]->getDate() ?></strong> &#10078;</p>
+				<p>&#10077; The last time you 💪 was the <strong><?= $trainings[0]->getAttribute("date") ?></strong> &#10078;</p>
 		<?php endif; ?>
 	</div>
 </div>
@@ -72,28 +72,28 @@
 			<table class="table is-fullwidth dashboard is-narrow">
 				<tr class="nutrient calories">
 					<td>Calories</td>
-					<td class="has-text-right">1300kcal / <?= round($user->getNutrient()->getKcalNeeds(), 0) ?>kcal</td>
+					<td class="has-text-right">1300kcal / <?= round($user->getAttribute("nutrient")->getAttribute("kcalNeeds"), 0) ?>kcal</td>
 				</tr>
 				<tr>
 					<td colspan=2><progress class="progress is-success" value="50" max="80"></progress></td>
 				</tr>
 				<tr class="nutrient proteins">
 					<td>Proteins</td>
-					<td class="has-text-right">80g / <?= round($user->getNutrient()->getProteinsNeeds(), 0) ?>g</td>
+					<td class="has-text-right">80g / <?= round($user->getAttribute("nutrient")->getAttribute("proteinsNeeds"), 0) ?>g</td>
 				</tr>
 				<tr>
 					<td colspan=2><progress class="progress is-danger" value="50" max="80"></progress></td>
 				</tr>
 				<tr class="nutrient fat">
 					<td>Fat </td>
-					<td class="has-text-right">50g / <?= round($user->getNutrient()->getFatNeeds(), 0) ?>g</td>
+					<td class="has-text-right">50g / <?= round($user->getAttribute("nutrient")->getAttribute("fatNeeds"), 0) ?>g</td>
 				</tr>
 				<tr>
 					<td colspan=2><progress class="progress is-warning" value="50" max="80"></progress></td>
 				</tr>
 				<tr class="nutrient carbs">
 					<td>Carbs</td>
-					<td class="has-text-right">250g / <?= round($user->getNutrient()->getCarbsNeeds(), 0) ?>g</td>
+					<td class="has-text-right">250g / <?= round($user->getAttribute("nutrient")->getAttribute("carbsNeeds"), 0) ?>g</td>
 				</tr>
 				<tr>
 					<td colspan=2><progress class="progress is-info" value="50" max="80"></progress></td>

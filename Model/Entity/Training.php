@@ -15,33 +15,13 @@ class Training {
 	}
 
 	// Getters
-	public function getDate() {
-		return $this->date;
-	}
-
-	public function getShape() {
-		return $this->shape;
-	}
-
-	public function getExercises() {
-		return $this->exercises;
-	}
-
-	public function getId() {
-		return $this->id;
+	public function getAttribute($attributeName) {
+		return $this->{$attributeName};
 	}
 
 	// Setters
-	public function setDate($date) {
-		return $this->date = $date;
-	}
-
-	public function setShape($shape) {
-		return $this->shape = $shape;
-	}
-
-	public function setExercises($exercices) {
-		return $this->exercices = $exercices;
+	public function setAttribute($attributeName, $value) {
+		$this->{$attributeName} = $value;
 	}
 
 	public function jsonSerialize($fields=NULL)

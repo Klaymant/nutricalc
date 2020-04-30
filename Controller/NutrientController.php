@@ -1,9 +1,8 @@
 <?php
 namespace Controller;
 
-require_once('Model/NutrientRepository.php');
-use Model\NutrientRepository;
+require_once('Controller/Controller.php');
+use Controller\Controller;
 
-class NutrientController {
-    private $nutriRepo;
+class NutrientController extends Controller {
 }

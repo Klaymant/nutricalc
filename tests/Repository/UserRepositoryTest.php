@@ -52,12 +52,12 @@ class UserRepositoryTest extends TestCase {
 		$userRepo = new UserRepository();
 		$user = $userRepo->getUserById($id);
 
-		$this->assertEquals($user->getSex(), $expectedUser['sex']);
-		$this->assertEquals($user->getAge(), $expectedUser['age']);
-		$this->assertEquals($user->getHeight(), $expectedUser['height']);
-		$this->assertEquals($user->getWeight(), $expectedUser['weight']);
-		$this->assertEquals($user->getActivity(), $expectedUser['activity']);
-		$this->assertEquals($user->getGoal(), $expectedUser['goal']);
+		$this->assertEquals($user->getAttribute("sex"), $expectedUser['sex']);
+		$this->assertEquals($user->getAttribute("age"), $expectedUser['age']);
+		$this->assertEquals($user->getAttribute("height"), $expectedUser['height']);
+		$this->assertEquals($user->getAttribute("weight"), $expectedUser['weight']);
+		$this->assertEquals($user->getAttribute("activity"), $expectedUser['activity']);
+		$this->assertEquals($user->getAttribute("goal"), $expectedUser['goal']);
 	}
 
 	public function userProvider() {

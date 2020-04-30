@@ -15,27 +15,27 @@
 				<tbody>
 					<tr>
 					<td class="attribute">Sex</td>
-					<td class="has-text-right"><span class="value"><?= $user->getSex() ?></span></td>
+					<td class="has-text-right"><span class="value"><?= $user->getAttribute("sex") ?></span></td>
 					</tr>
 					<tr>
 						<td class="attribute">Age</td>
-						<td class="has-text-right"><span class="value"><?= $user->getAge() ?></span> years</td>
+						<td class="has-text-right"><span class="value"><?= $user->getAttribute("age") ?></span> years</td>
 					</tr>
 					<tr>
 						<td class="attribute">Height</td>
-						<td class="has-text-right"><span class="value"><?= $user->getHeight() ?></span>cm</td>
+						<td class="has-text-right"><span class="value"><?= $user->getAttribute("height") ?></span>cm</td>
 					</tr>
 					<tr>
 						<td class="attribute">Weight</td>
-						<td class="has-text-right"><span class="value"><?= $user->getWeight() ?></span>kg</td>
+						<td class="has-text-right"><span class="value"><?= $user->getAttribute("weight") ?></span>kg</td>
 					</tr>
 					<tr>
 						<td class="attribute">Activity level</td>
-						<td class="has-text-right"><span class="value"><?= $user->getActivity() ?></span></td>
+						<td class="has-text-right"><span class="value"><?= $user->getAttribute("activity") ?></span></td>
 					</tr>
 					<tr>
 						<td class="attribute">Goal</td>
-						<td class="has-text-right"><span class="value"><?= $user->getGoal() ?></span></td>
+						<td class="has-text-right"><span class="value"><?= $user->getAttribute("goal") ?></span></td>
 					</tr>
 				</tbody>
 				<tfoot>

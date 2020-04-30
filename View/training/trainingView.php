@@ -12,8 +12,8 @@
 	<div class="column is-one-quarter has-text-centered">
 		<div class="box">
 			<h1 class="title">Training of the</h1>
-			<h1 class="subtitle"><?= $training->getDate() ?></h1>
-			<h1 class="subtitle">Shape : <?= $training->getShape() ?>/10</h1>
+			<h1 class="subtitle"><?= $training->getAttribute("date") ?></h1>
+			<h1 class="subtitle">Shape : <?= $training->getAttribute("shape") ?>/10</h1>
 		</div>
 		<table class="table is-fullwidth has-text-centered">
 			<thead>
@@ -28,7 +28,7 @@
 			</thead>
 				<tbody>
 				<?php
-					foreach ($training->getExercises() as $exo) :
+					foreach ($training->getAttribute("exercises") as $exo) :
 						$method = $exo->getMethod() != NULL ? $exo->getMethod() : "None";
 				?>
 						<tr>
@@ -43,8 +43,8 @@
 			</tbody>
 		</table>
 
-		<a class="button is-info" href="<?= $paths['APP'] ?>edittraining/<?= $training->getId() ?>">Edit</a>
-		<a class="button is-danger" href="<?= $paths['APP'] ?>deletetraining/<?= $training->getId() ?>">❌ Delete this training</a>
+		<a class="button is-info" href="<?= $paths['APP'] ?>edittraining/<?= $training->getAttribute('id') ?>">Edit</a>
+		<a class="button is-danger" href="<?= $paths['APP'] ?>deletetraining/<?= $training->getAttribute('id') ?>">❌ Delete this training</a>
 	</div>
 </div>
 

@@ -17,27 +17,27 @@
 		<tbody>
 			<tr>
 				<td class="attribute">Sex :</td>
-				<td><?= $user->getSex() ?></td>
+				<td><?= $user->getAttribute("sex") ?></td>
 			</tr>
 			<tr>
 				<td class="attribute">Age :</td>
-				<td><?= $user->getAge() ?> years</td>
+				<td><?= $user->getAttribute("age") ?> years</td>
 			</tr>
 			<tr>
 				<td class="attribute">Height :</td>
-				<td><?= $user->getHeight() ?> cm</td>
+				<td><?= $user->getAttribute("height") ?> cm</td>
 			</tr>
 			<tr>
 				<td class="attribute">Weight :</td>
-				<td><?= $user->getWeight() ?> kg</td>
+				<td><?= $user->getAttribute("weight") ?> kg</td>
 			</tr>
 			<tr>
 				<td class="attribute">Activity level :</td>
-				<td><?= $user->getActivity() ?></td>
+				<td><?= $user->getAttribute("activity") ?></td>
 			</tr>
 			<tr>
 				<td class="attribute">Goal :</td>
-				<td><?= $user->getGoal() ?></td>
+				<td><?= $user->getAttribute("goal") ?></td>
 			</tr>
 		</tbody>
 	</table>
