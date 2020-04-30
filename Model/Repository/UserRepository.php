@@ -94,12 +94,12 @@ class UserRepository extends Repository {
 	}
 
 	public function forgottenPwd($user) {
-		$userMail = $user->getMail();
+		$userMail = $user->getAttribute("mail");
 		date_default_timezone_set('Europe/paris');
 		$dateTime = date('yy-m-d h-i-sa');
 		
 		$pwdId = $this->generateRandomString(20);
-		$this->saveResetPwdLink($user->getId(), $pwdId);
+		$this->saveResetPwdLink($user->getAttribute("id"), $pwdId);
 		$pwdLink = Path::APP . "/newpwd/" . $pwdId;
 		
 		$fileName = "Mail/pwd-rest - ${userMail} - ${dateTime}.txt";

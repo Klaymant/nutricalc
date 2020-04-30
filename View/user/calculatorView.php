@@ -28,25 +28,25 @@
 						<tr>
 							<td class="has-background-success has-text-white">Calories</td>
 							<td class="has-text-right">
-								<?= round($user->getNutrient()->getKcalNeeds(), 0) ?>kcal
+								<?= round($user->getAttribute("nutrient")->getAttribute("kcalNeeds"), 0) ?>kcal
 							</td>
 						</tr>
 						<tr>
 							<td class="has-background-danger has-text-white">Proteins</td>
 							<td class="has-text-right">
-								<?=round($user->getNutrient()->getProteinsNeeds(), 0) ?>g
+								<?=round($user->getAttribute("nutrient")->getAttribute("proteinsNeeds"), 0) ?>g
 							</td>
 						</tr>
 						<tr>
 							<td class="has-background-warning has-text-white">Fat</td>
 							<td class="has-text-right">
-								<? round($user->getNutrient()->getFatNeeds(), 0) ?>g
+								<? round($user->getAttribute("nutrient")->getAttribute("fatNeeds"), 0) ?>g
 							</td>
 						</tr>
 						<tr>
 							<td class="has-background-info has-text-white">Carbs</td>
 							<td class="has-text-right">
-								<?= round($user->getNutrient()->getCarbsNeeds(), 0) ?>g
+								<?= round($user->getAttribute("nutrient")->getAttribute("carbsNeeds"), 0) ?>g
 							</td>
 						</tr>
 					</tbody>

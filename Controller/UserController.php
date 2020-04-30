@@ -1,27 +1,10 @@
 <?php
 namespace Controller;
 
-require_once('Model/Repository/UserRepository.php');
-require_once('Model/Repository/TrainingRepository.php');
-require_once('Model/Entity/User.php');
-require_once('Model/Entity/Training.php');
-use Model\Repository\UserRepository;
-use Model\Repository\TrainingRepository;
-use Model\Entity\User;
-use Model\Entity\Training;
-use Utils\YamlHelper;
+require_once('Controller/Controller.php');
+use Controller\Controller;
 
-class UserController {
-    private $userRepo;
-    private $trainingRepo;
-    private $paths;
-
-    function __construct() {
-        $this->userRepo = new UserRepository();
-        $this->trainingRepo = new TrainingRepository();
-        $yamlHelper = new YamlHelper('path.yaml');
-        $this->paths = $yamlHelper->getPaths();
-    }
+class UserController extends Controller {
 
     /*
     ** ========== 1 - ACCOUNT ==========
@@ -83,9 +66,7 @@ class UserController {
         $this->userRepo->createUser($mail, $pwd, $sex, $age, $height, $weight, $activityId, $goalId);
     }
 
-    /*
-    ** 1.3 - Password
-    */
+    /* 1.3 - Password */
 
     public function showForgottenPwd() {
         require_once($this->paths['ACCOUNT'] . "forgottenPwdView.php");
@@ -111,9 +92,7 @@ class UserController {
         header("Location: " . $this->paths['APP'] . "dashboard");
     }
 
-    /*
-    ** ========== 2 - CALCULATION & TREATMENT ==========
-    */
+    /* ========== 2 - CALCULATION & TREATMENT ========== */
 
     public function userCalculator() {
         $user = new User($_POST['sex'], $_POST['age'], $_POST['height'], $_POST['weight'], $_POST['activity'], $_POST['goal']);
@@ -142,9 +121,7 @@ class UserController {
         header("Location: " . $this->paths['APP'] . "dashboard");
     }
 
-    /*
-    ** ========== 3 - DASHBOARD ==========
-    */
+    /* ========== 3 - DASHBOARD ========== */
 
     public function showDashboard() {
         $user = $this->userRepo->getUserById($_SESSION['id']);

@@ -4,11 +4,11 @@
     - &projectname nutricalc
   Asset:
     - shortcut: JS
-      path: http://localhost/nutricalc/Public/Assets/js/
+      path: http://localhost/nutricalc/public/Assets/js/
     - shortcut: CSS
-      path: http://localhost/nutricalc/Public/Assets/css/
+      path: http://localhost/nutricalc/public/Assets/css/
     - shortcut: IMG
-      path: http://localhost/nutricalc/Public/Assets/img/
+      path: http://localhost/nutricalc/public/Assets/img/
   View:
     - shortcut: ELEMENT
       path: View/element/

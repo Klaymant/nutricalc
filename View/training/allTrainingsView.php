@@ -20,8 +20,8 @@
 	<?php
 		$iTraining = 0;
 		foreach ($trainings as $trainee) :
-			$actualDate = new DateTime($trainee->getDate());
-			$actualShape = getActualShape($trainee->getShape());
+			$actualDate = new DateTime($trainee->getAttribute("date"));
+			$actualShape = getActualShape($trainee->getAttribute("shape"));
 			if ($iTraining % 2 == 0 or $iTraining == 0) :
 	?>
 				<div class="columns is-centered">;
@@ -35,10 +35,10 @@
 
 						<!-- Date -->
 						<div class="column has-text-left">
-							<a class="button has-background-success has-text-white" href="<?= $paths['APP'] ?>training/<?= $trainee->getId() ?>">
+							<a class="button has-background-success has-text-white" href="<?= $paths['APP'] ?>training/<?= $trainee->getAttribute('id') ?>">
 								<?= $actualDate->format('l') ?>
 							</a>
-							<a class="button has-background-light" href="<?= $paths['APP'] ?>training/<?= $trainee->getId() ?>"><?= $trainee->getDate() ?></a>			
+							<a class="button has-background-light" href="<?= $paths['APP'] ?>training/<?= $trainee->getAttribute('id') ?>"><?= $trainee->getAttribute("date") ?></a>			
 						</div>
 
 						<!-- Shape -->
@@ -64,15 +64,15 @@
 						</thead>
 						<tbody>
 					<?php
-						foreach ($trainee->getExercises() as $exo) :
-							$method = ($exo->getMethod() != NULL) ? $exo->getMethod() : "None";
+						foreach ($trainee->getAttribute("exercises") as $exo) :
+							$method = ($exo->getAttribute("method") != NULL) ? $exo->getAttribute("method") : "None";
 					?>
 							<tr>
-								<td><?= $exo->getName() ?></td>
-								<td class="has-text-centered"><?= $exo->getWorkLoad() ?> kg</td>
-								<td class="has-text-centered"><?= $exo->getSets() ?></td>
-								<td class="has-text-centered"><?= $exo->getReps() ?></td>
-								<td class="has-text-centered"><?= $exo->getRest() ?>s</td>
+								<td><?= $exo->getAttribute("name") ?></td>
+								<td class="has-text-centered"><?= $exo->getAttribute("workLoad") ?> kg</td>
+								<td class="has-text-centered"><?= $exo->getAttribute("nbSets") ?></td>
+								<td class="has-text-centered"><?= $exo->getAttribute("nbReps") ?></td>
+								<td class="has-text-centered"><?= $exo->getAttribute("rest") ?>s</td>
 								<td class="has-text-centered"><?= $method ?></td>
 							</tr>
 					<?php
@@ -83,8 +83,8 @@
 					<!-- #END Exercises -->
 
 					<div class="content has-text-left">
-						<a class="button is-info" href="<?= $paths['APP'] ?>edittraining/<?= $trainee->getId() ?>">Edit</a>
-						<a class="button is-danger" href="<?= $paths['APP'] ?>deletetraining/<?= $trainee->getId() ?>">(-) Remove</a>
+						<a class="button is-info" href="<?= $paths['APP'] ?>edittraining/<?= $trainee->getAttribute('id') ?>">Edit</a>
+						<a class="button is-danger" href="<?= $paths['APP'] ?>deletetraining/<?= $trainee->getAttribute('id') ?>">(-) Remove</a>
 					</div>
 				</div>
 			</div>
