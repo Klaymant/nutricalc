@@ -1,23 +1,26 @@
 <?php
 namespace Model\Entity;
 
+require_once('Model/Entity/Entity.php');
 require_once('Model/Entity/Nutrient.php');
 require_once('Model/Entity/Training.php');
 use Model\Entity\Nutrient;
 use Model\Entity\Training;
+use Model\Entity\Entity;
 
-class User {
-	private $mail;
-	private $pwd;
-	private $sex;
-	private $age;
-	private $height;
-	private $weight;
-	private $activity;
-	private $goal;
-	private $bmr;
-	private $nutrient;
-	private $trainings;
+class User extends Entity {
+    protected $id;
+	protected $mail;
+	protected $pwd;
+	protected $sex;
+	protected $age;
+	protected $height;
+	protected $weight;
+	protected $activity;
+	protected $goal;
+	protected $bmr;
+	protected $nutrient;
+	protected $trainings;
 
 	function __construct($sex, $age, $height, $weight, $activity, $goal, $id=NULL, $mail=NULL, $pwd=NULL)
 	{
@@ -32,14 +35,6 @@ class User {
 		$this->goal = $goal;
 		$this->nutrient = new Nutrient(NULL, NULL, NULL, NULL);
 		$this->trainings = [];
-	}
-
-	public function getAttribute($attributeName) {
-		return $this->{$attributeName};
-	}
-
-	public function setAttribute($attributeName, $value) {
-		$this->{$attributeName} = $value;
 	}
 
     public function calculateBmr() {

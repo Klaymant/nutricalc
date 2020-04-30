@@ -66,9 +66,7 @@ class UserController extends Controller {
         $this->userRepo->createUser($mail, $pwd, $sex, $age, $height, $weight, $activityId, $goalId);
     }
 
-    /*
-    ** 1.3 - Password
-    */
+    /* 1.3 - Password */
 
     public function showForgottenPwd() {
         require_once($this->paths['ACCOUNT'] . "forgottenPwdView.php");
@@ -94,9 +92,7 @@ class UserController extends Controller {
         header("Location: " . $this->paths['APP'] . "dashboard");
     }
 
-    /*
-    ** ========== 2 - CALCULATION & TREATMENT ==========
-    */
+    /* ========== 2 - CALCULATION & TREATMENT ========== */
 
     public function userCalculator() {
         $user = new User($_POST['sex'], $_POST['age'], $_POST['height'], $_POST['weight'], $_POST['activity'], $_POST['goal']);
@@ -125,9 +121,7 @@ class UserController extends Controller {
         header("Location: " . $this->paths['APP'] . "dashboard");
     }
 
-    /*
-    ** ========== 3 - DASHBOARD ==========
-    */
+    /* ========== 3 - DASHBOARD ========== */
 
     public function showDashboard() {
         $user = $this->userRepo->getUserById($_SESSION['id']);

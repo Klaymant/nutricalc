@@ -65,14 +65,14 @@
 						<tbody>
 					<?php
 						foreach ($trainee->getAttribute("exercises") as $exo) :
-							$method = ($exo->getMethod() != NULL) ? $exo->getMethod() : "None";
+							$method = ($exo->getAttribute("method") != NULL) ? $exo->getAttribute("method") : "None";
 					?>
 							<tr>
-								<td><?= $exo->getName() ?></td>
-								<td class="has-text-centered"><?= $exo->getWorkLoad() ?> kg</td>
-								<td class="has-text-centered"><?= $exo->getSets() ?></td>
-								<td class="has-text-centered"><?= $exo->getReps() ?></td>
-								<td class="has-text-centered"><?= $exo->getRest() ?>s</td>
+								<td><?= $exo->getAttribute("name") ?></td>
+								<td class="has-text-centered"><?= $exo->getAttribute("workLoad") ?> kg</td>
+								<td class="has-text-centered"><?= $exo->getAttribute("nbSets") ?></td>
+								<td class="has-text-centered"><?= $exo->getAttribute("nbReps") ?></td>
+								<td class="has-text-centered"><?= $exo->getAttribute("rest") ?>s</td>
 								<td class="has-text-centered"><?= $method ?></td>
 							</tr>
 					<?php

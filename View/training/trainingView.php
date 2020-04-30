@@ -29,14 +29,14 @@
 				<tbody>
 				<?php
 					foreach ($training->getAttribute("exercises") as $exo) :
-						$method = $exo->getMethod() != NULL ? $exo->getMethod() : "None";
+						$method = $exo->getAttribute("method") != NULL ? $exo->getAttribute("method") : "None";
 				?>
 						<tr>
-							<td><?= $exo->getName() ?></td>
-							<td><?= $exo->getWorkLoad() ?>kg</td>
-							<td><?= $exo->getSets() ?></td>
-							<td><?= $exo->getReps() ?></td>
-							<td><?= $exo->getRest() ?>s</td>
+							<td><?= $exo->getAttribute("name") ?></td>
+							<td><?= $exo->getAttribute("workLoad") ?>kg</td>
+							<td><?= $exo->getAttribute("nbSets") ?></td>
+							<td><?= $exo->getAttribute("nbReps") ?></td>
+							<td><?= $exo->getAttribute("rest") ?>s</td>
 							<td><?= $method ?></td>
 						</tr>
 				<?php endforeach; ?>

@@ -26,4 +26,12 @@ abstract class Controller {
 		$this->trainingRepo = new TrainingRepository();
 		$this->nutrientRepo = new NutrientRepository();
 	}
+
+	public function getAttribute($attributeName) {
+		return $this->$attributeName;
+	}
+
+	public function setAttribute($attributeName, $value) {
+		$this->$attributeName = $value;
+	}
 }

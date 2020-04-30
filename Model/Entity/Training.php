@@ -1,27 +1,20 @@
 <?php
 namespace Model\Entity;
 
-class Training {
-	private $date;
-	private $shape;
-	private $exercises;
-	private $id;
+require_once('Model/Entity/Entity.php');
+use Model\Entity\Entity;
+
+class Training extends Entity {
+	protected $date;
+	protected $shape;
+	protected $exercises;
+	protected $id;
 
 	function __construct($exercises, $date=NULL, $shape=NULL, $id=NULL) {
 		$this->exercises = $exercises;
 		$this->date = $date;
 		$this->shape = $shape;
 		$this->id = $id;
-	}
-
-	// Getters
-	public function getAttribute($attributeName) {
-		return $this->{$attributeName};
-	}
-
-	// Setters
-	public function setAttribute($attributeName, $value) {
-		$this->{$attributeName} = $value;
 	}
 
 	public function jsonSerialize($fields=NULL)
