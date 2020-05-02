@@ -1,11 +1,11 @@
 <?php
 namespace Controller;
 
-require_once('Model/Repository/NutrientRepository.php');
-require_once('Model/Repository/UserRepository.php');
-require_once('Model/Repository/TrainingRepository.php');
-require_once('Model/Entity/User.php');
-require_once('Model/Entity/Training.php');
+require_once('../src/Model/Repository/NutrientRepository.php');
+require_once('../src/Model/Repository/UserRepository.php');
+require_once('../src/Model/Repository/TrainingRepository.php');
+require_once('../src/Model/Entity/User.php');
+require_once('../src/Model/Entity/Training.php');
 use Model\Repository\UserRepository;
 use Model\Repository\TrainingRepository;
 use Model\Repository\NutrientRepository;

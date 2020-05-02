@@ -5,7 +5,7 @@ class YamlHelper {
 	private $yamlFile;
 
 	function __construct($fileName) {
-		$this->yamlFile = "Config/" . $fileName;
+		$this->yamlFile = "../config/" . $fileName;
 		$this->yamlFile = yaml_parse_file($this->yamlFile);
 		$this->yamlFile = array_slice($this->yamlFile, 1);
 	}
@@ -13,11 +13,16 @@ class YamlHelper {
 	public function getPaths() {
 		$paths = [];
 
-		foreach ($this->yamlFile as $line):
-			foreach ($line as $element):
-				$paths[$element['shortcut']] = $element['path'];
-			endforeach;
-		endforeach;
+		foreach ($this->yamlFile as $tags) {
+			foreach ($tags as $tag) {
+				foreach ($tag as $element) {
+					$paths[key($tag)] = "";
+					foreach ($element as $elem) {
+						$paths[key($tag)] .= $elem;
+					}
+				}
+			}
+		}
 		return $paths;
 	}
 }

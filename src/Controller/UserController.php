@@ -1,7 +1,7 @@
 <?php
 namespace Controller;
 
-require_once('Controller/Controller.php');
+require_once('../src/Controller/Controller.php');
 use Controller\Controller;
 
 class UserController extends Controller {

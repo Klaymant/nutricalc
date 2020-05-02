@@ -1,7 +1,7 @@
 <?php
 namespace Model\Entity;
 
-require_once('Model/Entity/Entity.php');
+require_once('../src/Model/Entity/Entity.php');
 use Model\Entity\Entity;
 
 class Exercise extends Entity {

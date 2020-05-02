@@ -1,9 +1,9 @@
 <?php
 namespace Model\Entity;
 
-require_once('Model/Entity/Entity.php');
-require_once('Model/Entity/Nutrient.php');
-require_once('Model/Entity/Training.php');
+require_once('../src/Model/Entity/Entity.php');
+require_once('../src/Model/Entity/Nutrient.php');
+require_once('../src/Model/Entity/Training.php');
 use Model\Entity\Nutrient;
 use Model\Entity\Training;
 use Model\Entity\Entity;

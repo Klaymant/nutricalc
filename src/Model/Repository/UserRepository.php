@@ -1,8 +1,8 @@
 <?php
 namespace Model\Repository;
 
-require_once ('Model/Repository/Repository.php');
-require_once ('Model/Entity/User.php');
+require_once ('../src/Model/Repository/Repository.php');
+require_once ('../src/Model/Entity/User.php');
 use Model\Repository\Repository;
 use Model\Entity\User;
 

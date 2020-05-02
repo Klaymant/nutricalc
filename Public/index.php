@@ -1,4 +1,5 @@
 <?php
+	require_once('../src/Controller/UserController.php');
     require_once('indexIncludes.php');
 	use Utils\Routeur;
 	use Utils\UriParser;

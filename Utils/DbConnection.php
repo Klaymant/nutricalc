@@ -1,7 +1,7 @@
 <?php
 namespace Utils;
 
-require("Utils/YamlHelper.php");
+require("../Utils/YamlHelper.php");
 
 use Utils\YamlHelper;
 use \PDO;

@@ -1,10 +1,10 @@
 <?php
 namespace Model\Repository;
 
-require_once ('Model/Repository/Repository.php');
-require_once ('Model/Entity/User.php');
-require_once ('Model/Entity/Training.php');
-require_once ('Model/Entity/Exercise.php');
+require_once ('../src/Model/Repository/Repository.php');
+require_once ('../src/Model/Entity/User.php');
+require_once ('../src/Model/Entity/Training.php');
+require_once ('../src/Model/Entity/Exercise.php');
 use Model\Repository\Repository;
 use Model\Entity\User;
 use Model\Entity\Training;

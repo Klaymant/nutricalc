@@ -1,14 +1,14 @@
 ---
   HostInfos: 
-    - &host http://localhost
+    - &host http://nutricalc.local/
     - &projectname nutricalc
   Host:
-    - shortcut: HOST
-      path: "212.47.245.96"
-    - shortcut: DB_NAME
-      path: nutricalc
-    - shortcut: USERNAME
-      path: nutridev
-    - shortcut: PWD
-      path: nutridev
+    - HOST:
+      - "212.47.245.96"
+    - DB_NAME:
+      - nutricalc
+    - USERNAME:
+      - nutridev
+    - PWD:
+      - nutridev
 ...
