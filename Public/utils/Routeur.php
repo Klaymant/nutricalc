@@ -17,7 +17,8 @@ class Routeur {
 			['calculator', 'showCalculator', self::USER_CONTROLLER, false],
 			['usercalculator', 'userCalculator', self::USER_CONTROLLER, false],
 			['dashboard', 'showDashboard', self::USER_CONTROLLER, false],
-			['homepage', 'showHomepage', self::USER_CONTROLLER, false]
+			['homepage', 'showHomepage', self::USER_CONTROLLER, false],
+			['exercises', 'showExercises', self::USER_CONTROLLER, false]
 		];
 
 		$trainingMethods = [

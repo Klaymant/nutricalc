@@ -1,8 +1,5 @@
 <!-- DOCTYPE HTML -->
 <?php
-	use Utils\YamlHelper;
-
-	$paths = YamlHelper::getPaths('path.yaml');
 	ob_start();
 ?>
 
