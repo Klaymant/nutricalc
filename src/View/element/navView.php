@@ -16,17 +16,24 @@
 				if (isset($_SESSION['logged']) && $_SESSION['logged']) :
 			?>
 					<a class="navbar-item has-text-white" href="<?= $paths['APP'] ?>dashboard">
-					<figure class="image is-16x16">
+					<figure class="image is-24x24">
 						<img src="<?= $paths['IMG'] ?>dashboard_white_icon.png">
 					</figure>
 					<p>Dashboard</p>
 					</a>
 
 					<a class="navbar-item has-text-white" href="<?= $paths['APP'] ?>settings">
-					<figure class="image is-16x16">
+					<figure class="image is-24x24">
 						<img src="<?= $paths['IMG'] ?>settings_white_icon.png">
 					</figure>
 					<p>Settings</p>
+					</a>
+
+					<a class="navbar-item has-text-white" href="<?= $paths['APP'] ?>exercises">
+					<figure class="image is-24x24">
+						<img src="<?= $paths['IMG'] ?>bodybuilder_icon.png">
+					</figure>
+					<p>Exercises</p>
 					</a>
 			<?php endif; ?>
 		</div>

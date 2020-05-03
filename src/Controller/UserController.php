@@ -149,6 +149,12 @@ class UserController extends Controller {
         require_once($this->paths['SETTING'] . "settingsView.php");
     }
 
+    public function showExercises() {
+        $exercises = $this->userRepo->getExercises();
+        $paths = $this->paths;
+        require_once($this->paths['USER'] . "exercisesView.php");
+    }
+
     public function showCalculator() {
         $paths = $this->paths;
         require_once($this->paths['USER'] . "calculatorView.php");

@@ -142,4 +142,9 @@ class UserRepository extends Repository {
 		$query ="DELETE FROM weight_tracking WHERE wt_id=?";
 		$this->sqlMaker->make($query, NULL, [$weightId]);
 	}
+
+	public function getExercises() {
+		$query = "SELECT * FROM exercise_catalog";
+		return $this->sqlMaker->make($query, "fetchAll");
+	}
 }
