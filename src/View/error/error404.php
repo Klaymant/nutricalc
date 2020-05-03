@@ -1,10 +1,5 @@
 <!-- DOCTYPE HTML -->
 <?php
-	use Utils\YamlHelper;
-
-	$yamlHelper = new YamlHelper('path.yaml');
-	$paths = $yamlHelper->getPaths();
-
 	ob_start();
 ?>
 
@@ -29,7 +24,6 @@
 </div>
 
 <?php
-	// $content contains the html content from ob_start so far
 	$content = ob_get_clean();
 	require_once($paths['TEMPLATE'] . "template.php");
 ?>

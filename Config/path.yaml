@@ -5,6 +5,7 @@
     - &view View/
     - &model Model/
     - &assets assets/
+    - &index index.php/
   Asset:
     - JS:
       - *host
@@ -56,11 +57,12 @@
   Route:
     - APP:
       - *host
-      - index.php/
+      - *index
       - app/
     - API:
       - *host
-      - index.php/api/
+      - *index
+      - api/
   Model:
     - MODEL:
       - *local

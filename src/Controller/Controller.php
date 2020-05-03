@@ -20,8 +20,7 @@ abstract class Controller {
 	protected $nutrientRepo;
 
 	function __construct() {
-		$yamlHelper = new YamlHelper('path.yaml');
-		$this->paths = $yamlHelper->getPaths();
+		$this->paths = YamlHelper::getPaths("path.yaml");
 		$this->userRepo = new UserRepository();
 		$this->trainingRepo = new TrainingRepository();
 		$this->nutrientRepo = new NutrientRepository();

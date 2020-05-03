@@ -1,16 +1,11 @@
 <!-- DOCTYPE HTML -->
 <?php
-	use Utils\YamlHelper;
-
-	$yamlHelper = new YamlHelper('path.yaml');
-	$paths = $yamlHelper->getPaths();
-
 	ob_start();
 ?>
 
 <div class="content">
 	<?php
-		$formPath = Path::APP . '/changepwd';
+		$formPath = $paths['APP'] . 'changepwd';
 
 		if (isset($pwdIdExisting) && $pwdIdExisting) : ?>
 			Hello <?= $userMail ?> !

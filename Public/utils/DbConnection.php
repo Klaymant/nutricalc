@@ -1,7 +1,7 @@
 <?php
 namespace Utils;
 
-require("../Utils/YamlHelper.php");
+require("../public/Utils/YamlHelper.php");
 
 use Utils\YamlHelper;
 use \PDO;
@@ -11,8 +11,7 @@ class DbConnection {
 
 	function __construct()
 	{
-		$yamlHelper = new YamlHelper('dbinfo.yaml');
-        $dbInfo = $yamlHelper->getPaths();
+        $dbInfo = YamlHelper::getPaths("dbinfo.yaml");
 		$this->pdo = new PDO(
 	        'mysql:host=' . $dbInfo['HOST'] . ';dbname=' . $dbInfo['DB_NAME'] . ';',
 	        $dbInfo['USERNAME'],

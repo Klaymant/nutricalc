@@ -1,12 +1,6 @@
 <!-- DOCTYPE HTML -->
 <?php
-	use Utils\YamlHelper;
-
-	$yamlHelper = new YamlHelper('path.yaml');
-	$paths = $yamlHelper->getPaths();
-
 	ob_start();
-
 
 	function getActualShape($shape) {
 		$actualShape = "";

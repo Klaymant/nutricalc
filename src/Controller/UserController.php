@@ -11,6 +11,7 @@ class UserController extends Controller {
     */
 
     public function showHomepage() {
+        $paths = $this->paths;
         require_once ($this->paths['USER'] . "homepageView.php");
     }
 
@@ -19,6 +20,7 @@ class UserController extends Controller {
     */
 
     public function showLogin() {
+        $paths = $this->paths;
         require_once ($this->paths['ACCOUNT'] . "loginView.php");
     }
 
@@ -46,6 +48,7 @@ class UserController extends Controller {
     */
 
     public function showAccountCreator() {
+        $paths = $this->paths;
         require_once($this->paths['ACCOUNT'] . "newAccountView.php");
     }
 
@@ -69,6 +72,7 @@ class UserController extends Controller {
     /* 1.3 - Password */
 
     public function showForgottenPwd() {
+        $paths = $this->paths;
         require_once($this->paths['ACCOUNT'] . "forgottenPwdView.php");
     }
 
@@ -82,6 +86,7 @@ class UserController extends Controller {
         $pwdIdExisting = $this->userRepo->doesResetPwdExist($pwdId);
         $userId = $this->userRepo->getUserByResetPwdId($pwdId)['u_id'];
         $userMail = $this->userRepo->getMailById($userId)['u_mail'];
+        $paths = $this->paths;
         require_once($this->paths['ACCOUNT'] . "newPwdView.php");
     }
 
@@ -129,23 +134,28 @@ class UserController extends Controller {
         $mail = $this->userRepo->getMailById($_SESSION['id']);
         $trainings = $this->trainingRepo->makeLastTrainings($_SESSION['id'], 5);
         $weightTracking = $this->userRepo->makeWeightTracking($_SESSION['id'], 5);
+        $paths = $this->paths;
         require_once($this->paths['USER'] . "dashBoardView.php");
     }
 
     public function showChangeData() {
+        $paths = $this->paths;
         require_once($this->paths['ACCOUNT'] . "accountView.php");
     }
 
     public function showSettings() {
         $user = $this->userRepo->getUserById($_SESSION['id']);
+        $paths = $this->paths;
         require_once($this->paths['SETTING'] . "settingsView.php");
     }
 
     public function showCalculator() {
+        $paths = $this->paths;
         require_once($this->paths['USER'] . "calculatorView.php");
     }
 
     public function showAddWeight() {
+        $paths = $this->paths;
         require_once($this->paths['WEIGHT_TRACKING'] . "addWeightView.php");
     }
 
@@ -153,10 +163,13 @@ class UserController extends Controller {
         $weightTracking = $this->userRepo->makeWeightTracking($_SESSION['id']);
         $amount = 5;
         $weightTracking = array_slice($weightTracking, 0, $amount);
+        $paths = $this->paths;
+
         require_once($this->paths['WEIGHT_TRACKING'] . "weightTrackingView.php");
     }
 
     public function show404() {
+        $paths = $this->paths;
         require_once($this->paths['ERROR'] . "error404.php");
     }
 }

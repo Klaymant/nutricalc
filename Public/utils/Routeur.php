@@ -91,7 +91,7 @@ class Routeur {
     	$controller = $this->getMethodInfoFromTag($tag)['controller'];
     	$hasParam = $this->getMethodInfoFromTag($tag)['hasParam'];
 
-    	return $hasParam ? [$controller, $method , $param] : [$controller, $method];
+    	return $hasParam ? ['controller'=>$controller, 'method'=>$method , 'param'=>$param] : ['controller'=>$controller, 'method'=>$method];
 
     }
 

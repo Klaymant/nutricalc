@@ -1,7 +1,7 @@
 <?php
 namespace Utils;
 
-require_once ('../Utils/DbConnection.php');
+require_once ('../public/Utils/DbConnection.php');
 use Utils\DbConnection;
 
 class SqlMaker {

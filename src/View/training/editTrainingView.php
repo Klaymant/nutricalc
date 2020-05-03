@@ -1,21 +1,16 @@
 <!-- DOCTYPE HTML -->
 <?php
-	use Utils\YamlHelper;
 	use Utils\JsHelper;
 
 	$today = date('yy-m-d');
-	$yamlHelper = new YamlHelper('path.yaml');
-	$paths = $yamlHelper->getPaths();
-	$jsHelper = new JsHelper();
-
 	ob_start();
 ?>
 
 <script type="text/javascript">
 	var exoNb = 1;
-	var exoInfo = <?php $jsHelper->jsEncode($exoInfo) ?>;
-	var methodInfo = <?php $jsHelper->jsEncode($methodInfo) ?>;
-	var exercises = <?php $jsHelper->jsEncode($training['exercises']) ?>;
+	var exoInfo = <?php JsHelper::jsEncode($exoInfo) ?>;
+	var methodInfo = <?php JsHelper::jsEncode($methodInfo) ?>;
+	var exercises = <?php JsHelper::jsEncode($training['exercises']) ?>;
 </script>
 
 <script src="<?= $paths['JS'] ?>exo.js" type="text/javascript"></script>

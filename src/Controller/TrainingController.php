@@ -36,6 +36,7 @@ class TrainingController extends Controller {
         $maxNbPages = $this->getMaxNbPages($trainings, $nbTrainingsByPage);
         $actualPageNb = $this->checkActualPageNb($pageNb, $maxNbPages);
         $trainings = $this->getPaginationFromTrainings($trainings, $actualPageNb, $nbTrainingsByPage);
+        $paths = $this->paths;
 
         require_once($this->paths['TRAINING'] . "allTrainingsView.php");
     }
@@ -44,6 +45,8 @@ class TrainingController extends Controller {
         $dateError = $error;
         $exoInfo = $this->trainingRepo->getAllExercisesInfo();
         $methodInfo = $this->trainingRepo->getAllMethodsInfo();
+        $paths = $this->paths;
+        
        	require_once($this->paths['TRAINING'] . "addTrainingView.php");
     }
 
@@ -51,6 +54,8 @@ class TrainingController extends Controller {
         $exoInfo = $this->trainingRepo->getAllExercisesInfo();
         $methodInfo = $this->trainingRepo->getAllMethodsInfo();
         $training = $this->trainingRepo->makeTrainingByIdAsArray($trainingId);
+        $paths = $this->paths;
+
         require_once($this->paths['TRAINING'] . "editTrainingView.php");
     }
 

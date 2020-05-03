@@ -2,8 +2,7 @@
 <?php
 	use Utils\YamlHelper;
 
-	$yamlHelper = new YamlHelper('path.yaml');
-	$paths = $yamlHelper->getPaths();
+	$paths = YamlHelper::getPaths('path.yaml');
 	ob_start();
 ?>
 

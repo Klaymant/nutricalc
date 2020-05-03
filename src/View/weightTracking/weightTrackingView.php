@@ -1,13 +1,8 @@
 <!-- DOCTYPE HTML -->
 <?php
-	use Utils\YamlHelper;
 	use Utils\JsHelper;
 
 	$today = date('yy-m-d');
-	$jsHelper = new JsHelper();
-	$yamlHelper = new YamlHelper('path.yaml');
-	$paths = $yamlHelper->getPaths();
-
 	ob_start();
 ?>
 
@@ -27,7 +22,7 @@
 </div>
 
 <script type="text/javascript">
-	var weightTracking = <?php $jsHelper->jsEncode($weightTracking) ?>;
+	var weightTracking = <?php JsHelper::jsEncode($weightTracking) ?>;
 	weightTracking = weightTracking.reverse();
 </script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
